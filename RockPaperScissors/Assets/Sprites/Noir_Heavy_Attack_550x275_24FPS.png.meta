@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c664e570955e1ce44a2a82af85b989d0
+guid: 350f7b952ca5b6c4c9bd98b689f45b92
 TextureImporter:
   fileIDToRecycleName:
     21300000: Noir_Heavy_Attack_550x275_24FPS_0
@@ -8,6 +8,7 @@ TextureImporter:
     21300006: Noir_Heavy_Attack_550x275_24FPS_3
     21300008: Noir_Heavy_Attack_550x275_24FPS_4
     21300010: Noir_Heavy_Attack_550x275_24FPS_5
+    21300012: Noir_Heavy_Attack_550x275_24FPS_6
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -28,7 +29,7 @@ TextureImporter:
   generateCubemap: 0
   seamlessCubemap: 0
   textureFormat: -1
-  maxTextureSize: 2048
+  maxTextureSize: 4096
   textureSettings:
     filterMode: -1
     aniso: 16
@@ -53,7 +54,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1389
+        y: 2475
         width: 550
         height: 275
       alignment: 0
@@ -62,8 +63,8 @@ TextureImporter:
     - name: Noir_Heavy_Attack_550x275_24FPS_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1114
+        x: 550
+        y: 2475
         width: 550
         height: 275
       alignment: 0
@@ -73,7 +74,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 839
+        y: 2200
         width: 550
         height: 275
       alignment: 0
@@ -82,8 +83,8 @@ TextureImporter:
     - name: Noir_Heavy_Attack_550x275_24FPS_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 564
+        x: 550
+        y: 2200
         width: 550
         height: 275
       alignment: 0
@@ -93,7 +94,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 289
+        y: 1925
         width: 550
         height: 275
       alignment: 0
@@ -102,8 +103,18 @@ TextureImporter:
     - name: Noir_Heavy_Attack_550x275_24FPS_5
       rect:
         serializedVersion: 2
+        x: 550
+        y: 1925
+        width: 550
+        height: 275
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Noir_Heavy_Attack_550x275_24FPS_6
+      rect:
+        serializedVersion: 2
         x: 0
-        y: 14
+        y: 1650
         width: 550
         height: 275
       alignment: 0

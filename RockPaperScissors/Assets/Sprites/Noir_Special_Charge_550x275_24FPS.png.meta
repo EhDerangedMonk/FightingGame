@@ -1,13 +1,11 @@
 fileFormatVersion: 2
-guid: 9ea4fb35e3f0bc54192b58edf3317c39
+guid: c3d1d64accd9ebb4ca4acde54e01ae0b
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Noir_Light_Attack_550x275_24FPS_0
-    21300002: Noir_Light_Attack_550x275_24FPS_1
-    21300004: Noir_Light_Attack_550x275_24FPS_2
-    21300006: Noir_Light_Attack_550x275_24FPS_3
-    21300008: Noir_Light_Attack_550x275_24FPS_4
-    21300010: Noir_Light_Attack_550x275_24FPS_5
+    21300000: Noir_Special_Charge_550x275_24FPS_0
+    21300002: Noir_Special_Charge_550x275_24FPS_1
+    21300004: Noir_Special_Charge_550x275_24FPS_2
+    21300006: Noir_Special_Charge_550x275_24FPS_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -49,7 +47,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Noir_Light_Attack_550x275_24FPS_0
+    - name: Noir_Special_Charge_550x275_24FPS_0
       rect:
         serializedVersion: 2
         x: 0
@@ -59,7 +57,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Noir_Light_Attack_550x275_24FPS_1
+    - name: Noir_Special_Charge_550x275_24FPS_1
       rect:
         serializedVersion: 2
         x: 550
@@ -69,7 +67,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Noir_Light_Attack_550x275_24FPS_2
+    - name: Noir_Special_Charge_550x275_24FPS_2
       rect:
         serializedVersion: 2
         x: 0
@@ -79,31 +77,11 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Noir_Light_Attack_550x275_24FPS_3
+    - name: Noir_Special_Charge_550x275_24FPS_3
       rect:
         serializedVersion: 2
         x: 550
         y: 2200
-        width: 550
-        height: 275
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Noir_Light_Attack_550x275_24FPS_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1925
-        width: 550
-        height: 275
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Noir_Light_Attack_550x275_24FPS_5
-      rect:
-        serializedVersion: 2
-        x: 550
-        y: 1925
         width: 550
         height: 275
       alignment: 0
