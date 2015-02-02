@@ -54,8 +54,8 @@ TextureImporter:
         y: 2475
         width: 550
         height: 275
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .75, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Noir_Special_Charge_550x275_24FPS_1
       rect:
@@ -64,8 +64,8 @@ TextureImporter:
         y: 2475
         width: 550
         height: 275
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .75, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Noir_Special_Charge_550x275_24FPS_2
       rect:
@@ -74,8 +74,8 @@ TextureImporter:
         y: 2200
         width: 550
         height: 275
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .75, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Noir_Special_Charge_550x275_24FPS_3
       rect:
@@ -84,8 +84,8 @@ TextureImporter:
         y: 2200
         width: 550
         height: 275
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .75, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

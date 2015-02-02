@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class testCharacterController : MonoBehaviour {
+public class noirCharacterController : MonoBehaviour {
 	
 	public float maxSpeed = 3f;
 	bool facingLeft = true;
@@ -17,10 +17,15 @@ public class testCharacterController : MonoBehaviour {
 	//used or not used
 	bool doubleJump = false;
 
-	//presently using light attack
-	bool lightAttack = false;
+	//presently using attack
+	bool attack = false;
 	AnimatorStateInfo stateInfo;
 	int lightAttackStateHash = Animator.StringToHash("Base Layer.noirLightAttack");
+	int specState1Hash = Animator.StringToHash ("Base Layer.noirSpecial1");
+	int specState2Hash = Animator.StringToHash ("Base Layer.noirSpecial2");
+	int specState3Hash = Animator.StringToHash ("Base Layer.noirSpecial3");
+	int specState4Hash = Animator.StringToHash ("Base Layer.noirSpecial4");
+	int specStateExHash = Animator.StringToHash ("Base Layer.noirSpecialEx");
 
 
 	// Use this for initialization
@@ -32,13 +37,16 @@ public class testCharacterController : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
+		attack = false;
 		stateInfo = anim.GetCurrentAnimatorStateInfo (0);
 		if (stateInfo.nameHash == lightAttackStateHash)
-			lightAttack = true;
-		else
-			lightAttack = false;
+			attack = true;
+		if (stateInfo.nameHash == specState1Hash ||stateInfo.nameHash == specState2Hash ||stateInfo.nameHash == specState3Hash ||stateInfo.nameHash == specState4Hash)
+			attack = true;
+		if (stateInfo.nameHash == specStateExHash)
+			attack = true;
 
-		if (lightAttack)
+		if (attack)
 			return;
 
 		grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
@@ -73,9 +81,13 @@ public class testCharacterController : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			anim.SetTrigger("Light");
 		}
-		//if (Input.GetKeyUp (KeyCode.Space)) {
-		//	anim.SetBool ("Light", false);
-		//}
+		if (Input.GetKeyUp (KeyCode.LeftControl)) {
+			anim.SetBool("Special", false);
+		}
+		if (Input.GetKeyDown (KeyCode.LeftControl)) {
+			anim.SetBool("Special", true);
+		}
+
 
 		if ((grounded || !doubleJump) && Input.GetKeyDown (KeyCode.W)) 
 		{
