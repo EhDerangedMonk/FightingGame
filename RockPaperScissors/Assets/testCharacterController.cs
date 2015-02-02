@@ -16,7 +16,13 @@ public class testCharacterController : MonoBehaviour {
 	
 	//used or not used
 	bool doubleJump = false;
-	
+
+	//presently using light attack
+	bool lightAttack = false;
+	AnimatorStateInfo stateInfo;
+	int lightAttackStateHash = Animator.StringToHash("Base Layer.noirLightAttack");
+
+
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
@@ -26,6 +32,15 @@ public class testCharacterController : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
+		stateInfo = anim.GetCurrentAnimatorStateInfo (0);
+		if (stateInfo.nameHash == lightAttackStateHash)
+			lightAttack = true;
+		else
+			lightAttack = false;
+
+		if (lightAttack)
+			return;
+
 		grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
 		anim.SetBool ("Ground", grounded);
 		
@@ -36,8 +51,8 @@ public class testCharacterController : MonoBehaviour {
 		anim.SetFloat ("vSpeed", rigidbody2D.velocity.y);
 		
 		
-		if (!grounded)
-			return;
+		//if (!grounded)
+		//	return;
 		
 		float move = Input.GetAxis ("Horizontal");
 		
@@ -55,7 +70,14 @@ public class testCharacterController : MonoBehaviour {
 	
 	void Update()
 	{
-		if ((grounded || !doubleJump) && Input.GetKeyDown (KeyCode.Space)) 
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			anim.SetTrigger("Light");
+		}
+		//if (Input.GetKeyUp (KeyCode.Space)) {
+		//	anim.SetBool ("Light", false);
+		//}
+
+		if ((grounded || !doubleJump) && Input.GetKeyDown (KeyCode.W)) 
 		{
 			anim.SetBool("Ground", false);
 			rigidbody2D.AddForce(new Vector2(0, jumpForce));

@@ -84,6 +84,8 @@ GameObject:
   - 4: {fileID: 105454742}
   - 212: {fileID: 105454741}
   - 61: {fileID: 105454743}
+  - 61: {fileID: 105454745}
+  - 61: {fileID: 105454744}
   m_Layer: 0
   m_Name: Left Sub Platform
   m_TagString: Untagged
@@ -136,6 +138,28 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_Size: {x: 2.43000007, y: 1.75}
   m_Center: {x: 0, y: 0}
+--- !u!61 &105454744
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 105454740}
+  m_Enabled: 1
+  m_Material: {fileID: 6200000, guid: 108a0f16b7f4f0149a83166e2ebdfb64, type: 2}
+  m_IsTrigger: 0
+  m_Size: {x: .0399999991, y: 1.75}
+  m_Center: {x: -1.23000002, y: 0}
+--- !u!61 &105454745
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 105454740}
+  m_Enabled: 1
+  m_Material: {fileID: 6200000, guid: 108a0f16b7f4f0149a83166e2ebdfb64, type: 2}
+  m_IsTrigger: 0
+  m_Size: {x: .0399999991, y: 1.75}
+  m_Center: {x: 1.23000002, y: 0}
 --- !u!1 &366108716
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,10 +473,10 @@ CircleCollider2D:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1946648949}
   m_Enabled: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f36c9014ec1a24f449e373f7e886f7c9, type: 2}
   m_IsTrigger: 0
   m_Radius: .5
-  m_Center: {x: .150000006, y: -.810000002}
+  m_Center: {x: .129999995, y: -.810000002}
 --- !u!61 &1946648952
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -460,10 +484,10 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1946648949}
   m_Enabled: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f36c9014ec1a24f449e373f7e886f7c9, type: 2}
   m_IsTrigger: 0
   m_Size: {x: .779999971, y: 2.27999997}
-  m_Center: {x: .159999996, y: .0500000007}
+  m_Center: {x: .129999995, y: .0500000007}
 --- !u!50 &1946648953
 Rigidbody2D:
   m_ObjectHideFlags: 0
