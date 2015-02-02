@@ -26,6 +26,7 @@ public class noirCharacterController : MonoBehaviour {
 	int specState3Hash = Animator.StringToHash ("Base Layer.noirSpecial3");
 	int specState4Hash = Animator.StringToHash ("Base Layer.noirSpecial4");
 	int specStateExHash = Animator.StringToHash ("Base Layer.noirSpecialEx");
+	int heavyAttackStateHash = Animator.StringToHash ("Base Layer.noirHeavyAttack");
 
 
 	// Use this for initialization
@@ -44,6 +45,8 @@ public class noirCharacterController : MonoBehaviour {
 		if (stateInfo.nameHash == specState1Hash ||stateInfo.nameHash == specState2Hash ||stateInfo.nameHash == specState3Hash ||stateInfo.nameHash == specState4Hash)
 			attack = true;
 		if (stateInfo.nameHash == specStateExHash)
+			attack = true;
+		if (stateInfo.nameHash == heavyAttackStateHash)
 			attack = true;
 
 		if (attack)
@@ -86,6 +89,9 @@ public class noirCharacterController : MonoBehaviour {
 		}
 		if (Input.GetKeyDown (KeyCode.LeftControl)) {
 			anim.SetBool("Special", true);
+		}
+		if (Input.GetKeyDown (KeyCode.LeftShift)) {
+			anim.SetTrigger("Heavy");
 		}
 
 
