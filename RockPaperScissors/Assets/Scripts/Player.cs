@@ -11,12 +11,13 @@ public class Player : MonoBehaviour {
 	public LayerMask whatIsGround;
 	public float jumpForce = 300f;
 	public float maxSpeed = 3f;
+	public bool facingLeft = true; // Current direction the player is facing in
 
 	private PlayerState playerState; // Generic state that implements state and behaviour
 	private Animator anim; // Stores player animation
 	private Controls controller;
 	private Player player; //when collided check player collided with
-	private bool facingLeft = true;
+	
 	private bool grounded = false;
 	private float groundRadius = 0.2f;
 	private bool doubleJump = false;
@@ -121,12 +122,24 @@ public class Player : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D other) {
 		if (other.gameObject.tag == "Player") {
 			player = (Player)other.gameObject.GetComponent(typeof(Player));
+			//Debug.Log("My x is " + this.transform.position.x + ": their x is " + other.transform.position.x + ": I am facingLeft " + facingLeft);
+			if (this.transform.position.x < other.transform.position.x && facingLeft) {
+				player = null;
+			} else if (this.transform.position.x > other.transform.position.x && !facingLeft) {
+				player = null;
+			}
 		}
 	}
 
 	void OnCollisionStay2D(Collision2D other) {
 		if (other.gameObject.tag == "Player") {
 			player = (Player)other.gameObject.GetComponent(typeof(Player));
+			//Debug.Log("My x is " + this.transform.position.x + ": their x is " + other.transform.position.x + ": I am facingLeft " + facingLeft);
+			if (this.transform.position.x < other.transform.position.x && facingLeft) {
+				player = null;
+			} else if (this.transform.position.x > other.transform.position.x && !facingLeft) {
+				player = null;
+			}
 		}
 	}
 
