@@ -11,3 +11,11 @@ EditorBuildSettings:
     path: Assets/Scenes/mainmenu.unity
   - enabled: 1
     path: Assets/Scenes/Smash Bros Battlefield Map.unity
+  - enabled: 1
+    path: Assets/Scenes/MapSelectionMenu.unity
+  - enabled: 1
+    path: Assets/Scenes/Landslide Map.unity
+  - enabled: 1
+    path: Assets/Scenes/Traditional Fighter Map.unity
+  - enabled: 1
+    path: Assets/Scenes/CharacterSelectionMenu.unity

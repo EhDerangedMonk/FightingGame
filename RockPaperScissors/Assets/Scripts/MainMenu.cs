@@ -22,7 +22,9 @@ public class MainMenu : MonoBehaviour {
 		if (GUI.Button (new Rect (ButtonLocationX, Screen.height * PlayButtonLocationY, playButtonTexture.width, playButtonTexture.height), playButtonTexture, ""))
 		{
 			print ("Clicked PLAY");
-			Application.LoadLevel("Smash Bros Battlefield Map");
+			
+			// Load the map selection menu
+			Application.LoadLevel("CharacterSelectionMenu");
 		}
 
 		if (GUI.Button (new Rect (ButtonLocationX, Screen.height * OptionsButtonLocationY, optionsButtonTexture.width, optionsButtonTexture.height), optionsButtonTexture, ""))
