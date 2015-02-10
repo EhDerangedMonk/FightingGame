@@ -22,7 +22,7 @@ public class rockBehaviour : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D other) {
 		if (other.gameObject.tag == "Player") {
 			rockVictim = (Player)other.gameObject.GetComponent(typeof(Player));
-			rockVictim.playerHealth.damage(1000); // TEMP: Rocks deal 1000DMG just to show Denis they work.
+			rockVictim.playerHealth.damage(500); // TEMP: Rocks deal 500DMG just to show Denis they work.
 			Destroy();
 		}
 		/* //Rocks breaking eachother?
