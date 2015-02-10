@@ -545,8 +545,8 @@ GameObject:
   - 114: {fileID: 1946648956}
   - 58: {fileID: 1946648957}
   m_Layer: 8
-  m_Name: testCharacter
-  m_TagString: Untagged
+  m_Name: Player1
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -646,15 +646,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1946648949}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bb070f0f0c2e5c43a7d203ba0d88c40, type: 3}
+  m_Script: {fileID: 11500000, guid: 4db430f27868082438f3d33d21bddc79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 5
+  layout: 1
   groundCheck: {fileID: 2074676459}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 4294967039
   jumpForce: 700
+  maxSpeed: 5
 --- !u!58 &1946648957
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -682,8 +683,8 @@ GameObject:
   - 114: {fileID: 2047241312}
   - 58: {fileID: 2047241318}
   m_Layer: 8
-  m_Name: testCharacter2
-  m_TagString: Untagged
+  m_Name: Player2
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -709,15 +710,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2047241310}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3147fcdad928c8498c2d37a5927c4e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 4db430f27868082438f3d33d21bddc79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 5
+  layout: 2
   groundCheck: {fileID: 308123880}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 4294967039
   jumpForce: 700
+  maxSpeed: 5
 --- !u!95 &2047241313
 Animator:
   serializedVersion: 3
