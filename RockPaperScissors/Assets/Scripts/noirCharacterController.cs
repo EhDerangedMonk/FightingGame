@@ -28,6 +28,9 @@ public class noirCharacterController : MonoBehaviour {
 	int specStateExHash = Animator.StringToHash ("Base Layer.noirSpecialEx");
 	int heavyAttackStateHash = Animator.StringToHash ("Base Layer.noirHeavyAttack");
 
+	float slideSpeed = 200;
+	
+
 
 	// Use this for initialization
 	void Start () {
@@ -62,9 +65,7 @@ public class noirCharacterController : MonoBehaviour {
 		anim.SetFloat ("vSpeed", rigidbody2D.velocity.y);
 		
 		
-		//if (!grounded)
-		//	return;
-		
+
 		float move = Input.GetAxis ("Horizontal");
 		
 		anim.SetFloat ("speed", Mathf.Abs (move));
@@ -103,9 +104,38 @@ public class noirCharacterController : MonoBehaviour {
 			if(!doubleJump && !grounded)
 				doubleJump = true;
 		}
+
+
 		
+
+
 	}
-	
+	void OnTriggerStay2D(Collider2D other)
+	{
+		//CharacterController controller = GetComponent<CharacterController>();
+
+		//var controller = other.GetComponent(CharacterController);
+		Vector3 forward = new Vector3 (0, 0, 0);
+		//other.attachedRigidbody.GetVector (forward);
+		//Vector3 forward;
+		Debug.Log (forward);
+
+			if (other.transform.position.x > this.transform.position.x) {
+						forward = new Vector3 (1, 0, 0);
+				}
+			else{
+					forward = new Vector3 (-1, 0, 0);
+			}
+
+
+		//if(controller != null)
+		//{ 
+		//	controller.SimpleMove(forward * slideSpeed);
+		//}-0.1 *
+		other.attachedRigidbody.AddForce (forward * slideSpeed); //other.attachedRigidbody.velocity);
+
+	}
+
 	void flip(){
 		facingLeft = !facingLeft;
 		Vector3 theScale = transform.localScale;

@@ -28,7 +28,8 @@ public class noir2CharacterController : MonoBehaviour {
 	int specStateExHash = Animator.StringToHash ("Base Layer.noirSpecialEx");
 	int heavyAttackStateHash = Animator.StringToHash ("Base Layer.noirHeavyAttack");
 	
-	
+	float slideSpeed = 200;
+
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
@@ -110,6 +111,23 @@ public class noir2CharacterController : MonoBehaviour {
 				doubleJump = true;
 		}
 		
+	}
+
+	void OnTriggerStay2D(Collider2D other)
+	{
+		
+		Vector3 forward = new Vector3 (0, 0, 0);
+		Debug.Log (forward);
+		
+		if (other.transform.position.x > this.transform.position.x) {
+			forward = new Vector3 (1, 0, 0);
+		}
+		else{
+			forward = new Vector3 (-1, 0, 0);
+		}
+		
+		
+		other.attachedRigidbody.AddForce (forward * slideSpeed);
 	}
 	
 	void flip(){
