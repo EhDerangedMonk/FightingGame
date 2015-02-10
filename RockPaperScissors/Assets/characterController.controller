@@ -158,7 +158,7 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: 
     m_EventTreshold: 0
-    m_ExitTime: 1
+    m_ExitTime: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Death
     m_EventTreshold: 0
@@ -266,7 +266,7 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: 
     m_EventTreshold: 0
-    m_ExitTime: 1
+    m_ExitTime: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Death
     m_EventTreshold: 0
@@ -334,7 +334,7 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: 
     m_EventTreshold: 0
-    m_ExitTime: 1
+    m_ExitTime: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Death
     m_EventTreshold: 0
@@ -398,7 +398,7 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: 
     m_EventTreshold: 0
-    m_ExitTime: 1
+    m_ExitTime: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Death
     m_EventTreshold: 0
@@ -442,7 +442,7 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: 
     m_EventTreshold: 0
-    m_ExitTime: 1
+    m_ExitTime: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Death
     m_EventTreshold: 0
@@ -486,7 +486,7 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: 
     m_EventTreshold: 0
-    m_ExitTime: 1
+    m_ExitTime: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Death
     m_EventTreshold: 0
@@ -554,7 +554,7 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: 
     m_EventTreshold: 0
-    m_ExitTime: 1
+    m_ExitTime: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Death
     m_EventTreshold: 0
@@ -578,7 +578,7 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: 
     m_EventTreshold: 0
-    m_ExitTime: 1
+    m_ExitTime: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Death
     m_EventTreshold: 0
@@ -602,7 +602,7 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: 
     m_EventTreshold: 0
-    m_ExitTime: 1
+    m_ExitTime: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Death
     m_EventTreshold: 0
@@ -666,7 +666,7 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: 
     m_EventTreshold: 0
-    m_ExitTime: 1
+    m_ExitTime: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Death
     m_EventTreshold: 0
@@ -794,7 +794,7 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: 
     m_EventTreshold: 0
-    m_ExitTime: 1
+    m_ExitTime: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Death
     m_EventTreshold: 0
@@ -1250,14 +1250,37 @@ StateMachine:
       first: {fileID: 0}
       second: []
     data:
-      first: {fileID: 110211330}
+      first: {fileID: 110271800}
       second:
-      - {fileID: 110108012}
+      - {fileID: 110159858}
+      - {fileID: 110140958}
+      - {fileID: 110196488}
+      - {fileID: 110111306}
+      - {fileID: 110100012}
+      - {fileID: 110110354}
     data:
-      first: {fileID: 110211574}
+      first: {fileID: 110283448}
       second:
-      - {fileID: 110195388}
-      - {fileID: 110101348}
+      - {fileID: 110172386}
+      - {fileID: 110125466}
+      - {fileID: 110169330}
+      - {fileID: 110124260}
+      - {fileID: 110173544}
+      - {fileID: 110126132}
+    data:
+      first: {fileID: 110258878}
+      second:
+      - {fileID: 110191742}
+      - {fileID: 110126350}
+      - {fileID: 110135910}
+      - {fileID: 110188140}
+      - {fileID: 110194238}
+    data:
+      first: {fileID: 110275568}
+      second:
+      - {fileID: 110190800}
+      - {fileID: 110152486}
+      - {fileID: 110136438}
     data:
       first: {fileID: 110218292}
       second:
@@ -1271,9 +1294,22 @@ StateMachine:
       - {fileID: 110198606}
       - {fileID: 110153096}
     data:
-      first: {fileID: 110237218}
+      first: {fileID: 110258128}
       second:
-      - {fileID: 110154652}
+      - {fileID: 110107042}
+      - {fileID: 110157946}
+      - {fileID: 110156010}
+    data:
+      first: {fileID: 110211574}
+      second:
+      - {fileID: 110195388}
+      - {fileID: 110101348}
+    data:
+      first: {fileID: 110283862}
+      second:
+      - {fileID: 110174338}
+      - {fileID: 110109974}
+      - {fileID: 110120050}
     data:
       first: {fileID: 110247618}
       second:
@@ -1281,56 +1317,20 @@ StateMachine:
       - {fileID: 110195492}
       - {fileID: 110160714}
     data:
+      first: {fileID: 110211330}
+      second:
+      - {fileID: 110108012}
+    data:
       first: {fileID: 110257528}
       second: []
-    data:
-      first: {fileID: 110258128}
-      second:
-      - {fileID: 110107042}
-      - {fileID: 110157946}
-      - {fileID: 110156010}
-    data:
-      first: {fileID: 110258878}
-      second:
-      - {fileID: 110191742}
-      - {fileID: 110126350}
-      - {fileID: 110135910}
-      - {fileID: 110188140}
-      - {fileID: 110194238}
-    data:
-      first: {fileID: 110271800}
-      second:
-      - {fileID: 110159858}
-      - {fileID: 110140958}
-      - {fileID: 110196488}
-      - {fileID: 110111306}
-      - {fileID: 110100012}
-      - {fileID: 110110354}
-    data:
-      first: {fileID: 110275568}
-      second:
-      - {fileID: 110190800}
-      - {fileID: 110152486}
-      - {fileID: 110136438}
     data:
       first: {fileID: 110277866}
       second:
       - {fileID: 110129904}
     data:
-      first: {fileID: 110283448}
+      first: {fileID: 110237218}
       second:
-      - {fileID: 110172386}
-      - {fileID: 110125466}
-      - {fileID: 110169330}
-      - {fileID: 110124260}
-      - {fileID: 110173544}
-      - {fileID: 110126132}
-    data:
-      first: {fileID: 110283862}
-      second:
-      - {fileID: 110174338}
-      - {fileID: 110109974}
-      - {fileID: 110120050}
+      - {fileID: 110154652}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: -324, y: -48, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
