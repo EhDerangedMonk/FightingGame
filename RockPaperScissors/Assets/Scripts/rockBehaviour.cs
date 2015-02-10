@@ -2,13 +2,11 @@
 using System.Collections;
 
 public class rockBehaviour : MonoBehaviour {
-	public float lifeTime = 8f; //TEMP: Amount of time before this object is destroyed.
-	//TODO: Have rock destroyed when it hits either players or other rocks.
-
+	Player rockVictim;
 
 	// Use this for initialization
 	void Start () {
-		Invoke ("Destroy", lifeTime); //TEMP: Destroy this object after some time.
+
 	}
 	
 	// Update is called once per frame
@@ -18,5 +16,19 @@ public class rockBehaviour : MonoBehaviour {
 
 	void Destroy () {
 		Destroy (this.gameObject);
+	}
+
+	// Called when a 2D object collides with another 2D object
+	void OnCollisionEnter2D(Collision2D other) {
+		if (other.gameObject.tag == "Player") {
+			rockVictim = (Player)other.gameObject.GetComponent(typeof(Player));
+			rockVictim.playerHealth.damage(1000); // TEMP: Rocks deal 1000DMG just to show Denis they work.
+			Destroy();
+		}
+		/* //Rocks breaking eachother?
+		if (other.gameObject.tag == "Rock") {
+			Destroy();
+		}
+		*/
 	}
 }
