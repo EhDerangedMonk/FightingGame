@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PlayerState.cs" />
      <Compile Include="Assets\Scripts\Spawner.cs" />
+     <Compile Include="Assets\Scripts\healthDisplay.cs" />
      <Compile Include="Assets\Scripts\noir2CharacterController.cs" />
      <Compile Include="Assets\Scripts\noirBehaviour.cs" />
      <Compile Include="Assets\Scripts\noirCharacterController.cs" />
