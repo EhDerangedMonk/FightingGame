@@ -21,7 +21,7 @@ public class Player : MonoBehaviour {
 	private bool grounded = false;
 	private float groundRadius = 0.2f;
 	private bool doubleJump = false;
-	private float slideSpeed = 200; // Speed characters slide at when pushed
+	private float slideSpeed = 200; // Speed characters slide at when standing on someone's head
 	
 	void Start() {
 		player = null; // Not colliding with a player by default
@@ -104,18 +104,30 @@ public class Player : MonoBehaviour {
 
 	}
 
+
+	//triggers when someone would stand on another person's head
 	void OnTriggerStay2D(Collider2D other) {
+		
+		Vector3 forward = new Vector3 (0f, 0f, 0.0f);
+		
 
-		// Vector3 forward = new Vector3 (0, 0, 0);
-
-		// 	if (other.transform.position.x > this.transform.position.x) {
-		// 		forward = new Vector3 (1, 0, 0);
-		// 	} else {
-		// 		forward = new Vector3 (-1, 0, 0);
-		// 	}
-
-		// other.attachedRigidbody.AddForce (forward * slideSpeed);
-
+		//check to ensure they are a player
+		if (other.gameObject.tag == "Player") {
+			player = (Player)other.gameObject.GetComponent(typeof(Player));
+			//finds out which player is on the other
+			if (player.gameObject.transform.position.y >this.gameObject.transform.position.y) {
+				//pushes you in the direction you are closest to not colliding with
+				if(player.gameObject.transform.position.x >this.gameObject.transform.position.x) {
+					forward = new Vector3(1f, 0f, 0f);
+					player.rigidbody2D.AddForce (forward * slideSpeed);
+				}
+				else{
+					forward = new Vector3(-1f, 0f, 0f);
+					player.rigidbody2D.AddForce (forward * slideSpeed);
+				}
+			}
+		}
+		
 	}
 
 	// Called when a 2D object collides with another 2D object
