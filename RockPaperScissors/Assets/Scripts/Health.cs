@@ -5,11 +5,12 @@ public class Health {
 	public int health; //Current players health out of 1000
 
 	// Constructor
-	public Health() {
-		health = 1000;
+	public Health(int hp) {
+		health = hp;
 	}
 
 	/*
+	 * DESCR: Damages player health
 	 * PRE: Give int amount of damage to be taken from the player health
 	 * POST: Returns bool if True player is dead/ False player is alive
 	 */
@@ -27,6 +28,7 @@ public class Health {
 	}
 
 	/*
+	 * DESCR: Heals player health
 	 * PRE: Give int amount of health to add to the current player health
 	 * POST: NONE
 	 */
@@ -37,6 +39,7 @@ public class Health {
 
 
 	/*
+	 * DESCR: Tells you if the player is dead or not
 	 * PRE: None
 	 * POST: True is dead / False is alive
 	 */

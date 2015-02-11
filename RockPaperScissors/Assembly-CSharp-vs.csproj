@@ -48,7 +48,6 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CharacterSelectionMenu.cs" />
      <Compile Include="Assets\Scripts\Controls.cs" />
-     <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\Health.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\MapSelectionMenu.cs" />
@@ -56,9 +55,7 @@
      <Compile Include="Assets\Scripts\PlayerState.cs" />
      <Compile Include="Assets\Scripts\Spawner.cs" />
      <Compile Include="Assets\Scripts\healthDisplay.cs" />
-     <Compile Include="Assets\Scripts\noir2CharacterController.cs" />
      <Compile Include="Assets\Scripts\noirBehaviour.cs" />
-     <Compile Include="Assets\Scripts\noirCharacterController.cs" />
      <Compile Include="Assets\Scripts\rockBehaviour.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>

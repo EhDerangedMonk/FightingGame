@@ -7,7 +7,7 @@ public abstract class PlayerState {
 	public int lightAttackStateHash;
 	public int[] specStateHash; // Can have more than one state
 	public int heavyAttackStateHash;
-	//public int deathStateHash;
+	public int idleStateHash;
 	public Animator anim; // Passing in a copy of the player animation to read it
 
 	public abstract void lightAttack();
