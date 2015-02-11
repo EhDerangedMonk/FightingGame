@@ -20,6 +20,7 @@ public class noirBehaviour: PlayerState {
 		specStateHash[3] = Animator.StringToHash ("Base Layer.noirSpecial4");
 		specStateHash[4] = Animator.StringToHash ("Base Layer.noirSpecialEx"); // Extension when the attack is considered to hitting
 		heavyAttackStateHash = Animator.StringToHash ("Base Layer.noirHeavyAttack");
+
 		//deathStateHash = Animator.StringToHash ("Base Layer.noirDeath");
 	}
 

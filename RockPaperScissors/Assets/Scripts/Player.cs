@@ -131,17 +131,17 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	// void OnCollisionStay2D(Collision2D other) {
-	// 	if (other.gameObject.tag == "Player") {
-	// 		player = (Player)other.gameObject.GetComponent(typeof(Player));
-	// 		//Debug.Log("My x is " + this.transform.position.x + ": their x is " + other.transform.position.x + ": I am facingLeft " + facingLeft);
-	// 		if (this.transform.position.x < other.transform.position.x && facingLeft) {
-	// 			player = null;
-	// 		} else if (this.transform.position.x > other.transform.position.x && !facingLeft) {
-	// 			player = null;
-	// 		}
-	// 	}
-	// }
+	void OnCollisionStay2D(Collision2D other) {
+		if (other.gameObject.tag == "Player") {
+			player = (Player)other.gameObject.GetComponent(typeof(Player));
+			//Debug.Log("My x is " + this.transform.position.x + ": their x is " + other.transform.position.x + ": I am facingLeft " + facingLeft);
+			if (this.transform.position.x < other.transform.position.x && facingLeft) {
+				player = null;
+			} else if (this.transform.position.x > other.transform.position.x && !facingLeft) {
+				player = null;
+			}
+		}
+	}
 
 	// Called when a 2D object stops colliding with another 2D object
 	void OnCollisionExit2D(Collision2D other) {
