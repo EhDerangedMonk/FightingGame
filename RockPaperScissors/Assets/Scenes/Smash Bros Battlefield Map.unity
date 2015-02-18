@@ -666,9 +666,6 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 4294967039
-  jumpForce: 700
-  maxSpeed: 5
-  facingLeft: 1
 --- !u!58 &1946648957
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -731,9 +728,6 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 4294967039
-  jumpForce: 700
-  maxSpeed: 5
-  facingLeft: 1
 --- !u!95 &2047241313
 Animator:
   serializedVersion: 3

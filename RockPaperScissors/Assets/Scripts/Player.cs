@@ -47,7 +47,14 @@ public class Player : MonoBehaviour {
                 anim.SetBool("Special", true);
             } else if (Input.GetKeyDown (controller.heavy)) {
                 anim.SetTrigger("Heavy");
-            }
+			} else if (Input.GetKeyUp (controller.block)) {
+				anim.SetBool ("Block", false);
+			} else if (Input.GetKeyDown (controller.block)) {
+				anim.SetBool("Block", true);
+			} else if (Input.GetKeyDown (controller.grapple)) {
+				anim.SetTrigger("Grapple");
+			}
+
         }
 
     }

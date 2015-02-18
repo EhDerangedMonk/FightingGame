@@ -9,6 +9,8 @@ public class Controls {
 	public KeyCode jump;
 	public KeyCode left;
 	public KeyCode right;
+	public KeyCode block;
+	public KeyCode grapple;
 
 
 	public Controls(int layout) {
@@ -20,6 +22,8 @@ public class Controls {
 				jump = KeyCode.W;
 				left = KeyCode.A;
 				right = KeyCode.D;
+				block = KeyCode.F;
+				grapple = KeyCode.LeftAlt;
 				break;
 			case 2:
 				light = KeyCode.O;
@@ -28,6 +32,8 @@ public class Controls {
 				jump = KeyCode.I;
 				left = KeyCode.J;
 				right = KeyCode.L;
+				block = KeyCode.Slash;
+				grapple = KeyCode.P;
 				break;
 			default:
 				Debug.Log("Unkown player! " + layout);
