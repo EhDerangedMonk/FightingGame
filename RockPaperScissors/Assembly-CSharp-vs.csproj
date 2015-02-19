@@ -57,6 +57,8 @@
      <Compile Include="Assets\Scripts\healthDisplay.cs" />
      <Compile Include="Assets\Scripts\noirBehaviour.cs" />
      <Compile Include="Assets\Scripts\rockBehaviour.cs" />
+     <Compile Include="Assets\cameraController.cs" />
+     <Compile Include="Assets\pitfallBehaviour.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>
