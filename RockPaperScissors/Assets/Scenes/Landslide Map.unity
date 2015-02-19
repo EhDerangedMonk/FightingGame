@@ -485,9 +485,6 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 4294967039
-  jumpForce: 700
-  maxSpeed: 5
-  facingLeft: 1
 --- !u!95 &1216961839
 Animator:
   serializedVersion: 3
@@ -638,9 +635,6 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 4294967039
-  jumpForce: 700
-  maxSpeed: 5
-  facingLeft: 1
 --- !u!95 &1869827387
 Animator:
   serializedVersion: 3
