@@ -23,15 +23,17 @@ public class CharacterSelectionMenu : MonoBehaviour {
 	\*******/
 	void Start()
 	{
-		int buttonWidth = Screen.width/3;
-		int buttonHeight = (int) (Screen.width/3 * 0.78947368); // The height is multiplied by 0.78947368 to match the aspect ratio of the button to 16:9
+		int buttonWidth = Screen.width * 2/7;
+		int buttonHeight = (int) (buttonWidth * 0.7125); // The height is multiplied by 0.7125 to match the aspect ratio of the button to 16:9
 		int vertSpacing = (Screen.height - 2*buttonHeight)/3;
+		int horzSpacing = (Screen.width - 2*buttonWidth)/3;
+		print (horzSpacing.ToString() + "     " + vertSpacing.ToString());
 	
 		// Initialize the buttons' rectangles
-		CharacterSelectionRect = new Rect(Screen.width/9, vertSpacing, buttonWidth, buttonHeight);
-		VioletRect = new Rect(Screen.width/9, Screen.width/3 + 2*vertSpacing, buttonWidth, buttonHeight);
-		ZakirRect = new Rect(Screen.width*5/9, vertSpacing, buttonWidth, buttonHeight);
-		NoirRect = new Rect(Screen.width*5/9, Screen.width/3 + 2*vertSpacing, buttonWidth, buttonHeight);
+		CharacterSelectionRect = new Rect(horzSpacing, vertSpacing, buttonWidth, buttonHeight);
+		VioletRect = new Rect(horzSpacing, buttonHeight + 2*vertSpacing, buttonWidth, buttonHeight);
+		ZakirRect = new Rect(buttonWidth + 2*horzSpacing, vertSpacing, buttonWidth, buttonHeight);
+		NoirRect = new Rect(buttonWidth + 2*horzSpacing, buttonHeight + 2*vertSpacing, buttonWidth, buttonHeight);
 		
 	} 
 	
