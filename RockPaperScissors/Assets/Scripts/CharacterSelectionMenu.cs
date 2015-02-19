@@ -7,47 +7,43 @@ using System.Collections;
 
 public class CharacterSelectionMenu : MonoBehaviour {
 	
-	public float ButtonLocationX;
-	public float ZakirButtonLocationY;
-	public float VioletButtonLocationY;
-	public float NoirButtonLocationY;
+	public Texture NoirSelectionButton;
+	public Texture ZakirSelectionButton;
+	public Texture VioletSelectionButton;
+	public Texture CharacterSelectionTitle;
 	
-	public GUIStyle CharacterButtonTexture;
+	private Rect NoirRect;
+	private Rect ZakirRect;
+	private Rect VioletRect;
+	private Rect CharacterSelectionRect;
 	
-	public Texture NoirIdle;
-	public Texture ZakirIdle;
-	public Texture VioletIdle;
 	
+	/*******\
+	* START *
+	\*******/
+	void Start()
+	{
+		int buttonWidth = Screen.width/3;
+		int buttonHeight = (int) (Screen.width/3 * 0.78947368); // The height is multiplied by 0.78947368 to match the aspect ratio of the button to 16:9
+		int vertSpacing = (Screen.height - 2*buttonHeight)/3;
+	
+		// Initialize the buttons' rectangles
+		CharacterSelectionRect = new Rect(Screen.width/9, vertSpacing, buttonWidth, buttonHeight);
+		VioletRect = new Rect(Screen.width/9, Screen.width/3 + 2*vertSpacing, buttonWidth, buttonHeight);
+		ZakirRect = new Rect(Screen.width*5/9, vertSpacing, buttonWidth, buttonHeight);
+		NoirRect = new Rect(Screen.width*5/9, Screen.width/3 + 2*vertSpacing, buttonWidth, buttonHeight);
+		
+	} 
+	
+	/*******\
+	* ONGUI *
+	\*******/
 	void OnGUI()
 	{
-		// Display the buttons
-		if (GUI.Button (new Rect (Screen.width * ButtonLocationX, Screen.height * ZakirButtonLocationY, 350, 250), "", CharacterButtonTexture))
-		{
-			print ("Selected ZAKIR");
-			
-			// Load the map scene
-			Application.LoadLevel("MapSelectionMenu");
-		}
-		
-		if (GUI.Button (new Rect (Screen.width * ButtonLocationX, Screen.height * VioletButtonLocationY, 350, 250), "", CharacterButtonTexture))
-		{
-			print ("Selected VIOLET");
-			
-			// Load the map scene
-			Application.LoadLevel("MapSelectionMenu");
-		}
-		
-		if (GUI.Button (new Rect (Screen.width * ButtonLocationX, Screen.height * NoirButtonLocationY, 350, 250), "", CharacterButtonTexture))
-		{
-			print ("Selected NOIR");
-			
-			// Load the map scene
-			Application.LoadLevel("MapSelectionMenu");
-		}
-		
-		// Display the characters
-		GUI.DrawTexture(new Rect (Screen.width * ButtonLocationX+175, Screen.height * ZakirButtonLocationY+125, ZakirIdle.width, ZakirIdle.height), ZakirIdle);
-		GUI.DrawTexture(new Rect (Screen.width * ButtonLocationX+175, Screen.height * VioletButtonLocationY+125, VioletIdle.width, VioletIdle.height), VioletIdle);
-		GUI.DrawTexture(new Rect (Screen.width * ButtonLocationX+175, Screen.height * NoirButtonLocationY+125, NoirIdle.width, NoirIdle.height), NoirIdle);
+		// Draw the buttons, adjusted for screen width
+		GUI.DrawTexture(CharacterSelectionRect, CharacterSelectionTitle, ScaleMode.ScaleToFit, true);
+		GUI.DrawTexture(VioletRect, VioletSelectionButton, ScaleMode.ScaleToFit, true);
+		GUI.DrawTexture(ZakirRect, ZakirSelectionButton, ScaleMode.ScaleToFit, true);
+		GUI.DrawTexture(NoirRect, NoirSelectionButton, ScaleMode.ScaleToFit, true);
 	}
 }
