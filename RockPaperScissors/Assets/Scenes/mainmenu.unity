@@ -174,10 +174,10 @@ MonoBehaviour:
   PlayButtonLocationY: .0199999996
   OptionsButtonLocationY: .25999999
   ExitButtonLocationY: .5
-  playButtonTexture: {fileID: 2800000, guid: 05097c2291ccd494eae695e6569b4b9e, type: 3}
-  optionsButtonTexture: {fileID: 2800000, guid: 31cc2ade72628344ba84ffa84f1b730c,
+  playButtonTexture: {fileID: 2800000, guid: 57190dde6361db24197cd6c25780a76e, type: 3}
+  optionsButtonTexture: {fileID: 2800000, guid: 7380a571dfe1e854fa6fd423ac61ab34,
     type: 3}
-  exitButtonTexture: {fileID: 2800000, guid: 473e5ea2ed94b7540ab6750d427f3669, type: 3}
+  exitButtonTexture: {fileID: 2800000, guid: 81b75b7871b7823489e939f6045e1086, type: 3}
 --- !u!1 &2045566925
 GameObject:
   m_ObjectHideFlags: 0
