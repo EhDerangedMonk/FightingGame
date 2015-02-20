@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\ledgeBehaviour.cs" />
      <Compile Include="Assets\Scripts\noirBehaviour.cs" />
      <Compile Include="Assets\Scripts\pitfallBehaviour.cs" />
+     <Compile Include="Assets\Scripts\platformBehaviour.cs" />
      <Compile Include="Assets\Scripts\rockBehaviour.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
