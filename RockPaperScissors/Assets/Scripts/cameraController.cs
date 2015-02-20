@@ -61,7 +61,7 @@ public class cameraController : MonoBehaviour {
 
 			else {
 				minX = Mathf.Min(minX, position.x);
-				minY = defaultCam.transform.position.y;
+				minY = Mathf.Min(minY, position.y);
 				minX = Mathf.Max(maxX, position.x);
 				maxY = Mathf.Max(maxY, position.y);
 			}
@@ -74,6 +74,10 @@ public class cameraController : MonoBehaviour {
 	Vector3 CalculateCameraPosition(Rect boundingBox)
 	{
 		Vector2 boundingBoxCenter = boundingBox.center;
+
+		if (boundingBoxCenter.y < cameraBounds.transform.position.y) {
+			boundingBoxCenter.y = defaultCam.transform.position.y;
+		}
 		
 		return new Vector3(boundingBoxCenter.x, boundingBoxCenter.y, cam.transform.position.z);
 	}
