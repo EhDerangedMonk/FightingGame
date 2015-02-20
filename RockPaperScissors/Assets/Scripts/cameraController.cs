@@ -18,15 +18,15 @@ public class cameraController : MonoBehaviour {
 	[SerializeField]
 	float zoomSpeed = 20f;
 	
-	Camera camera;
+	Camera cam;
 
 	public GameObject cameraBounds;
 	public GameObject defaultCam;
 
 	// Use this for initialization
 	void Start () {
-		camera = GetComponent<Camera>();
-		camera.orthographic = true;
+		cam = GetComponent<Camera>();
+		cam.orthographic = true;
 	}
 	
 	// Update is called once per frame
@@ -38,7 +38,7 @@ public class cameraController : MonoBehaviour {
 	{
 		Rect boundingBox = CalculateTargetsBoundingBox();
 		transform.position = CalculateCameraPosition(boundingBox);
-		camera.orthographicSize = CalculateOrthographicSize(boundingBox);
+		cam.orthographicSize = CalculateOrthographicSize(boundingBox);
 	}
 
 	// Calculates a bounding box that contains all the targets, returning a Rect containing all targets.
@@ -75,22 +75,22 @@ public class cameraController : MonoBehaviour {
 	{
 		Vector2 boundingBoxCenter = boundingBox.center;
 		
-		return new Vector3(boundingBoxCenter.x, boundingBoxCenter.y, camera.transform.position.z);
+		return new Vector3(boundingBoxCenter.x, boundingBoxCenter.y, cam.transform.position.z);
 	}
 
 	// Calculates a new orthographic size for the camera based on the target bounding box.
 	float CalculateOrthographicSize(Rect boundingBox)
 	{
-		float orthographicSize = camera.orthographicSize;
+		float orthographicSize = cam.orthographicSize;
 		Vector3 topRight = new Vector3(boundingBox.x + boundingBox.width, boundingBox.y, 0f);
-		Vector3 topRightAsViewport = camera.WorldToViewportPoint(topRight);
+		Vector3 topRightAsViewport = cam.WorldToViewportPoint(topRight);
 		
 		if (topRightAsViewport.x >= topRightAsViewport.y)
-			orthographicSize = Mathf.Abs(boundingBox.width) / camera.aspect / 2f;
+			orthographicSize = Mathf.Abs(boundingBox.width) / cam.aspect / 2f;
 		else
 			orthographicSize = Mathf.Abs(boundingBox.height) / 2f;
 		
-		return Mathf.Clamp(Mathf.Lerp(camera.orthographicSize, orthographicSize, Time.deltaTime * zoomSpeed), minimumOrthographicSize, Mathf.Infinity);
+		return Mathf.Clamp(Mathf.Lerp(cam.orthographicSize, orthographicSize, Time.deltaTime * zoomSpeed), minimumOrthographicSize, Mathf.Infinity);
 	}
 
 }
