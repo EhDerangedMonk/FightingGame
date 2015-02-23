@@ -94,20 +94,50 @@ public class CharacterSelectionMenu : MonoBehaviour {
 		GUI.DrawTexture(ZakirRect, ZakirSelectionButton, ScaleMode.ScaleToFit, true);
 		GUI.DrawTexture(NoirRect, NoirSelectionButton, ScaleMode.ScaleToFit, true);
 		
-		// Draw the tokens in the correct position, adjusted for screen size
+		// Draw the tokens in the correct position, adjusted for screen size. Change the token texture depending on if it's selected.
 		if (P1State == CharState.Violet)
-			GUI.DrawTexture(P1TokenRectV, P1TokenTexture, ScaleMode.ScaleToFit, true);
+		{
+			if (P1Selected)
+				GUI.DrawTexture(P1TokenRectV, P1TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P1TokenRectV, P1TokenTexture, ScaleMode.ScaleToFit, true);
+		}
 		else if (P1State == CharState.Zakir)
-			GUI.DrawTexture(P1TokenRectZ, P1TokenTexture, ScaleMode.ScaleToFit, true);
+		{
+			if (P1Selected)
+				GUI.DrawTexture(P1TokenRectZ, P1TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P1TokenRectZ, P1TokenTexture, ScaleMode.ScaleToFit, true);
+		}
 		else
-			GUI.DrawTexture(P1TokenRectN, P1TokenTexture, ScaleMode.ScaleToFit, true);
+		{
+			if (P1Selected)
+				GUI.DrawTexture(P1TokenRectN, P1TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P1TokenRectN, P1TokenTexture, ScaleMode.ScaleToFit, true);
+		}
 			
 		if (P2State == CharState.Violet)
-			GUI.DrawTexture(P2TokenRectV, P2TokenTexture, ScaleMode.ScaleToFit, true);
+		{
+			if (P2Selected)
+				GUI.DrawTexture(P2TokenRectV, P2TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P2TokenRectV, P2TokenTexture, ScaleMode.ScaleToFit, true);
+		}
 		else if (P2State == CharState.Zakir)
-			GUI.DrawTexture(P2TokenRectZ, P2TokenTexture, ScaleMode.ScaleToFit, true);
+		{
+			if (P2Selected)
+				GUI.DrawTexture(P2TokenRectZ, P2TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P2TokenRectZ, P2TokenTexture, ScaleMode.ScaleToFit, true);
+		}
 		else
-			GUI.DrawTexture(P2TokenRectN, P2TokenTexture, ScaleMode.ScaleToFit, true);
+		{
+			if (P2Selected)
+				GUI.DrawTexture(P2TokenRectN, P2TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P2TokenRectN, P2TokenTexture, ScaleMode.ScaleToFit, true);
+		}
 	}
 	
 	/*-******\
