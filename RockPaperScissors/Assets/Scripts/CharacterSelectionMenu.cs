@@ -22,6 +22,8 @@ public class CharacterSelectionMenu : MonoBehaviour {
 	// Token Textures
 	public Texture P1TokenTexture;
 	public Texture P2TokenTexture;
+	public Texture P1TokenSelectedTexture;
+	public Texture P2TokenSelectedTexture;
 	
 	// Token Rectangles (one for each token in each position)
 	private Rect P1TokenRectN;
@@ -35,6 +37,10 @@ public class CharacterSelectionMenu : MonoBehaviour {
 	enum CharState {Noir=1, Violet, Zakir};
 	private CharState P1State;
 	private CharState P2State;
+	
+	// Keep track of if each player has selected a character yet
+	private bool P1Selected;
+	private bool P2Selected;
 	
 	
 	/*******\
@@ -71,6 +77,10 @@ public class CharacterSelectionMenu : MonoBehaviour {
 		// Initialize player selection
 		P1State = CharState.Violet;
 		P2State = CharState.Violet; 
+		
+		// Initialize whether the players have selected to false
+		P1Selected = false;
+		P2Selected = false;
 	} 
 	
 	/*******\
@@ -105,48 +115,79 @@ public class CharacterSelectionMenu : MonoBehaviour {
 	\********/
 	void Update()
 	{
-		// Update the tokens based on any key input
-		switch(P1State)
+		// If both players have selected, go to the next scene (Map Selection)
+		if (P1Selected == true && P2Selected == true)
 		{
-			case CharState.Noir:
-				if (Input.GetKeyDown(KeyCode.W))
-					P1State = CharState.Zakir;
-				else if (Input.GetKeyDown(KeyCode.A))
-					P1State = CharState.Violet;
-				break;
-			case CharState.Violet:
-				if (Input.GetKeyDown(KeyCode.W))
-					P1State = CharState.Zakir;
-				else if (Input.GetKeyDown(KeyCode.D))
-					P1State = CharState.Noir;
-				break;
-			case CharState.Zakir:
-				if (Input.GetKeyDown(KeyCode.S))
-					P1State = CharState.Noir;
-				else if (Input.GetKeyDown(KeyCode.A))
-					P1State = CharState.Violet;
-				break;					
+			Application.LoadLevel("MapSelectionMenu");
 		}
-		switch(P2State)
+	
+		// Update the tokens based on any key input, if the players haven't selected yet
+		if (P1Selected == false)
 		{
-			case CharState.Noir:
-				if (Input.GetKeyDown(KeyCode.I))
-					P2State = CharState.Zakir;
-				else if (Input.GetKeyDown(KeyCode.J))
-					P2State = CharState.Violet;
-				break;
-			case CharState.Violet:
-				if (Input.GetKeyDown(KeyCode.I))
-					P2State = CharState.Zakir;
-				else if (Input.GetKeyDown(KeyCode.L))
-					P2State = CharState.Noir;
-				break;
-			case CharState.Zakir:
-				if (Input.GetKeyDown(KeyCode.K))
-					P2State = CharState.Noir;
-				else if (Input.GetKeyDown(KeyCode.J))
-					P2State = CharState.Violet;
-				break;	
+			switch(P1State)
+			{
+				case CharState.Noir:
+					if (Input.GetKeyDown(KeyCode.W))
+						P1State = CharState.Zakir;
+					else if (Input.GetKeyDown(KeyCode.A))
+						P1State = CharState.Violet;
+					break;
+				case CharState.Violet:
+					if (Input.GetKeyDown(KeyCode.W))
+						P1State = CharState.Zakir;
+					else if (Input.GetKeyDown(KeyCode.D))
+						P1State = CharState.Noir;
+					break;
+				case CharState.Zakir:
+					if (Input.GetKeyDown(KeyCode.S))
+						P1State = CharState.Noir;
+					else if (Input.GetKeyDown(KeyCode.A))
+						P1State = CharState.Violet;
+					break;					
+			}
+		}
+		// Check for the selection key being pressed
+		if (Input.GetKeyUp(KeyCode.Space))
+		{
+			// Toggle the selection
+			if (P1Selected)
+				P1Selected = false;
+			else
+				P1Selected = true;
+		}
+		
+		
+		if (P2Selected == false)
+		{
+			switch(P2State)
+			{
+				case CharState.Noir:
+					if (Input.GetKeyDown(KeyCode.I))
+						P2State = CharState.Zakir;
+					else if (Input.GetKeyDown(KeyCode.J))
+						P2State = CharState.Violet;
+					break;
+				case CharState.Violet:
+					if (Input.GetKeyDown(KeyCode.I))
+						P2State = CharState.Zakir;
+					else if (Input.GetKeyDown(KeyCode.L))
+						P2State = CharState.Noir;
+					break;
+				case CharState.Zakir:
+					if (Input.GetKeyDown(KeyCode.K))
+						P2State = CharState.Noir;
+					else if (Input.GetKeyDown(KeyCode.J))
+						P2State = CharState.Violet;
+					break;	
+			}
+		}
+		if (Input.GetKeyUp(KeyCode.Return))
+		{
+			// Toggle the selection
+			if (P2Selected)
+				P2Selected = false;
+			else
+				P2Selected = true;
 		}
 	}
 }
