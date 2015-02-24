@@ -66,7 +66,7 @@ public class CharacterSelectionMenu : MonoBehaviour {
 		int P1offset = 1;
 		int P2offset = (int)(buttonWidth - tokenWidth);
 		
-		// Initialize the token's rectangles
+		// Initialize the tokens' rectangles
 		P1TokenRectV = new Rect(horzSpacing+P1offset, buttonHeight + 2*vertSpacing, (int)tokenWidth, (int)tokenHeight);
 		P1TokenRectZ = new Rect((buttonWidth + 2*horzSpacing)+P1offset, vertSpacing, (int)tokenWidth, (int)tokenHeight);
 		P1TokenRectN = new Rect((buttonWidth + 2*horzSpacing)+P1offset, buttonHeight + 2*vertSpacing, (int)tokenWidth, (int)tokenHeight);
