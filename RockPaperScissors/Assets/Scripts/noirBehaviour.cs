@@ -13,6 +13,7 @@ public class noirBehaviour: PlayerState {
     // Constructor
     public noirBehaviour(Animator animation) {
         attack = false;
+        flinch = false;
         specState = 0;// No spec attack by default
         anim = animation; // Getting component from unity passed in
         specStateHash = new int[5]; // Noir has 4 special states
@@ -24,6 +25,7 @@ public class noirBehaviour: PlayerState {
         specStateHash[3] = Animator.StringToHash("Base Layer.noirSpecial4");
         specStateHash[4] = Animator.StringToHash("Base Layer.noirSpecialEx"); // Extension when the attack is considered to hitting
         heavyAttackStateHash = Animator.StringToHash("Base Layer.noirHeavyAttack");
+        flinchStateHash = Animator.StringToHash("Base Layer.noirFlinch");
     }
 
     /*
@@ -38,6 +40,11 @@ public class noirBehaviour: PlayerState {
         chargeState = false;
         curPlayer = player;
         stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+
+        if(stateInfo.nameHash != flinchStateHash) {
+            anim.SetBool("Flinch", false);
+            setFlinch(false);
+        }
 
         if(stateInfo.nameHash == idleStateHash) {
             attack = false;
@@ -74,6 +81,8 @@ public class noirBehaviour: PlayerState {
         
         if (curPlayer == null)
             return;
+
+        curPlayer.playerState.setFlinch(true);
         curPlayer.playerHealth.damage(50);
         //Debug.Log("Light Attack for 50 damage");    
     }
@@ -99,7 +108,7 @@ public class noirBehaviour: PlayerState {
                 damage = 400;
                 break;
         }
-
+        curPlayer.playerState.setFlinch(true);
         curPlayer.playerHealth.damage(damage);
         //Debug.Log("Special Attack!: Power is " + curState + "- Damage hit for " + damage);
     }
@@ -108,6 +117,8 @@ public class noirBehaviour: PlayerState {
         
         if (curPlayer == null)
             return;
+
+        curPlayer.playerState.setFlinch(true);
         curPlayer.playerHealth.damage(80);
         //Debug.Log("Heavy Attack for 80 damage");
     }

@@ -21,9 +21,9 @@ public class ledgeBehaviour : MonoBehaviour {
 	void FixedUpdate() {
 		hang = Physics2D.OverlapCircle (hangCheck.position, hangRadius, players);
 
-		if (hang)
-			Debug.Log ("Player should be hanging!");
-		else
-			Debug.Log ("Player isn't hanging!");
+		// if (hang)
+		// 	Debug.Log ("Player should be hanging!");
+		// else
+		// 	Debug.Log ("Player isn't hanging!");
 	}
 }

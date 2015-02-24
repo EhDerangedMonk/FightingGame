@@ -14,7 +14,7 @@ public class Player : MonoBehaviour {
 
     private bool facingLeft = true;// Current direction the player is facing in
 
-    private PlayerState playerState; // Generic state that implements state and behaviour
+    public PlayerState playerState; // Generic state that implements state and behaviour
     private Animator anim; // Stores player animation
     private Controls controller; // Player keyboard/game controller controls
     private Player player; //when collided check player collided with
@@ -23,9 +23,12 @@ public class Player : MonoBehaviour {
     private float groundRadius = 0.2f;
     private bool doubleJump = false; // If the player is currently allowed to double jump
     private float slideSpeed = 200; // Speed characters slide at when standing on someone's head
+
+    private bool isFlinching; // Stops player from flinching more than one until flinch is done
     
     void Start() {
         player = null; // Not colliding with a player by default
+        isFlinching = false;
         anim = GetComponent<Animator>();
         controller = new Controls(layout);
         playerHealth = new Health(1000);
@@ -38,8 +41,8 @@ public class Player : MonoBehaviour {
         // Disable controls if the player is dead/ otherwise accept them
         if (playerHealth.isDead() == true) {
             anim.SetBool("Death", true);
-        } else if (playerHealth.isFlinch() == true) {
-            anim.SetBool("Flinch", true);
+        } else if (playerState.isFlinch()) {
+            return;
         } else {
             if (Input.GetKeyDown (controller.light)) {
                 anim.SetTrigger("Light");
@@ -68,19 +71,18 @@ public class Player : MonoBehaviour {
         if (playerHealth.isDead() == true) { // Temporary I have no death state?
             anim.SetBool("Death", true);
             return;
-        } else if (playerHealth.isFlinch() == true) {
+        }  else if (isFlinching == false && playerState.isFlinch() == true) {
+            Debug.Log("INIT FLINCH");
             anim.SetBool("Flinch", true);
+            rigidbody2D.AddForce(new Vector3(1f, 0f, 0f) * 200);
+            isFlinching = true;
             return;
+        } else if (isFlinching == true && playerState.isFlinch() == false) {
+            Debug.Log("FLINCH DONE");
+            isFlinching = false;
         }
 
-        if ((grounded || !doubleJump) && Input.GetKeyDown (controller.jump)) 
-        {
-            anim.SetBool("Ground", false);
-            rigidbody2D.AddForce(new Vector2(0, jumpForce));
-            
-            if(!doubleJump && !grounded)
-                doubleJump = true;
-        }
+        
     
         grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
         anim.SetBool ("Ground", grounded);
@@ -92,6 +94,17 @@ public class Player : MonoBehaviour {
 
         if (playerState.checkState(player)) { //Controls player and their actions
             return; // Currently in attack if return is true so don't allow character movement
+        } else if (isFlinching == true) {
+            return;
+        }
+
+        if ((grounded || !doubleJump) && Input.GetKeyDown (controller.jump)) 
+        {
+            anim.SetBool("Ground", false);
+            rigidbody2D.AddForce(new Vector2(0, jumpForce));
+            
+            if(!doubleJump && !grounded)
+                doubleJump = true;
         }
 
         // Keyboard input
@@ -131,17 +144,17 @@ public class Player : MonoBehaviour {
             
 
             //finds out which player is on the other
-            if (player.gameObject.transform.position.y >this.gameObject.transform.position.y) {
-                //pushes you in the direction you are closest to not colliding with
-                if(player.gameObject.transform.position.x >this.gameObject.transform.position.x) {
-                    forward = new Vector3(1f, 0f, 0f);
-                    player.rigidbody2D.AddForce (forward * slideSpeed);
-                }
-                else{
-                    forward = new Vector3(-1f, 0f, 0f);
-                    player.rigidbody2D.AddForce (forward * slideSpeed);
-                }
-            }
+            // if (player.gameObject.transform.position.y >this.gameObject.transform.position.y) {
+            //     //pushes you in the direction you are closest to not colliding with
+            //     if(player.gameObject.transform.position.x >this.gameObject.transform.position.x) {
+            //         forward = new Vector3(1f, 0f, 0f);
+            //         player.rigidbody2D.AddForce (forward * slideSpeed);
+            //     }
+            //     else{
+            //         forward = new Vector3(-1f, 0f, 0f);
+            //         player.rigidbody2D.AddForce (forward * slideSpeed);
+            //     }
+            // }
 
             if (this.transform.position.x < other.transform.position.x && facingLeft) {
                 player = null;
@@ -201,6 +214,10 @@ public class Player : MonoBehaviour {
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    void flinch() {
+
     }
 
 }
