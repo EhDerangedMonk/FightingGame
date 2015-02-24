@@ -78,16 +78,16 @@ public class MapSelectionMenu : MonoBehaviour {
 		int P2offset = (int)(buttonWidth - tokenWidth);
 		
 		// Inititalize the tokens' rectangles
-		P1TokenRect_Trad = new Rect((buttonWidth + 2*horzSpacing)+P1offset, vertSpacing, buttonWidth, buttonHeight);
-		P1TokenRect_Btle = new Rect((2*buttonWidth + 3*horzSpacing)+P1offset, vertSpacing, buttonWidth, buttonHeight);
-		P1TokenRect_Land = new Rect((buttonWidth + 2*horzSpacing)+P1offset, buttonHeight + 2*vertSpacing, buttonWidth, buttonHeight);
-		P1TokenRect_Lava = new Rect((2*buttonWidth + 3*horzSpacing)+P1offset, buttonHeight + 2*vertSpacing, buttonWidth, buttonHeight);
-		P1TokenRect_Rand = new Rect(horzSpacing+P1offset, buttonHeight + 2*vertSpacing, buttonWidth, buttonHeight);
-		P2TokenRect_Trad = new Rect((buttonWidth + 2*horzSpacing)+P2offset, vertSpacing, buttonWidth, buttonHeight);
-		P2TokenRect_Btle = new Rect((2*buttonWidth + 3*horzSpacing)+P2offset, vertSpacing, buttonWidth, buttonHeight);
-		P2TokenRect_Land = new Rect((buttonWidth + 2*horzSpacing)+P2offset, buttonHeight + 2*vertSpacing, buttonWidth, buttonHeight);
-		P2TokenRect_Lava = new Rect((2*buttonWidth + 3*horzSpacing)+P2offset, buttonHeight + 2*vertSpacing, buttonWidth, buttonHeight);
-		P2TokenRect_Rand = new Rect(horzSpacing+P2offset, buttonHeight + 2*vertSpacing, buttonWidth, buttonHeight);
+		P1TokenRect_Trad = new Rect((buttonWidth + 2*horzSpacing)+P1offset, vertSpacing, (int)tokenWidth, (int)tokenHeight);
+		P1TokenRect_Btle = new Rect((2*buttonWidth + 3*horzSpacing)+P1offset, vertSpacing, (int)tokenWidth, (int)tokenHeight);
+		P1TokenRect_Land = new Rect((buttonWidth + 2*horzSpacing)+P1offset, buttonHeight + 2*vertSpacing, (int)tokenWidth, (int)tokenHeight);
+		P1TokenRect_Lava = new Rect((2*buttonWidth + 3*horzSpacing)+P1offset, buttonHeight + 2*vertSpacing, (int)tokenWidth, (int)tokenHeight);
+		P1TokenRect_Rand = new Rect(horzSpacing+P1offset, buttonHeight + 2*vertSpacing, (int)tokenWidth, (int)tokenHeight);
+		P2TokenRect_Trad = new Rect((buttonWidth + 2*horzSpacing)+P2offset, vertSpacing, (int)tokenWidth, (int)tokenHeight);
+		P2TokenRect_Btle = new Rect((2*buttonWidth + 3*horzSpacing)+P2offset, vertSpacing, (int)tokenWidth, (int)tokenHeight);
+		P2TokenRect_Land = new Rect((buttonWidth + 2*horzSpacing)+P2offset, buttonHeight + 2*vertSpacing, (int)tokenWidth, (int)tokenHeight);
+		P2TokenRect_Lava = new Rect((2*buttonWidth + 3*horzSpacing)+P2offset, buttonHeight + 2*vertSpacing, (int)tokenWidth, (int)tokenHeight);
+		P2TokenRect_Rand = new Rect(horzSpacing+P2offset, buttonHeight + 2*vertSpacing, (int)tokenWidth, (int)tokenHeight);
 		
 		// Initialize the player selection
 		P1State = MapState.Trad;
@@ -112,6 +112,79 @@ public class MapSelectionMenu : MonoBehaviour {
 		GUI.DrawTexture(LavaRect, LavaSelectionButton, ScaleMode.ScaleToFit, true);
 		GUI.DrawTexture(RandRect, RandSelectionButton, ScaleMode.ScaleToFit, true);
 		GUI.DrawTexture(MapSelectionRect, MapSelectionButton, ScaleMode.ScaleToFit, true);
+		
+		// Draw the tokens in the correct position, adjusted for screen size. Change the token texture depending on if it's selected.
+		if (P1State == MapState.Trad)
+		{
+			if (P1Selected)
+				GUI.DrawTexture(P1TokenRect_Trad, P1TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P1TokenRect_Trad, P1TokenTexture, ScaleMode.ScaleToFit, true);
+		}
+		else if (P1State == MapState.Btle)
+		{
+			if (P1Selected)
+				GUI.DrawTexture(P1TokenRect_Btle, P1TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P1TokenRect_Btle, P1TokenTexture, ScaleMode.ScaleToFit, true);
+		}
+		else if (P1State == MapState.Land)
+		{
+			if (P1Selected)
+				GUI.DrawTexture(P1TokenRect_Land, P1TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P1TokenRect_Land, P1TokenTexture, ScaleMode.ScaleToFit, true);
+		}
+		else if (P1State == MapState.Lava)
+		{
+			if (P1Selected)
+				GUI.DrawTexture(P1TokenRect_Lava, P1TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P1TokenRect_Lava, P1TokenTexture, ScaleMode.ScaleToFit, true);
+		}
+		else
+		{
+			if (P1Selected)
+				GUI.DrawTexture(P1TokenRect_Rand, P1TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P1TokenRect_Rand, P1TokenTexture, ScaleMode.ScaleToFit, true);
+		}
+		
+		if (P2State == MapState.Trad)
+		{
+			if (P2Selected)
+				GUI.DrawTexture(P2TokenRect_Trad, P2TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P2TokenRect_Trad, P2TokenTexture, ScaleMode.ScaleToFit, true);
+		}
+		else if (P2State == MapState.Btle)
+		{
+			if (P2Selected)
+				GUI.DrawTexture(P2TokenRect_Btle, P2TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P2TokenRect_Btle, P2TokenTexture, ScaleMode.ScaleToFit, true);
+		}
+		else if (P2State == MapState.Land)
+		{
+			if (P2Selected)
+				GUI.DrawTexture(P2TokenRect_Land, P2TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P2TokenRect_Land, P2TokenTexture, ScaleMode.ScaleToFit, true);
+		}
+		else if (P2State == MapState.Lava)
+		{
+			if (P2Selected)
+				GUI.DrawTexture(P2TokenRect_Lava, P2TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P2TokenRect_Lava, P2TokenTexture, ScaleMode.ScaleToFit, true);
+		}
+		else
+		{
+			if (P2Selected)
+				GUI.DrawTexture(P2TokenRect_Rand, P2TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P2TokenRect_Rand, P2TokenTexture, ScaleMode.ScaleToFit, true);
+		}
 	}
 	
 	
