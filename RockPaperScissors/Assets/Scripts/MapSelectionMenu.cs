@@ -202,7 +202,6 @@ public class MapSelectionMenu : MonoBehaviour {
 			int randomSelection = 0;
 			if (P1State == MapState.Rand) // Assign a value to the random selection, otherwise leave it as 0
 			{
-				Random rnd = new Random();
 				randomSelection = Random.Range(1,5); // Creates a random number between 1 and 4
 			}
 				
