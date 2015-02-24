@@ -194,6 +194,127 @@ public class MapSelectionMenu : MonoBehaviour {
 	\********/
 	void Update()
 	{
-	
+		// If both players have selected, determine which map to load and do so
+		if (P1Selected == true && P2Selected == true)
+		{
+			// TODO: implement map voting
+			// Right now it will just load whatever player 1 chose
+			int randomSelection = 0;
+			if (P1State == MapState.Rand) // Assign a value to the random selection, otherwise leave it as 0
+			{
+				Random rnd = new Random();
+				randomSelection = Random.Range(1,5); // Creates a random number between 1 and 4
+			}
+				
+			if (P1State == MapState.Trad || randomSelection == 1)
+				Application.LoadLevel("Traditional Fighter Map");
+			else if (P1State == MapState.Btle || randomSelection == 2)
+				Application.LoadLevel("Smash Bros Battlefield Map");
+			else if (P1State == MapState.Land || randomSelection == 3)
+				Application.LoadLevel("Landslide Map");
+			else
+				Application.LoadLevel("Lava Map");
+		}
+		
+		// Update the tokens based on any key input, if the players haven't selected yet
+		if (P1Selected == false)
+		{
+			switch(P1State)
+			{
+				case MapState.Rand:
+					if (Input.GetKeyUp(KeyCode.W))
+						P1State = MapState.Trad;
+				    else if (Input.GetKeyUp(KeyCode.D))
+				    	P1State = MapState.Land;
+					break;	
+				case MapState.Trad:	
+					if (Input.GetKeyUp(KeyCode.S))
+						P1State	= MapState.Land;
+					else if (Input.GetKeyUp(KeyCode.D))
+						P1State = MapState.Btle;
+					else if (Input.GetKeyUp(KeyCode.A))
+						P1State = MapState.Rand;
+					break;
+				case MapState.Btle:
+					if (Input.GetKeyUp(KeyCode.S))
+						P1State = MapState.Lava;
+					else if (Input.GetKeyUp(KeyCode.A))
+						P1State = MapState.Trad;
+					break;	
+				case MapState.Land:
+					if (Input.GetKeyUp(KeyCode.W))
+						P1State = MapState.Trad;
+					else if (Input.GetKeyUp(KeyCode.D))
+						P1State = MapState.Lava;
+					else if (Input.GetKeyUp(KeyCode.A))
+						P1State = MapState.Rand;
+					break;	
+				case MapState.Lava:
+					if (Input.GetKeyUp(KeyCode.W))
+						P1State = MapState.Btle;
+					else if (Input.GetKeyUp(KeyCode.A))
+						P1State = MapState.Land;
+					break;
+			}
+		}
+		// Check for the selection key being pressed
+		if (Input.GetKeyUp(KeyCode.Space))
+		{
+			// Toggle the selection
+			if (P1Selected)
+				P1Selected = false;
+			else
+				P1Selected = true;
+		}
+		
+		if (P2Selected == false)
+		{
+			switch(P2State)
+			{
+			case MapState.Rand:
+				if (Input.GetKeyUp(KeyCode.I))
+					P2State = MapState.Trad;
+				else if (Input.GetKeyUp(KeyCode.L))
+					P2State = MapState.Land;
+				break;	
+			case MapState.Trad:	
+				if (Input.GetKeyUp(KeyCode.K))
+					P2State	= MapState.Land;
+				else if (Input.GetKeyUp(KeyCode.L))
+					P2State = MapState.Btle;
+				else if (Input.GetKeyUp(KeyCode.J))
+					P2State = MapState.Rand;
+				break;
+			case MapState.Btle:
+				if (Input.GetKeyUp(KeyCode.K))
+					P2State = MapState.Lava;
+				else if (Input.GetKeyUp(KeyCode.J))
+					P2State = MapState.Trad;
+				break;	
+			case MapState.Land:
+				if (Input.GetKeyUp(KeyCode.I))
+					P2State = MapState.Trad;
+				else if (Input.GetKeyUp(KeyCode.L))
+					P2State = MapState.Lava;
+				else if (Input.GetKeyUp(KeyCode.J))
+					P2State = MapState.Rand;
+				break;	
+			case MapState.Lava:
+				if (Input.GetKeyUp(KeyCode.I))
+					P2State = MapState.Btle;
+				else if (Input.GetKeyUp(KeyCode.J))
+					P2State = MapState.Land;
+				break;
+			}
+		}
+		// Check for the selection key being pressed
+		if (Input.GetKeyUp(KeyCode.Return))
+		{
+			// Toggle the selection
+			if (P2Selected)
+				P2Selected = false;
+			else
+				P2Selected = true;
+		}
 	}
 }
