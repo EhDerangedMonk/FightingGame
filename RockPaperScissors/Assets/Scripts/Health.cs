@@ -3,10 +3,12 @@ using System.Collections;
 
 public class Health {
     private int health; //Current players health out of 1000
+    private bool flinch; //Gets triggered when the player should flinch
 
     // Constructor
     public Health(int hp) {
         health = hp;
+        flinch = false;
     }
 
 
@@ -21,11 +23,13 @@ public class Health {
         if (health <= 0) {
             Debug.Log("Player is dead!");
             health = 0;
-            return true;
-        } else {
-                Debug.Log("Player has taken damage!: " + damage + " - Remaining health is: " + health);
-        }
-        return false;
+            flinch = false;
+            return false;
+        } //else {
+                //Debug.Log("Player has taken damage!: " + damage + " - Remaining health is: " + health);
+        //}
+        flinch = true;
+        return true;
     }
 
 
@@ -62,7 +66,21 @@ public class Health {
         return false;
     }
 
+    /*
+     *
+     *
+     *
+     */
+    public bool isFlinch() {
 
+        if (flinch == true) {
+            flinch = false;
+            return true;
+        }
+        return false;
+    }
+
+  
     /*
      * DESCR: Set player health to current number
      * PRE: give new health (>= 0)

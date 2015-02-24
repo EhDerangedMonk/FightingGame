@@ -38,6 +38,8 @@ public class Player : MonoBehaviour {
         // Disable controls if the player is dead/ otherwise accept them
         if (playerHealth.isDead() == true) {
             anim.SetBool("Death", true);
+        } else if (playerHealth.isFlinch() == true) {
+            anim.SetBool("Flinch", true);
         } else {
             if (Input.GetKeyDown (controller.light)) {
                 anim.SetTrigger("Light");
@@ -65,6 +67,9 @@ public class Player : MonoBehaviour {
 
         if (playerHealth.isDead() == true) { // Temporary I have no death state?
             anim.SetBool("Death", true);
+            return;
+        } else if (playerHealth.isFlinch() == true) {
+            anim.SetBool("Flinch", true);
             return;
         }
 
@@ -120,7 +125,11 @@ public class Player : MonoBehaviour {
 
         //check to ensure they are a player
         if (other.gameObject.tag == "Player") {
+            Debug.Log("Touching a player");
             player = (Player)other.gameObject.GetComponent(typeof(Player));
+
+            
+
             //finds out which player is on the other
             if (player.gameObject.transform.position.y >this.gameObject.transform.position.y) {
                 //pushes you in the direction you are closest to not colliding with
@@ -133,10 +142,25 @@ public class Player : MonoBehaviour {
                     player.rigidbody2D.AddForce (forward * slideSpeed);
                 }
             }
+
+            if (this.transform.position.x < other.transform.position.x && facingLeft) {
+                player = null;
+            } else if (this.transform.position.x > other.transform.position.x && !facingLeft) {
+                player = null;
+            }
         }
         
     }
 
+    void OnTriggerExit2D(Collider2D other) {
+        // When a Player object stops colliding with another Player object
+        Debug.Log("Exit Called");
+        if (other.gameObject.tag == "Player") {
+            Debug.Log("Trigger Exit Player");
+            player = null;
+        }
+    }
+    /*
     // Called when a 2D object collides with another 2D object
     void OnCollisionEnter2D(Collision2D other) {
         // When a Player object collides with another Player object
@@ -169,7 +193,7 @@ public class Player : MonoBehaviour {
         if (other.gameObject.tag == "Player") {
             player = null;
         }
-    }
+    }*/
 
     // Reverses character direction
     void flip() {

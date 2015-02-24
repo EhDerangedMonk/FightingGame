@@ -75,7 +75,7 @@ public class noirBehaviour: PlayerState {
         if (curPlayer == null)
             return;
         curPlayer.playerHealth.damage(50);
-        Debug.Log("Light Attack for 50 damage");    
+        //Debug.Log("Light Attack for 50 damage");    
     }
 
     override public void specialAttack(int curState) {
@@ -101,7 +101,7 @@ public class noirBehaviour: PlayerState {
         }
 
         curPlayer.playerHealth.damage(damage);
-        Debug.Log("Special Attack!: Power is " + curState + "- Damage hit for " + damage);
+        //Debug.Log("Special Attack!: Power is " + curState + "- Damage hit for " + damage);
     }
 
     override public void heavyAttack() {
@@ -109,6 +109,6 @@ public class noirBehaviour: PlayerState {
         if (curPlayer == null)
             return;
         curPlayer.playerHealth.damage(80);
-        Debug.Log("Heavy Attack for 80 damage");
+        //Debug.Log("Heavy Attack for 80 damage");
     }
 }
