@@ -5,23 +5,20 @@ public class cameraController : MonoBehaviour {
 	//Elements of code inspired by a tutorial by Ryan Nielson.
 	//http://nielson.io/2014/03/making-a-target-tracking-orthographic-camera-in-unity/
 
-	//In this case, the targets are players.
-	[SerializeField] 
-	Transform[] targets;
-	
-	[SerializeField] 
-	float boundingBoxPadding = 2f;
-	
-	[SerializeField]
-	float minimumOrthographicSize = 5f;
-	
-	[SerializeField]
-	float zoomSpeed = 20f;
-	
-	Camera cam;
+	private float boundingBoxPadding = 2f;
+	private float minimumOrthographicSize = 5f;
+	private float zoomSpeed = 20f;
+	private Camera cam;
 
-	public GameObject cameraBounds;
+	//Boundaries and default camera location may differ between maps.
+	//[SerializeField] 
+	public Transform[] targets;
+	//public GameObject cameraBounds;
 	public GameObject defaultCam;
+	public GameObject topBounds;
+	public GameObject leftBounds;
+	public GameObject rightBounds;
+	public GameObject bottomBounds;
 
 	// Use this for initialization
 	void Start () {
@@ -48,23 +45,38 @@ public class cameraController : MonoBehaviour {
 		float maxX = Mathf.NegativeInfinity;
 		float minY = Mathf.Infinity;
 		float maxY = Mathf.NegativeInfinity;
-		
+
+		//Find the dimensions of a box that will contain all the targets, a.k.a. players.
+		//DefaultCam is among the targets to avoid any 'accessing empty object' errors.
 		foreach (Transform target in targets) {
 			Vector3 position = target.position;
 
-			if(target.position.y > cameraBounds.transform.position.y) {
-				minX = Mathf.Min(minX, position.x);
-				minY = Mathf.Min(minY, position.y);
-				maxX = Mathf.Max(maxX, position.x);
+			if(target.position.y > topBounds.transform.position.y)
+				maxY = topBounds.transform.position.y;
+			else
 				maxY = Mathf.Max(maxY, position.y);
-			}
 
-			else {
-				minX = Mathf.Min(minX, position.x);
+			if(target.position.y < bottomBounds.transform.position.y)
+				minY = bottomBounds.transform.position.y;
+			else
 				minY = Mathf.Min(minY, position.y);
-				minX = Mathf.Max(maxX, position.x);
-				maxY = Mathf.Max(maxY, position.y);
-			}
+
+			if(target.position.x < leftBounds.transform.position.x)
+				minX = leftBounds.transform.position.x;
+			else
+				minX = Mathf.Min(minX, position.x);
+
+			if(target.position.x > rightBounds.transform.position.x)
+				maxX = rightBounds.transform.position.x;
+			else
+				maxX = Mathf.Max(maxX, position.x);
+
+			/*
+			minX = Mathf.Min(minX, position.x);
+			minY = Mathf.Min(minY, position.y);
+			maxX = Mathf.Max(maxX, position.x);
+			maxY = Mathf.Max(maxY, position.y);
+			*/
 		}
 		
 		return Rect.MinMaxRect(minX - boundingBoxPadding, maxY + boundingBoxPadding, maxX + boundingBoxPadding, minY - boundingBoxPadding);
@@ -74,10 +86,6 @@ public class cameraController : MonoBehaviour {
 	Vector3 CalculateCameraPosition(Rect boundingBox)
 	{
 		Vector2 boundingBoxCenter = boundingBox.center;
-
-		if (boundingBoxCenter.y < cameraBounds.transform.position.y) {
-			boundingBoxCenter.y = defaultCam.transform.position.y;
-		}
 		
 		return new Vector3(boundingBoxCenter.x, boundingBoxCenter.y, cam.transform.position.z);
 	}

@@ -1,11 +1,10 @@
 fileFormatVersion: 2
-guid: 5ce90510bccdde24b946d700d40bb23b
+guid: 7baf67d6238109346845e61724aba677
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Zakir_Grapple_Throw_550x275_0
-    21300002: Zakir_Grapple_Throw_550x275_1
-    21300004: Zakir_Grapple_Throw_550x275_2
-    21300006: Zakir_Grapple_Throw_550x275_3
+    21300000: Violet_Grapple_Reach_550x275_0
+    21300002: Violet_Grapple_Reach_550x275_1
+    21300004: Violet_Grapple_Reach_550x275_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -47,7 +46,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Zakir_Grapple_Throw_550x275_0
+    - name: Violet_Grapple_Reach_550x275_0
       rect:
         serializedVersion: 2
         x: 0
@@ -57,7 +56,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .75, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zakir_Grapple_Throw_550x275_1
+    - name: Violet_Grapple_Reach_550x275_1
       rect:
         serializedVersion: 2
         x: 550
@@ -67,20 +66,10 @@ TextureImporter:
       alignment: 9
       pivot: {x: .75, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zakir_Grapple_Throw_550x275_2
+    - name: Violet_Grapple_Reach_550x275_2
       rect:
         serializedVersion: 2
         x: 0
-        y: 2200
-        width: 550
-        height: 275
-      alignment: 9
-      pivot: {x: .75, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zakir_Grapple_Throw_550x275_3
-      rect:
-        serializedVersion: 2
-        x: 550
         y: 2200
         width: 550
         height: 275

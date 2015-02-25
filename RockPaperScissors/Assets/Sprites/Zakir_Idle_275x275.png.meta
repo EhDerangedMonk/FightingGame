@@ -63,27 +63,7 @@ TextureImporter:
         width: 275
         height: 275
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zakir_Idle_275x275_1
-      rect:
-        serializedVersion: 2
-        x: 275
-        y: 2475
-        width: 275
-        height: 275
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zakir_Idle_275x275_2
-      rect:
-        serializedVersion: 2
-        x: 550
-        y: 2475
-        width: 275
-        height: 275
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zakir_Idle_275x275_3
       rect:
@@ -93,27 +73,7 @@ TextureImporter:
         width: 275
         height: 275
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zakir_Idle_275x275_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 2200
-        width: 275
-        height: 275
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zakir_Idle_275x275_5
-      rect:
-        serializedVersion: 2
-        x: 275
-        y: 2200
-        width: 275
-        height: 275
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zakir_Idle_275x275_6
       rect:
@@ -123,27 +83,7 @@ TextureImporter:
         width: 275
         height: 275
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zakir_Idle_275x275_7
-      rect:
-        serializedVersion: 2
-        x: 825
-        y: 2200
-        width: 275
-        height: 275
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zakir_Idle_275x275_8
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1925
-        width: 275
-        height: 275
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Zakir_Idle_275x275_9
       rect:
@@ -153,27 +93,7 @@ TextureImporter:
         width: 275
         height: 275
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zakir_Idle_275x275_10
-      rect:
-        serializedVersion: 2
-        x: 550
-        y: 1925
-        width: 275
-        height: 275
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Zakir_Idle_275x275_11
-      rect:
-        serializedVersion: 2
-        x: 825
-        y: 1925
-        width: 275
-        height: 275
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

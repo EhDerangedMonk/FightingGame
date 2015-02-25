@@ -1,7 +1,11 @@
 fileFormatVersion: 2
 guid: 3aca96d328880184bba419d50ee24763
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Zakir_Grapple_Reach_550x275_0
+    21300002: Zakir_Grapple_Reach_550x275_1
+    21300004: Zakir_Grapple_Reach_550x275_2
+    21300006: Zakir_Grapple_Reach_550x275_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -22,16 +26,16 @@ TextureImporter:
   generateCubemap: 0
   seamlessCubemap: 0
   textureFormat: -1
-  maxTextureSize: 1024
+  maxTextureSize: 4096
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -42,6 +46,46 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Zakir_Grapple_Reach_550x275_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2475
+        width: 550
+        height: 275
+      alignment: 9
+      pivot: {x: .75, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zakir_Grapple_Reach_550x275_1
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 2475
+        width: 550
+        height: 275
+      alignment: 9
+      pivot: {x: .75, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zakir_Grapple_Reach_550x275_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2200
+        width: 550
+        height: 275
+      alignment: 9
+      pivot: {x: .75, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Zakir_Grapple_Reach_550x275_3
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 2200
+        width: 550
+        height: 275
+      alignment: 9
+      pivot: {x: .75, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
