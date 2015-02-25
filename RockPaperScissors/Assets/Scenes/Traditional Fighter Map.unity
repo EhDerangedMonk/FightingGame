@@ -458,6 +458,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1360957896}
+  - 61: {fileID: 1360957897}
   m_Layer: 8
   m_Name: groundCheck
   m_TagString: Untagged
@@ -477,6 +478,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1833204342}
   m_RootOrder: 0
+--- !u!61 &1360957897
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1360957895}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Size: {x: 3.5999999, y: 2.79999995}
+  m_Center: {x: 0, y: 1.34000003}
 --- !u!1 &1439033456
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,6 +503,7 @@ GameObject:
   - 81: {fileID: 1439033459}
   - 114: {fileID: 1439033458}
   - 114: {fileID: 1439033457}
+  - 114: {fileID: 1439033464}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -594,6 +607,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &1439033464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1439033456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc2a1ee709e65c24582014acde425ba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1794441162
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,6 +626,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1794441163}
+  - 61: {fileID: 1794441164}
   m_Layer: 8
   m_Name: groundCheck
   m_TagString: Untagged
@@ -621,6 +646,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 447818047}
   m_RootOrder: 0
+--- !u!61 &1794441164
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1794441162}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Size: {x: 3.5999999, y: 2.79999995}
+  m_Center: {x: 0, y: 1.34000003}
 --- !u!1 &1833204341
 GameObject:
   m_ObjectHideFlags: 0

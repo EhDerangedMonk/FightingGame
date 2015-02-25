@@ -6,7 +6,7 @@ public class noirBehaviour: PlayerState {
 
     private AnimatorStateInfo stateInfo;
     private int specState;// int representing the charge value
-    private Player curPlayer;
+    private Player curPlayer; // Colliding player which is usually the opponent
     private bool attack; // If player currently in attack don't redo dmg for it
 
 
@@ -28,12 +28,7 @@ public class noirBehaviour: PlayerState {
         flinchStateHash = Animator.StringToHash("Base Layer.noirFlinch");
     }
 
-    /*
-     * DESCR: Checks the actions a player is currently performing and
-     *        does the according move
-     * PRE: A Player object to compare to self
-     * POST: if an attack was made true will return otherwise false
-     */
+
     override public bool checkState(Player player) {
         bool chargeState; // Player is charging set to true (Prevents player from moving while charging)
 
@@ -51,8 +46,8 @@ public class noirBehaviour: PlayerState {
         }
 
         if (!attack && stateInfo.nameHash == lightAttackStateHash) {
-            lightAttack();
-            attack = true;
+            if (lightAttack() == true)
+                attack = true;
         }
 
         // Special attack for Noir can have 4 states of charging
@@ -65,36 +60,36 @@ public class noirBehaviour: PlayerState {
         }
 
         if (!attack && stateInfo.nameHash == specStateHash[4]) {
-            specialAttack(specState);
-            attack = true;
+            if (specialAttack(specState) == true)
+                attack = true;
         }
 
         if (!attack && stateInfo.nameHash == heavyAttackStateHash) {
-            heavyAttack();
-            attack = true;
+            if (heavyAttack() == true)
+                attack = true;
         }
 
         return (attack || chargeState);
     }
 
-    override public void lightAttack() {
+    override public bool lightAttack() {
         
         if (curPlayer == null)
-            return;
+            return false;
 
         curPlayer.playerState.setFlinch(true);
         curPlayer.playerHealth.damage(50);
-        //Debug.Log("Light Attack for 50 damage");    
+        return true; 
     }
 
-    override public void specialAttack(int curState) {
+    override public bool specialAttack(int curState) {
         int damage;
 
         damage = 0;
 
         if (curPlayer == null)
-            return;
-        switch (curState) {
+            return false;
+        switch (curState) { // Calculate damage based on charge of noirs special
             case 1:
                 damage = 50;
                 break;
@@ -110,16 +105,16 @@ public class noirBehaviour: PlayerState {
         }
         curPlayer.playerState.setFlinch(true);
         curPlayer.playerHealth.damage(damage);
-        //Debug.Log("Special Attack!: Power is " + curState + "- Damage hit for " + damage);
+        return true;
     }
 
-    override public void heavyAttack() {
+    override public bool heavyAttack() {
         
         if (curPlayer == null)
-            return;
+            return false;
 
         curPlayer.playerState.setFlinch(true);
         curPlayer.playerHealth.damage(80);
-        //Debug.Log("Heavy Attack for 80 damage");
+        return true;
     }
 }

@@ -307,6 +307,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 308123880}
+  - 61: {fileID: 308123881}
   m_Layer: 8
   m_Name: groundCheck
   m_TagString: Untagged
@@ -326,6 +327,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2047241311}
   m_RootOrder: 0
+--- !u!61 &308123881
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 308123879}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Size: {x: 3.5999999, y: 2.79999995}
+  m_Center: {x: 0, y: 1.34000003}
 --- !u!1 &316134529
 GameObject:
   m_ObjectHideFlags: 0
@@ -979,7 +991,6 @@ GameObject:
   - 95: {fileID: 1946648950}
   - 114: {fileID: 1946648956}
   - 58: {fileID: 1946648957}
-  - 61: {fileID: 1946648958}
   m_Layer: 8
   m_Name: Player1
   m_TagString: Player
@@ -1101,17 +1112,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_Radius: .430000007
   m_Center: {x: .133000001, y: .790000021}
---- !u!61 &1946648958
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1946648949}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Size: {x: 2.75, y: 2.75}
-  m_Center: {x: 0, y: 0}
 --- !u!1 &1980930670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,7 +1179,6 @@ GameObject:
   - 95: {fileID: 2047241313}
   - 114: {fileID: 2047241312}
   - 58: {fileID: 2047241318}
-  - 61: {fileID: 2047241319}
   m_Layer: 8
   m_Name: Player2
   m_TagString: Player
@@ -1301,17 +1300,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_Radius: .430000007
   m_Center: {x: .133000001, y: .790000021}
---- !u!61 &2047241319
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2047241310}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Size: {x: 2.75, y: 2.75}
-  m_Center: {x: 0, y: 0}
 --- !u!1 &2074676458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1320,6 +1308,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2074676459}
+  - 61: {fileID: 2074676460}
   m_Layer: 8
   m_Name: groundCheck
   m_TagString: Untagged
@@ -1339,3 +1328,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1946648955}
   m_RootOrder: 0
+--- !u!61 &2074676460
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2074676458}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Size: {x: 3.5999999, y: 2.79999995}
+  m_Center: {x: -.134591103, y: 1.34000003}

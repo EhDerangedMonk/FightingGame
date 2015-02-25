@@ -22,7 +22,7 @@ public class Player : MonoBehaviour {
     private bool grounded = false;
     private float groundRadius = 0.2f;
     private bool doubleJump = false; // If the player is currently allowed to double jump
-    private float slideSpeed = 200; // Speed characters slide at when standing on someone's head
+    private float slideSpeed = 10; // Speed characters slide at when standing on someone's head
 
     private bool isFlinching; // Stops player from flinching more than one until flinch is done
     
@@ -72,18 +72,18 @@ public class Player : MonoBehaviour {
             anim.SetBool("Death", true);
             return;
         }  else if (isFlinching == false && playerState.isFlinch() == true) {
-            Debug.Log("INIT FLINCH");
             anim.SetBool("Flinch", true);
-            rigidbody2D.AddForce(new Vector3(1f, 0f, 0f) * 200);
+            anim.SetBool("Special", false);
+            
+            rigidbody2D.AddForce(new Vector3(1f, 0f, 0f) * 200); //Test force not final
             isFlinching = true;
             return;
         } else if (isFlinching == true && playerState.isFlinch() == false) {
-            Debug.Log("FLINCH DONE");
             isFlinching = false;
         }
 
         
-    
+        
         grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
         anim.SetBool ("Ground", grounded);
     
@@ -134,11 +134,9 @@ public class Player : MonoBehaviour {
     void OnTriggerStay2D(Collider2D other) {
         
         Vector3 forward = new Vector3 (0f, 0f, 0.0f);
-        
 
         //check to ensure they are a player
         if (other.gameObject.tag == "Player") {
-            Debug.Log("Touching a player");
             player = (Player)other.gameObject.GetComponent(typeof(Player));
 
             
@@ -173,40 +171,6 @@ public class Player : MonoBehaviour {
             player = null;
         }
     }
-    /*
-    // Called when a 2D object collides with another 2D object
-    void OnCollisionEnter2D(Collision2D other) {
-        // When a Player object collides with another Player object
-        if (other.gameObject.tag == "Player") {
-            player = (Player)other.gameObject.GetComponent(typeof(Player));
-            if (this.transform.position.x < other.transform.position.x && facingLeft) {
-                player = null;
-            } else if (this.transform.position.x > other.transform.position.x && !facingLeft) {
-                player = null;
-            }
-        }
-    }
-
-    void OnCollisionStay2D(Collision2D other) {
-        // When a Player object collides with another Player object
-        if (other.gameObject.tag == "Player") {
-            player = (Player)other.gameObject.GetComponent(typeof(Player));
-            if (this.transform.position.x < other.transform.position.x && facingLeft) {
-                player = null;
-            } else if (this.transform.position.x > other.transform.position.x && !facingLeft) {
-                player = null;
-            }
-        }
-    }
-
-    // Called when a 2D object stops colliding with another 2D object
-    void OnCollisionExit2D(Collision2D other) {
-
-        // When a Player object stops colliding with another Player object
-        if (other.gameObject.tag == "Player") {
-            player = null;
-        }
-    }*/
 
     // Reverses character direction
     void flip() {
@@ -214,10 +178,6 @@ public class Player : MonoBehaviour {
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
-    }
-
-    void flinch() {
-
     }
 
 }
