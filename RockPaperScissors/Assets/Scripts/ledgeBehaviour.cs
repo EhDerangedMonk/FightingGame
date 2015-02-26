@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿// ledgeBehaviour.cs
+// Nigel Martinez
+// GMMA Studios
+//February 18th, 2015
+
+using UnityEngine;
 using System.Collections;
 
 public class ledgeBehaviour : MonoBehaviour {

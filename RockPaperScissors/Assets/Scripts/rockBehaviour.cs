@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿// rockBehaviour.cs
+// Nigel Martinez
+// GMMA Studios
+//February 10th, 2015
+
+using UnityEngine;
 using System.Collections;
 
 public class rockBehaviour : MonoBehaviour {

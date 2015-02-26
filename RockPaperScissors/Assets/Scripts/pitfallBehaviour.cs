@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿// pitfallBehaviour.cs
+// Nigel Martinez
+// GMMA Studios
+//February 20th, 2015
+
+using UnityEngine;
 using System.Collections;
 
 public class pitfallBehaviour : MonoBehaviour {

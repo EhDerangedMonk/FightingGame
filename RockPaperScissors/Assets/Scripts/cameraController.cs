@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿// cameraController.cs
+// Nigel Martinez
+// GMMA Studios
+//February 20th, 2015
+
+using UnityEngine;
 using System.Collections;
 
 public class cameraController : MonoBehaviour {
