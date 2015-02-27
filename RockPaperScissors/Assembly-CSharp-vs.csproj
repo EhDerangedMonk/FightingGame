@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\MapSelectionMenu.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PlayerState.cs" />
+     <Compile Include="Assets\Scripts\Spawner.cs" />
      <Compile Include="Assets\Scripts\cameraController.cs" />
      <Compile Include="Assets\Scripts\healthDisplay.cs" />
      <Compile Include="Assets\Scripts\lavaBehaviour.cs" />
@@ -62,7 +63,6 @@
      <Compile Include="Assets\Scripts\pitfallBehaviour.cs" />
      <Compile Include="Assets\Scripts\platformBehaviour.cs" />
      <Compile Include="Assets\Scripts\rockBehaviour.cs" />
-     <Compile Include="Assets\Scripts\rockSpawner.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>
