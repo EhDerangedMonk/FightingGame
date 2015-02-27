@@ -45,14 +45,12 @@ public class noirBehaviour: PlayerState {
             setFlinch(false);
         }
 
-        if(stateInfo.nameHash == idleStateHash) {
+        if(stateInfo.nameHash == idleStateHash)
             attack = false;
-        }
 
-        if (!attack && stateInfo.nameHash == lightAttackStateHash) {
+        if (!attack && stateInfo.nameHash == lightAttackStateHash)
             if (lightAttack() == true)
                 attack = true;
-        }
 
         // Special attack for Noir can have 4 states of charging
         for (int i = 0; i < 4; i++) {
@@ -63,15 +61,13 @@ public class noirBehaviour: PlayerState {
             }
         }
 
-        if (!attack && stateInfo.nameHash == specStateHash[4]) {
+        if (!attack && stateInfo.nameHash == specStateHash[4])
             if (specialAttack(specState) == true)
                 attack = true;
-        }
 
-        if (!attack && stateInfo.nameHash == heavyAttackStateHash) {
+        if (!attack && stateInfo.nameHash == heavyAttackStateHash)
             if (heavyAttack() == true)
                 attack = true;
-        }
 
         return (attack || chargeState);
     }
