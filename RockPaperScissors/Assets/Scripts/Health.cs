@@ -1,5 +1,6 @@
 /*
 	Authored By: Jerrit Anderson
+    Purpose: Represents the current health of the Player, has methods to manipulate the player health
 */
 using UnityEngine;
 using System.Collections;
@@ -25,9 +26,8 @@ public class Health {
             Debug.Log("Player is dead!");
             health = 0;
             return false;
-        } //else {
-                //Debug.Log("Player has taken damage!: " + damage + " - Remaining health is: " + health);
-        //}
+        }
+
         return true;
     }
 
@@ -62,6 +62,7 @@ public class Health {
     public bool isDead() {
         if (health <= 0)
             return true;
+
         return false;
     }
 
@@ -72,11 +73,10 @@ public class Health {
      * POST: NONE
      */
     public void setHealth(int hp) {
-        if (hp >= 0) {
+        if (hp >= 0)
             health = hp;
-        } else {
+        else
             health = 0;
-        }
     }
 
 

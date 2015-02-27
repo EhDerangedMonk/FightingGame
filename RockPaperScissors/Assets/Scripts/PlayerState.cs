@@ -1,5 +1,6 @@
 /*
 	Authored By: Jerrit Anderson
+	Purpose: An interface that must be implemented by all behaviour classes for the game to use them
 */
 using UnityEngine;
 using System.Collections;
@@ -15,8 +16,22 @@ public abstract class PlayerState {
 	public Animator anim; // Passing in a copy of the player animation to read it
 	public bool flinch; // Is the player currently unable attack due to a flinch?
 
+
+	/*
+	 * DESCR: Performs a light attack and damages an intersecting player
+	 */
 	public abstract bool lightAttack();
+
+
+	/*
+	 * DESCR: Performs a special attack and damages an intersecting player
+	 * PRE: An integer representing the current charge of the special attack
+	 */
 	public abstract bool specialAttack(int curStates);
+
+	/*
+	 * DESCR: Performs a heavy attack and damages an intersecting player
+	 */
 	public abstract bool heavyAttack();
 
 

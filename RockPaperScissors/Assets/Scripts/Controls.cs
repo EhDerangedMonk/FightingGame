@@ -1,5 +1,6 @@
 /*
 	Authored By: Josiah Menezes & Jerrit Anderson
+	Purpose: Contains the control behaviour for the Player
 */
 using UnityEngine;
 using System.Collections;
@@ -15,8 +16,16 @@ public class Controls {
 	public KeyCode block;
 	public KeyCode grapple;
 
-
+	// Constructor
 	public Controls(int layout) {
+		changeControls(layout);
+	}
+
+	/*
+	 * DESCR: Changes the control scheme layout for the current player
+	 * PRE: an integer representing the layout(1 - player 1/ 2 - player 2)
+	 */
+	public void changeControls(int layout) {
 		switch(layout) {
 			case 1:
 				light = KeyCode.Space;
