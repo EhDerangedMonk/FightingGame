@@ -1,7 +1,7 @@
-﻿// lavaBehaviour.cs
-// Nigel Martinez
-// GMMA Studios
-//February 18th, 2015
+﻿/*
+	Authored By: Nigel Martinez
+	Purpose: Controls the behaviour of lava hazards.
+*/
 
 using UnityEngine;
 using System.Collections;

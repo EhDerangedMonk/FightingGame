@@ -1,7 +1,7 @@
-﻿// ledgeBehaviour.cs
-// Nigel Martinez
-// GMMA Studios
-//February 18th, 2015
+﻿/*
+	Authored By: Nigel Martinez
+	Purpose: Controls the behaviour of "hanging state" triggers on maps.
+*/
 
 using UnityEngine;
 using System.Collections;
@@ -24,7 +24,7 @@ public class ledgeBehaviour : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		hang = Physics2D.OverlapCircle (hangCheck.position, hangRadius, players);
+		//hang = Physics2D.OverlapCircle (hangCheck.position, hangRadius, players);
 
 		// if (hang)
 		// 	Debug.Log ("Player should be hanging!");

@@ -1,14 +1,16 @@
-﻿// cameraController.cs
-// Nigel Martinez
-// GMMA Studios
-//February 20th, 2015
+﻿/*
+	Authored By: Nigel Martinez
+	Purpose: Controls the movement and zoom of the camera.
+*/
 
 using UnityEngine;
 using System.Collections;
 
 public class cameraController : MonoBehaviour {
-	//Elements of code inspired by a tutorial by Ryan Nielson.
-	//http://nielson.io/2014/03/making-a-target-tracking-orthographic-camera-in-unity/
+	/*
+		Elements of code dervied from a tutorial by Ryan Nielson.
+		http://nielson.io/2014/03/making-a-target-tracking-orthographic-camera-in-unity/
+	*/
 
 	private float boundingBoxPadding = 2f;
 	private float minimumOrthographicSize = 5f;
@@ -16,9 +18,7 @@ public class cameraController : MonoBehaviour {
 	private Camera cam;
 
 	//Boundaries and default camera location may differ between maps.
-	//[SerializeField] 
 	public Transform[] targets;
-	//public GameObject cameraBounds;
 	public GameObject defaultCam;
 	public GameObject topBounds;
 	public GameObject leftBounds;
@@ -43,7 +43,11 @@ public class cameraController : MonoBehaviour {
 		cam.orthographicSize = CalculateOrthographicSize(boundingBox);
 	}
 
-	// Calculates a bounding box that contains all the targets, returning a Rect containing all targets.
+	/*
+     * DESCR: Calculates an rectangle that contains the players.
+     * PRE: NONE
+     * POST: A rectangle with an area containing the players.
+     */
 	Rect CalculateTargetsBoundingBox()
 	{
 		float minX = Mathf.Infinity;
@@ -56,27 +60,31 @@ public class cameraController : MonoBehaviour {
 		foreach (Transform target in targets) {
 			Vector3 position = target.position;
 
+			//If the player goes too high, adjust the value to the top boundary.
 			if(target.position.y > topBounds.transform.position.y)
 				maxY = topBounds.transform.position.y;
 			else
 				maxY = Mathf.Max(maxY, position.y);
 
+			//Likewise for a player going too low.
 			if(target.position.y < bottomBounds.transform.position.y)
 				minY = bottomBounds.transform.position.y;
 			else
 				minY = Mathf.Min(minY, position.y);
 
+			//Likewise for a player going too far to the left.
 			if(target.position.x < leftBounds.transform.position.x)
 				minX = leftBounds.transform.position.x;
 			else
 				minX = Mathf.Min(minX, position.x);
 
+			//Liksewise for a player going too far to the right.
 			if(target.position.x > rightBounds.transform.position.x)
 				maxX = rightBounds.transform.position.x;
 			else
 				maxX = Mathf.Max(maxX, position.x);
 
-			/*
+			/* Nielson's orginal calculations, which did not account for boundaries.
 			minX = Mathf.Min(minX, position.x);
 			minY = Mathf.Min(minY, position.y);
 			maxX = Mathf.Max(maxX, position.x);
@@ -87,7 +95,11 @@ public class cameraController : MonoBehaviour {
 		return Rect.MinMaxRect(minX - boundingBoxPadding, maxY + boundingBoxPadding, maxX + boundingBoxPadding, minY - boundingBoxPadding);
 	}
 
-	// Calculates a camera position given the a bounding box containing all the targets.
+	/*
+     * DESCR: Determines the location for the camera.
+     * PRE: A rectangle with an area containing the players.
+     * POST: A 3D vector for location of the camera.
+     */
 	Vector3 CalculateCameraPosition(Rect boundingBox)
 	{
 		Vector2 boundingBoxCenter = boundingBox.center;
@@ -95,7 +107,11 @@ public class cameraController : MonoBehaviour {
 		return new Vector3(boundingBoxCenter.x, boundingBoxCenter.y, cam.transform.position.z);
 	}
 
-	// Calculates a new orthographic size for the camera based on the target bounding box.
+	/*
+     * DESCR: Determines a size for the camera.
+     * PRE: A rectangle with an area containing the players.
+     * POST: A float for the size of the camera.
+     */
 	float CalculateOrthographicSize(Rect boundingBox)
 	{
 		float orthographicSize = cam.orthographicSize;
