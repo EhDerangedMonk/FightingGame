@@ -1,5 +1,6 @@
 /*
 	Authored By: Jerrit Anderson & Josiah Menezes
+	Purpose: Class for the Character Noir, defines her attack's effects.
 */
 using UnityEngine;
 using System.Collections;

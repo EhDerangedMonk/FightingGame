@@ -1,5 +1,6 @@
 /*
 	Authored By: Josiah Menezes & Jerrit Anderson
+	Purpose: Generic player class, controls the default functionality given to all players.
 */
 using UnityEngine;
 using System.Collections;
@@ -179,7 +180,7 @@ public class Player : MonoBehaviour {
 
 	/*
      * DESCR: Flips the horizontal direction the sprite is facing.
-     * PRE: Player Character's sprite is facing a direction
+     * PRE: Player Character's sprite and the direction it is facing
      * POST: Player Character's sprite is facing the opposite direction they were facing
      */
 	 void flip() {
