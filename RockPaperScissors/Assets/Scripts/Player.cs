@@ -1,15 +1,18 @@
+/*
+	Authored By: Josiah Menezes & Jerrit Anderson
+*/
 using UnityEngine;
 using System.Collections;
 
 
 public class Player : MonoBehaviour {
 
-    private const float jumpForce = 700f;
-    private const float maxSpeed = 5f;
+    private const float jumpForce = 700f; //force added to player when they jump
+    private const float maxSpeed = 5f; // limit on player run speed
 
     public int layout; // 1 - player 1 / 2 - player 2 <- Gets assigned in Unity right now
-    public Transform groundCheck;
-    public LayerMask whatIsGround;
+    public Transform groundCheck; // object that is used to check if the player is on the ground
+    public LayerMask whatIsGround;//Layer object that indicates that the player themselves and other players are not the ground, everything else is
     public Health playerHealth; // Player health representation - Needs to be public for GUI to read
 
     private bool facingLeft = true;// Current direction the player is facing in
@@ -44,6 +47,7 @@ public class Player : MonoBehaviour {
         } else if (playerState.isFlinch()) {
             return;
         } else {
+			//input for player controls
             if (Input.GetKeyDown (controller.light)) {
                 anim.SetTrigger("Light");
             } else if (Input.GetKeyUp (controller.special)) {
@@ -83,11 +87,11 @@ public class Player : MonoBehaviour {
         }
 
         
-        
+        //determines if we are presently on the ground
         grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
         anim.SetBool ("Ground", grounded);
     
-        
+        //if we are on the ground, refreshes our double jump
         if (grounded) { //Can't double jump unless already in air
             doubleJump = false;
         }
@@ -98,6 +102,7 @@ public class Player : MonoBehaviour {
             return;
         }
 
+		//checks conditions for jumping, launches player if they can jump
         if ((grounded || !doubleJump) && Input.GetKeyDown (controller.jump)) 
         {
             anim.SetBool("Ground", false);
@@ -107,7 +112,7 @@ public class Player : MonoBehaviour {
                 doubleJump = true;
         }
 
-        // Keyboard input
+        // Keyboard input for horizontal movement
         if (Input.GetKey (controller.left)) {
             move = -1;
         } else if (Input.GetKey (controller.right)) {
@@ -116,12 +121,13 @@ public class Player : MonoBehaviour {
             move = 0;
         }
         
-        
+        //sets variables for vertical speed and horizontal speed
         anim.SetFloat("vSpeed", rigidbody2D.velocity.y);   
         anim.SetFloat("speed", Mathf.Abs (move));
         
         rigidbody2D.velocity = new Vector2 (move * maxSpeed, rigidbody2D.velocity.y);
         
+		//determines which way we should be facing and flips sprite towards the appropriate direction
         if (move > 0 && facingLeft)
             flip();
         else if (move < 0 && !facingLeft)
@@ -130,7 +136,7 @@ public class Player : MonoBehaviour {
     }
 
 
-    //triggers when someone would stand on another person's head
+    //triggers when a trigger is maintained for more than a frame
     void OnTriggerStay2D(Collider2D other) {
         
         Vector3 forward = new Vector3 (0f, 0f, 0.0f);
@@ -139,8 +145,7 @@ public class Player : MonoBehaviour {
         if (other.gameObject.tag == "Player") {
             player = (Player)other.gameObject.GetComponent(typeof(Player));
 
-            
-
+            //THE CODE TO STOP PEOPLE FROM STANDING ON EACH OTHER'S HEADS
             //finds out which player is on the other
             // if (player.gameObject.transform.position.y >this.gameObject.transform.position.y) {
             //     //pushes you in the direction you are closest to not colliding with
@@ -172,8 +177,12 @@ public class Player : MonoBehaviour {
         }
     }
 
-    // Reverses character direction
-    void flip() {
+	/*
+     * DESCR: Flips the horizontal direction the sprite is facing.
+     * PRE: Player Character's sprite is facing a direction
+     * POST: Player Character's sprite is facing the opposite direction they were facing
+     */
+	 void flip() {
         facingLeft = !facingLeft;
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;

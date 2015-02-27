@@ -1,3 +1,6 @@
+/*
+	Authored By: Jerrit Anderson
+*/
 using UnityEngine;
 using System.Collections;
 
