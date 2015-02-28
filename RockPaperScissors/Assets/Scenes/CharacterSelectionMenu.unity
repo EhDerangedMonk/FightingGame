@@ -171,9 +171,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoirSelectionButton: {fileID: 2800000, guid: 56f4297a7abb231428b5e1c2fbcef99e, type: 3}
-  ZakirSelectionButton: {fileID: 2800000, guid: f3c5e18bd032ae043a4cb6f0056ef56e,
+  ZakirSelectionButton: {fileID: 2800000, guid: 2b8b59665bb87dc4c9b7f01d54421d17,
     type: 3}
-  VioletSelectionButton: {fileID: 2800000, guid: 385ef819f85e4f140b5e0911fb6ea76e,
+  VioletSelectionButton: {fileID: 2800000, guid: 6e621430d683e8b459c9aa42d6ef4b05,
     type: 3}
   CharacterSelectionTitle: {fileID: 2800000, guid: 8f61e10d50681654f8779e805422bf65,
     type: 3}

@@ -114,7 +114,7 @@ public class MainMenu : MonoBehaviour {
 	            print ("Clicked OPTIONS");
 	            
 				// Load the credits (for now) TODO: add a dedicated credits button
-				Application.LoadLevel("CharacterSelectionMenu");
+				Application.LoadLevel("Credits");
 	        }
 	    }
 	    else
@@ -124,7 +124,7 @@ public class MainMenu : MonoBehaviour {
 				print ("Clicked OPTIONS");
 				
 				// Load the credits (for now) 
-				Application.LoadLevel("CharacterSelectionMenu");
+				Application.LoadLevel("Credits");
 			}
 	    }
 

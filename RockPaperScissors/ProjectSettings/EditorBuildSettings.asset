@@ -19,3 +19,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Traditional Fighter Map.unity
   - enabled: 1
     path: Assets/Scenes/CharacterSelectionMenu.unity
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity

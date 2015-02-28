@@ -214,10 +214,8 @@ public class MapSelectionMenu : MonoBehaviour {
 				else
 					selected = P2State;
 			}
-			
-			
-			
-			// Right now it will just load whatever player 1 chose
+						
+			// Load the map based on the winner
 			int randomSelection = 0;
 			if (selected == MapState.Rand) // Assign a value to the random selection, otherwise leave it as 0
 			{
