@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/************************************************************************\
+*	Author:		Braden Gibson											 *
+*	Purpose:	Attaches to main camera and scrolls through the credits. *
+\************************************************************************/
+using UnityEngine;
 using System.Collections;
 
 public class Credits : MonoBehaviour {

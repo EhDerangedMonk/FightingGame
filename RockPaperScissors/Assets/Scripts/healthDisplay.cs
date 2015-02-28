@@ -1,5 +1,11 @@
-﻿using UnityEngine;
+﻿/*****************************************************************************\
+*	Author:		Nigel Martinez/Jerrit Anderson/Braden Gibson				  *
+*	Purpose:	Attaches to main camera and displays the health of P1 and P2. *
+\*****************************************************************************/
+using UnityEngine;
 using System.Collections;
+
+// TODO: make the health display above the players' heads
 
 public class healthDisplay : MonoBehaviour {
     Player p1, p2;

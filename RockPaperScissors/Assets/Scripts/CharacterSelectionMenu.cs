@@ -1,9 +1,13 @@
-﻿/// <summary>
-/// Character Selection Menu.
-/// Attaches to main camera.
-/// </summary>
+﻿/*******************************************************************************\
+*	Author:		Braden Gibson											 		*
+*	Purpose:	Attaches to main camera. Each player can select their character *
+*				simultaneously. 												*
+\*******************************************************************************/
 using UnityEngine;
 using System.Collections;
+
+// TODO: Make selecting the characters spawn them correctly in the map
+// TODO: Add support for up to 4 players
 
 public class CharacterSelectionMenu : MonoBehaviour {
 	
@@ -186,7 +190,7 @@ public class CharacterSelectionMenu : MonoBehaviour {
 				P1Selected = true;
 		}
 		
-		
+		// Same for P2
 		if (P2Selected == false)
 		{
 			switch(P2State)

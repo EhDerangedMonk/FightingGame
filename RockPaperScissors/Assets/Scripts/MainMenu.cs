@@ -1,9 +1,12 @@
-﻿/// <summary>
-/// Main menu.
-/// Attaches to main camera.
-/// </summary>
+﻿/****************************************************************************\
+*	Author:		Braden Gibson											     *
+*	Purpose:	Attaches to main camera. Allows selection of options through *
+*				use of the mouse.										 	 *
+\****************************************************************************/
 using UnityEngine;
 using System.Collections;
+
+// TODO: make the buttons and logo scale to the screen size
 
 public class MainMenu : MonoBehaviour {
 
@@ -109,6 +112,9 @@ public class MainMenu : MonoBehaviour {
 	        if (GUI.Button (optionsRectHover, optionsButtonTexture, ""))
 	        {
 	            print ("Clicked OPTIONS");
+	            
+				// Load the credits (for now) TODO: add a dedicated credits button
+				Application.LoadLevel("CharacterSelectionMenu");
 	        }
 	    }
 	    else
@@ -116,6 +122,9 @@ public class MainMenu : MonoBehaviour {
 			if (GUI.Button (optionsRect, optionsButtonTexture, ""))
 			{
 				print ("Clicked OPTIONS");
+				
+				// Load the credits (for now) 
+				Application.LoadLevel("CharacterSelectionMenu");
 			}
 	    }
 
@@ -124,6 +133,7 @@ public class MainMenu : MonoBehaviour {
 	        if (GUI.Button (exitRectHover, exitButtonTexture, ""))
 	        {
 	            print ("Clicked EXIT");
+	            // TODO: Make the exit button quit the application
 	        }
 	    }
 	    else

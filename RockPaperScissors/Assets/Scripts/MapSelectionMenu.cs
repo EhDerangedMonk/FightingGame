@@ -1,9 +1,12 @@
-﻿/// <summary>
-/// Map Selection Menu.
-/// Attaches to main camera.
-/// </summary>
+﻿/************************************************************************\
+*	Author:		Braden Gibson											 *
+*	Purpose:	Attaches to main camera. Allows the selection of a map   *
+*				via voting. A tie is broken at random.					 *
+\************************************************************************/
 using UnityEngine;
 using System.Collections;
+
+// TODO: Add support for up to 4 players
 
 public class MapSelectionMenu : MonoBehaviour {
 	
@@ -197,7 +200,9 @@ public class MapSelectionMenu : MonoBehaviour {
 		// If both players have selected, determine which map to load and do so
 		if (P1Selected == true && P2Selected == true)
 		{
-			// TODO: implement map voting
+			// TODO: Implement map voting
+			
+			
 			// Right now it will just load whatever player 1 chose
 			int randomSelection = 0;
 			if (P1State == MapState.Rand) // Assign a value to the random selection, otherwise leave it as 0
@@ -266,6 +271,7 @@ public class MapSelectionMenu : MonoBehaviour {
 				P1Selected = true;
 		}
 		
+		// Same for P2
 		if (P2Selected == false)
 		{
 			switch(P2State)
