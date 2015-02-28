@@ -202,7 +202,7 @@ public class MapSelectionMenu : MonoBehaviour {
 		{
 			MapState selected; // Stores whatever the voted map is
 			// Determine what the voted map is
-			if (P1State == P2State) // If they voted for the time thing
+			if (P1State == P2State) // If they voted for the same thing
 			{
 				selected = P1State;
 			}
