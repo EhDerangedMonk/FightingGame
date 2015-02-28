@@ -200,21 +200,35 @@ public class MapSelectionMenu : MonoBehaviour {
 		// If both players have selected, determine which map to load and do so
 		if (P1Selected == true && P2Selected == true)
 		{
-			// TODO: Implement map voting
+			MapState selected; // Stores whatever the voted map is
+			// Determine what the voted map is
+			if (P1State == P2State) // If they voted for the time thing
+			{
+				selected = P1State;
+			}
+			else // They voted for different things
+			{
+				int rnd = Random.Range (1,3); // pick player 1 or player 2
+				if (rnd == 1)
+					selected = P1State;
+				else
+					selected = P2State;
+			}
+			
 			
 			
 			// Right now it will just load whatever player 1 chose
 			int randomSelection = 0;
-			if (P1State == MapState.Rand) // Assign a value to the random selection, otherwise leave it as 0
+			if (selected == MapState.Rand) // Assign a value to the random selection, otherwise leave it as 0
 			{
 				randomSelection = Random.Range(1,5); // Creates a random number between 1 and 4
 			}
 				
-			if (P1State == MapState.Trad || randomSelection == 1)
+			if (selected == MapState.Trad || randomSelection == 1)
 				Application.LoadLevel("Traditional Fighter Map");
-			else if (P1State == MapState.Btle || randomSelection == 2)
+			else if (selected == MapState.Btle || randomSelection == 2)
 				Application.LoadLevel("Smash Bros Battlefield Map");
-			else if (P1State == MapState.Land || randomSelection == 3)
+			else if (selected == MapState.Land || randomSelection == 3)
 				Application.LoadLevel("Landslide Map");
 			else
 				Application.LoadLevel("Lava Map");
