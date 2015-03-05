@@ -111,8 +111,6 @@ GameObject:
   - 4: {fileID: 105454742}
   - 212: {fileID: 105454741}
   - 61: {fileID: 105454743}
-  - 61: {fileID: 105454745}
-  - 61: {fileID: 105454744}
   m_Layer: 0
   m_Name: Sub Platform - Left
   m_TagString: Untagged
@@ -166,28 +164,6 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_Size: {x: 2.43000007, y: 1.75}
   m_Center: {x: 0, y: 0}
---- !u!61 &105454744
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 105454740}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: 108a0f16b7f4f0149a83166e2ebdfb64, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: .0500000007, y: 1.75}
-  m_Center: {x: -1.23000002, y: 0}
---- !u!61 &105454745
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 105454740}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: 108a0f16b7f4f0149a83166e2ebdfb64, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: .0500000007, y: 1.75}
-  m_Center: {x: 1.23000002, y: 0}
 --- !u!1 &137400428
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,8 +174,6 @@ GameObject:
   - 4: {fileID: 137400433}
   - 212: {fileID: 137400432}
   - 61: {fileID: 137400431}
-  - 61: {fileID: 137400430}
-  - 61: {fileID: 137400429}
   m_Layer: 0
   m_Name: Sub Platform - Top
   m_TagString: Untagged
@@ -207,28 +181,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &137400429
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 137400428}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: 108a0f16b7f4f0149a83166e2ebdfb64, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: .0500000007, y: 1.75}
-  m_Center: {x: -1.23000002, y: 0}
---- !u!61 &137400430
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 137400428}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: 108a0f16b7f4f0149a83166e2ebdfb64, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: .0500000007, y: 1.75}
-  m_Center: {x: 1.23000002, y: 0}
 --- !u!61 &137400431
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -438,7 +390,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 497469807}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -10, z: 0}
+  m_LocalPosition: {x: 0, y: -5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -453,8 +405,6 @@ GameObject:
   - 4: {fileID: 613214212}
   - 212: {fileID: 613214211}
   - 61: {fileID: 613214210}
-  - 61: {fileID: 613214209}
-  - 61: {fileID: 613214208}
   m_Layer: 0
   m_Name: Sub Platform - Right
   m_TagString: Untagged
@@ -462,28 +412,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &613214208
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 613214207}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: 108a0f16b7f4f0149a83166e2ebdfb64, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: .0500000007, y: 1.75}
-  m_Center: {x: -1.23000002, y: 0}
---- !u!61 &613214209
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 613214207}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: 108a0f16b7f4f0149a83166e2ebdfb64, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: .0500000007, y: 1.75}
-  m_Center: {x: 1.23000002, y: 0}
 --- !u!61 &613214210
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -646,8 +574,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: 3, y: 2}
-  m_Center: {x: 0, y: 0}
+  m_Size: {x: 2.43000007, y: 5}
+  m_Center: {x: 0, y: 4}
 --- !u!114 &691464078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -710,8 +638,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: 3, y: 2}
-  m_Center: {x: 0, y: 0}
+  m_Size: {x: 2.43000007, y: 5}
+  m_Center: {x: 0, y: 4}
 --- !u!1 &1346989317
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,8 +1132,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: 3, y: 2}
-  m_Center: {x: 0, y: 0}
+  m_Size: {x: 2.43000007, y: 5}
+  m_Center: {x: 0, y: 4}
 --- !u!114 &1980930673
 MonoBehaviour:
   m_ObjectHideFlags: 0

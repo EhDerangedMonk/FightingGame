@@ -9,6 +9,8 @@ using System.Collections;
 public class platformBehaviour : MonoBehaviour {
 	
 	public BoxCollider2D mainCollider;
+	private bool oneWay = false;
+	private Transform feet;
 
 	// Use this for initialization
 	void Start () {
@@ -17,20 +19,30 @@ public class platformBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		mainCollider.enabled = oneWay;
+	
 	}
 	
 	void OnTriggerEnter2D(Collider2D other) {
-		if (other.gameObject.tag == "Player")
-			Physics2D.IgnoreCollision(mainCollider, other.gameObject.collider2D, true);
+		if (other.gameObject.tag == "Player") {
+			feet = other.transform.FindChild ("groundCheck");
+			
+			if (feet.position.y > mainCollider.transform.position.y)
+				oneWay = true;
+		}
+	}
 
+	void OnTriggerStay2D(Collider2D other) {
+		if (other.gameObject.tag == "Player") {
+			feet = other.transform.FindChild ("groundCheck");
+
+			if (feet.position.y > mainCollider.transform.position.y)
+				oneWay = true;
+		}
 	}
 
 	void OnTriggerExit2D(Collider2D other) {
-		if (other.gameObject.tag == "Player") {
-			if(other.gameObject.transform.position.y > this.gameObject.transform.position.y)
-				Physics2D.IgnoreCollision (mainCollider, other.gameObject.collider2D, false);
-		}
+		oneWay = false;
 	}
 	
 }
