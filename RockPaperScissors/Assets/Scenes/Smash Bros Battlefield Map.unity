@@ -238,7 +238,7 @@ GameObject:
   - 61: {fileID: 186476752}
   - 114: {fileID: 186476751}
   m_Layer: 0
-  m_Name: Pitfall Killer - Right
+  m_Name: Right Screen Killer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -328,7 +328,7 @@ GameObject:
   - 61: {fileID: 316134531}
   - 114: {fileID: 316134532}
   m_Layer: 0
-  m_Name: Pitfall Killer - Bottom
+  m_Name: Bottom Screen Killer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -469,7 +469,7 @@ GameObject:
   - 61: {fileID: 640602458}
   - 114: {fileID: 640602457}
   m_Layer: 0
-  m_Name: Pitfall Killer - Left
+  m_Name: Left Screen Killer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -517,10 +517,12 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 668360773}
+  - 61: {fileID: 668360774}
+  - 114: {fileID: 668360775}
   m_Layer: 0
   m_Name: rightHangCheck
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -531,11 +533,33 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 668360772}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.16999996, y: 6.18000031, z: 0}
+  m_LocalPosition: {x: 1.20000005, y: 0, z: 0}
   m_LocalScale: {x: .125, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1346989319}
   m_RootOrder: 1
+--- !u!61 &668360774
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 668360772}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Size: {x: .5, y: .800000012}
+  m_Center: {x: .200000003, y: 0}
+--- !u!114 &668360775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 668360772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8099cd3dfe73d34f96f4e3c1e4eabc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &691464075
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,8 +676,6 @@ GameObject:
   - 61: {fileID: 1346989320}
   - 61: {fileID: 1346989322}
   - 61: {fileID: 1346989321}
-  - 114: {fileID: 1346989324}
-  - 114: {fileID: 1346989323}
   m_Layer: 0
   m_Name: Main Platform
   m_TagString: Untagged
@@ -730,36 +752,6 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_Size: {x: .0500000007, y: 1.75}
   m_Center: {x: 1.20000005, y: 0}
---- !u!114 &1346989323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1346989317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8099cd3dfe73d34f96f4e3c1e4eabc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hangCheck: {fileID: 668360773}
-  players:
-    serializedVersion: 2
-    m_Bits: 256
---- !u!114 &1346989324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1346989317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8099cd3dfe73d34f96f4e3c1e4eabc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hangCheck: {fileID: 1770321035}
-  players:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!1 &1581021335
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,10 +931,12 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1770321035}
+  - 61: {fileID: 1770321036}
+  - 114: {fileID: 1770321037}
   m_Layer: 0
   m_Name: leftHangCheck
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -953,11 +947,33 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1770321034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.16999996, y: 6.18000031, z: 0}
+  m_LocalPosition: {x: -1.20000005, y: 0, z: 0}
   m_LocalScale: {x: .125, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1346989319}
   m_RootOrder: 0
+--- !u!61 &1770321036
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1770321034}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Size: {x: .5, y: .800000012}
+  m_Center: {x: -.200000003, y: 0}
+--- !u!114 &1770321037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1770321034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8099cd3dfe73d34f96f4e3c1e4eabc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1946648949
 GameObject:
   m_ObjectHideFlags: 0
