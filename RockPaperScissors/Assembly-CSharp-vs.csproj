@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\healthDisplay.cs" />
      <Compile Include="Assets\Scripts\lavaBehaviour.cs" />
      <Compile Include="Assets\Scripts\ledgeBehaviour.cs" />
+     <Compile Include="Assets\Scripts\noirAudioController.cs" />
      <Compile Include="Assets\Scripts\noirBehaviour.cs" />
      <Compile Include="Assets\Scripts\pitfallBehaviour.cs" />
      <Compile Include="Assets\Scripts\platformBehaviour.cs" />

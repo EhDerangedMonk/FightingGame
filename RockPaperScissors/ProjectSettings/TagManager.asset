@@ -43,3 +43,27 @@ TagManager:
     userID: 0
     uniqueID: 0
     locked: 0
+  - name: Backdrop
+    userID: 5
+    uniqueID: 887277551
+    locked: 0
+  - name: Background
+    userID: 4
+    uniqueID: 869834413
+    locked: 0
+  - name: Platforms
+    userID: 3
+    uniqueID: 236734981
+    locked: 0
+  - name: Objects
+    userID: 6
+    uniqueID: 286223899
+    locked: 0
+  - name: Players
+    userID: 2
+    uniqueID: 932472279
+    locked: 0
+  - name: UI
+    userID: 1
+    uniqueID: 1413090587
+    locked: 0
