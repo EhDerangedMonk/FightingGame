@@ -24,7 +24,7 @@ public class noirAudioController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("noirIdle"))
+		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("noirIdle")) 
 			soundPlaying = false;
 
 		else if (anim.GetCurrentAnimatorStateInfo (0).IsName ("noirLightAttack") && !soundPlaying) 
@@ -42,8 +42,8 @@ public class noirAudioController : MonoBehaviour {
 		else if (anim.GetCurrentAnimatorStateInfo (0).IsName ("noirLaunch") && !soundPlaying) 
 			setAndPlay (launched);
 		
-		else if (anim.GetCurrentAnimatorStateInfo (0).IsName ("noirDeath") && !soundPlaying)
-			setAndPlay (death);
+		else if (anim.GetCurrentAnimatorStateInfo (0).IsName ("noirDeath"))
+			trumpAudio (death);
 		
 	}
 
@@ -51,5 +51,16 @@ public class noirAudioController : MonoBehaviour {
 		voice.clip = sound;
 		voice.Play ();
 		soundPlaying = true;
+	}
+
+	void trumpAudio (AudioClip sound) {
+		if (voice.clip != sound) {
+			voice.clip = sound;
+
+			if (audio.isPlaying)
+				voice.Stop ();
+
+			voice.Play ();
+		}
 	}
 }
