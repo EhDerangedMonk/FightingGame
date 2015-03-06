@@ -16,7 +16,6 @@ public class Player : MonoBehaviour {
     public LayerMask whatIsGround;//Layer object that indicates that the player themselves and other players are not the ground, everything else is
     public Health playerHealth; // Player health representation - Needs to be public for GUI to read
 
-    private bool facingLeft = true;// Current direction the player is facing in
 
     public PlayerState playerState; // Generic state that implements state and behaviour
     private Animator anim; // Stores player animation
@@ -45,21 +44,19 @@ public class Player : MonoBehaviour {
         // Disable controls if the player is dead/ otherwise accept them
         if (playerHealth.isDead() == true) {
             anim.SetBool("Death", true);
-        } else if (playerState.isFlinch()) {
-            return;
         } else {
 			//input for player controls
-            if (Input.GetKeyDown (controller.light)) {
+            if (playerState.isBlock() == false && playerState.isFlinch() == false && Input.GetKeyDown (controller.light)) {
                 anim.SetTrigger("Light");
             } else if (Input.GetKeyUp (controller.special)) {
                 anim.SetBool("Special", false);
-            } else if (Input.GetKeyDown (controller.special)) {
+            } else if (playerState.isBlock() == false && playerState.isFlinch() == false && Input.GetKeyDown (controller.special)) {
                 anim.SetBool("Special", true);
-            } else if (Input.GetKeyDown (controller.heavy)) {
+            } else if (playerState.isBlock() == false && playerState.isFlinch() == false && Input.GetKeyDown (controller.heavy)) {
                 anim.SetTrigger("Heavy");
-			} else if (Input.GetKeyUp (controller.block)) {
+			} else if (Input.GetKeyUp(controller.block)) {
 				anim.SetBool ("Block", false);
-			} else if (Input.GetKeyDown (controller.block)) {
+			} else if (playerState.isBlock() == false && playerState.isFlinch() == false && Input.GetKeyDown (controller.block)) {
 				anim.SetBool("Block", true);
 			} else if (Input.GetKeyDown (controller.grapple)) {
 				anim.SetTrigger("Grapple");
@@ -78,9 +75,13 @@ public class Player : MonoBehaviour {
             return;
         }  else if (isFlinching == false && playerState.isFlinch() == true) {
             anim.SetBool("Flinch", true);
-            anim.SetBool("Special", false);
+            //anim.SetBool("Special", false);
             
-            rigidbody2D.AddForce(new Vector3(1f, 0f, 0f) * 200); //Test force not final
+            if (playerState.isFacingLeft()) {
+                rigidbody2D.AddForce(new Vector3(1f, 0f, 0f) * 200); //Test force not final
+            } else {
+                rigidbody2D.AddForce(new Vector3(-1f, 0f, 0f) * 200); //Test force not final
+            }
             isFlinching = true;
             return;
         } else if (isFlinching == true && playerState.isFlinch() == false) {
@@ -99,7 +100,7 @@ public class Player : MonoBehaviour {
 
         if (playerState.checkState(player)) { //Controls player and their actions
             return; // Currently in attack if return is true so don't allow character movement
-        } else if (isFlinching == true) {
+        } else if (isFlinching == true || playerState.isBlock()) {
             return;
         }
 
@@ -114,9 +115,9 @@ public class Player : MonoBehaviour {
         }
 
         // Keyboard input for horizontal movement
-        if (Input.GetKey (controller.left)) {
+        if (Input.GetKey(controller.left)) {
             move = -1;
-        } else if (Input.GetKey (controller.right)) {
+        } else if (Input.GetKey(controller.right)) {
             move = 1;
         } else {
             move = 0;
@@ -129,9 +130,9 @@ public class Player : MonoBehaviour {
         rigidbody2D.velocity = new Vector2 (move * maxSpeed, rigidbody2D.velocity.y);
         
 		//determines which way we should be facing and flips sprite towards the appropriate direction
-        if (move > 0 && facingLeft)
+        if (move > 0 && playerState.isFacingLeft())
             flip();
-        else if (move < 0 && !facingLeft)
+        else if (move < 0 && !(playerState.isFacingLeft()))
             flip();
 
     }
@@ -148,21 +149,21 @@ public class Player : MonoBehaviour {
 
             //THE CODE TO STOP PEOPLE FROM STANDING ON EACH OTHER'S HEADS
             //finds out which player is on the other
-            // if (player.gameObject.transform.position.y >this.gameObject.transform.position.y) {
-            //     //pushes you in the direction you are closest to not colliding with
-            //     if(player.gameObject.transform.position.x >this.gameObject.transform.position.x) {
-            //         forward = new Vector3(1f, 0f, 0f);
-            //         player.rigidbody2D.AddForce (forward * slideSpeed);
-            //     }
-            //     else{
-            //         forward = new Vector3(-1f, 0f, 0f);
-            //         player.rigidbody2D.AddForce (forward * slideSpeed);
-            //     }
-            // }
+            if (player.gameObject.transform.position.y >this.gameObject.transform.position.y) {
+                //pushes you in the direction you are closest to not colliding with
+                if(player.gameObject.transform.position.x >this.gameObject.transform.position.x) {
+                    forward = new Vector3(1f, 0f, 0f);
+                    player.rigidbody2D.AddForce (forward * slideSpeed);
+                }
+                else{
+                    forward = new Vector3(-1f, 0f, 0f);
+                    player.rigidbody2D.AddForce (forward * slideSpeed);
+                }
+            }
 
-            if (this.transform.position.x < other.transform.position.x && facingLeft) {
+            if (this.transform.position.x < other.transform.position.x && playerState.isFacingLeft()) {
                 player = null;
-            } else if (this.transform.position.x > other.transform.position.x && !facingLeft) {
+            } else if (this.transform.position.x > other.transform.position.x && !(playerState.isFacingLeft())) {
                 player = null;
             }
         }
@@ -184,7 +185,7 @@ public class Player : MonoBehaviour {
      * POST: Player Character's sprite is facing the opposite direction they were facing
      */
 	 void flip() {
-        facingLeft = !facingLeft;
+        playerState.setFacingLeft(!(playerState.isFacingLeft()));
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;

@@ -30,6 +30,8 @@ public class noirBehaviour: PlayerState {
         specStateHash[4] = Animator.StringToHash("Base Layer.noirSpecialEx"); // Extension when the attack is considered to hitting
         heavyAttackStateHash = Animator.StringToHash("Base Layer.noirHeavyAttack");
         flinchStateHash = Animator.StringToHash("Base Layer.noirFlinch");
+        grappleStateHash = Animator.StringToHash("Base Layer.noirGrapple");
+        blockStateHash = Animator.StringToHash("Base Layer.noirBlock");
     }
 
 
@@ -69,26 +71,47 @@ public class noirBehaviour: PlayerState {
             if (heavyAttack() == true)
                 attack = true;
 
+        if (!attack && stateInfo.nameHash == blockStateHash) {
+            //attack = true;
+            setBlock(true); // Player is blocking incoming damage
+        } else {
+            setBlock(false);
+        }
+
+
         return (attack || chargeState);
     }
 
+
     override public bool lightAttack() {
         
-        if (curPlayer == null)
+        if (curPlayer == null) {
             return false;
+        } else if ((curPlayer.playerState.isBlock() && isFacingLeft() && !(curPlayer.playerState.isFacingLeft()))
+            ||  (curPlayer.playerState.isBlock() && !isFacingLeft() && curPlayer.playerState.isFacingLeft())) {
+            setFlinch(true);
+            return false;
+        }
 
         curPlayer.playerState.setFlinch(true);
         curPlayer.playerHealth.damage(50);
         return true; 
     }
 
+
     override public bool specialAttack(int curState) {
         int damage;
 
         damage = 0;
 
-        if (curPlayer == null)
+        if (curPlayer == null) {
             return false;
+        } else if ((curPlayer.playerState.isBlock() && isFacingLeft() && !(curPlayer.playerState.isFacingLeft()))
+            ||  (curPlayer.playerState.isBlock() && !isFacingLeft() && curPlayer.playerState.isFacingLeft())) {
+            setFlinch(true);
+            return false;
+        }
+
         switch (curState) { // Calculate damage based on charge of noirs special
             case 1:
                 damage = 50;
@@ -108,13 +131,21 @@ public class noirBehaviour: PlayerState {
         return true;
     }
 
+
     override public bool heavyAttack() {
         
-        if (curPlayer == null)
+        if (curPlayer == null) {
             return false;
+        } else if ((curPlayer.playerState.isBlock() && isFacingLeft() && !(curPlayer.playerState.isFacingLeft()))
+            ||  (curPlayer.playerState.isBlock() && !isFacingLeft() && curPlayer.playerState.isFacingLeft())) {
+            setFlinch(true);
+            return false;
+        }
+
 
         curPlayer.playerState.setFlinch(true);
         curPlayer.playerHealth.damage(80);
         return true;
     }
+
 }

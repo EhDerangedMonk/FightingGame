@@ -13,12 +13,17 @@ public abstract class PlayerState {
 	public int heavyAttackStateHash;
 	public int idleStateHash;
 	public int flinchStateHash;
+	public int blockStateHash;
+	public int grappleStateHash;
 	public Animator anim; // Passing in a copy of the player animation to read it
 	public bool flinch; // Is the player currently unable attack due to a flinch?
+	public bool block; // Is the player currently blocking
+	public bool facingLeft = true;// Current direction the player is facing in
 
 
 	/*
 	 * DESCR: Performs a light attack and damages an intersecting player
+	 * POST: Returns true if the move intersected with a player
 	 */
 	public abstract bool lightAttack();
 
@@ -26,13 +31,22 @@ public abstract class PlayerState {
 	/*
 	 * DESCR: Performs a special attack and damages an intersecting player
 	 * PRE: An integer representing the current charge of the special attack
+	 * POST: Returns true if the move intersected with a player
 	 */
 	public abstract bool specialAttack(int curStates);
 
 	/*
 	 * DESCR: Performs a heavy attack and damages an intersecting player
+	 * POST: Returns true if the move intersected with a player
 	 */
 	public abstract bool heavyAttack();
+
+
+	/*
+	 * DESCR: Performs a grapple and tosses the player
+	 * POST: Returns true if the move intersected with a player
+	 */
+	//public abstract bool grapple();
 
 
 	/*
@@ -58,5 +72,30 @@ public abstract class PlayerState {
 	 */
 	public void setFlinch(bool newFlinch) {
 		flinch = newFlinch;
+	}
+
+
+	/*
+	 * DESCR: getter method if the player currently blocking
+	 */
+	public bool isBlock() {
+		return block;
+	}
+
+
+	/*
+	 * DESCR: Set the player to blocking
+	 */
+	public void setBlock(bool newBlock) {
+		block = newBlock;
+	}
+
+
+	public bool isFacingLeft() {
+		return facingLeft;
+	}
+
+	public void setFacingLeft(bool newFacingLeft) {
+		facingLeft = newFacingLeft;
 	}
 }
