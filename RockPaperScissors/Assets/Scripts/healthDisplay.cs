@@ -30,7 +30,12 @@ public class healthDisplay : MonoBehaviour {
     }
 
     void OnGUI() {
+		Vector3 P1ScreenPoint = Camera.main.WorldToScreenPoint(p1.transform.position);
+		Vector3 P2ScreenPoint = Camera.main.WorldToScreenPoint(p2.transform.position);
+		
         GUI.Label (new Rect(10, 10, 300, 300), p1.playerHealth.getHealth().ToString(), labelFontSize);
+        GUI.Label (new Rect(P1ScreenPoint[0], Screen.height-P1ScreenPoint[1], 300, 300), P1ScreenPoint.ToString(), labelFontSize);
         GUI.Label (new Rect(1200, 10, 300, 300), p2.playerHealth.getHealth().ToString(), labelFontSize);
+        GUI.Label (new Rect(P2ScreenPoint[0], Screen.height-P2ScreenPoint[1], 300, 300), P2ScreenPoint.ToString(), labelFontSize);
     }
 }
