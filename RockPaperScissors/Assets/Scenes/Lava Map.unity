@@ -953,10 +953,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 849e26a543361e1469d0b8379ea31889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets:
-  - {fileID: 410607660}
-  - {fileID: 220939970}
-  - {fileID: 1651594281}
   defaultCam: {fileID: 1651594280}
   topBounds: {fileID: 1146467857}
   leftBounds: {fileID: 1411982410}
@@ -973,6 +969,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc2a1ee709e65c24582014acde425ba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  P1Tag: {fileID: 2800000, guid: 948bad63308ee9b419aaf4f33d680b30, type: 3}
+  P2Tag: {fileID: 2800000, guid: 0700d6ca272016e4196bab3fdb762787, type: 3}
 --- !u!1 &1644875503
 GameObject:
   m_ObjectHideFlags: 0
