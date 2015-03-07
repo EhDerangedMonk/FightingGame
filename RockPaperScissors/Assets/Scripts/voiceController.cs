@@ -4,6 +4,7 @@ using System.Collections;
 public class voiceController : MonoBehaviour {
 	
 	private AudioSource voice;
+	private bool hasPlayed;
 	
 	public AudioClip lightAttack;
 	public AudioClip heavyAttack;
@@ -15,6 +16,7 @@ public class voiceController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		voice = this.audio;
+		hasPlayed = false;
 		
 	}
 	
@@ -22,35 +24,57 @@ public class voiceController : MonoBehaviour {
 	void Update () {
 		
 	}
-	
+
+	void reset() {
+		hasPlayed = false;
+	}
+
 	void playLightAttack () {
-		voice.clip = lightAttack;
-		voice.Play ();
+		if (!hasPlayed) {
+			voice.clip = lightAttack;
+			voice.Play ();
+			hasPlayed = true;
+		}
 	}
 	
 	void playHeavyAttack() {
-		voice.clip = heavyAttack;
-		voice.Play ();
+		if (!hasPlayed) {
+			voice.clip = heavyAttack;
+			voice.Play ();
+			hasPlayed = true;
+		}
 	}
 	
 	void playSpecialAttack() {
-		voice.clip = specialAttack;
-		voice.Play ();
+		if (!hasPlayed) {
+			voice.clip = specialAttack;
+			voice.Play ();
+			hasPlayed = true;
+		}
 	}
 	
 	void playFlinch() {
-		voice.clip = flinch;
-		voice.Play ();
+		if (!hasPlayed) {
+			voice.clip = flinch;
+			voice.Play ();
+			hasPlayed = true;
+		}
 	}
 	
 	void playLaunched() {
-		voice.clip = launched;
-		voice.Play ();
+		if (!hasPlayed) {
+			voice.clip = launched;
+			voice.Play ();
+			hasPlayed = true;
+		}
 	}
 	
 	void playDeath() {
-		voice.clip = death;
-		voice.Play ();
+		if (!hasPlayed) {
+			voice.clip = death;
+			voice.Play ();
+			hasPlayed = true;
+		}
 	}
 	
 }

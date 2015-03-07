@@ -1169,12 +1169,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e832cbe63e919a54db3472a9521dd7c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightAttack: {fileID: 0}
-  heavyAttack: {fileID: 0}
-  specialAttack: {fileID: 0}
-  flinch: {fileID: 0}
-  launched: {fileID: 0}
-  death: {fileID: 0}
+  lightAttack: {fileID: 8300000, guid: 8537b4634aa6c5c46bc6b8bd3c2c714e, type: 3}
+  heavyAttack: {fileID: 8300000, guid: 57d3f77b3221fd54a93852f05536df72, type: 3}
+  specialAttack: {fileID: 8300000, guid: ea93bc85df8942c4e8008a9a8aeba1b8, type: 3}
+  flinch: {fileID: 8300000, guid: fc30a5bdd7828474782b8141edf23615, type: 3}
+  launched: {fileID: 8300000, guid: 869beac1fb8ce2648b30575885ab6afc, type: 3}
+  death: {fileID: 8300000, guid: 508dc2eae4c3cce4ca542b3bd13813b9, type: 3}
 --- !u!82 &1946648959
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1461,12 +1461,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e832cbe63e919a54db3472a9521dd7c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightAttack: {fileID: 0}
-  heavyAttack: {fileID: 0}
-  specialAttack: {fileID: 0}
-  flinch: {fileID: 0}
-  launched: {fileID: 0}
-  death: {fileID: 0}
+  lightAttack: {fileID: 8300000, guid: 8537b4634aa6c5c46bc6b8bd3c2c714e, type: 3}
+  heavyAttack: {fileID: 8300000, guid: 57d3f77b3221fd54a93852f05536df72, type: 3}
+  specialAttack: {fileID: 8300000, guid: ea93bc85df8942c4e8008a9a8aeba1b8, type: 3}
+  flinch: {fileID: 8300000, guid: fc30a5bdd7828474782b8141edf23615, type: 3}
+  launched: {fileID: 8300000, guid: 869beac1fb8ce2648b30575885ab6afc, type: 3}
+  death: {fileID: 8300000, guid: 508dc2eae4c3cce4ca542b3bd13813b9, type: 3}
 --- !u!82 &2047241320
 AudioSource:
   m_ObjectHideFlags: 0
