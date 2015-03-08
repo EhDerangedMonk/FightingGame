@@ -28,6 +28,9 @@ public class Player : MonoBehaviour {
     private float slideSpeed = 10; // Speed characters slide at when standing on someone's head
 
     private bool isFlinching; // Stops player from flinching more than one until flinch is done
+
+	float nextJump = 0.0f;
+	float jumpDelay = 0.3f;
     
     void Start() {
         player = null; // Not colliding with a player by default
@@ -105,23 +108,20 @@ public class Player : MonoBehaviour {
         }
 
 		//checks conditions for jumping, launches player if they can jump
-        if ((grounded || !doubleJump) && Input.GetKeyDown (controller.jump)) 
+       // if ((grounded || !doubleJump) && Input.GetKeyDown (controller.jump)) 
+		  if ((grounded || !doubleJump) && -0.6>Input.GetAxis(controller.YAxis) && Time.time > nextJump)
         {
+			nextJump = Time.time + jumpDelay;
             anim.SetBool("Ground", false);
             rigidbody2D.AddForce(new Vector2(0, jumpForce));
-            
+
             if(!doubleJump && !grounded)
                 doubleJump = true;
         }
+		
 
-        // Keyboard input for horizontal movement
-        if (Input.GetKey(controller.left)) {
-            move = -1;
-        } else if (Input.GetKey(controller.right)) {
-            move = 1;
-        } else {
-            move = 0;
-        }
+		//X-axis movement input
+		move = Input.GetAxis (controller.XAxis);
         
         //sets variables for vertical speed and horizontal speed
         anim.SetFloat("vSpeed", rigidbody2D.velocity.y);   

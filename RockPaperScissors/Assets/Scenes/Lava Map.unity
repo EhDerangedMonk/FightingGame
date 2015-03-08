@@ -73,6 +73,7 @@ NavMeshSettings:
     minRegionArea: 2
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
+    tileSizeHint: 0
   m_NavMesh: {fileID: 0}
 --- !u!1 &97086858
 GameObject:
@@ -368,7 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db430f27868082438f3d33d21bddc79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layout: 1
+  layout: 3
   groundCheck: {fileID: 1409181453}
   whatIsGround:
     serializedVersion: 2
