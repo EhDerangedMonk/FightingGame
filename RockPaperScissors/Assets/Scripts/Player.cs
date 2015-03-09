@@ -8,14 +8,14 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-    private const float jumpForce = 700f; //force added to player when they jump
     private const float maxSpeed = 5f; // limit on player run speed
+
 
     public int layout; // 1 - player 1 / 2 - player 2 <- Gets assigned in Unity right now
     public Transform groundCheck; // object that is used to check if the player is on the ground
     public LayerMask whatIsGround;//Layer object that indicates that the player themselves and other players are not the ground, everything else is
     public Health playerHealth; // Player health representation - Needs to be public for GUI to read
-
+	public int cChangeKey; //player# indicator
 
     public PlayerState playerState; // Generic state that implements state and behaviour
     private Animator anim; // Stores player animation
@@ -36,7 +36,7 @@ public class Player : MonoBehaviour {
         player = null; // Not colliding with a player by default
         isFlinching = false;
         anim = GetComponent<Animator>();
-        controller = new Controls(layout);
+        controller = new Controls(layout, cChangeKey);
         playerHealth = new Health(1000);
         playerState = new noirBehaviour(anim);
     }
@@ -91,6 +91,12 @@ public class Player : MonoBehaviour {
             isFlinching = false;
         }
 
+
+		//
+		if (Input.GetKeyDown(controller.cChangeKey)){
+			layout = ((layout %4)+1); //mod number must always be equal to number of possible control schemes
+			controller.changeControls(layout);
+		}
         
         //determines if we are presently on the ground
         grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
@@ -113,7 +119,9 @@ public class Player : MonoBehaviour {
         {
 			nextJump = Time.time + jumpDelay;
             anim.SetBool("Ground", false);
-            rigidbody2D.AddForce(new Vector2(0, jumpForce));
+			Vector2 v = rigidbody2D.velocity;
+			rigidbody2D.velocity = new Vector2(v.x, 15);
+
 
             if(!doubleJump && !grounded)
                 doubleJump = true;

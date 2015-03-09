@@ -73,6 +73,7 @@ NavMeshSettings:
     minRegionArea: 2
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
+    tileSizeHint: 0
   m_NavMesh: {fileID: 0}
 --- !u!1 &127733213
 GameObject:
@@ -898,6 +899,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 4294967039
+  cChangeKey: 1
 --- !u!95 &1734783798
 Animator:
   serializedVersion: 3
@@ -1035,6 +1037,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 4294967039
+  cChangeKey: 2
 --- !u!95 &1795367125
 Animator:
   serializedVersion: 3

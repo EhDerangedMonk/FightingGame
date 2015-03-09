@@ -18,10 +18,27 @@ public class Controls {
 	public KeyCode grapple;
 	public string XAxis;
 	public string YAxis;
+	public KeyCode cChangeKey;
 
 	// Constructor
-	public Controls(int layout) {
+	public Controls(int layout, int changeKey) {
 		changeControls(layout);
+		if (changeKey == 1){
+			cChangeKey = KeyCode.Alpha1;
+		}
+		else if (changeKey == 2){
+			cChangeKey = KeyCode.Alpha2;
+		}
+		else if (changeKey == 3){
+			cChangeKey = KeyCode.Alpha3;
+		}
+		else if (changeKey == 4){
+			cChangeKey = KeyCode.Alpha4;
+		}
+		else{
+			cChangeKey = KeyCode.Alpha0;
+		}
+
 	}
 
 	/*
@@ -39,8 +56,8 @@ public class Controls {
 				right = KeyCode.D;
 				block = KeyCode.F;
 				grapple = KeyCode.LeftAlt;
-				XAxis = "KeyboardlX";
-				YAxis = "KeyboardlY";
+				XAxis = "Keyboard1X";
+				YAxis = "Keyboard1Y";
 				break;
 			case 2:
 				light = KeyCode.O;

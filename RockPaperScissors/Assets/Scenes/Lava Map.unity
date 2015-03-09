@@ -151,6 +151,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 4294967039
+  cChangeKey: 2
 --- !u!95 &220939965
 Animator:
   serializedVersion: 3
@@ -369,11 +370,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db430f27868082438f3d33d21bddc79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layout: 3
+  layout: 1
   groundCheck: {fileID: 1409181453}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 4294967039
+  cChangeKey: 1
 --- !u!95 &410607663
 Animator:
   serializedVersion: 3
