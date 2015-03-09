@@ -73,7 +73,6 @@ NavMeshSettings:
     minRegionArea: 2
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
-    tileSizeHint: 0
   m_NavMesh: {fileID: 0}
 --- !u!1 &86467896
 GameObject:
@@ -1128,7 +1127,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1946648949}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.01000023, y: -1, z: 0}
+  m_LocalPosition: {x: -6, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2074676459}
@@ -1173,12 +1172,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e832cbe63e919a54db3472a9521dd7c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightAttack: {fileID: 8300000, guid: 8537b4634aa6c5c46bc6b8bd3c2c714e, type: 3}
-  heavyAttack: {fileID: 8300000, guid: 57d3f77b3221fd54a93852f05536df72, type: 3}
-  specialAttack: {fileID: 8300000, guid: ea93bc85df8942c4e8008a9a8aeba1b8, type: 3}
-  flinch: {fileID: 8300000, guid: fc30a5bdd7828474782b8141edf23615, type: 3}
-  launched: {fileID: 8300000, guid: 869beac1fb8ce2648b30575885ab6afc, type: 3}
-  death: {fileID: 8300000, guid: 508dc2eae4c3cce4ca542b3bd13813b9, type: 3}
+  lightAttack: {fileID: 8300000, guid: 821567137ca4f754db8b4794f59f0d47, type: 3}
+  heavyAttack: {fileID: 8300000, guid: 783b95d7f6faa404580d3fee4dd4e21f, type: 3}
+  specialAttack: {fileID: 8300000, guid: 379eaa6b11be2cb4f9f9661633945e0a, type: 3}
+  flinch: {fileID: 8300000, guid: 1ad1f1b4cd128344482abd0efdf4212d, type: 3}
+  launched: {fileID: 8300000, guid: f2d301c9d25e2094eb980d803bc745d4, type: 3}
+  death: {fileID: 8300000, guid: da99589e71379cd42a3d44064022ff2b, type: 3}
 --- !u!82 &1946648959
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1466,12 +1465,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e832cbe63e919a54db3472a9521dd7c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightAttack: {fileID: 8300000, guid: 8537b4634aa6c5c46bc6b8bd3c2c714e, type: 3}
-  heavyAttack: {fileID: 8300000, guid: 57d3f77b3221fd54a93852f05536df72, type: 3}
-  specialAttack: {fileID: 8300000, guid: ea93bc85df8942c4e8008a9a8aeba1b8, type: 3}
-  flinch: {fileID: 8300000, guid: fc30a5bdd7828474782b8141edf23615, type: 3}
-  launched: {fileID: 8300000, guid: 869beac1fb8ce2648b30575885ab6afc, type: 3}
-  death: {fileID: 8300000, guid: 508dc2eae4c3cce4ca542b3bd13813b9, type: 3}
+  lightAttack: {fileID: 8300000, guid: 821567137ca4f754db8b4794f59f0d47, type: 3}
+  heavyAttack: {fileID: 8300000, guid: 783b95d7f6faa404580d3fee4dd4e21f, type: 3}
+  specialAttack: {fileID: 8300000, guid: 379eaa6b11be2cb4f9f9661633945e0a, type: 3}
+  flinch: {fileID: 8300000, guid: 1ad1f1b4cd128344482abd0efdf4212d, type: 3}
+  launched: {fileID: 8300000, guid: f2d301c9d25e2094eb980d803bc745d4, type: 3}
+  death: {fileID: 8300000, guid: da99589e71379cd42a3d44064022ff2b, type: 3}
 --- !u!82 &2047241320
 AudioSource:
   m_ObjectHideFlags: 0
