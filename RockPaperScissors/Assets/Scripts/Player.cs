@@ -38,7 +38,7 @@ public class Player : MonoBehaviour {
         anim = GetComponent<Animator>();
         controller = new Controls(layout, cChangeKey);
         playerHealth = new Health(1000);
-        playerState = new noirBehaviour(anim);
+        playerState = new noirBehaviour(this.transform, anim);
     }
 
     // Update is called whenever the processor is free (As fast as possible)
@@ -67,6 +67,11 @@ public class Player : MonoBehaviour {
 
         }
 
+        if (Input.GetKeyDown(controller.cChangeKey)){
+            layout = ((layout %4)+1); //mod number must always be equal to number of possible control schemes
+            controller.changeControls(layout);
+        }
+
     }
 
     // Update is called once per frame (Controlled)
@@ -77,13 +82,16 @@ public class Player : MonoBehaviour {
             anim.SetBool("Death", true);
             return;
         }  else if (isFlinching == false && playerState.isFlinch() == true) {
-            anim.SetBool("Flinch", true);
-            //anim.SetBool("Special", false);
-            
-            if (playerState.isFacingLeft()) {
-                rigidbody2D.AddForce(new Vector3(1f, 0f, 0f) * 200); //Test force not final
-            } else {
-                rigidbody2D.AddForce(new Vector3(-1f, 0f, 0f) * 200); //Test force not final
+            anim.SetTrigger("Flinch");
+
+            if (player != null) {
+
+                if (player.playerState.isFacingLeft() == true) {
+                    rigidbody2D.AddForce(new Vector3(-1f, 0f, 0f) * 300); //Test force not final
+                    player = null;
+                } else if (player.playerState.isFacingLeft() == false) {
+                    rigidbody2D.AddForce(new Vector3(1f, 0f, 0f) * 300); //Test force not final
+                }
             }
             isFlinching = true;
             return;
@@ -93,10 +101,7 @@ public class Player : MonoBehaviour {
 
 
 		//
-		if (Input.GetKeyDown(controller.cChangeKey)){
-			layout = ((layout %4)+1); //mod number must always be equal to number of possible control schemes
-			controller.changeControls(layout);
-		}
+
         
         //determines if we are presently on the ground
         grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
@@ -159,20 +164,13 @@ public class Player : MonoBehaviour {
             //finds out which player is on the other
             if (player.gameObject.transform.position.y >this.gameObject.transform.position.y) {
                 //pushes you in the direction you are closest to not colliding with
-                if(player.gameObject.transform.position.x >this.gameObject.transform.position.x) {
+                if (player.gameObject.transform.position.x >this.gameObject.transform.position.x) {
                     forward = new Vector3(1f, 0f, 0f);
                     player.rigidbody2D.AddForce (forward * slideSpeed);
-                }
-                else{
+                } else {
                     forward = new Vector3(-1f, 0f, 0f);
                     player.rigidbody2D.AddForce (forward * slideSpeed);
                 }
-            }
-
-            if (this.transform.position.x < other.transform.position.x && playerState.isFacingLeft()) {
-                player = null;
-            } else if (this.transform.position.x > other.transform.position.x && !(playerState.isFacingLeft())) {
-                player = null;
             }
         }
         
@@ -180,9 +178,7 @@ public class Player : MonoBehaviour {
 
     void OnTriggerExit2D(Collider2D other) {
         // When a Player object stops colliding with another Player object
-        Debug.Log("Exit Called");
         if (other.gameObject.tag == "Player") {
-            Debug.Log("Trigger Exit Player");
             player = null;
         }
     }

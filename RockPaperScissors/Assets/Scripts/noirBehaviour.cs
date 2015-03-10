@@ -8,6 +8,7 @@ using System.Collections;
 
 public class noirBehaviour: PlayerState {
 
+    private Transform transform;
     private AnimatorStateInfo stateInfo;
     private int specState;// int representing the charge value
     private Player curPlayer; // Colliding player which is usually the opponent
@@ -15,11 +16,12 @@ public class noirBehaviour: PlayerState {
 
 
     // Constructor
-    public noirBehaviour(Animator animation) {
+    public noirBehaviour(Transform trans, Animator animation) {
         attack = false;
         flinch = false;
         specState = 0;// No spec attack by default
         anim = animation; // Getting component from unity passed in
+        transform = trans; // Player coordinates
         specStateHash = new int[5]; // Noir has 4 special states
         idleStateHash = Animator.StringToHash("Base Layer.noirIdle");
         lightAttackStateHash = Animator.StringToHash("Base Layer.noirLightAttack");
@@ -51,7 +53,7 @@ public class noirBehaviour: PlayerState {
             attack = false;
 
         if (!attack && stateInfo.nameHash == lightAttackStateHash)
-            if (lightAttack() == true)
+            if (contact() == true && lightAttack() == true)
                 attack = true;
 
         // Special attack for Noir can have 4 states of charging
@@ -64,22 +66,20 @@ public class noirBehaviour: PlayerState {
         }
 
         if (!attack && stateInfo.nameHash == specStateHash[4])
-            if (specialAttack(specState) == true)
+            if (contact() == true && specialAttack(specState) == true)
                 attack = true;
 
         if (!attack && stateInfo.nameHash == heavyAttackStateHash)
-            if (heavyAttack() == true)
+            if (contact() == true && heavyAttack() == true)
                 attack = true;
 
-        if (!attack && stateInfo.nameHash == blockStateHash) {
-            //attack = true;
+        if (!attack && stateInfo.nameHash == blockStateHash)
             setBlock(true); // Player is blocking incoming damage
-        } else {
+        else
             setBlock(false);
-        }
 
 
-        return (attack || chargeState);
+        return (attack || chargeState); //Don't allow the player to attack again until it's finished
     }
 
 
@@ -145,6 +145,17 @@ public class noirBehaviour: PlayerState {
 
         curPlayer.playerState.setFlinch(true);
         curPlayer.playerHealth.damage(80);
+        return true;
+    }
+
+    // Helper Method
+
+    private bool contact() {
+            if (this.transform.position.x < curPlayer.transform.position.x && isFacingLeft()) {
+                return false;
+            } else if (this.transform.position.x > curPlayer.transform.position.x && !(isFacingLeft())) {
+                return false;
+            }
         return true;
     }
 
