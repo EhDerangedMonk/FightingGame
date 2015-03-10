@@ -393,7 +393,7 @@ GameObject:
   - 4: {fileID: 668360773}
   - 61: {fileID: 668360774}
   - 114: {fileID: 668360775}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: rightHangCheck
   m_TagString: Untagged
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
@@ -561,7 +561,7 @@ GameObject:
   - 61: {fileID: 1346989320}
   - 61: {fileID: 1346989322}
   - 61: {fileID: 1346989321}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Main Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -931,7 +931,7 @@ GameObject:
   - 4: {fileID: 1770321035}
   - 61: {fileID: 1770321036}
   - 114: {fileID: 1770321037}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: leftHangCheck
   m_TagString: Untagged
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}

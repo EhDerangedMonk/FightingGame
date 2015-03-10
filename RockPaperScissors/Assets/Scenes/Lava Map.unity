@@ -161,7 +161,7 @@ GameObject:
   - 4: {fileID: 496079028}
   - 212: {fileID: 496079027}
   - 61: {fileID: 496079029}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Middle Sub Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -364,7 +364,7 @@ GameObject:
   - 4: {fileID: 855079637}
   - 68: {fileID: 855079636}
   - 114: {fileID: 855079638}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Lava Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,8 +381,10 @@ EdgeCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Points:
-  - {x: -5.34563351, y: .520194054}
-  - {x: 5.43502569, y: .440443993}
+  - {x: -5.60011911, y: .523880482}
+  - {x: -4.90161037, y: .502560616}
+  - {x: 4.92083359, y: .487211227}
+  - {x: 5.37293005, y: .478589058}
 --- !u!4 &855079637
 Transform:
   m_ObjectHideFlags: 0
@@ -494,7 +496,7 @@ GameObject:
   - 4: {fileID: 1393397655}
   - 212: {fileID: 1393397654}
   - 68: {fileID: 1393397656}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Lava Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,9 +552,9 @@ EdgeCollider2D:
   - {x: -26.9596386, y: 12.3890524}
   - {x: -22.5418968, y: 11.0612202}
   - {x: -15.2984505, y: 9.74508572}
-  - {x: -5.49077654, y: 7.09724236}
+  - {x: -5.92626143, y: 7.27094936}
   - {x: .318893522, y: 2.58403492}
-  - {x: 5.74162054, y: 7.01209211}
+  - {x: 5.74162054, y: 7.2215271}
   - {x: 12.6464653, y: 8.77685928}
   - {x: 16.5334816, y: 9.98164749}
   - {x: 22.7491016, y: 11.0759296}
@@ -1306,7 +1308,7 @@ GameObject:
   - 4: {fileID: 1984632784}
   - 114: {fileID: 1984632786}
   - 61: {fileID: 1984632785}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: phaseCheck
   m_TagString: Platform
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
