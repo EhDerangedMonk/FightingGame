@@ -7,16 +7,21 @@ using UnityEngine;
 using System.Collections;
 
 public class rockBehaviour : MonoBehaviour {
-	Player rockVictim;
+	private Player rockVictim;
+	private Animator anim;
 
 	// Use this for initialization
 	void Start () {
-
+		anim = GetComponent<Animator> ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	void playHit() {
+		anim.SetTrigger ("Hit");
 	}
 
 	void Destroy () {
@@ -28,11 +33,11 @@ public class rockBehaviour : MonoBehaviour {
 		if (other.gameObject.tag == "Player") {
 			rockVictim = (Player)other.gameObject.GetComponent(typeof(Player));
 			rockVictim.playerHealth.damage(100); // Rocks deal 100DMG
-			Destroy(); //The rock 'breaks' when it collides with a player.
+			playHit(); //The rock 'breaks' when it collides with a player.
 		}
 		//Rocks breaking eachother?
 		if (other.gameObject.tag == "Rock") {
-			Destroy(); //The rock 'breaks' when it collides with another rock.
+			playHit(); //The rock 'breaks' when it collides with another rock.
 		}
 	}
 }

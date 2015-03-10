@@ -55,13 +55,13 @@ TagManager:
     userID: 3
     uniqueID: 236734981
     locked: 0
-  - name: Objects
-    userID: 6
-    uniqueID: 286223899
-    locked: 0
   - name: Players
     userID: 2
     uniqueID: 932472279
+    locked: 0
+  - name: Objects
+    userID: 6
+    uniqueID: 286223899
     locked: 0
   - name: UI
     userID: 1
