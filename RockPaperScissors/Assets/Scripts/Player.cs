@@ -114,9 +114,9 @@ public class Player : MonoBehaviour {
         }
 
 		//checks conditions for jumping, launches player if they can jump
-       // if ((grounded || !doubleJump) && Input.GetKeyDown (controller.jump)) 
-		  if ((grounded || !doubleJump) && -0.6>Input.GetAxis(controller.YAxis) && Time.time > nextJump)
-        {
+
+
+		if ((grounded || !doubleJump) && (-0.6>Input.GetAxis(controller.YAxis) || Input.GetKeyDown(controller.jump)) && Time.time > nextJump){
 			nextJump = Time.time + jumpDelay;
             anim.SetBool("Ground", false);
 			Vector2 v = rigidbody2D.velocity;
