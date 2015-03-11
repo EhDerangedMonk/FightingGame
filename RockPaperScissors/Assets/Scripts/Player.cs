@@ -67,6 +67,7 @@ public class Player : MonoBehaviour {
 
         }
 
+        // Placeholder to be able to change player controls
         if (Input.GetKeyDown(controller.cChangeKey)){
             layout = ((layout %4)+1); //mod number must always be equal to number of possible control schemes
             controller.changeControls(layout);
@@ -76,19 +77,17 @@ public class Player : MonoBehaviour {
 
     // Update is called once per frame (Controlled)
     void FixedUpdate ()  {
-        float move; // Direction that the player is moving in forward(1) - backwards(-1) - stop(0)
+
 
         if (playerHealth.isDead() == true) { // Temporary I have no death state?
             anim.SetBool("Death", true);
             return;
-        }  else if (isFlinching == false && playerState.isFlinch() == true) {
+        } else if (isFlinching == false && playerState.isFlinch() == true) { // Code to handle the movement of the player if they are flinching
             anim.SetTrigger("Flinch");
 
             if (player != null) {
-
                 if (player.playerState.isFacingLeft() == true) {
                     rigidbody2D.AddForce(new Vector3(-1f, 0f, 0f) * 300); //Test force not final
-                    player = null;
                 } else if (player.playerState.isFacingLeft() == false) {
                     rigidbody2D.AddForce(new Vector3(1f, 0f, 0f) * 300); //Test force not final
                 }
@@ -96,57 +95,17 @@ public class Player : MonoBehaviour {
             isFlinching = true;
             return;
         } else if (isFlinching == true && playerState.isFlinch() == false) {
-            isFlinching = false;
+            isFlinching = false; // Animation is complete flip the variable
         }
 
-
-		//
-
-        
-        //determines if we are presently on the ground
-        grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
-        anim.SetBool ("Ground", grounded);
-    
-        //if we are on the ground, refreshes our double jump
-        if (grounded) { //Can't double jump unless already in air
-            doubleJump = false;
-        }
-
-        if (playerState.checkState(player)) { //Controls player and their actions
+        if (playerState.checkState(player) == true) { //Controls player and their actions
             return; // Currently in attack if return is true so don't allow character movement
         } else if (isFlinching == true || playerState.isBlock()) {
             return;
         }
 
-		//checks conditions for jumping, launches player if they can jump
-
-
-		if ((grounded || !doubleJump) && (-0.6>Input.GetAxis(controller.YAxis) || Input.GetKeyDown(controller.jump)) && Time.time > nextJump){
-			nextJump = Time.time + jumpDelay;
-            anim.SetBool("Ground", false);
-			Vector2 v = rigidbody2D.velocity;
-			rigidbody2D.velocity = new Vector2(v.x, 15);
-
-
-            if(!doubleJump && !grounded)
-                doubleJump = true;
-        }
-		
-
-		//X-axis movement input
-		move = Input.GetAxis (controller.XAxis);
-        
-        //sets variables for vertical speed and horizontal speed
-        anim.SetFloat("vSpeed", rigidbody2D.velocity.y);   
-        anim.SetFloat("speed", Mathf.Abs (move));
-        
-        rigidbody2D.velocity = new Vector2 (move * maxSpeed, rigidbody2D.velocity.y);
-        
-		//determines which way we should be facing and flips sprite towards the appropriate direction
-        if (move > 0 && playerState.isFacingLeft())
-            flip();
-        else if (move < 0 && !(playerState.isFacingLeft()))
-            flip();
+        jump(); // Controls players jumping ability
+        movement();
 
     }
 
@@ -179,10 +138,9 @@ public class Player : MonoBehaviour {
     }
 
     void OnTriggerExit2D(Collider2D other) {
-        // When a Player object stops colliding with another Player object
-        if (other.gameObject.tag == "Player") {
+        // When a Player object stops colliding with another Player object (Since they are not in your range)
+        if (other.gameObject.tag == "Player")
             player = null;
-        }
     }
 
 	/*
@@ -195,6 +153,54 @@ public class Player : MonoBehaviour {
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+
+    /*
+     * DESCR: Checks if the player is currently jumping (Sets accordingly) + and allows the player to
+     *  jump if they hit their jump key
+     */
+    void jump() {
+        //determines if we are presently on the ground
+        grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
+        anim.SetBool ("Ground", grounded);
+    
+        //if we are on the ground, refreshes our double jump
+        if (grounded) { //Can't double jump unless already in air
+            doubleJump = false;
+        }
+
+        //checks conditions for jumping, launches player if they can jump
+        if ((grounded || !doubleJump) && (-0.6>Input.GetAxis(controller.YAxis) || Input.GetKeyDown(controller.jump)) && Time.time > nextJump){
+            nextJump = Time.time + jumpDelay;
+            anim.SetBool("Ground", false);
+            Vector2 v = rigidbody2D.velocity;
+            rigidbody2D.velocity = new Vector2(v.x, 15);
+
+
+            if(!doubleJump && !grounded)
+                doubleJump = true;
+        }
+    }
+
+
+    void movement() {
+        float move; // Direction that the player is moving in forward(1) - backwards(-1) - stop(0)
+        //X-axis movement input
+        move = Input.GetAxis (controller.XAxis);
+
+        //sets variables for vertical speed and horizontal speed
+        anim.SetFloat("vSpeed", rigidbody2D.velocity.y);   
+        anim.SetFloat("speed", Mathf.Abs (move));
+        
+        rigidbody2D.velocity = new Vector2 (move * maxSpeed, rigidbody2D.velocity.y);
+
+
+        //determines which way we should be facing and flips sprite towards the appropriate direction
+        if (move > 0 && playerState.isFacingLeft())
+            flip();
+        else if (move < 0 && !(playerState.isFacingLeft()))
+            flip();
     }
 
 }

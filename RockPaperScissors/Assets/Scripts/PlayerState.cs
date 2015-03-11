@@ -8,7 +8,7 @@ using System.Collections;
 
 public abstract class PlayerState {
 
-	public int lightAttackStateHash;
+	public int lightAttackStateHash; // All State hashes are links to the animator
 	public int[] specStateHash; // Can have more than one state
 	public int heavyAttackStateHash;
 	public int idleStateHash;
@@ -85,16 +85,26 @@ public abstract class PlayerState {
 
 	/*
 	 * DESCR: Set the player to blocking
+	 * PRE: bool (True if the player is blocking)
 	 */
 	public void setBlock(bool newBlock) {
 		block = newBlock;
 	}
 
 
+	/*
+	 * DESCR: getter method for the direction the current player is facing
+	 * POST: True (Facing left) - False (Facing Right)
+	 */
 	public bool isFacingLeft() {
 		return facingLeft;
 	}
 
+
+	/*
+	 * DESCR: Set the direction the player is facing (Doesn't update what is shown on screen)
+	 * PRE: True (Facing left) - False (Facing Right)
+	 */
 	public void setFacingLeft(bool newFacingLeft) {
 		facingLeft = newFacingLeft;
 	}

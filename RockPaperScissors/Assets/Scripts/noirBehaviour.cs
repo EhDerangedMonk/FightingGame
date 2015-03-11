@@ -8,7 +8,7 @@ using System.Collections;
 
 public class noirBehaviour: PlayerState {
 
-    private Transform transform;
+    private Transform transform; // Current player coordinates - Compare to other players
     private AnimatorStateInfo stateInfo;
     private int specState;// int representing the charge value
     private Player curPlayer; // Colliding player which is usually the opponent
@@ -44,17 +44,22 @@ public class noirBehaviour: PlayerState {
         curPlayer = player;
         stateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
-        if(stateInfo.nameHash != flinchStateHash) {
+        if (stateInfo.nameHash != flinchStateHash) {
             anim.SetBool("Flinch", false);
             setFlinch(false);
         }
 
-        if(stateInfo.nameHash == idleStateHash)
+        if (stateInfo.nameHash == idleStateHash)
             attack = false;
 
-        if (!attack && stateInfo.nameHash == lightAttackStateHash)
-            if (contact() == true && lightAttack() == true)
-                attack = true;
+        if (stateInfo.nameHash == grappleStateHash)
+            attack = true;
+
+        if (!attack && stateInfo.nameHash == lightAttackStateHash) {
+            attack = true;
+            if (contact() == true)
+                lightAttack();
+        }
 
         // Special attack for Noir can have 4 states of charging
         for (int i = 0; i < 4; i++) {
@@ -65,13 +70,17 @@ public class noirBehaviour: PlayerState {
             }
         }
 
-        if (!attack && stateInfo.nameHash == specStateHash[4])
-            if (contact() == true && specialAttack(specState) == true)
-                attack = true;
+        if (!attack && stateInfo.nameHash == specStateHash[4]) {
+            attack = true;
+            if (contact() == true)
+                specialAttack(specState);
+        }
 
-        if (!attack && stateInfo.nameHash == heavyAttackStateHash)
-            if (contact() == true && heavyAttack() == true)
-                attack = true;
+        if (!attack && stateInfo.nameHash == heavyAttackStateHash) {
+            attack = true;
+            if (contact() == true)
+                heavyAttack();
+        }
 
         if (!attack && stateInfo.nameHash == blockStateHash)
             setBlock(true); // Player is blocking incoming damage
@@ -149,7 +158,6 @@ public class noirBehaviour: PlayerState {
     }
 
     // Helper Method
-
     private bool contact() {
 		if (curPlayer == null)
 			return false;
