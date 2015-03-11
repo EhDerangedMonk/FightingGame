@@ -1,4 +1,8 @@
 ﻿using UnityEngine;
+/*
+	Authored By: Nigel Martinez
+	Purpose: Controls the behaviour of a character's audio source, or "voice".
+*/
 using System.Collections;
 
 public class voiceController : MonoBehaviour {

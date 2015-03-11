@@ -3,6 +3,8 @@
 	Purpose: Controls the behaviour of "hanging state" triggers on maps.
 */
 
+//TODO: Actually cause "hang" state.
+
 using UnityEngine;
 using System.Collections;
 
