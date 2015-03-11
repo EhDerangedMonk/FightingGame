@@ -98,6 +98,8 @@ public class Player : MonoBehaviour {
             isFlinching = false; // Animation is complete flip the variable
         }
 
+        setGround();
+
         if (playerState.checkState(player) == true) { //Controls player and their actions
             return; // Currently in attack if return is true so don't allow character movement
         } else if (isFlinching == true || playerState.isBlock()) {
@@ -157,14 +159,21 @@ public class Player : MonoBehaviour {
 
 
     /*
+     * DESCR: Sets the player grounded animation if they are touching the ground
+     */
+    void setGround() {
+        //determines if we are presently on the ground
+        grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
+        anim.SetBool ("Ground", grounded);
+    }
+
+
+    /*
      * DESCR: Checks if the player is currently jumping (Sets accordingly) + and allows the player to
      *  jump if they hit their jump key
      */
     void jump() {
-        //determines if we are presently on the ground
-        grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
-        anim.SetBool ("Ground", grounded);
-    
+  
         //if we are on the ground, refreshes our double jump
         if (grounded) { //Can't double jump unless already in air
             doubleJump = false;
