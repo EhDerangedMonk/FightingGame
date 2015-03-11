@@ -444,8 +444,8 @@ GameObject:
   - 4: {fileID: 1088457426}
   - 114: {fileID: 1088457425}
   - 61: {fileID: 1088457424}
-  m_Layer: 9
-  m_Name: phaseCheck
+  m_Layer: 0
+  m_Name: Right phaseCheck
   m_TagString: Platform
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -647,8 +647,8 @@ GameObject:
   - 4: {fileID: 1540374269}
   - 114: {fileID: 1540374268}
   - 61: {fileID: 1540374267}
-  m_Layer: 9
-  m_Name: phaseCheck
+  m_Layer: 0
+  m_Name: Left phaseCheck
   m_TagString: Platform
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1148,7 +1148,7 @@ MonoBehaviour:
   groundCheck: {fileID: 2074676459}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 4294967039
+    m_Bits: 512
   cChangeKey: 1
 --- !u!58 &1946648957
 CircleCollider2D:
@@ -1246,8 +1246,8 @@ GameObject:
   - 4: {fileID: 1980930671}
   - 114: {fileID: 1980930673}
   - 61: {fileID: 1980930672}
-  m_Layer: 9
-  m_Name: phaseCheck
+  m_Layer: 0
+  m_Name: Top phaseCheck
   m_TagString: Platform
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1367,7 +1367,7 @@ MonoBehaviour:
   groundCheck: {fileID: 308123880}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 4294967039
+    m_Bits: 512
   cChangeKey: 2
 --- !u!95 &2047241313
 Animator:

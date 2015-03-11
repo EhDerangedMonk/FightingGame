@@ -9,6 +9,7 @@ using System.Collections;
 public class rockBehaviour : MonoBehaviour {
 	private Player rockVictim;
 	private Animator anim;
+	private bool hit = false;
 
 	// Use this for initialization
 	void Start () {
@@ -32,7 +33,10 @@ public class rockBehaviour : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D other) {
 		if (other.gameObject.tag == "Player") {
 			rockVictim = (Player)other.gameObject.GetComponent(typeof(Player));
-			rockVictim.playerHealth.damage(100); // Rocks deal 100DMG
+			if(!hit) {
+				rockVictim.playerHealth.damage(100); // Rocks deal 100DMG
+				hit = true;
+			}
 			playHit(); //The rock 'breaks' when it collides with a player.
 		}
 		//Rocks breaking eachother?

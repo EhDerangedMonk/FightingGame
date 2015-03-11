@@ -212,7 +212,7 @@ MonoBehaviour:
   groundCheck: {fileID: 453342}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 4294967039
+    m_Bits: 512
   cChangeKey: 1
 --- !u!114 &11453342
 MonoBehaviour:

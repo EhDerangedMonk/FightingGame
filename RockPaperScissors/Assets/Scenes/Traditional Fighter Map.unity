@@ -239,7 +239,7 @@ MonoBehaviour:
   groundCheck: {fileID: 610134624}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 4294967039
+    m_Bits: 512
   cChangeKey: 1
 --- !u!95 &18892884
 Animator:
@@ -940,7 +940,7 @@ MonoBehaviour:
   groundCheck: {fileID: 820629755}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 4294967039
+    m_Bits: 512
   cChangeKey: 2
 --- !u!95 &1478818838
 Animator:
