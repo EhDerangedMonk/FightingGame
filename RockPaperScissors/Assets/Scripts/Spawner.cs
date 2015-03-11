@@ -11,7 +11,7 @@ public class Spawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		InvokeRepeating("Spawn", 1, Random.Range (3,8)); // Call the Spawn function between spawn times.
+		InvokeRepeating("Spawn", 1, Random.Range (5,20)); // Call the Spawn function between spawn times.
 	}
 
 	// Update is called once per frame

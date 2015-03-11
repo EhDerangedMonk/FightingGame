@@ -42,7 +42,7 @@ public class healthDisplay : MonoBehaviour {
 		// Get each player's bottom-centre screen position
 		Vector3 extents = p1.renderer.bounds.extents;
 		CharacterScreenHeight = (int) Camera.main.WorldToScreenPoint(new Vector3(0f, extents.y*2, 0f)).y;
-		print ("Scale: " + ((float)CharacterScreenHeight/275f).ToString());
+		//print ("Scale: " + ((float)CharacterScreenHeight/275f).ToString());
 		
 		// Adjust the offset based on the character's screen height
 		P1Offset = P2Offset = new Vector2((int) (-17f * ((float)CharacterScreenHeight/275f)), (int) ((float)(0 - P1Tag.height/4) - (40f * ((float)CharacterScreenHeight)/275f))); // divides the character's current height by their original height
