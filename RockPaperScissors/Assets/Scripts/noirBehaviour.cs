@@ -151,12 +151,14 @@ public class noirBehaviour: PlayerState {
     // Helper Method
 
     private bool contact() {
-            if (this.transform.position.x < curPlayer.transform.position.x && isFacingLeft()) {
-                return false;
-            } else if (this.transform.position.x > curPlayer.transform.position.x && !(isFacingLeft())) {
-                return false;
-            }
-        return true;
+		if (curPlayer == null)
+			return false;
+        if (this.transform.position.x < curPlayer.transform.position.x && isFacingLeft())
+            return false;
+        else if (this.transform.position.x > curPlayer.transform.position.x && !(isFacingLeft()))
+            return false;
+        else    
+        	return true;
     }
 
 }
