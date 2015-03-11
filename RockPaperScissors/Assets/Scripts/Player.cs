@@ -160,6 +160,7 @@ public class Player : MonoBehaviour {
         if (other.gameObject.tag == "Player") {
             player = (Player)other.gameObject.GetComponent(typeof(Player));
 
+			/*
             //THE CODE TO STOP PEOPLE FROM STANDING ON EACH OTHER'S HEADS
             //finds out which player is on the other
             if (player.gameObject.transform.position.y >this.gameObject.transform.position.y) {
@@ -172,6 +173,7 @@ public class Player : MonoBehaviour {
                     player.rigidbody2D.AddForce (forward * slideSpeed);
                 }
             }
+            */
         }
         
     }
