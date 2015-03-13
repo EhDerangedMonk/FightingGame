@@ -10,6 +10,7 @@ public class noirBehaviour: PlayerState {
 
     private Transform transform; // Current player coordinates - Compare to other players
     private AnimatorStateInfo stateInfo;
+    private int counterStateHash;
     private int specState;// int representing the charge value
     private Player curPlayer; // Colliding player which is usually the opponent
     private bool attack; // If player currently in attack don't redo dmg for it
@@ -34,6 +35,8 @@ public class noirBehaviour: PlayerState {
         flinchStateHash = Animator.StringToHash("Base Layer.noirFlinch");
         grappleStateHash = Animator.StringToHash("Base Layer.noirGrapple");
         blockStateHash = Animator.StringToHash("Base Layer.noirBlock");
+        counterStateHash = Animator.StringToHash("Base Layer.noirCounter");
+        launchStateHash = Animator.StringToHash("Base Layer.noirLaunch");
     }
 
 
@@ -49,25 +52,24 @@ public class noirBehaviour: PlayerState {
             setFlinch(false);
         }
 
+        if (stateInfo.nameHash == launchStateHash) {
+            setLaunch(false);
+        }
+
+        // Player is idling thus not attacking
         if (stateInfo.nameHash == idleStateHash)
             attack = false;
 
+        // Place holder grapple has no current use
         if (stateInfo.nameHash == grappleStateHash)
             attack = true;
 
+        // If player is not already in an attack and they have triggered attack animations
+        // Set attack to true and see if they are currently hitting or missing a player (If hit inflict damage)
         if (!attack && stateInfo.nameHash == lightAttackStateHash) {
             attack = true;
             if (contact() == true)
                 lightAttack();
-        }
-
-        // Special attack for Noir can have 4 states of charging
-        for (int i = 0; i < 4; i++) {
-            
-            if (stateInfo.nameHash == specStateHash[i]) {
-                chargeState = true;
-                specState = i + 1;
-            }
         }
 
         if (!attack && stateInfo.nameHash == specStateHash[4]) {
@@ -82,13 +84,30 @@ public class noirBehaviour: PlayerState {
                 heavyAttack();
         }
 
+        if (!attack && stateInfo.nameHash == counterStateHash) {
+            attack = true;
+            if (contact() == true)
+                counterAttack();
+        }
+
+        // Special attack for Noir can have 4 states of charging
+        for (int i = 0; i < 4; i++) {
+            
+            if (stateInfo.nameHash == specStateHash[i]) {
+                chargeState = true;
+                specState = i + 1;
+            }
+        }
+
+
+
         if (!attack && stateInfo.nameHash == blockStateHash)
             setBlock(true); // Player is blocking incoming damage
         else
             setBlock(false);
 
 
-        return (attack || chargeState); //Don't allow the player to attack again until it's finished
+        return (attack || chargeState); //Don't allow the player to attack again until the attack/move is finished
     }
 
 
@@ -99,6 +118,7 @@ public class noirBehaviour: PlayerState {
         } else if ((curPlayer.playerState.isBlock() && isFacingLeft() && !(curPlayer.playerState.isFacingLeft()))
             ||  (curPlayer.playerState.isBlock() && !isFacingLeft() && curPlayer.playerState.isFacingLeft())) {
             setFlinch(true);
+            curPlayer.playerState.anim.SetTrigger("Counter");
             return false;
         }
 
@@ -118,6 +138,7 @@ public class noirBehaviour: PlayerState {
         } else if ((curPlayer.playerState.isBlock() && isFacingLeft() && !(curPlayer.playerState.isFacingLeft()))
             ||  (curPlayer.playerState.isBlock() && !isFacingLeft() && curPlayer.playerState.isFacingLeft())) {
             setFlinch(true);
+            curPlayer.playerState.anim.SetTrigger("Counter");
             return false;
         }
 
@@ -148,12 +169,13 @@ public class noirBehaviour: PlayerState {
         } else if ((curPlayer.playerState.isBlock() && isFacingLeft() && !(curPlayer.playerState.isFacingLeft()))
             ||  (curPlayer.playerState.isBlock() && !isFacingLeft() && curPlayer.playerState.isFacingLeft())) {
             setFlinch(true);
+            curPlayer.playerState.anim.SetTrigger("Counter");
             return false;
         }
 
 
-        curPlayer.playerState.setFlinch(true);
-        curPlayer.playerHealth.damage(80);
+        curPlayer.playerState.setLaunch(true);
+        curPlayer.playerHealth.damage(100);
         return true;
     }
 
@@ -167,6 +189,22 @@ public class noirBehaviour: PlayerState {
             return false;
         else    
         	return true;
+    }
+
+    private bool counterAttack() {
+        if (curPlayer == null) {
+            return false;
+        } else if ((curPlayer.playerState.isBlock() && isFacingLeft() && !(curPlayer.playerState.isFacingLeft()))
+            ||  (curPlayer.playerState.isBlock() && !isFacingLeft() && curPlayer.playerState.isFacingLeft())) {
+            setFlinch(true);
+            curPlayer.playerState.anim.SetTrigger("Counter");
+            return false;
+        }
+
+
+        curPlayer.playerState.setFlinch(true);
+        curPlayer.playerHealth.damage(25);
+        return true;
     }
 
 }

@@ -28,6 +28,7 @@ public class Player : MonoBehaviour {
     private float slideSpeed = 10; // Speed characters slide at when standing on someone's head
 
     private bool isFlinching; // Stops player from flinching more than one until flinch is done
+    private bool isLaunching; // Stops the player from launching more than once until done
 
 	float nextJump = 0.0f;
 	float jumpDelay = 0.3f;
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour {
     void Start() {
         player = null; // Not colliding with a player by default
         isFlinching = false;
+        isLaunching = false;
         anim = GetComponent<Animator>();
         controller = new Controls(layout, cChangeKey);
         playerHealth = new Health(1000);
@@ -87,22 +89,35 @@ public class Player : MonoBehaviour {
 
             if (player != null) {
                 if (player.playerState.isFacingLeft() == true) {
-                    rigidbody2D.AddForce(new Vector3(-1f, 0f, 0f) * 300); //Test force not final
+                    rigidbody2D.AddForce(new Vector3(-2f, 0f, 0f) * 200); //Test force not final
                 } else if (player.playerState.isFacingLeft() == false) {
-                    rigidbody2D.AddForce(new Vector3(1f, 0f, 0f) * 300); //Test force not final
+                    rigidbody2D.AddForce(new Vector3(2f, 0f, 0f) * 200); //Test force not final
                 }
             }
             isFlinching = true;
             return;
         } else if (isFlinching == true && playerState.isFlinch() == false) {
             isFlinching = false; // Animation is complete flip the variable
+        } else if (isLaunching == false && playerState.isLaunch() == true) {
+            anim.SetTrigger("Launch");
+
+            if (player != null) {
+                if (player.playerState.isFacingLeft() == true) {
+                    rigidbody2D.AddForce(new Vector3(1f, 3f, 0f) * 300); //Test force not final
+                } else if (player.playerState.isFacingLeft() == false) {
+                    rigidbody2D.AddForce(new Vector3(1f, 3f, 0f) * 300); //Test force not final
+                }
+            }
+            isLaunching = true;
+        } else if (isLaunching == true && playerState.isLaunch() == false) {
+            isLaunching = false; // Animation is complete flip the variable
         }
 
         setGround();
 
         if (playerState.checkState(player) == true) { //Controls player and their actions
             return; // Currently in attack if return is true so don't allow character movement
-        } else if (isFlinching == true || playerState.isBlock()) {
+        } else if (isFlinching == true || playerState.isBlock() == true || isLaunching == true) {
             return;
         }
 
