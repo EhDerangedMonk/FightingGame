@@ -6,27 +6,22 @@
 using System.Collections;
 
 public class voiceController : MonoBehaviour {
-	
+
+	public AudioClip lightAttack, heavyAttack, specialAttack, flinch, launched, death;
+
 	private AudioSource voice;
 	private bool hasPlayed;
-	
-	public AudioClip lightAttack;
-	public AudioClip heavyAttack;
-	public AudioClip specialAttack;
-	public AudioClip flinch;
-	public AudioClip launched;
-	public AudioClip death;
-	
+
 	// Use this for initialization
 	void Start () {
 		voice = this.audio;
 		hasPlayed = false;
-		
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
 	void reset() {
