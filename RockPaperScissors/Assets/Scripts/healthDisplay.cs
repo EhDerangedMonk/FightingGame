@@ -5,8 +5,6 @@
 using UnityEngine;
 using System.Collections;
 
-// TODO: make the health display above the players' heads
-
 public class healthDisplay : MonoBehaviour {
     private Player p1, p2;
 	private GUIStyle labelFontSize; // Formats the labels
