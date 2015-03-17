@@ -73,7 +73,7 @@ public class Credits : MonoBehaviour {
 	void OnGUI()
 	{
 		// Draw all the labels and textures
-		GUI.DrawTexture(new Rect((int)(xOffset-(100*mainLogoScale)), mainLogoY, mainLogo.width*mainLogoScale, mainLogo.height*mainLogoScale), mainLogo, ScaleMode.ScaleToFit, true);
+		GUI.DrawTexture(new Rect((int)(xOffset), mainLogoY, mainLogo.width*mainLogoScale, mainLogo.height*mainLogoScale), mainLogo, ScaleMode.ScaleToFit, true);
 		GUI.Label (new Rect(xOffset, title1y, fontSize, Screen.width), "Character Interactions", creditFont);
 		GUI.Label (new Rect(xOffset2, name1y, fontSize, Screen.width), "Jerrit Anderson", creditFont);
 		GUI.Label (new Rect(xOffset, title2y, fontSize, Screen.width), "User Interface", creditFont);

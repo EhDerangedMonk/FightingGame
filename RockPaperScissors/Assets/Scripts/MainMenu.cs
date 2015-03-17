@@ -31,6 +31,10 @@ public class MainMenu : MonoBehaviour {
    	private bool controlsHover;
    	private bool creditsHover;
    	private bool exitHover;
+   	
+   	// Display the logo
+   	public Texture logoTexture;
+   	private Rect logoRect;
     
 
 
@@ -61,6 +65,13 @@ public class MainMenu : MonoBehaviour {
 		controlsHover = false;
 		creditsHover = false;
 		exitHover = false;
+		
+		// Initialize the logo location
+		int logoWidth = (int)(0.35*Screen.width);
+		int logoHeight = (int) ((float)logoTexture.height * ((float)logoWidth/(float)logoTexture.width));
+		int logoXposition = (int) (0.6*Screen.width);
+		
+		logoRect = new Rect(logoXposition, vertSpacing, logoWidth, logoHeight);
 	}
 	
 	
@@ -182,6 +193,10 @@ public class MainMenu : MonoBehaviour {
 				print ("Clicked EXIT");
 			}
 	    }
+	    
+	    
+	    // Draw the logo
+	    GUI.DrawTexture(logoRect, logoTexture);
         
     }
     
