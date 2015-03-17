@@ -1327,6 +1327,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   P1Tag: {fileID: 2800000, guid: 948bad63308ee9b419aaf4f33d680b30, type: 3}
   P2Tag: {fileID: 2800000, guid: 0700d6ca272016e4196bab3fdb762787, type: 3}
+  xOffset: 0
+  yOffset: 0
 --- !u!114 &1750818124
 MonoBehaviour:
   m_ObjectHideFlags: 0
