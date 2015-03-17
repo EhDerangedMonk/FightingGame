@@ -147,6 +147,8 @@ public class MainMenu : MonoBehaviour {
 	        if (GUI.Button (controlsRectHover, controlsButtonTexture, ""))
 	        {
 	            print ("Clicked CONTROLS");
+	            
+	            Application.LoadLevel("Controls");
 	        }
 	    }
 	    else
@@ -154,6 +156,8 @@ public class MainMenu : MonoBehaviour {
 			if (GUI.Button (controlsRect, controlsButtonTexture, ""))
 			{
 				print ("Clicked CONTROLS");
+				
+				Application.LoadLevel("Controls");
 			}
 	    }
 	    
@@ -183,7 +187,8 @@ public class MainMenu : MonoBehaviour {
 	        if (GUI.Button (exitRectHover, exitButtonTexture, ""))
 	        {
 	            print ("Clicked EXIT");
-	            // TODO: Make the exit button quit the application
+	            
+	            Application.Quit();
 	        }
 	    }
 	    else
@@ -191,6 +196,8 @@ public class MainMenu : MonoBehaviour {
 			if (GUI.Button (exitRect, exitButtonTexture, ""))
 			{
 				print ("Clicked EXIT");
+				
+				Application.Quit();
 			}
 	    }
 	    
