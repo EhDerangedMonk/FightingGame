@@ -26,6 +26,7 @@ public class lavaBehaviour : MonoBehaviour {
 			victim = (Player)other.gameObject.GetComponent(typeof(Player));
 
 			if(victim.playerHealth.isDead() == false) {
+				victim.playerState.anim.SetTrigger("Launch");
 				victim.rigidbody2D.AddForce(new Vector2(0, launchForce));
 				victim.playerHealth.damage(100); //Deal 100 to the player.
 			}

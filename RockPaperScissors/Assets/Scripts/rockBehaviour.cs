@@ -7,7 +7,7 @@ using UnityEngine;
 using System.Collections;
 
 public class rockBehaviour : MonoBehaviour {
-	private Player rockVictim;
+	Player victim;
 	private Animator anim;
 	private bool hit = false;
 
@@ -32,9 +32,10 @@ public class rockBehaviour : MonoBehaviour {
 	// Called when a 2D object collides with another 2D object
 	void OnCollisionEnter2D(Collision2D other) {
 		if (other.gameObject.tag == "Player") {
-			rockVictim = (Player)other.gameObject.GetComponent(typeof(Player));
+			victim = (Player)other.gameObject.GetComponent(typeof(Player));
 			if(!hit) {
-				rockVictim.playerHealth.damage(100); // Rocks deal 100DMG
+				victim.playerState.setFlinch(true); //TEMP: Causes Flinch
+				victim.playerHealth.damage(100); // Rocks deal 100DMG
 				hit = true;
 			}
 			playHit(); //The rock 'breaks' when it collides with a player.

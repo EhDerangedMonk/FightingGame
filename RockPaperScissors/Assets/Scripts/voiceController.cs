@@ -10,69 +10,63 @@ public class voiceController : MonoBehaviour {
 	public AudioClip lightAttack, heavyAttack, specialAttack, flinch, launched, death;
 
 	private AudioSource voice;
-	private bool hasPlayed;
+	private Animator anim;
 
 	// Use this for initialization
 	void Start () {
 		voice = this.audio;
-		hasPlayed = false;
-
+		anim = this.GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		if (anim.IsInTransition(0) && !voice.isPlaying)
+			reset ();
 	}
 
 	void reset() {
-		hasPlayed = false;
+		voice.clip = null;
 	}
 
 	void playLightAttack () {
-		if (!hasPlayed) {
+		if (voice.clip != lightAttack) {
 			voice.clip = lightAttack;
 			voice.Play ();
-			hasPlayed = true;
 		}
 	}
 	
 	void playHeavyAttack() {
-		if (!hasPlayed) {
+		if (voice.clip != heavyAttack) {
 			voice.clip = heavyAttack;
 			voice.Play ();
-			hasPlayed = true;
 		}
 	}
 	
 	void playSpecialAttack() {
-		if (!hasPlayed) {
+		if (voice.clip != specialAttack) {
 			voice.clip = specialAttack;
 			voice.Play ();
-			hasPlayed = true;
 		}
 	}
 	
 	void playFlinch() {
-		if (!hasPlayed) {
+		if (voice.clip != flinch) {
 			voice.clip = flinch;
 			voice.Play ();
-			hasPlayed = true;
 		}
 	}
 	
 	void playLaunched() {
-		if (!hasPlayed) {
+		if (voice.clip != launched) {
 			voice.clip = launched;
-			voice.Play ();
-			hasPlayed = true;
+			voice.Play ();;
 		}
 	}
 	
 	void playDeath() {
-		if (!hasPlayed) {
+		if (voice.clip != death) {
 			voice.clip = death;
 			voice.Play ();
-			hasPlayed = true;
 		}
 	}
 	
