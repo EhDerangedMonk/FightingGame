@@ -73,7 +73,6 @@ NavMeshSettings:
     minRegionArea: 2
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
-    tileSizeHint: 0
   m_NavMesh: {fileID: 0}
 --- !u!1 &97086858
 GameObject:
@@ -417,7 +416,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: 3.5999999, y: 2.79999995}
+  m_Size: {x: 4, y: 1}
   m_Center: {x: -.134591103, y: 1.34000003}
 --- !u!1 &850263883
 GameObject:
@@ -445,7 +444,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: 3.5999999, y: 2.79999995}
+  m_Size: {x: 4, y: 1}
   m_Center: {x: 0, y: 1.34000003}
 --- !u!4 &850263885
 Transform:
@@ -1031,6 +1030,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   P1Tag: {fileID: 2800000, guid: 948bad63308ee9b419aaf4f33d680b30, type: 3}
   P2Tag: {fileID: 2800000, guid: 0700d6ca272016e4196bab3fdb762787, type: 3}
+  Health_100to81: {fileID: 2800000, guid: 46448c306e88fc541aa37d7c590e3df6, type: 3}
+  Health_80to61: {fileID: 2800000, guid: 364e0124f7a9e334a920595a86aaf93a, type: 3}
+  Health_60to41: {fileID: 2800000, guid: c5eb4def2348f514a9f8ec9f374bb5e9, type: 3}
+  Health_40to21: {fileID: 2800000, guid: c4a721bf987c04044a545c8310ec88fc, type: 3}
+  Health_20to1: {fileID: 2800000, guid: 295068f401ab8d64fad544ba19ded96e, type: 3}
+  xHealthOffset: 0
+  yHealthOffset: 0
 --- !u!1 &1644875503
 GameObject:
   m_ObjectHideFlags: 0
@@ -1482,4 +1488,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f0b1ab881299149ad4595d6decfc38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCollider: {fileID: 496079029}

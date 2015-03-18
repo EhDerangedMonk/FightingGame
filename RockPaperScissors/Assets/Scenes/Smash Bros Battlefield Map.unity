@@ -1327,8 +1327,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   P1Tag: {fileID: 2800000, guid: 948bad63308ee9b419aaf4f33d680b30, type: 3}
   P2Tag: {fileID: 2800000, guid: 0700d6ca272016e4196bab3fdb762787, type: 3}
-  xOffset: 0
-  yOffset: 0
+  Health_100to81: {fileID: 2800000, guid: 46448c306e88fc541aa37d7c590e3df6, type: 3}
+  Health_80to61: {fileID: 2800000, guid: 364e0124f7a9e334a920595a86aaf93a, type: 3}
+  Health_60to41: {fileID: 2800000, guid: c5eb4def2348f514a9f8ec9f374bb5e9, type: 3}
+  Health_40to21: {fileID: 2800000, guid: c4a721bf987c04044a545c8310ec88fc, type: 3}
+  Health_20to1: {fileID: 2800000, guid: 295068f401ab8d64fad544ba19ded96e, type: 3}
+  xHealthOffset: 0
+  yHealthOffset: 0
 --- !u!114 &1750818124
 MonoBehaviour:
   m_ObjectHideFlags: 0
