@@ -31,7 +31,7 @@ public class rockBehaviour : MonoBehaviour {
 
 	// Called when a 2D object collides with another 2D object
 	void OnCollisionEnter2D(Collision2D other) {
-		bool dealDamage = false;
+		bool dealDamage = true;
 
 		if (other.gameObject.tag == "Player") {
 			victim = (Player)other.gameObject.GetComponent(typeof(Player));
@@ -41,13 +41,13 @@ public class rockBehaviour : MonoBehaviour {
 				if(victim.playerState.isBlock ()) {
 					//If the rock collides to the right of the player.
 					if(this.transform.position.x > victim.transform.position.x) {
-						if(victim.playerState.isFacingLeft ())
-							dealDamage = true;
+						if(!victim.playerState.isFacingLeft ())
+							dealDamage = false;
 					}
 					//If the rock collides to the left of the player.
 					else {
-						if(!victim.playerState.isFacingLeft())
-							dealDamage = true;
+						if(victim.playerState.isFacingLeft())
+							dealDamage = false;
 					}
 				}
 
