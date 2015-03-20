@@ -45,8 +45,13 @@ public class Player : MonoBehaviour {
 			playerState = new noirBehaviour (this.transform, anim);
 		} else {
 			//playerState = new noirBehaviour(this.transform, anim);
+		//	Animator animator = playerTransform.gameObject.GetComponent<Animator>();
+		//	animator.runtimeAnimatorController = Resources.Load("Assets/zakirController") as RuntimeAnimatorController;
 			playerState = new zakirBehaviour(this.transform,anim);
 		}
+
+
+
     }
 
     // Update is called whenever the processor is free (As fast as possible)

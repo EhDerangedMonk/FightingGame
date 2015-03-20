@@ -106,28 +106,28 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - m_Motion: {fileID: 7400000, guid: 7664bed001d477e458e34e88d72ac69c, type: 2}
-    m_Threshold: -7
-    m_Position: {x: 0, y: 0}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_IsAnim: 1
-    m_Mirror: 0
-  - m_Motion: {fileID: 7400000, guid: be962239e96c7a54eb5492aa13ff4cdb, type: 2}
     m_Threshold: -3
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
-  - m_Motion: {fileID: 7400000, guid: 5850484348241d34e9f57821b57c2248, type: 2}
-    m_Threshold: 1
+  - m_Motion: {fileID: 7400000, guid: be962239e96c7a54eb5492aa13ff4cdb, type: 2}
+    m_Threshold: 7
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
   - m_Motion: {fileID: 7400000, guid: af3121700c6e37b47b4d49fdc63cab04, type: 2}
-    m_Threshold: 5
+    m_Threshold: 8
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_IsAnim: 1
+    m_Mirror: 0
+  - m_Motion: {fileID: 7400000, guid: 5850484348241d34e9f57821b57c2248, type: 2}
+    m_Threshold: 10
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -135,8 +135,8 @@ BlendTree:
     m_Mirror: 0
   m_BlendParameter: vSpeed
   m_BlendParameterY: New Float
-  m_MinThreshold: -7
-  m_MaxThreshold: 5
+  m_MinThreshold: -3
+  m_MaxThreshold: 10
   m_UseAutomaticThresholds: 0
   m_BlendType: 0
 --- !u!1101 &110101844
