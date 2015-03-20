@@ -44,8 +44,8 @@ public class Player : MonoBehaviour {
 		if (characterChoice == 0) {
 			playerState = new noirBehaviour (this.transform, anim);
 		} else {
-			playerState = new noirBehaviour(this.transform, anim);
-			//playerState = new zakirBehaviour(this.transform,anim);
+			//playerState = new noirBehaviour(this.transform, anim);
+			playerState = new zakirBehaviour(this.transform,anim);
 		}
     }
 

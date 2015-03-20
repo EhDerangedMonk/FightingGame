@@ -10,7 +10,7 @@ public class zakirBehaviour: PlayerState {
 	
 	private Transform transform; // Current player coordinates - Compare to other players
 	private AnimatorStateInfo stateInfo;
-	private int counterStateHash;
+	//private int counterStateHash;
 	private int specState;// int representing the charge value
 	private Player curPlayer; // Colliding player which is usually the opponent
 	private bool attack; // If player currently in attack don't redo dmg for it
@@ -23,20 +23,20 @@ public class zakirBehaviour: PlayerState {
 		specState = 0;// No spec attack by default
 		anim = animation; // Getting component from unity passed in
 		transform = trans; // Player coordinates
-		specStateHash = new int[5]; // Zakir has 4 special states
-		idleStateHash = Animator.StringToHash("Base Layer.noirIdle");
-		lightAttackStateHash = Animator.StringToHash("Base Layer.noirLightAttack");
-		specStateHash[0] = Animator.StringToHash("Base Layer.noirSpecial1"); // Noir has multiple special states (Charging)
-		specStateHash[1] = Animator.StringToHash("Base Layer.noirSpecial2");
-		specStateHash[2] = Animator.StringToHash("Base Layer.noirSpecial3");
-		specStateHash[3] = Animator.StringToHash("Base Layer.noirSpecial4");
-		specStateHash[4] = Animator.StringToHash("Base Layer.noirSpecialEx"); // Extension when the attack is considered to hitting
-		heavyAttackStateHash = Animator.StringToHash("Base Layer.noirHeavyAttack");
-		flinchStateHash = Animator.StringToHash("Base Layer.noirFlinch");
-		grappleStateHash = Animator.StringToHash("Base Layer.noirGrapple");
-		blockStateHash = Animator.StringToHash("Base Layer.noirBlock");
-		counterStateHash = Animator.StringToHash("Base Layer.noirCounter");
-		launchStateHash = Animator.StringToHash("Base Layer.noirLaunch");
+		specStateHash = new int[1]; // Zakir has 1 special states
+		idleStateHash = Animator.StringToHash("Base Layer.zakirIdle");
+		lightAttackStateHash = Animator.StringToHash("Base Layer.zakirLightAttack");
+		specStateHash[0] = Animator.StringToHash("Base Layer.zakirSpecial"); // Noir has multiple special states (Charging)
+		//specStateHash[1] = Animator.StringToHash("Base Layer.noirSpecial2");
+		//specStateHash[2] = Animator.StringToHash("Base Layer.noirSpecial3");
+		//specStateHash[3] = Animator.StringToHash("Base Layer.noirSpecial4");
+		//specStateHash[4] = Animator.StringToHash("Base Layer.noirSpecialEx"); // Extension when the attack is considered to hitting
+		heavyAttackStateHash = Animator.StringToHash("Base Layer.zakirHeavyAttack");
+		flinchStateHash = Animator.StringToHash("Base Layer.zakirFlinch");
+		grappleStateHash = Animator.StringToHash("Base Layer.zakirGrapple");
+		blockStateHash = Animator.StringToHash("Base Layer.zakirBlock");
+		//counterStateHash = Animator.StringToHash("Base Layer.noirCounter");
+		launchStateHash = Animator.StringToHash("Base Layer.zakirLaunch");
 	}
 	
 	
@@ -71,8 +71,9 @@ public class zakirBehaviour: PlayerState {
 			if (contact() == true)
 				lightAttack();
 		}
-		
-		if (!attack && stateInfo.nameHash == specStateHash[4]) {
+
+
+		if (!attack && stateInfo.nameHash == specStateHash[0]) {
 			attack = true;
 			if (contact() == true)
 				specialAttack(specState);
@@ -84,20 +85,20 @@ public class zakirBehaviour: PlayerState {
 				heavyAttack();
 		}
 		
-		if (!attack && stateInfo.nameHash == counterStateHash) {
-			attack = true;
-			if (contact() == true)
-				counterAttack();
-		}
+		//if (!attack && stateInfo.nameHash == counterStateHash) {
+		//	attack = true;
+		//	if (contact() == true)
+		//		counterAttack();
+		//}
 		
 		// Special attack for Noir can have 4 states of charging
-		for (int i = 0; i < 4; i++) {
+		/*for (int i = 0; i < 4; i++) {
 			
 			if (stateInfo.nameHash == specStateHash[i]) {
 				chargeState = true;
 				specState = i + 1;
 			}
-		}
+		}*/
 		
 		
 		
@@ -141,21 +142,10 @@ public class zakirBehaviour: PlayerState {
 			curPlayer.playerState.anim.SetTrigger("Counter");
 			return false;
 		}
-		
-		switch (curState) { // Calculate damage based on charge of noirs special
-		case 1:
-			damage = 50;
-			break;
-		case 2:
-			damage = 200;
-			break;
-		case 3:
-			damage = 300;
-			break;
-		case 4:
-			damage = 400;
-			break;
-		}
+
+		//damgage that zakir's special does
+		damage = 200;
+
 		curPlayer.playerState.setFlinch(true);
 		curPlayer.playerHealth.damage(damage);
 		return true;
@@ -203,7 +193,7 @@ public class zakirBehaviour: PlayerState {
 		
 		
 		curPlayer.playerState.setFlinch(true);
-		curPlayer.playerHealth.damage(25);
+		//curPlayer.playerHealth.damage(25);
 		return true;
 	}
 	

@@ -73,6 +73,7 @@ NavMeshSettings:
     minRegionArea: 2
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
+    tileSizeHint: 0
   m_NavMesh: {fileID: 0}
 --- !u!1 &88499622
 GameObject:
@@ -218,6 +219,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   cChangeKey: 2
+  characterChoice: 1
 --- !u!95 &88499628
 Animator:
   serializedVersion: 3
@@ -228,7 +230,7 @@ Animator:
   m_GameObject: {fileID: 88499622}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cc4a1f79950ac46439d19c6902db46a7, type: 2}
+  m_Controller: {fileID: 9100000, guid: b1a72ae94e156e24d8d938a7df982e1b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 1
   m_ApplyRootMotion: 1
@@ -519,6 +521,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   cChangeKey: 1
+  characterChoice: 0
 --- !u!95 &381847528
 Animator:
   serializedVersion: 3
@@ -1149,6 +1152,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11468290, guid: de6e957951985b94a830685784a6a8bf, type: 2}
+      propertyPath: characterChoice
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9568290, guid: de6e957951985b94a830685784a6a8bf, type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b1a72ae94e156e24d8d938a7df982e1b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de6e957951985b94a830685784a6a8bf, type: 2}
   m_RootGameObject: {fileID: 88499622}
