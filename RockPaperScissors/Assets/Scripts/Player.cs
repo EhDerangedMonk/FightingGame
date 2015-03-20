@@ -16,6 +16,7 @@ public class Player : MonoBehaviour {
     public LayerMask whatIsGround;//Layer object that indicates that the player themselves and other players are not the ground, everything else is
     public Health playerHealth; // Player health representation - Needs to be public for GUI to read
 	public int cChangeKey; //player# indicator
+	public int characterChoice; //player's character indicator
 
     public PlayerState playerState; // Generic state that implements state and behaviour
     private Animator anim; // Stores player animation
@@ -40,7 +41,12 @@ public class Player : MonoBehaviour {
         anim = GetComponent<Animator>();
         controller = new Controls(layout, cChangeKey);
         playerHealth = new Health(1000);
-        playerState = new noirBehaviour(this.transform, anim);
+		if (characterChoice == 0) {
+			playerState = new noirBehaviour (this.transform, anim);
+		} else {
+			playerState = new noirBehaviour(this.transform, anim);
+			//playerState = new zakirBehaviour(this.transform,anim);
+		}
     }
 
     // Update is called whenever the processor is free (As fast as possible)
