@@ -43,11 +43,13 @@ public class Player : MonoBehaviour {
         playerHealth = new Health(1000);
 		if (characterChoice == 0) {
 			playerState = new noirBehaviour (this.transform, anim);
-		} else {
+		} else if(characterChoice == 1) {
 			//playerState = new noirBehaviour(this.transform, anim);
 		//	Animator animator = playerTransform.gameObject.GetComponent<Animator>();
 		//	animator.runtimeAnimatorController = Resources.Load("Assets/zakirController") as RuntimeAnimatorController;
 			playerState = new zakirBehaviour(this.transform,anim);
+		} else {
+			playerState = new violetBehaviour(this.transform, anim);
 		}
 
 

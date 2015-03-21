@@ -1,12 +1,12 @@
 ﻿/*
-	Authored By: Josiah Menezes && Jerrit Anderson
-	Purpose: Class for the Character Zakir, defines his attack's effects.
+	Authored By: Jerrit Anderson & Josiah Menezes
+	Purpose: Class for the Character Violet, defines her attack's effects.
 */
 using UnityEngine;
 using System.Collections;
 
 
-public class zakirBehaviour: PlayerState {
+public class violetBehaviour: PlayerState {
 	
 	private Transform transform; // Current player coordinates - Compare to other players
 	private AnimatorStateInfo stateInfo;
@@ -17,26 +17,26 @@ public class zakirBehaviour: PlayerState {
 	
 	
 	// Constructor
-	public zakirBehaviour(Transform trans, Animator animation) {
+	public violetBehaviour(Transform trans, Animator animation) {
 		attack = false;
 		flinch = false;
 		specState = 0;// No spec attack by default
 		anim = animation; // Getting component from unity passed in
 		transform = trans; // Player coordinates
-		specStateHash = new int[1]; // Zakir has 1 special state
-		idleStateHash = Animator.StringToHash("Base Layer.zakirIdle");
-		lightAttackStateHash = Animator.StringToHash("Base Layer.zakirLightAttack");
-		specStateHash[0] = Animator.StringToHash("Base Layer.zakirSpecial"); // Noir has multiple special states (Charging)
-		//specStateHash[1] = Animator.StringToHash("Base Layer.noirSpecial2");
-		//specStateHash[2] = Animator.StringToHash("Base Layer.noirSpecial3");
+		specStateHash = new int[4]; // Noir has 4 special states
+		idleStateHash = Animator.StringToHash("Base Layer.violetIdle");
+		lightAttackStateHash = Animator.StringToHash("Base Layer.violetLightAttack");
+		specStateHash[0] = Animator.StringToHash("Base Layer.violetSpecial1"); // Noir has multiple special states (Charging)
+		specStateHash[1] = Animator.StringToHash("Base Layer.violetSpecial2");
+		specStateHash[2] = Animator.StringToHash("Base Layer.violetSpecial3");
 		//specStateHash[3] = Animator.StringToHash("Base Layer.noirSpecial4");
-		//specStateHash[4] = Animator.StringToHash("Base Layer.noirSpecialEx"); // Extension when the attack is considered to hitting
-		heavyAttackStateHash = Animator.StringToHash("Base Layer.zakirHeavyAttack");
-		flinchStateHash = Animator.StringToHash("Base Layer.zakirFlinch");
-		grappleStateHash = Animator.StringToHash("Base Layer.zakirGrapple");
-		blockStateHash = Animator.StringToHash("Base Layer.zakirBlock");
-		//counterStateHash = Animator.StringToHash("Base Layer.noirCounter");
-		launchStateHash = Animator.StringToHash("Base Layer.zakirLaunch");
+		specStateHash[3] = Animator.StringToHash("Base Layer.violetSpecialEX"); // Extension when the attack is considered to hitting
+		heavyAttackStateHash = Animator.StringToHash("Base Layer.violetHeavyAttack");
+		flinchStateHash = Animator.StringToHash("Base Layer.violetFlinch");
+		grappleStateHash = Animator.StringToHash("Base Layer.violetGrapple");
+		blockStateHash = Animator.StringToHash("Base Layer.violetBlock");
+		//counterStateHash = Animator.StringToHash("Base Layer.violetCounter");
+		launchStateHash = Animator.StringToHash("Base Layer.violetLaunch");
 	}
 	
 	
@@ -71,9 +71,8 @@ public class zakirBehaviour: PlayerState {
 			if (contact() == true)
 				lightAttack();
 		}
-
-
-		if (!attack && stateInfo.nameHash == specStateHash[0]) {
+		
+		if (!attack && stateInfo.nameHash == specStateHash[3]) {
 			attack = true;
 			if (contact() == true)
 				specialAttack(specState);
@@ -85,20 +84,16 @@ public class zakirBehaviour: PlayerState {
 				heavyAttack();
 		}
 		
-		//if (!attack && stateInfo.nameHash == counterStateHash) {
-		//	attack = true;
-		//	if (contact() == true)
-		//		counterAttack();
-		//}
+
 		
-		// Special attack for Noir can have 4 states of charging
-		/*for (int i = 0; i < 4; i++) {
+		// Special attack for Violet can have 4 states of charging
+		for (int i = 0; i < 3; i++) {
 			
 			if (stateInfo.nameHash == specStateHash[i]) {
 				chargeState = true;
 				specState = i + 1;
 			}
-		}*/
+		}
 		
 		
 		
@@ -142,10 +137,24 @@ public class zakirBehaviour: PlayerState {
 			curPlayer.playerState.anim.SetTrigger("Counter");
 			return false;
 		}
-
-		//damgage that zakir's special does
-		damage = 200;
-
+		
+		switch (curState) { // Calculate damage based on charge of Violet's special
+		case 1:
+			damage = 25;
+			break;
+		case 2:
+			damage = 200;
+			break;
+		case 3:
+			damage = 300;
+			break;
+		case 4:
+			damage = 400;
+			break;
+		default:
+			damage = 20;
+			break;
+		}
 		curPlayer.playerState.setFlinch(true);
 		curPlayer.playerHealth.damage(damage);
 		return true;
@@ -190,7 +199,6 @@ public class zakirBehaviour: PlayerState {
 			curPlayer.playerState.anim.SetTrigger("Counter");
 			return false;
 		}
-		
 		
 		curPlayer.playerState.setFlinch(true);
 		//curPlayer.playerHealth.damage(25);
