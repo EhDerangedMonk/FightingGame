@@ -34,7 +34,7 @@ public class cameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 	
 	void LateUpdate()
@@ -48,7 +48,7 @@ public class cameraController : MonoBehaviour {
 	void findTargets() {
 		Player subject;
 		GameObject[] players;
-		
+
 		targets = new Transform[5];
 		targets [0] = defaultCam.transform;
 		targetSize = 0;
@@ -57,7 +57,7 @@ public class cameraController : MonoBehaviour {
 		
 		foreach (GameObject player in players) {
 			subject = (Player)player.gameObject.GetComponent(typeof(Player));
-			
+
 			if(!subject.playerHealth.isDead()) {
 				targetSize++;
 				targets[targetSize] = player.transform;
