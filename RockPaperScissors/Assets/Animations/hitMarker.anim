@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: noirLaunch
+  m_Name: hitMarker
   serializedVersion: 4
   m_AnimationType: 2
   m_Compressed: 0
@@ -18,14 +18,14 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 070cbb7acfc46e44da9edf5181eada03, type: 3}
-    - time: 1
-      value: {fileID: 21300000, guid: 070cbb7acfc46e44da9edf5181eada03, type: 3}
+      value: {fileID: 21300000, guid: 0fa1a624ca6787d45a0ca6d79944c261, type: 3}
+    - time: .208333328
+      value: {fileID: 0}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 1
+  m_SampleRate: 24
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -39,12 +39,12 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 070cbb7acfc46e44da9edf5181eada03, type: 3}
-    - {fileID: 21300000, guid: 070cbb7acfc46e44da9edf5181eada03, type: 3}
+    - {fileID: 21300000, guid: 0fa1a624ca6787d45a0ca6d79944c261, type: 3}
+    - {fileID: 0}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: 2
+    m_StopTime: .25
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -60,18 +60,4 @@ AnimationClip:
     m_Mirror: 0
   m_EditorCurves: []
   m_EulerEditorCurves: []
-  m_Events:
-  - time: 0
-    functionName: playLaunched
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0
-    functionName: makeHitMarker
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []

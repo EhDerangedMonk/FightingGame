@@ -57,9 +57,9 @@ public class rockBehaviour : MonoBehaviour {
 
 					//Apply a force to the player in the corresponding direction.
 					if(this.transform.position.x > victim.transform.position.x)
-						rigidbody2D.velocity = new Vector2(100, 0);
+						rigidbody2D.velocity = new Vector2(100, 100);
 					else
-						rigidbody2D.velocity = new Vector2(-100, 0);
+						rigidbody2D.velocity = new Vector2(-100, 100);
 				}
 				hit = true;
 			}

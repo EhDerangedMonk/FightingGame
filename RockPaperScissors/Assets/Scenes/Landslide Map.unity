@@ -406,6 +406,7 @@ GameObject:
   - 58: {fileID: 381847526}
   - 82: {fileID: 381847525}
   - 114: {fileID: 381847524}
+  - 114: {fileID: 381847534}
   m_Layer: 8
   m_Name: Player1
   m_TagString: Player
@@ -613,6 +614,17 @@ Transform:
   - {fileID: 1833816847}
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!114 &381847534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 381847523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed197437a468324fb403e3d7a0e2fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &468548720
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,6 +703,10 @@ Prefab:
     - target: {fileID: 453340, guid: 4f70cac693931cd46a267efb9e78312b, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8253340, guid: 4f70cac693931cd46a267efb9e78312b, type: 2}
+      propertyPath: BypassListenerEffects
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4f70cac693931cd46a267efb9e78312b, type: 2}
