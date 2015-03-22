@@ -89,11 +89,17 @@ public class ControlsMenu : MonoBehaviour {
 		CancelButtonRect = new Rect(horzSpacing*5 + buttonWidth*3, vertSpacing*4 + buttonHeight*3, buttonWidth, buttonHeight);
 		
 		
-		// Initialize the slot states
-		Slot1Selection = ControllerSelectionState.None;
-		Slot2Selection = ControllerSelectionState.None;
-		Slot3Selection = ControllerSelectionState.None;
-		Slot4Selection = ControllerSelectionState.None;
+		// Initialize the slot states by getting the storage object
+		InitializeStorage storage = (InitializeStorage) GameObject.Find("VariableStorage").GetComponent(typeof(InitializeStorage));
+		InitializeStorage.ControllerSelection storedP1Controller = storage.P1Controller;
+		InitializeStorage.ControllerSelection storedP2Controller = storage.P2Controller;
+		InitializeStorage.ControllerSelection storedP3Controller = storage.P3Controller;
+		InitializeStorage.ControllerSelection storedP4Controller = storage.P4Controller;
+		
+		Slot1Selection = (ControllerSelectionState)((int)storedP1Controller);
+		Slot2Selection = (ControllerSelectionState)((int)storedP2Controller);
+		Slot3Selection = (ControllerSelectionState)((int)storedP3Controller);
+		Slot4Selection = (ControllerSelectionState)((int)storedP4Controller);
 		
 		// Initialize the what the player is currently selecting
 		CurrentlySelecting = SelectingState.None;
@@ -104,9 +110,8 @@ public class ControlsMenu : MonoBehaviour {
 	/********\
 	* UPDATE *
 	\********/
-	void FixedUpdate () {
-		
-		if(CurrentlySelecting == SelectingState.None)
+	void Update () {
+		/*if(CurrentlySelecting == SelectingState.None)
 			Debug.Log("NONE");
 		if(CurrentlySelecting == SelectingState.P1)
 			Debug.Log("P1");
@@ -115,7 +120,7 @@ public class ControlsMenu : MonoBehaviour {
 		if(CurrentlySelecting == SelectingState.P3)
 			Debug.Log("P3");
 		if(CurrentlySelecting == SelectingState.P4)
-			Debug.Log("P4");
+			Debug.Log("P4");*/
 	}
 	
 	

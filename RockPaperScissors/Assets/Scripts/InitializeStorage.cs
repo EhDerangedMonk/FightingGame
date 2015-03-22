@@ -42,6 +42,47 @@ public class InitializeStorage : MonoBehaviour {
 	\*******/
 	void Start()
 	{
-		Application.LoadLevel("mainmenu"); // transition straight into the main menu
+		// Determine the default controller assignments
+		int numOfControllers = Input.GetJoystickNames().Length;
+		
+		if (numOfControllers == 0)
+		{
+			P1Controller = ControllerSelection.KB1;
+			P2Controller = ControllerSelection.KB2;
+			P3Controller = ControllerSelection.None;
+			P4Controller = ControllerSelection.None;
+		}
+		else if (numOfControllers == 1)
+		{
+			P1Controller = ControllerSelection.KB1;
+			P2Controller = ControllerSelection.KB2;
+			P3Controller = ControllerSelection.C1;
+			P4Controller = ControllerSelection.None;
+		}
+		else if (numOfControllers == 2)
+		{
+			P1Controller = ControllerSelection.KB1;
+			P2Controller = ControllerSelection.KB2;
+			P3Controller = ControllerSelection.C1;
+			P4Controller = ControllerSelection.C2;
+		}
+		else if (numOfControllers == 3)
+		{
+			P1Controller = ControllerSelection.KB1;
+			P2Controller = ControllerSelection.C1;
+			P3Controller = ControllerSelection.C2;
+			P4Controller = ControllerSelection.C3;
+		}
+		else if (numOfControllers >= 4)
+		{
+			P1Controller = ControllerSelection.C1;
+			P2Controller = ControllerSelection.C2;
+			P3Controller = ControllerSelection.C3;
+			P4Controller = ControllerSelection.C4;
+		}
+		
+		
+		// transition straight into the main menu
+		Application.LoadLevel("mainmenu"); 
 	}
 }
