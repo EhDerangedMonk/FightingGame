@@ -195,8 +195,37 @@ public class ControlsMenu : MonoBehaviour {
 		GUI.DrawTexture(P3LabelRect, P3LabelTexture);
 		GUI.DrawTexture(P4LabelRect, P4LabelTexture);
 		
-		GUI.DrawTexture(SaveButtonRect, SaveButtonTexture);
-		GUI.DrawTexture(CancelButtonRect, CancelButtonTexture);
+		if (GUI.Button(SaveButtonRect, SaveButtonTexture, "")) // if they click the save button
+		{
+			if (CurrentlySelecting == SelectingState.None) // and they're not selecting anything
+			{
+				// check for the two kinds of errors
+				if (Slot1Selection == ControllerSelectionState.None || Slot2Selection == ControllerSelectionState.None) // if P1 or P2 don't have controllers assigned
+				{
+					//TODO display error messages
+				}
+				else if ((Slot3Selection == ControllerSelectionState.None) && !(Slot4Selection == ControllerSelectionState.None)) // if P3 doesn't have a controller but P4 does
+				{
+				
+				}
+				else // otherwise the changes can be saved and go back to the main menu
+				{
+					InitializeStorage storage = (InitializeStorage) GameObject.Find("VariableStorage").GetComponent(typeof(InitializeStorage));
+					storage.P1Controller = (InitializeStorage.ControllerSelection)((int)Slot1Selection);
+					storage.P2Controller = (InitializeStorage.ControllerSelection)((int)Slot2Selection);
+					storage.P3Controller = (InitializeStorage.ControllerSelection)((int)Slot3Selection);
+					storage.P4Controller = (InitializeStorage.ControllerSelection)((int)Slot4Selection);
+					Application.LoadLevel("mainmenu");
+				}
+			}
+		}
+		if (GUI.Button(CancelButtonRect, CancelButtonTexture, "")) // if they click the cancel button
+		{
+			if (CurrentlySelecting == SelectingState.None) // and they're not selecting anything
+			{
+				Application.LoadLevel("mainmenu"); // go back to the main menu, discarding all changes (by not saving)
+			}
+		}
 		
 		
 		
