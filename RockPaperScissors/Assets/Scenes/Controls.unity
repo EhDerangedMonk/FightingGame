@@ -184,3 +184,4 @@ MonoBehaviour:
   C4Texture: {fileID: 2800000, guid: be70f8dbe65d5064d908ed4d6e496c65, type: 3}
   SaveButtonTexture: {fileID: 2800000, guid: a726c2840e0d8ce43aa97b1ce3babba9, type: 3}
   CancelButtonTexture: {fileID: 2800000, guid: ecc0984c29aaef64bb983ad0eec53197, type: 3}
+  GreyOutTexture: {fileID: 2800000, guid: 58912ad1cb5de994abd431753c1a0397, type: 3}

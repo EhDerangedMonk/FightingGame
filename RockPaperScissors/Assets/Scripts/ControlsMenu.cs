@@ -45,6 +45,16 @@ public class ControlsMenu : MonoBehaviour {
 	public Texture C4Texture;
 	public Texture SaveButtonTexture;
 	public Texture CancelButtonTexture;
+	public Texture GreyOutTexture;
+	
+	private enum ControllerSelectionState {None=0, KB1, KB2, C1, C2, C3, C4}; // Store where the controllers are
+	private ControllerSelectionState Slot1Selection;
+	private ControllerSelectionState Slot2Selection;
+	private ControllerSelectionState Slot3Selection;
+	private ControllerSelectionState Slot4Selection;
+	
+	private enum SelectingState {None=0, P1, P2, P3, P4}; // Keeps track of which slot the player is choosing for
+	private SelectingState CurrentlySelecting;
 	
 	
 	
@@ -77,6 +87,16 @@ public class ControlsMenu : MonoBehaviour {
 		C2SlotRect = new Rect(horzSpacing*5 + buttonWidth*3, vertSpacing*2 + buttonHeight, buttonWidth, buttonHeight);
 		C4SlotRect = new Rect(horzSpacing*5 + buttonWidth*3, vertSpacing*3 + buttonHeight*2, buttonWidth, buttonHeight);
 		CancelButtonRect = new Rect(horzSpacing*5 + buttonWidth*3, vertSpacing*4 + buttonHeight*3, buttonWidth, buttonHeight);
+		
+		
+		// Initialize the slot states
+		Slot1Selection = ControllerSelectionState.None;
+		Slot2Selection = ControllerSelectionState.None;
+		Slot3Selection = ControllerSelectionState.None;
+		Slot4Selection = ControllerSelectionState.None;
+		
+		// Initialize the what the player is currently selecting
+		CurrentlySelecting = SelectingState.None;
 	}
 	
 	
@@ -84,8 +104,18 @@ public class ControlsMenu : MonoBehaviour {
 	/********\
 	* UPDATE *
 	\********/
-	void Update () {
-	
+	void FixedUpdate () {
+		
+		if(CurrentlySelecting == SelectingState.None)
+			Debug.Log("NONE");
+		if(CurrentlySelecting == SelectingState.P1)
+			Debug.Log("P1");
+		if(CurrentlySelecting == SelectingState.P2)
+			Debug.Log("P2");
+		if(CurrentlySelecting == SelectingState.P3)
+			Debug.Log("P3");
+		if(CurrentlySelecting == SelectingState.P4)
+			Debug.Log("P4");
 	}
 	
 	
@@ -95,25 +125,209 @@ public class ControlsMenu : MonoBehaviour {
 	\*******/
 	void OnGUI()
 	{
+		// Check to see if a button has been pressed
+		if (GUI.Button (P1SlotRect, ControllerSlotTexture, ""))
+		{
+			// Toggle selecting for the slot
+			if (CurrentlySelecting == SelectingState.None)
+				CurrentlySelecting = SelectingState.P1;
+			else if (CurrentlySelecting == SelectingState.P1)
+				CurrentlySelecting = SelectingState.None;
+		}
+		if (GUI.Button (P2SlotRect, ControllerSlotTexture, ""))
+		{
+			// Toggle selecting for the slot
+			if (CurrentlySelecting == SelectingState.None)
+				CurrentlySelecting = SelectingState.P2;
+			else if (CurrentlySelecting == SelectingState.P2)
+				CurrentlySelecting = SelectingState.None;
+		}
+		if (GUI.Button (P3SlotRect, ControllerSlotTexture, ""))
+		{
+			// Toggle selecting for the slot
+			if (CurrentlySelecting == SelectingState.None)
+				CurrentlySelecting = SelectingState.P3;
+			else if (CurrentlySelecting == SelectingState.P3)
+				CurrentlySelecting = SelectingState.None;
+		}
+		if (GUI.Button (P4SlotRect, ControllerSlotTexture, ""))
+		{
+			// Toggle selecting for the slot
+			if (CurrentlySelecting == SelectingState.None)
+				CurrentlySelecting = SelectingState.P4;
+			else if (CurrentlySelecting == SelectingState.P4)
+				CurrentlySelecting = SelectingState.None;
+			
+		}
+		
+	
+	
 		// Draw the textures
 		GUI.DrawTexture(P1LabelRect, P1LabelTexture);
 		GUI.DrawTexture(P2LabelRect, P2LabelTexture);
 		GUI.DrawTexture(P3LabelRect, P3LabelTexture);
 		GUI.DrawTexture(P4LabelRect, P4LabelTexture);
 		
-		GUI.DrawTexture(P1SlotRect, ControllerSlotTexture);
-		GUI.DrawTexture(P2SlotRect, ControllerSlotTexture);
-		GUI.DrawTexture(P3SlotRect, ControllerSlotTexture);
-		GUI.DrawTexture(P4SlotRect, ControllerSlotTexture);
-		
-		GUI.DrawTexture(KB1SlotRect, KB1Texture);
-		GUI.DrawTexture(C1SlotRect, C1Texture);
-		GUI.DrawTexture(C3SlotRect, C3Texture);
 		GUI.DrawTexture(SaveButtonRect, SaveButtonTexture);
-		
-		GUI.DrawTexture(KB2SlotRect, KB2Texture);
-		GUI.DrawTexture(C2SlotRect, C2Texture);
-		GUI.DrawTexture(C4SlotRect, C4Texture);
 		GUI.DrawTexture(CancelButtonRect, CancelButtonTexture);
+		
+		
+		
+		// Draw the controller images
+		if (Slot1Selection == ControllerSelectionState.KB1)      // Draw it in the correct Player slot
+			GUI.DrawTexture(P1SlotRect, KB1Texture);
+		else if (Slot2Selection == ControllerSelectionState.KB1)
+			GUI.DrawTexture(P2SlotRect, KB1Texture);
+		else if (Slot3Selection == ControllerSelectionState.KB1)
+			GUI.DrawTexture(P3SlotRect, KB1Texture);
+		else if (Slot4Selection == ControllerSelectionState.KB1)
+			GUI.DrawTexture(P4SlotRect, KB1Texture);
+		else // Draw it as a button
+		{
+			if (GUI.Button(KB1SlotRect, KB1Texture, ""))
+			{
+				if (CurrentlySelecting == SelectingState.P1)
+					Slot1Selection = ControllerSelectionState.KB1;
+				else if (CurrentlySelecting == SelectingState.P2)
+					Slot2Selection = ControllerSelectionState.KB1;
+				else if (CurrentlySelecting == SelectingState.P3)
+					Slot3Selection = ControllerSelectionState.KB1;
+				else if (CurrentlySelecting == SelectingState.P4)
+					Slot4Selection = ControllerSelectionState.KB1;
+				
+				if (CurrentlySelecting != SelectingState.None)
+					CurrentlySelecting = SelectingState.None;
+			}
+		}
+			
+		if (Slot1Selection == ControllerSelectionState.KB2)
+			GUI.DrawTexture(P1SlotRect, KB2Texture);
+		else if (Slot2Selection == ControllerSelectionState.KB2)
+			GUI.DrawTexture(P2SlotRect, KB2Texture);
+		else if (Slot3Selection == ControllerSelectionState.KB2)
+			GUI.DrawTexture(P3SlotRect, KB2Texture);
+		else if (Slot4Selection == ControllerSelectionState.KB2)
+			GUI.DrawTexture(P4SlotRect, KB2Texture);
+		else // Draw it as a button
+		{
+			if (GUI.Button(KB2SlotRect, KB2Texture, ""))
+			{
+				if (CurrentlySelecting == SelectingState.P1)
+					Slot1Selection = ControllerSelectionState.KB2;
+				else if (CurrentlySelecting == SelectingState.P2)
+					Slot2Selection = ControllerSelectionState.KB2;
+				else if (CurrentlySelecting == SelectingState.P3)
+					Slot3Selection = ControllerSelectionState.KB2;
+				else if (CurrentlySelecting == SelectingState.P4)
+					Slot4Selection = ControllerSelectionState.KB2;
+				
+				if (CurrentlySelecting != SelectingState.None)
+					CurrentlySelecting = SelectingState.None;
+			}
+		}
+			
+		if (Slot1Selection == ControllerSelectionState.C1)
+			GUI.DrawTexture(P1SlotRect, C1Texture);
+		else if (Slot2Selection == ControllerSelectionState.C1)
+			GUI.DrawTexture(P2SlotRect, C1Texture);
+		else if (Slot3Selection == ControllerSelectionState.C1)
+			GUI.DrawTexture(P3SlotRect, C1Texture);
+		else if (Slot4Selection == ControllerSelectionState.C1)
+			GUI.DrawTexture(P4SlotRect, C1Texture);
+		else // Draw it as a button
+		{
+			if (GUI.Button(C1SlotRect, C1Texture, ""))
+			{
+				if (CurrentlySelecting == SelectingState.P1)
+					Slot1Selection = ControllerSelectionState.C1;
+				else if (CurrentlySelecting == SelectingState.P2)
+					Slot2Selection = ControllerSelectionState.C1;
+				else if (CurrentlySelecting == SelectingState.P3)
+					Slot3Selection = ControllerSelectionState.C1;
+				else if (CurrentlySelecting == SelectingState.P4)
+					Slot4Selection = ControllerSelectionState.C1;
+				
+				if (CurrentlySelecting != SelectingState.None)
+					CurrentlySelecting = SelectingState.None;
+			}
+		}
+			
+		if (Slot1Selection == ControllerSelectionState.C2)
+			GUI.DrawTexture(P1SlotRect, C2Texture);
+		else if (Slot2Selection == ControllerSelectionState.C2)
+			GUI.DrawTexture(P2SlotRect, C2Texture);
+		else if (Slot3Selection == ControllerSelectionState.C2)
+			GUI.DrawTexture(P3SlotRect, C2Texture);
+		else if (Slot4Selection == ControllerSelectionState.C2)
+			GUI.DrawTexture(P4SlotRect, C2Texture);
+		else // Draw it as a button
+		{
+			if (GUI.Button(C2SlotRect, C2Texture, ""))
+			{
+				if (CurrentlySelecting == SelectingState.P1)
+					Slot1Selection = ControllerSelectionState.C2;
+				else if (CurrentlySelecting == SelectingState.P2)
+					Slot2Selection = ControllerSelectionState.C2;
+				else if (CurrentlySelecting == SelectingState.P3)
+					Slot3Selection = ControllerSelectionState.C2;
+				else if (CurrentlySelecting == SelectingState.P4)
+					Slot4Selection = ControllerSelectionState.C2;
+				
+				if (CurrentlySelecting != SelectingState.None)
+					CurrentlySelecting = SelectingState.None;
+			}
+		}
+			
+		if (Slot1Selection == ControllerSelectionState.C3)
+			GUI.DrawTexture(P1SlotRect, C3Texture);
+		else if (Slot2Selection == ControllerSelectionState.C3)
+			GUI.DrawTexture(P2SlotRect, C3Texture);
+		else if (Slot3Selection == ControllerSelectionState.C3)
+			GUI.DrawTexture(P3SlotRect, C3Texture);
+		else if (Slot4Selection == ControllerSelectionState.C3)
+			GUI.DrawTexture(P4SlotRect, C3Texture);
+		else // Draw it as a button
+		{
+			if (GUI.Button(C3SlotRect, C3Texture, ""))
+			{
+				if (CurrentlySelecting == SelectingState.P1)
+					Slot1Selection = ControllerSelectionState.C3;
+				else if (CurrentlySelecting == SelectingState.P2)
+					Slot2Selection = ControllerSelectionState.C3;
+				else if (CurrentlySelecting == SelectingState.P3)
+					Slot3Selection = ControllerSelectionState.C3;
+				else if (CurrentlySelecting == SelectingState.P4)
+					Slot4Selection = ControllerSelectionState.C3;
+				
+				if (CurrentlySelecting != SelectingState.None)
+					CurrentlySelecting = SelectingState.None;
+			}
+		}
+			
+		if (Slot1Selection == ControllerSelectionState.C4)
+			GUI.DrawTexture(P1SlotRect, C4Texture);
+		else if (Slot2Selection == ControllerSelectionState.C4)
+			GUI.DrawTexture(P2SlotRect, C4Texture);
+		else if (Slot3Selection == ControllerSelectionState.C4)
+			GUI.DrawTexture(P3SlotRect, C4Texture);
+		else if (Slot4Selection == ControllerSelectionState.C4)
+			GUI.DrawTexture(P4SlotRect, C4Texture);
+		else // Draw it as a button
+		{
+			if (GUI.Button(C4SlotRect, C4Texture, ""))
+			{
+				if (CurrentlySelecting == SelectingState.P1)
+					Slot1Selection = ControllerSelectionState.C4;
+				else if (CurrentlySelecting == SelectingState.P2)
+					Slot2Selection = ControllerSelectionState.C4;
+				else if (CurrentlySelecting == SelectingState.P3)
+					Slot3Selection = ControllerSelectionState.C4;
+				else if (CurrentlySelecting == SelectingState.P4)
+					Slot4Selection = ControllerSelectionState.C4;
+				
+				if (CurrentlySelecting != SelectingState.None)
+					CurrentlySelecting = SelectingState.None;
+			}
+		}
 	}
 }
