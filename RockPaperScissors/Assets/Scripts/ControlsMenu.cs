@@ -130,7 +130,12 @@ public class ControlsMenu : MonoBehaviour {
 		{
 			// Toggle selecting for the slot
 			if (CurrentlySelecting == SelectingState.None)
-				CurrentlySelecting = SelectingState.P1;
+			{
+				if (Slot1Selection == ControllerSelectionState.None)
+					CurrentlySelecting = SelectingState.P1; // toggle
+				else
+					Slot1Selection = ControllerSelectionState.None; // reset slot
+			}				
 			else if (CurrentlySelecting == SelectingState.P1)
 				CurrentlySelecting = SelectingState.None;
 		}
@@ -138,23 +143,40 @@ public class ControlsMenu : MonoBehaviour {
 		{
 			// Toggle selecting for the slot
 			if (CurrentlySelecting == SelectingState.None)
-				CurrentlySelecting = SelectingState.P2;
+			{
+				if (Slot2Selection == ControllerSelectionState.None)
+					CurrentlySelecting = SelectingState.P2; // toggle
+				else
+					Slot2Selection = ControllerSelectionState.None; // reset slot
+			}	
 			else if (CurrentlySelecting == SelectingState.P2)
 				CurrentlySelecting = SelectingState.None;
 		}
+		GUI.depth = 0;
 		if (GUI.Button (P3SlotRect, ControllerSlotTexture, ""))
 		{
 			// Toggle selecting for the slot
 			if (CurrentlySelecting == SelectingState.None)
-				CurrentlySelecting = SelectingState.P3;
+			{
+				if (Slot3Selection == ControllerSelectionState.None)
+					CurrentlySelecting = SelectingState.P3; // toggle
+				else
+					Slot3Selection = ControllerSelectionState.None; // reset slot
+			}	
 			else if (CurrentlySelecting == SelectingState.P3)
 				CurrentlySelecting = SelectingState.None;
 		}
+		GUI.depth = 10;
 		if (GUI.Button (P4SlotRect, ControllerSlotTexture, ""))
 		{
 			// Toggle selecting for the slot
 			if (CurrentlySelecting == SelectingState.None)
-				CurrentlySelecting = SelectingState.P4;
+			{
+				if (Slot4Selection == ControllerSelectionState.None)
+					CurrentlySelecting = SelectingState.P4; // toggle
+				else
+					Slot4Selection = ControllerSelectionState.None; // reset slot
+			}	
 			else if (CurrentlySelecting == SelectingState.P4)
 				CurrentlySelecting = SelectingState.None;
 			
@@ -329,5 +351,14 @@ public class ControlsMenu : MonoBehaviour {
 					CurrentlySelecting = SelectingState.None;
 			}
 		}
+		
+		
+		
+		
+		// Draw the grey-out texture
+		/*GUI.depth = 5; // Place it in between the greyed-out textures and the full-colour textures
+		GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.2f); // Make it translucent
+		GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), GreyOutTexture);
+		GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f); // Reset the colour*/
 	}
 }
