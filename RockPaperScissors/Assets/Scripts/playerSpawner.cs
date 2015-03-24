@@ -34,7 +34,23 @@ public class playerSpawner : MonoBehaviour {
 			else
 				print ("Error: Character Selection Not Found");
 
-			newPlayer.GetComponent<Player>().layout = 1;
+			//Assign Controller
+			if(gameSettings.P1Controller == InitializeStorage.ControllerSelection.KB1)
+				newPlayer.GetComponent<Player>().layout = 1;
+			else if(gameSettings.P1Controller == InitializeStorage.ControllerSelection.KB2)
+				newPlayer.GetComponent<Player>().layout = 2;
+			else if(gameSettings.P1Controller == InitializeStorage.ControllerSelection.C1)
+				newPlayer.GetComponent<Player>().layout = 3;
+			else if(gameSettings.P1Controller == InitializeStorage.ControllerSelection.C2)
+				newPlayer.GetComponent<Player>().layout = 4;
+			else if(gameSettings.P1Controller == InitializeStorage.ControllerSelection.C3)
+				newPlayer.GetComponent<Player>().layout = 5;
+			else if(gameSettings.P1Controller == InitializeStorage.ControllerSelection.C4)
+				newPlayer.GetComponent<Player>().layout = 6;
+			else
+				print ("Error: Controller not found.");
+
+			//Spawn the player.
 			Instantiate(newPlayer, transform.position, transform.rotation);
 		}
 
@@ -49,7 +65,23 @@ public class playerSpawner : MonoBehaviour {
 			else
 				print ("Error: Character Selection Not Found");
 
-			newPlayer.GetComponent<Player>().layout = 2;
+			//Assign Controller
+			if(gameSettings.P2Controller == InitializeStorage.ControllerSelection.KB1)
+				newPlayer.GetComponent<Player>().layout = 1;
+			else if(gameSettings.P2Controller == InitializeStorage.ControllerSelection.KB2)
+				newPlayer.GetComponent<Player>().layout = 2;
+			else if(gameSettings.P2Controller == InitializeStorage.ControllerSelection.C1)
+				newPlayer.GetComponent<Player>().layout = 3;
+			else if(gameSettings.P2Controller == InitializeStorage.ControllerSelection.C2)
+				newPlayer.GetComponent<Player>().layout = 4;
+			else if(gameSettings.P2Controller == InitializeStorage.ControllerSelection.C3)
+				newPlayer.GetComponent<Player>().layout = 5;
+			else if(gameSettings.P2Controller == InitializeStorage.ControllerSelection.C4)
+				newPlayer.GetComponent<Player>().layout = 6;
+			else
+				print ("Error: Controller not found.");
+			
+			//Spawn the player.
 			Instantiate(newPlayer, transform.position, transform.rotation);
 
 		}
