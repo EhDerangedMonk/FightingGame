@@ -448,7 +448,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 468288, guid: de6e957951985b94a830685784a6a8bf, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11468290, guid: de6e957951985b94a830685784a6a8bf, type: 2}
       propertyPath: characterChoice
@@ -491,7 +491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSettings: {fileID: 0}
-  playerNum: 0
+  playerNum: 1
 --- !u!4 &795276562
 Transform:
   m_ObjectHideFlags: 0
@@ -592,7 +592,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 453340, guid: 4f70cac693931cd46a267efb9e78312b, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4f70cac693931cd46a267efb9e78312b, type: 2}

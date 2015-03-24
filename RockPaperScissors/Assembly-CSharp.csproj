@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\PlayerState.cs" />
      <Compile Include="Assets\Scripts\Spawner.cs" />
      <Compile Include="Assets\Scripts\cameraController.cs" />
+     <Compile Include="Assets\Scripts\explosionBehaviour.cs" />
      <Compile Include="Assets\Scripts\healthDisplay.cs" />
      <Compile Include="Assets\Scripts\hitMarkerBehaviour.cs" />
      <Compile Include="Assets\Scripts\hitMarkerSpawner.cs" />
@@ -65,12 +66,11 @@
      <Compile Include="Assets\Scripts\noirBehaviour.cs" />
      <Compile Include="Assets\Scripts\pitfallBehaviour.cs" />
      <Compile Include="Assets\Scripts\platformBehaviour.cs" />
+     <Compile Include="Assets\Scripts\playerSpawner.cs" />
      <Compile Include="Assets\Scripts\rockBehaviour.cs" />
      <Compile Include="Assets\Scripts\violetBehaviour.cs" />
      <Compile Include="Assets\Scripts\voiceController.cs" />
      <Compile Include="Assets\Scripts\zakirBehaviour.cs" />
-     <Compile Include="Assets\explosionBehaviour.cs" />
-     <Compile Include="Assets\playerSpawner.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>

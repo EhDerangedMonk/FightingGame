@@ -80,7 +80,8 @@ public class InitializeStorage : MonoBehaviour {
 			P3Controller = ControllerSelection.C3;
 			P4Controller = ControllerSelection.C4;
 		}
-		
+
+		P1Character = CharacterSelection.Violet;
 		
 		// transition straight into the main menu
 		Application.LoadLevel("mainmenu"); 
