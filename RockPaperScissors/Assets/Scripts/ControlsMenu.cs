@@ -130,71 +130,25 @@ public class ControlsMenu : MonoBehaviour {
 	\*******/
 	void OnGUI()
 	{
-		// Check to see if a button has been pressed
-		if (GUI.Button (P1SlotRect, ControllerSlotTexture, ""))
-		{
-			// Toggle selecting for the slot
-			if (CurrentlySelecting == SelectingState.None)
-			{
-				if (Slot1Selection == ControllerSelectionState.None)
-					CurrentlySelecting = SelectingState.P1; // toggle
-				else
-					Slot1Selection = ControllerSelectionState.None; // reset slot
-			}				
-			else if (CurrentlySelecting == SelectingState.P1)
-				CurrentlySelecting = SelectingState.None;
-		}
-		if (GUI.Button (P2SlotRect, ControllerSlotTexture, ""))
-		{
-			// Toggle selecting for the slot
-			if (CurrentlySelecting == SelectingState.None)
-			{
-				if (Slot2Selection == ControllerSelectionState.None)
-					CurrentlySelecting = SelectingState.P2; // toggle
-				else
-					Slot2Selection = ControllerSelectionState.None; // reset slot
-			}	
-			else if (CurrentlySelecting == SelectingState.P2)
-				CurrentlySelecting = SelectingState.None;
-		}
-		GUI.depth = 0;
-		if (GUI.Button (P3SlotRect, ControllerSlotTexture, ""))
-		{
-			// Toggle selecting for the slot
-			if (CurrentlySelecting == SelectingState.None)
-			{
-				if (Slot3Selection == ControllerSelectionState.None)
-					CurrentlySelecting = SelectingState.P3; // toggle
-				else
-					Slot3Selection = ControllerSelectionState.None; // reset slot
-			}	
-			else if (CurrentlySelecting == SelectingState.P3)
-				CurrentlySelecting = SelectingState.None;
-		}
-		GUI.depth = 10;
-		if (GUI.Button (P4SlotRect, ControllerSlotTexture, ""))
-		{
-			// Toggle selecting for the slot
-			if (CurrentlySelecting == SelectingState.None)
-			{
-				if (Slot4Selection == ControllerSelectionState.None)
-					CurrentlySelecting = SelectingState.P4; // toggle
-				else
-					Slot4Selection = ControllerSelectionState.None; // reset slot
-			}	
-			else if (CurrentlySelecting == SelectingState.P4)
-				CurrentlySelecting = SelectingState.None;
-			
-		}
+		// Draw the slot buttons if they're not currently being selected (below the grey-out)
+		if (CurrentlySelecting != SelectingState.P1)
+			drawP1Slot();
+		if (CurrentlySelecting != SelectingState.P2)
+			drawP2Slot();
+		if (CurrentlySelecting != SelectingState.P3)
+			drawP3Slot();
+		if (CurrentlySelecting != SelectingState.P4)
+			drawP4Slot();		
 		
-	
-	
-		// Draw the textures
+		
+		// Draw the labels
 		GUI.DrawTexture(P1LabelRect, P1LabelTexture);
 		GUI.DrawTexture(P2LabelRect, P2LabelTexture);
 		GUI.DrawTexture(P3LabelRect, P3LabelTexture);
 		GUI.DrawTexture(P4LabelRect, P4LabelTexture);
 		
+		
+		// Draw the Save and Cancel buttons
 		if (GUI.Button(SaveButtonRect, SaveButtonTexture, "")) // if they click the save button
 		{
 			if (CurrentlySelecting == SelectingState.None) // and they're not selecting anything
@@ -228,8 +182,148 @@ public class ControlsMenu : MonoBehaviour {
 		}
 		
 		
+		// Draw the controller images if they are in a slot (below the grey-out)
+		if (Slot1Selection == ControllerSelectionState.KB1 || Slot2Selection == ControllerSelectionState.KB1 ||
+		    Slot3Selection == ControllerSelectionState.KB1 || Slot4Selection == ControllerSelectionState.KB1)
+			drawKB1Icon();
+		if (Slot1Selection == ControllerSelectionState.KB2 || Slot2Selection == ControllerSelectionState.KB2 ||
+		    Slot3Selection == ControllerSelectionState.KB2 || Slot4Selection == ControllerSelectionState.KB2)
+			drawKB2Icon();
+		if (Slot1Selection == ControllerSelectionState.C1 || Slot2Selection == ControllerSelectionState.C1 ||
+		    Slot3Selection == ControllerSelectionState.C1 || Slot4Selection == ControllerSelectionState.C1)
+			drawC1Icon();
+		if (Slot1Selection == ControllerSelectionState.C2 || Slot2Selection == ControllerSelectionState.C2 ||
+		    Slot3Selection == ControllerSelectionState.C2 || Slot4Selection == ControllerSelectionState.C2)
+			drawC2Icon();
+		if (Slot1Selection == ControllerSelectionState.C3 || Slot2Selection == ControllerSelectionState.C3 ||
+		    Slot3Selection == ControllerSelectionState.C3 || Slot4Selection == ControllerSelectionState.C3)
+			drawC3Icon();
+		if (Slot1Selection == ControllerSelectionState.C4 || Slot2Selection == ControllerSelectionState.C4 ||
+		    Slot3Selection == ControllerSelectionState.C4 || Slot4Selection == ControllerSelectionState.C4)
+			drawC4Icon();
 		
-		// Draw the controller images
+			
+		// Draw the grey-out texture
+		if (CurrentlySelecting != SelectingState.None)
+		{
+			GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.5f); // Make it translucent
+			GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), GreyOutTexture);
+			GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f); // Reset the colour
+		}
+		
+		
+		// Draw the slot buttons if they're currently being selected (above the grey-out)
+		if (CurrentlySelecting == SelectingState.P1)
+			drawP1Slot();
+		if (CurrentlySelecting == SelectingState.P2)
+			drawP2Slot();
+		if (CurrentlySelecting == SelectingState.P3)
+			drawP3Slot();
+		if (CurrentlySelecting == SelectingState.P4)
+			drawP4Slot();	
+			
+		
+		// Draw the controller images if they're not in a slot (on top of the grey-out)
+		if (Slot1Selection != ControllerSelectionState.KB1 && Slot2Selection != ControllerSelectionState.KB1 &&
+		    Slot3Selection != ControllerSelectionState.KB1 && Slot4Selection != ControllerSelectionState.KB1)
+			drawKB1Icon();
+		if (Slot1Selection != ControllerSelectionState.KB2 && Slot2Selection != ControllerSelectionState.KB2 &&
+		    Slot3Selection != ControllerSelectionState.KB2 && Slot4Selection != ControllerSelectionState.KB2)
+			drawKB2Icon();
+		if (Slot1Selection != ControllerSelectionState.C1 && Slot2Selection != ControllerSelectionState.C1 &&
+		    Slot3Selection != ControllerSelectionState.C1 && Slot4Selection != ControllerSelectionState.C1)
+			drawC1Icon();
+		if (Slot1Selection != ControllerSelectionState.C2 && Slot2Selection != ControllerSelectionState.C2 &&
+		    Slot3Selection != ControllerSelectionState.C2 && Slot4Selection != ControllerSelectionState.C2)
+			drawC2Icon();
+		if (Slot1Selection != ControllerSelectionState.C3 && Slot2Selection != ControllerSelectionState.C3 &&
+		    Slot3Selection != ControllerSelectionState.C3 && Slot4Selection != ControllerSelectionState.C3)
+			drawC3Icon();
+		if (Slot1Selection != ControllerSelectionState.C4 && Slot2Selection != ControllerSelectionState.C4 &&
+		    Slot3Selection != ControllerSelectionState.C4 && Slot4Selection != ControllerSelectionState.C4)
+			drawC4Icon();
+	}
+	
+	
+	
+	/**************************\
+	* BUTTON-DRAWING FUNCTIONS *
+	* ------------------------ *
+	* This is so that the      *
+	* buttons can be drawn in  *
+	* order correctly.         *
+	\**************************/
+	void drawP1Slot()
+	{
+		if (GUI.Button (P1SlotRect, ControllerSlotTexture, ""))
+		{
+			// Toggle selecting for the slot
+			if (CurrentlySelecting == SelectingState.None)
+			{
+				if (Slot1Selection == ControllerSelectionState.None)
+					CurrentlySelecting = SelectingState.P1; // toggle
+				else
+					Slot1Selection = ControllerSelectionState.None; // reset slot
+			}				
+			else if (CurrentlySelecting == SelectingState.P1)
+				CurrentlySelecting = SelectingState.None;
+		}
+	}
+	
+	void drawP2Slot()
+	{
+		if (GUI.Button (P2SlotRect, ControllerSlotTexture, ""))
+		{
+			// Toggle selecting for the slot
+			if (CurrentlySelecting == SelectingState.None)
+			{
+				if (Slot2Selection == ControllerSelectionState.None)
+					CurrentlySelecting = SelectingState.P2; // toggle
+				else
+					Slot2Selection = ControllerSelectionState.None; // reset slot
+			}	
+			else if (CurrentlySelecting == SelectingState.P2)
+				CurrentlySelecting = SelectingState.None;
+		}
+	}
+	
+	void drawP3Slot()
+	{
+		if (GUI.Button (P3SlotRect, ControllerSlotTexture, ""))
+		{
+			// Toggle selecting for the slot
+			if (CurrentlySelecting == SelectingState.None)
+			{
+				if (Slot3Selection == ControllerSelectionState.None)
+					CurrentlySelecting = SelectingState.P3; // toggle
+				else
+					Slot3Selection = ControllerSelectionState.None; // reset slot
+			}	
+			else if (CurrentlySelecting == SelectingState.P3)
+				CurrentlySelecting = SelectingState.None;
+		}
+	}
+	
+	void drawP4Slot()
+	{
+		if (GUI.Button (P4SlotRect, ControllerSlotTexture, ""))
+		{
+			// Toggle selecting for the slot
+			if (CurrentlySelecting == SelectingState.None)
+			{
+				if (Slot4Selection == ControllerSelectionState.None)
+					CurrentlySelecting = SelectingState.P4; // toggle
+				else
+					Slot4Selection = ControllerSelectionState.None; // reset slot
+			}	
+			else if (CurrentlySelecting == SelectingState.P4)
+				CurrentlySelecting = SelectingState.None;
+			
+		}
+	}
+	
+	void drawKB1Icon()
+	{
 		if (Slot1Selection == ControllerSelectionState.KB1)      // Draw it in the correct Player slot
 			GUI.DrawTexture(P1SlotRect, KB1Texture);
 		else if (Slot2Selection == ControllerSelectionState.KB1)
@@ -255,7 +349,10 @@ public class ControlsMenu : MonoBehaviour {
 					CurrentlySelecting = SelectingState.None;
 			}
 		}
-			
+	}
+	
+	void drawKB2Icon()
+	{
 		if (Slot1Selection == ControllerSelectionState.KB2)
 			GUI.DrawTexture(P1SlotRect, KB2Texture);
 		else if (Slot2Selection == ControllerSelectionState.KB2)
@@ -281,7 +378,10 @@ public class ControlsMenu : MonoBehaviour {
 					CurrentlySelecting = SelectingState.None;
 			}
 		}
-			
+	}
+	
+	void drawC1Icon()
+	{
 		if (Slot1Selection == ControllerSelectionState.C1)
 			GUI.DrawTexture(P1SlotRect, C1Texture);
 		else if (Slot2Selection == ControllerSelectionState.C1)
@@ -307,7 +407,10 @@ public class ControlsMenu : MonoBehaviour {
 					CurrentlySelecting = SelectingState.None;
 			}
 		}
-			
+	}
+	
+	void drawC2Icon()
+	{
 		if (Slot1Selection == ControllerSelectionState.C2)
 			GUI.DrawTexture(P1SlotRect, C2Texture);
 		else if (Slot2Selection == ControllerSelectionState.C2)
@@ -333,7 +436,10 @@ public class ControlsMenu : MonoBehaviour {
 					CurrentlySelecting = SelectingState.None;
 			}
 		}
-			
+	}
+	
+	void drawC3Icon()
+	{
 		if (Slot1Selection == ControllerSelectionState.C3)
 			GUI.DrawTexture(P1SlotRect, C3Texture);
 		else if (Slot2Selection == ControllerSelectionState.C3)
@@ -359,7 +465,10 @@ public class ControlsMenu : MonoBehaviour {
 					CurrentlySelecting = SelectingState.None;
 			}
 		}
-			
+	}
+	
+	void drawC4Icon()
+	{
 		if (Slot1Selection == ControllerSelectionState.C4)
 			GUI.DrawTexture(P1SlotRect, C4Texture);
 		else if (Slot2Selection == ControllerSelectionState.C4)
@@ -385,14 +494,5 @@ public class ControlsMenu : MonoBehaviour {
 					CurrentlySelecting = SelectingState.None;
 			}
 		}
-		
-		
-		
-		
-		// Draw the grey-out texture
-		/*GUI.depth = 5; // Place it in between the greyed-out textures and the full-colour textures
-		GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.2f); // Make it translucent
-		GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), GreyOutTexture);
-		GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f); // Reset the colour*/
 	}
 }
