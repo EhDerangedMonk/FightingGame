@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: noirDeath
+  m_Name: screenExplosion
   serializedVersion: 4
   m_AnimationType: 2
   m_Compressed: 0
@@ -18,22 +18,24 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: aa50d1aa093c8f24cb06358072805ca1, type: 3}
+      value: {fileID: 21300000, guid: a797edde67070d1438f50394ce4b811e, type: 3}
     - time: .0833333358
-      value: {fileID: 21300000, guid: 070cbb7acfc46e44da9edf5181eada03, type: 3}
+      value: {fileID: 21300000, guid: 0c242b4272dc7a3428545b1011b90bb1, type: 3}
     - time: .166666672
-      value: {fileID: 21300000, guid: 87f726f8430c6bd4a8649d50b76e25b6, type: 3}
+      value: {fileID: 21300000, guid: 0c242b4272dc7a3428545b1011b90bb1, type: 3}
     - time: .25
-      value: {fileID: 21300002, guid: 87f726f8430c6bd4a8649d50b76e25b6, type: 3}
+      value: {fileID: 21300000, guid: 6792cec545cb0c94a84e78243ac30b59, type: 3}
     - time: .333333343
-      value: {fileID: 21300002, guid: 87f726f8430c6bd4a8649d50b76e25b6, type: 3}
+      value: {fileID: 21300000, guid: 6d1e888544067444d9ffb9f6d605b8ba, type: 3}
     - time: .416666657
-      value: {fileID: 21300000, guid: 330b281ee5c72a349b27ea7092ff35b9, type: 3}
+      value: {fileID: 21300000, guid: 0c242b4272dc7a3428545b1011b90bb1, type: 3}
+    - time: .5
+      value: {fileID: 21300000, guid: a797edde67070d1438f50394ce4b811e, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 48
+  m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -47,16 +49,17 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: aa50d1aa093c8f24cb06358072805ca1, type: 3}
-    - {fileID: 21300000, guid: 070cbb7acfc46e44da9edf5181eada03, type: 3}
-    - {fileID: 21300000, guid: 87f726f8430c6bd4a8649d50b76e25b6, type: 3}
-    - {fileID: 21300002, guid: 87f726f8430c6bd4a8649d50b76e25b6, type: 3}
-    - {fileID: 21300002, guid: 87f726f8430c6bd4a8649d50b76e25b6, type: 3}
-    - {fileID: 21300000, guid: 330b281ee5c72a349b27ea7092ff35b9, type: 3}
+    - {fileID: 21300000, guid: a797edde67070d1438f50394ce4b811e, type: 3}
+    - {fileID: 21300000, guid: 0c242b4272dc7a3428545b1011b90bb1, type: 3}
+    - {fileID: 21300000, guid: 0c242b4272dc7a3428545b1011b90bb1, type: 3}
+    - {fileID: 21300000, guid: 6792cec545cb0c94a84e78243ac30b59, type: 3}
+    - {fileID: 21300000, guid: 6d1e888544067444d9ffb9f6d605b8ba, type: 3}
+    - {fileID: 21300000, guid: 0c242b4272dc7a3428545b1011b90bb1, type: 3}
+    - {fileID: 21300000, guid: a797edde67070d1438f50394ce4b811e, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: .4375
+    m_StopTime: .516666651
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -72,11 +75,4 @@ AnimationClip:
     m_Mirror: 0
   m_EditorCurves: []
   m_EulerEditorCurves: []
-  m_Events:
-  - time: 0
-    functionName: playDeath
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []
