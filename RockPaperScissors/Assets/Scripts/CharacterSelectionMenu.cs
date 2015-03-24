@@ -225,7 +225,7 @@ public class CharacterSelectionMenu : MonoBehaviour {
 	void Update()
 	{
 		// If all players have selected, go to the next scene (Map Selection)
-		if (P1Selected == true && P2Selected == true && P3Selected == true && P4Selected == true)
+		if (P1Selected == true && P2Selected == true /*&& P3Selected == true && P4Selected == true*/)
 		{
 			Application.LoadLevel("MapSelectionMenu");
 		}
