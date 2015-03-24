@@ -15,12 +15,11 @@ public class Player : MonoBehaviour {
     public Transform groundCheck; // object that is used to check if the player is on the ground
     public LayerMask whatIsGround;//Layer object that indicates that the player themselves and other players are not the ground, everything else is
     public Health playerHealth; // Player health representation - Needs to be public for GUI to read
-	public int cChangeKey; //player# indicator
 	public int characterChoice; //player's character indicator
 
     public PlayerState playerState; // Generic state that implements state and behaviour
     private Animator anim; // Stores player animation
-    private Controls controller; // Player keyboard/game controller controls
+    public Controls controller; // Player keyboard/game controller controls
     private Player player; //when collided check player collided with
     
     private bool grounded = false;
@@ -39,7 +38,7 @@ public class Player : MonoBehaviour {
         isFlinching = false;
         isLaunching = false;
         anim = GetComponent<Animator>();
-        controller = new Controls(layout, cChangeKey);
+        controller = new Controls(layout);
         playerHealth = new Health(1000);
 		if (characterChoice == 0) {
 			playerState = new noirBehaviour (this.transform, anim);
@@ -81,12 +80,7 @@ public class Player : MonoBehaviour {
 			}
 
         }
-
-        // Placeholder to be able to change player controls
-        if (Input.GetKeyDown(controller.cChangeKey)){
-            layout = ((layout %4)+1); //mod number must always be equal to number of possible control schemes
-            controller.changeControls(layout);
-        }
+	
 
     }
 

@@ -6,7 +6,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Spawner : MonoBehaviour {
+public class rockSpawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

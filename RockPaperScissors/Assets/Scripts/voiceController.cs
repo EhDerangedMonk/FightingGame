@@ -25,7 +25,8 @@ public class voiceController : MonoBehaviour {
 	}
 
 	void reset() {
-		voice.clip = null;
+		if(voice != null)
+			voice.clip = null;
 	}
 
 	void playLightAttack () {
