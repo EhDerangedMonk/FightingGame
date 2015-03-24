@@ -84,6 +84,26 @@ public class Controls {
 				XAxis = "LeftJoystick2X";
 				YAxis = "LeftJoystick2Y";
 				break;
+			case 5:
+				light = KeyCode.Joystick3Button2;
+				heavy = KeyCode.Joystick3Button3;
+				special = KeyCode.Joystick3Button1;
+				block = KeyCode.Joystick3Button4;
+				jump = KeyCode.Joystick3Button0;
+				grapple = KeyCode.Joystick3Button5;
+				XAxis = "LeftJoystick3X";
+				YAxis = "LeftJoystick3Y";
+				break;
+			case 6:
+				light = KeyCode.Joystick4Button2;
+				heavy = KeyCode.Joystick4Button3;
+				special = KeyCode.Joystick4Button1;
+				block = KeyCode.Joystick4Button4;
+				jump = KeyCode.Joystick4Button0;
+				grapple = KeyCode.Joystick4Button5;
+				XAxis = "LeftJoystick4X";
+				YAxis = "LeftJoystick4Y";
+				break;
 			default:
 				Debug.Log("Unkown player! " + layout);
 				break;
