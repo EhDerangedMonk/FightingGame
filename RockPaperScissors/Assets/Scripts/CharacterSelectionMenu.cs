@@ -60,6 +60,25 @@ public class CharacterSelectionMenu : MonoBehaviour {
 	private bool P3Selected;
 	private bool P4Selected;
 	
+	// How each player selects their character
+	private KeyCode P1Enter;
+	private string P1xAxis;
+	private string P1yAxis;
+	private KeyCode P2Enter;
+	private string P2xAxis;
+	private string P2yAxis;
+	private KeyCode P3Enter;
+	private string P3xAxis;
+	private string P3yAxis;
+	private KeyCode P4Enter;
+	private string P4xAxis;
+	private string P4yAxis;
+	
+	// Determine if players 3 and 4 are playing
+	private bool P3Playing;
+	private bool P4Playing;
+	
+	
 	
 	/*******\
 	* START *
@@ -116,6 +135,153 @@ public class CharacterSelectionMenu : MonoBehaviour {
 		P2Selected = false;
 		P3Selected = false;
 		P4Selected = false;
+		
+		
+		// Initialize the controller layouts
+		InitializeStorage settings = (InitializeStorage) GameObject.Find("VariableStorage").GetComponent(typeof(InitializeStorage));
+		switch ((int)settings.P1Controller)
+		{
+			case 1:
+				P1Enter = KeyCode.Space;
+				P1xAxis = "Keyboard1X";
+				P1yAxis = "Keyboard1Y";
+				break;
+		case 2:
+				P1Enter = KeyCode.Return;
+				P1xAxis = "Keyboard2X";
+				P1yAxis = "Keyboard2Y";
+				break;
+		case 3:
+				P1Enter = KeyCode.Joystick1Button0;
+				P1xAxis = "LeftJoystick1X";
+				P1yAxis = "LeftJoystick1Y";
+				break;
+		case 4:
+				P1Enter = KeyCode.Joystick1Button0;
+				P1xAxis = "LeftJoystick2X";
+				P1yAxis = "LeftJoystick2Y";
+				break;
+		case 5:
+				P1Enter = KeyCode.Joystick1Button0;
+				P1xAxis = "LeftJoystick3X";
+				P1yAxis = "LeftJoystick3Y";
+				break;
+		case 6:
+				P1Enter = KeyCode.Joystick1Button0;
+				P1xAxis = "LeftJoystick4X";
+				P1yAxis = "LeftJoystick4Y";
+				break;
+		}
+		
+		switch ((int)settings.P2Controller)
+		{
+			case 1:
+				P2Enter = KeyCode.Space;
+				P2xAxis = "Keyboard1X";
+				P2yAxis = "Keyboard1Y";
+				break;
+		case 2:
+				P2Enter = KeyCode.Return;
+				P2xAxis = "Keyboard2X";
+				P2yAxis = "Keyboard2Y";
+				break;
+		case 3:
+				P2Enter = KeyCode.Joystick1Button0;
+				P2xAxis = "LeftJoystick1X";
+				P2yAxis = "LeftJoystick1Y";
+				break;
+		case 4:
+				P2Enter = KeyCode.Joystick1Button0;
+				P2xAxis = "LeftJoystick2X";
+				P2yAxis = "LeftJoystick2Y";
+				break;
+		case 5:
+				P2Enter = KeyCode.Joystick1Button0;
+				P2xAxis = "LeftJoystick3X";
+				P2yAxis = "LeftJoystick3Y";
+				break;
+		case 6:
+				P2Enter = KeyCode.Joystick1Button0;
+				P2xAxis = "LeftJoystick4X";
+				P2yAxis = "LeftJoystick4Y";
+				break;
+		}
+		
+		P3Playing = true;
+		switch ((int)settings.P3Controller)
+		{
+			case 0:
+				P3Playing = false;
+				break;
+		case 1:
+				P3Enter = KeyCode.Space;
+				P3xAxis = "Keyboard1X";
+				P3yAxis = "Keyboard1Y";
+				break;
+		case 2:
+				P3Enter = KeyCode.Return;
+				P3xAxis = "Keyboard2X";
+				P3yAxis = "Keyboard2Y";
+				break;
+		case 3:
+				P3Enter = KeyCode.Joystick1Button0;
+				P3xAxis = "LeftJoystick1X";
+				P3yAxis = "LeftJoystick1Y";
+				break;
+		case 4:
+				P3Enter = KeyCode.Joystick1Button0;
+				P3xAxis = "LeftJoystick2X";
+				P3yAxis = "LeftJoystick2Y";
+				break;
+		case 5:
+				P3Enter = KeyCode.Joystick1Button0;
+				P3xAxis = "LeftJoystick3X";
+				P3yAxis = "LeftJoystick3Y";
+				break;
+		case 6:
+				P3Enter = KeyCode.Joystick1Button0;
+				P3xAxis = "LeftJoystick4X";
+				P3yAxis = "LeftJoystick4Y";
+				break;
+		}
+		
+		P4Playing = true;
+		switch ((int)settings.P4Controller)
+		{
+			case 0:
+				P4Playing = false;
+				break;
+			case 1:
+				P4Enter = KeyCode.Space;
+				P4xAxis = "Keyboard1X";
+				P4yAxis = "Keyboard1Y";
+				break;
+		case 2:
+				P4Enter = KeyCode.Return;
+				P4xAxis = "Keyboard2X";
+				P4yAxis = "Keyboard2Y";
+				break;
+		case 3:
+				P4Enter = KeyCode.Joystick1Button0;
+				P4xAxis = "LeftJoystick1X";
+				P4yAxis = "LeftJoystick1Y";
+				break;
+		case 4:
+				P4Enter = KeyCode.Joystick1Button0;
+				P4xAxis = "LeftJoystick2X";
+				P4yAxis = "LeftJoystick2Y";
+				break;
+		case 5:
+				P4Enter = KeyCode.Joystick1Button0;
+				P4xAxis = "LeftJoystick3X";
+				P4yAxis = "LeftJoystick3Y";
+				break;
+		case 6:
+				P4Enter = KeyCode.Joystick1Button0;
+				P4xAxis = "LeftJoystick4X";
+				P4yAxis = "LeftJoystick4Y";
+				break;
+		}
 	} 
 	
 	/*******\
@@ -174,48 +340,54 @@ public class CharacterSelectionMenu : MonoBehaviour {
 				GUI.DrawTexture(P2TokenRectN, P2TokenTexture, ScaleMode.ScaleToFit, true);
 		}
 		
-		if (P3State == CharState.Violet)
+		if (P3Playing)
 		{
-			if (P3Selected)
-				GUI.DrawTexture(P3TokenRectV, P3TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			if (P3State == CharState.Violet)
+			{
+				if (P3Selected)
+					GUI.DrawTexture(P3TokenRectV, P3TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+				else
+					GUI.DrawTexture(P3TokenRectV, P3TokenTexture, ScaleMode.ScaleToFit, true);
+			}
+			else if (P3State == CharState.Zakir)
+			{
+				if (P3Selected)
+					GUI.DrawTexture(P3TokenRectZ, P3TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+				else
+					GUI.DrawTexture(P3TokenRectZ, P3TokenTexture, ScaleMode.ScaleToFit, true);
+			}
 			else
-				GUI.DrawTexture(P3TokenRectV, P3TokenTexture, ScaleMode.ScaleToFit, true);
-		}
-		else if (P3State == CharState.Zakir)
-		{
-			if (P3Selected)
-				GUI.DrawTexture(P3TokenRectZ, P3TokenSelectedTexture, ScaleMode.ScaleToFit, true);
-			else
-				GUI.DrawTexture(P3TokenRectZ, P3TokenTexture, ScaleMode.ScaleToFit, true);
-		}
-		else
-		{
-			if (P3Selected)
-				GUI.DrawTexture(P3TokenRectN, P3TokenSelectedTexture, ScaleMode.ScaleToFit, true);
-			else
-				GUI.DrawTexture(P3TokenRectN, P3TokenTexture, ScaleMode.ScaleToFit, true);
+			{
+				if (P3Selected)
+					GUI.DrawTexture(P3TokenRectN, P3TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+				else
+					GUI.DrawTexture(P3TokenRectN, P3TokenTexture, ScaleMode.ScaleToFit, true);
+			}
 		}
 		
-		if (P4State == CharState.Violet)
+		if (P4Playing)
 		{
-			if (P4Selected)
-				GUI.DrawTexture(P4TokenRectV, P4TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			if (P4State == CharState.Violet)
+			{
+				if (P4Selected)
+					GUI.DrawTexture(P4TokenRectV, P4TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+				else
+					GUI.DrawTexture(P4TokenRectV, P4TokenTexture, ScaleMode.ScaleToFit, true);
+			}
+			else if (P4State == CharState.Zakir)
+			{
+				if (P4Selected)
+					GUI.DrawTexture(P4TokenRectZ, P4TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+				else
+					GUI.DrawTexture(P4TokenRectZ, P4TokenTexture, ScaleMode.ScaleToFit, true);
+			}
 			else
-				GUI.DrawTexture(P4TokenRectV, P4TokenTexture, ScaleMode.ScaleToFit, true);
-		}
-		else if (P4State == CharState.Zakir)
-		{
-			if (P4Selected)
-				GUI.DrawTexture(P4TokenRectZ, P4TokenSelectedTexture, ScaleMode.ScaleToFit, true);
-			else
-				GUI.DrawTexture(P4TokenRectZ, P4TokenTexture, ScaleMode.ScaleToFit, true);
-		}
-		else
-		{
-			if (P4Selected)
-				GUI.DrawTexture(P4TokenRectN, P4TokenSelectedTexture, ScaleMode.ScaleToFit, true);
-			else
-				GUI.DrawTexture(P4TokenRectN, P4TokenTexture, ScaleMode.ScaleToFit, true);
+			{
+				if (P4Selected)
+					GUI.DrawTexture(P4TokenRectN, P4TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+				else
+					GUI.DrawTexture(P4TokenRectN, P4TokenTexture, ScaleMode.ScaleToFit, true);
+			}
 		}
 	}
 	
@@ -230,6 +402,10 @@ public class CharacterSelectionMenu : MonoBehaviour {
 			InitializeStorage storage = (InitializeStorage) GameObject.Find("VariableStorage").GetComponent(typeof(InitializeStorage));
 			storage.P1Character = (InitializeStorage.CharacterSelection)((int)P1State);
 			storage.P2Character = (InitializeStorage.CharacterSelection)((int)P2State);
+			if (P3Playing == true)
+				storage.P3Character = (InitializeStorage.CharacterSelection)((int)P3State);
+			if (P4Playing == true)
+				storage.P4Character = (InitializeStorage.CharacterSelection)((int)P4State);
 			
 			
 			Application.LoadLevel("MapSelectionMenu");
@@ -241,27 +417,27 @@ public class CharacterSelectionMenu : MonoBehaviour {
 			switch(P1State)
 			{
 				case CharState.Noir:
-					if (Input.GetKeyDown(KeyCode.W))
+					if (Input.GetAxis(P1yAxis) < 0) // up
 						P1State = CharState.Zakir;
-					else if (Input.GetKeyDown(KeyCode.A))
+					else if (Input.GetAxis(P1xAxis) < 0) // left
 						P1State = CharState.Violet;
 					break;
 				case CharState.Violet:
-					if (Input.GetKeyDown(KeyCode.W))
+					if (Input.GetAxis(P1yAxis) < 0) // up
 						P1State = CharState.Zakir;
-					else if (Input.GetKeyDown(KeyCode.D))
+					else if (Input.GetAxis(P1xAxis) > 0) // right
 						P1State = CharState.Noir;
 					break;
 				case CharState.Zakir:
-					if (Input.GetKeyDown(KeyCode.S))
+					if (Input.GetAxis(P1yAxis) > 0) // down
 						P1State = CharState.Noir;
-					else if (Input.GetKeyDown(KeyCode.A))
+					else if (Input.GetAxis(P1xAxis) < 0) // left
 						P1State = CharState.Violet;
 					break;					
 			}
 		}
 		// Check for the selection key being pressed
-		if (Input.GetKeyUp(KeyCode.Space))
+		if (Input.GetKeyUp(P1Enter))
 		{
 			// Toggle the selection
 			if (P1Selected)
@@ -276,32 +452,106 @@ public class CharacterSelectionMenu : MonoBehaviour {
 			switch(P2State)
 			{
 				case CharState.Noir:
-					if (Input.GetKeyDown(KeyCode.I))
+					if (Input.GetAxis(P2yAxis) < 0) // up
 						P2State = CharState.Zakir;
-					else if (Input.GetKeyDown(KeyCode.J))
+					else if (Input.GetAxis(P2xAxis) < 0) // left
 						P2State = CharState.Violet;
 					break;
 				case CharState.Violet:
-					if (Input.GetKeyDown(KeyCode.I))
+					if (Input.GetAxis(P2yAxis) < 0) // up
 						P2State = CharState.Zakir;
-					else if (Input.GetKeyDown(KeyCode.L))
+					else if (Input.GetAxis(P2xAxis) > 0) // right
 						P2State = CharState.Noir;
 					break;
 				case CharState.Zakir:
-					if (Input.GetKeyDown(KeyCode.K))
+					if (Input.GetAxis(P2yAxis) > 0) // down
 						P2State = CharState.Noir;
-					else if (Input.GetKeyDown(KeyCode.J))
+					else if (Input.GetAxis(P2xAxis) < 0) // left
 						P2State = CharState.Violet;
 					break;	
 			}
 		}
-		if (Input.GetKeyUp(KeyCode.Return))
+		if (Input.GetKeyUp(P2Enter))
 		{
 			// Toggle the selection
 			if (P2Selected)
 				P2Selected = false;
 			else
 				P2Selected = true;
+		}
+		
+		// Same for P3, if P3 is playing
+		if (P3Playing)
+		{
+			if (P3Selected == false)
+			{
+				switch(P3State)
+				{
+				case CharState.Noir:
+					if (Input.GetAxis(P3yAxis) < 0) // up
+						P3State = CharState.Zakir;
+					else if (Input.GetAxis(P3xAxis) < 0) // left
+						P3State = CharState.Violet;
+					break;
+				case CharState.Violet:
+					if (Input.GetAxis(P3yAxis) < 0) // up
+						P3State = CharState.Zakir;
+					else if (Input.GetAxis(P3xAxis) > 0) // right
+						P3State = CharState.Noir;
+					break;
+				case CharState.Zakir:
+					if (Input.GetAxis(P3yAxis) > 0) // down
+						P3State = CharState.Noir;
+					else if (Input.GetAxis(P3xAxis) < 0) // left
+						P3State = CharState.Violet;
+					break;	
+				}
+			}
+			if (Input.GetKeyUp(P3Enter))
+			{
+				// Toggle the selection
+				if (P3Selected)
+					P3Selected = false;
+				else
+					P3Selected = true;
+			}
+		}
+		
+		// Same for P4, if P4 is playing
+		if (P4Playing)
+		{
+			if (P4Selected == false)
+			{
+				switch(P4State)
+				{
+				case CharState.Noir:
+					if (Input.GetAxis(P4yAxis) < 0) // up
+						P4State = CharState.Zakir;
+					else if (Input.GetAxis(P4xAxis) < 0) // left
+						P4State = CharState.Violet;
+					break;
+				case CharState.Violet:
+					if (Input.GetAxis(P4yAxis) < 0) // up
+						P4State = CharState.Zakir;
+					else if (Input.GetAxis(P4xAxis) > 0) // right
+						P4State = CharState.Noir;
+					break;
+				case CharState.Zakir:
+					if (Input.GetAxis(P4yAxis) > 0) // down
+						P4State = CharState.Noir;
+					else if (Input.GetAxis(P4xAxis) < 0) // left
+						P4State = CharState.Violet;
+					break;	
+				}
+			}
+			if (Input.GetKeyUp(P4Enter))
+			{
+				// Toggle the selection
+				if (P4Selected)
+					P4Selected = false;
+				else
+					P4Selected = true;
+			}
 		}
 	}
 }
