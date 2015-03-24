@@ -26,8 +26,12 @@ public class CharacterSelectionMenu : MonoBehaviour {
 	// Token Textures
 	public Texture P1TokenTexture;
 	public Texture P2TokenTexture;
+	public Texture P3TokenTexture;
+	public Texture P4TokenTexture;
 	public Texture P1TokenSelectedTexture;
 	public Texture P2TokenSelectedTexture;
+	public Texture P3TokenSelectedTexture;
+	public Texture P4TokenSelectedTexture;
 	
 	// Token Rectangles (one for each token in each position)
 	private Rect P1TokenRectN;
@@ -36,15 +40,25 @@ public class CharacterSelectionMenu : MonoBehaviour {
 	private Rect P2TokenRectN;
 	private Rect P2TokenRectV;
 	private Rect P2TokenRectZ;
+	private Rect P3TokenRectN;
+	private Rect P3TokenRectV;
+	private Rect P3TokenRectZ;
+	private Rect P4TokenRectN;
+	private Rect P4TokenRectV;
+	private Rect P4TokenRectZ;
 	
 	// Keep track of which button each player is selecting
 	enum CharState {Noir=1, Violet, Zakir};
 	private CharState P1State;
 	private CharState P2State;
+	private CharState P3State;
+	private CharState P4State;
 	
 	// Keep track of if each player has selected a character yet
 	private bool P1Selected;
 	private bool P2Selected;
+	private bool P3Selected;
+	private bool P4Selected;
 	
 	
 	/*******\
@@ -65,26 +79,43 @@ public class CharacterSelectionMenu : MonoBehaviour {
 		NoirRect = new Rect(buttonWidth + 2*horzSpacing, buttonHeight + 2*vertSpacing, buttonWidth, buttonHeight);
 		
 		// Calculate the token sizes based on the button sizes
-		double tokenWidth = (double)P1TokenTexture.width * ((double)buttonWidth / (double)NoirSelectionButton.width);
-		double tokenHeight = (double)P1TokenTexture.height * ((double)buttonHeight / (double)NoirSelectionButton.height);
-		int P1offset = 1;
-		int P2offset = (int)(buttonWidth - tokenWidth);
+		int tokenWidth = (int)(P1TokenTexture.width * ((double)buttonWidth / (double)NoirSelectionButton.width));
+		int tokenHeight = (int)(P1TokenTexture.height * ((double)buttonHeight / (double)NoirSelectionButton.height));
+		int P1xOffset = 1;
+		int P2xOffset = (int)(buttonWidth - tokenWidth);
+		int P3xOffset = 1;
+		int P3yOffset = (int)(buttonHeight - tokenHeight);
+		int P4xOffset = (int)(buttonWidth - tokenWidth);
+		int P4yOffset = (int)(buttonHeight - tokenHeight);
 		
 		// Initialize the tokens' rectangles
-		P1TokenRectV = new Rect(horzSpacing+P1offset, buttonHeight + 2*vertSpacing, (int)tokenWidth, (int)tokenHeight);
-		P1TokenRectZ = new Rect((buttonWidth + 2*horzSpacing)+P1offset, vertSpacing, (int)tokenWidth, (int)tokenHeight);
-		P1TokenRectN = new Rect((buttonWidth + 2*horzSpacing)+P1offset, buttonHeight + 2*vertSpacing, (int)tokenWidth, (int)tokenHeight);
-		P2TokenRectV = new Rect(horzSpacing+P2offset, buttonHeight + 2*vertSpacing, (int)tokenWidth, (int)tokenHeight);
-		P2TokenRectZ = new Rect((buttonWidth + 2*horzSpacing)+P2offset, vertSpacing, (int)tokenWidth, (int)tokenHeight);
-		P2TokenRectN = new Rect((buttonWidth + 2*horzSpacing)+P2offset, buttonHeight + 2*vertSpacing, (int)tokenWidth, (int)tokenHeight);
+		P1TokenRectV = new Rect(horzSpacing + P1xOffset, buttonHeight + 2*vertSpacing, tokenWidth, tokenHeight);
+		P1TokenRectZ = new Rect((buttonWidth + 2*horzSpacing)+P1xOffset, vertSpacing, tokenWidth, tokenHeight);
+		P1TokenRectN = new Rect((buttonWidth + 2*horzSpacing)+P1xOffset, buttonHeight + 2*vertSpacing, tokenWidth, tokenHeight);
+		
+		P2TokenRectV = new Rect(horzSpacing + P2xOffset, buttonHeight + 2*vertSpacing, tokenWidth, tokenHeight);
+		P2TokenRectZ = new Rect((buttonWidth + 2*horzSpacing) + P2xOffset, vertSpacing, tokenWidth, tokenHeight);
+		P2TokenRectN = new Rect((buttonWidth + 2*horzSpacing) + P2xOffset, buttonHeight + 2*vertSpacing, tokenWidth, tokenHeight);
+		
+		P3TokenRectV = new Rect(horzSpacing + P3xOffset, buttonHeight + 2*vertSpacing + P3yOffset, tokenWidth, tokenHeight);
+		P3TokenRectZ = new Rect((buttonWidth + 2*horzSpacing) + P3xOffset, vertSpacing + P3yOffset, tokenWidth, tokenHeight);
+		P3TokenRectN = new Rect((buttonWidth + 2*horzSpacing) + P3xOffset, buttonHeight + 2*vertSpacing + P3yOffset, tokenWidth, tokenHeight);
+		
+		P4TokenRectV = new Rect(horzSpacing + P4xOffset, buttonHeight + 2*vertSpacing + P4yOffset, tokenWidth, tokenHeight);
+		P4TokenRectZ = new Rect((buttonWidth + 2*horzSpacing) + P4xOffset, vertSpacing + P4yOffset, tokenWidth, tokenHeight);
+		P4TokenRectN = new Rect((buttonWidth + 2*horzSpacing) + P4xOffset, buttonHeight + 2*vertSpacing + P4yOffset, tokenWidth, tokenHeight);
 		
 		// Initialize player selection
 		P1State = CharState.Violet;
 		P2State = CharState.Violet; 
+		P3State = CharState.Violet;
+		P4State = CharState.Violet;
 		
 		// Initialize whether the players have selected to false
 		P1Selected = false;
 		P2Selected = false;
+		P3Selected = false;
+		P4Selected = false;
 	} 
 	
 	/*******\
@@ -142,6 +173,50 @@ public class CharacterSelectionMenu : MonoBehaviour {
 			else
 				GUI.DrawTexture(P2TokenRectN, P2TokenTexture, ScaleMode.ScaleToFit, true);
 		}
+		
+		if (P3State == CharState.Violet)
+		{
+			if (P3Selected)
+				GUI.DrawTexture(P3TokenRectV, P3TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P3TokenRectV, P3TokenTexture, ScaleMode.ScaleToFit, true);
+		}
+		else if (P3State == CharState.Zakir)
+		{
+			if (P3Selected)
+				GUI.DrawTexture(P3TokenRectZ, P3TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P3TokenRectZ, P3TokenTexture, ScaleMode.ScaleToFit, true);
+		}
+		else
+		{
+			if (P3Selected)
+				GUI.DrawTexture(P3TokenRectN, P3TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P3TokenRectN, P3TokenTexture, ScaleMode.ScaleToFit, true);
+		}
+		
+		if (P4State == CharState.Violet)
+		{
+			if (P4Selected)
+				GUI.DrawTexture(P4TokenRectV, P4TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P4TokenRectV, P4TokenTexture, ScaleMode.ScaleToFit, true);
+		}
+		else if (P4State == CharState.Zakir)
+		{
+			if (P4Selected)
+				GUI.DrawTexture(P4TokenRectZ, P4TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P4TokenRectZ, P4TokenTexture, ScaleMode.ScaleToFit, true);
+		}
+		else
+		{
+			if (P4Selected)
+				GUI.DrawTexture(P4TokenRectN, P4TokenSelectedTexture, ScaleMode.ScaleToFit, true);
+			else
+				GUI.DrawTexture(P4TokenRectN, P4TokenTexture, ScaleMode.ScaleToFit, true);
+		}
 	}
 	
 	/*-******\
@@ -149,8 +224,8 @@ public class CharacterSelectionMenu : MonoBehaviour {
 	\********/
 	void Update()
 	{
-		// If both players have selected, go to the next scene (Map Selection)
-		if (P1Selected == true && P2Selected == true)
+		// If all players have selected, go to the next scene (Map Selection)
+		if (P1Selected == true && P2Selected == true && P3Selected == true && P4Selected == true)
 		{
 			Application.LoadLevel("MapSelectionMenu");
 		}
