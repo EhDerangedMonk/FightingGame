@@ -36,7 +36,7 @@ public class noirBehaviour: PlayerState {
         grappleStateHash = Animator.StringToHash("Base Layer.noirGrapple");
         blockStateHash = Animator.StringToHash("Base Layer.noirBlock");
         counterStateHash = Animator.StringToHash("Base Layer.noirCounter");
-        launchStateHash = Animator.StringToHash("Base Layer.noirLaunch");
+        launchStateHash = Animator.StringToHash("Base Layer.noirRecovery");
     }
 
 
@@ -57,8 +57,9 @@ public class noirBehaviour: PlayerState {
         }
 
         // Player is idling thus not attacking
-        if (stateInfo.nameHash == idleStateHash)
+        if (stateInfo.nameHash == idleStateHash) {
             attack = false;
+        }
 
         // Place holder grapple has no current use
         if (stateInfo.nameHash == grappleStateHash) {

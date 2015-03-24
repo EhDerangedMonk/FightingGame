@@ -36,7 +36,7 @@ public class violetBehaviour: PlayerState {
 		grappleStateHash = Animator.StringToHash("Base Layer.violetGrapple");
 		blockStateHash = Animator.StringToHash("Base Layer.violetBlock");
 		//counterStateHash = Animator.StringToHash("Base Layer.violetCounter");
-		launchStateHash = Animator.StringToHash("Base Layer.violetLaunch");
+		launchStateHash = Animator.StringToHash("Base Layer.violetRecovery");
 	}
 	
 	
@@ -53,8 +53,8 @@ public class violetBehaviour: PlayerState {
 		}
 		
 		if (stateInfo.nameHash == launchStateHash) {
-			setLaunch(false);
-		}
+            setLaunch(false);
+        }
 		
 		// Player is idling thus not attacking
 		if (stateInfo.nameHash == idleStateHash)

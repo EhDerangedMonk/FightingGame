@@ -46,7 +46,7 @@ public class Player : MonoBehaviour {
 			//playerState = new noirBehaviour(this.transform, anim);
 		//	Animator animator = playerTransform.gameObject.GetComponent<Animator>();
 		//	animator.runtimeAnimatorController = Resources.Load("Assets/zakirController") as RuntimeAnimatorController;
-			playerState = new zakirBehaviour(this.transform,anim);
+			playerState = new zakirBehaviour(this.transform, anim);
 		} else {
 			playerState = new violetBehaviour(this.transform, anim);
 		}
@@ -110,9 +110,9 @@ public class Player : MonoBehaviour {
 
             if (player != null) {
                 if (player.playerState.isFacingLeft() == true) {
-                    rigidbody2D.AddForce(new Vector3(1f, 3f, 0f) * 300); //Test force not final
+                    rigidbody2D.AddForce(new Vector3(1.2f, 3f, 0f) * 300); //Test force not final
                 } else if (player.playerState.isFacingLeft() == false) {
-                    rigidbody2D.AddForce(new Vector3(1f, 3f, 0f) * 300); //Test force not final
+                    rigidbody2D.AddForce(new Vector3(1.2f, 3f, 0f) * 300); //Test force not final
                 }
             }
             isLaunching = true;
@@ -124,7 +124,7 @@ public class Player : MonoBehaviour {
 
         if (playerState.checkState(player) == true) { //Controls player and their actions
             return; // Currently in attack if return is true so don't allow character movement
-        } else if (isFlinching == true || playerState.isBlock() == true || isLaunching == true) {
+        } else if (isFlinching == true || playerState.isBlock() == true || playerState.isLaunch() == true) {
             return;
         }
 

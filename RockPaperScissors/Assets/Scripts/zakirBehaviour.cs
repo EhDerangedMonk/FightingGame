@@ -27,16 +27,12 @@ public class zakirBehaviour: PlayerState {
 		idleStateHash = Animator.StringToHash("Base Layer.zakirIdle");
 		lightAttackStateHash = Animator.StringToHash("Base Layer.zakirLightAttack");
 		specStateHash[0] = Animator.StringToHash("Base Layer.zakirSpecial"); // Noir has multiple special states (Charging)
-		//specStateHash[1] = Animator.StringToHash("Base Layer.noirSpecial2");
-		//specStateHash[2] = Animator.StringToHash("Base Layer.noirSpecial3");
-		//specStateHash[3] = Animator.StringToHash("Base Layer.noirSpecial4");
-		//specStateHash[4] = Animator.StringToHash("Base Layer.noirSpecialEx"); // Extension when the attack is considered to hitting
 		heavyAttackStateHash = Animator.StringToHash("Base Layer.zakirHeavyAttack");
 		flinchStateHash = Animator.StringToHash("Base Layer.zakirFlinch");
-		grappleStateHash = Animator.StringToHash("Base Layer.zakirGrapple");
+		grappleStateHash = Animator.StringToHash("Base Layer.zakirThrow");
 		blockStateHash = Animator.StringToHash("Base Layer.zakirBlock");
 		//counterStateHash = Animator.StringToHash("Base Layer.noirCounter");
-		launchStateHash = Animator.StringToHash("Base Layer.zakirLaunch");
+		launchStateHash = Animator.StringToHash("Base Layer.zakirRecovery");
 	}
 	
 	
