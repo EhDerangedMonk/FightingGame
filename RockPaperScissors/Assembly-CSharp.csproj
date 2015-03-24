@@ -56,7 +56,6 @@
      <Compile Include="Assets\Scripts\MapSelectionMenu.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PlayerState.cs" />
-     <Compile Include="Assets\Scripts\Spawner.cs" />
      <Compile Include="Assets\Scripts\cameraController.cs" />
      <Compile Include="Assets\Scripts\explosionBehaviour.cs" />
      <Compile Include="Assets\Scripts\healthDisplay.cs" />
@@ -68,6 +67,7 @@
      <Compile Include="Assets\Scripts\platformBehaviour.cs" />
      <Compile Include="Assets\Scripts\playerSpawner.cs" />
      <Compile Include="Assets\Scripts\rockBehaviour.cs" />
+     <Compile Include="Assets\Scripts\rockSpawner.cs" />
      <Compile Include="Assets\Scripts\violetBehaviour.cs" />
      <Compile Include="Assets\Scripts\voiceController.cs" />
      <Compile Include="Assets\Scripts\zakirBehaviour.cs" />

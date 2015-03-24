@@ -214,7 +214,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   cChangeKey: 1
-  characterChoice: 0
+  characterChoice: 2
 --- !u!114 &11477540
 MonoBehaviour:
   m_ObjectHideFlags: 1

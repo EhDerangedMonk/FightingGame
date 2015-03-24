@@ -9,13 +9,12 @@ public class playerSpawner : MonoBehaviour {
 
 	private Player player;
 	private GameObject newPlayer;
-	private int layout;
-	private Controls controller;
-	private Animator anim;
 
 	// Use this for initialization
 	void Start () {
-		gameSettings = FindObjectOfType<InitializeStorage> ();
+	
+		gameSettings = FindObjectOfType<InitializeStorage>();
+		Spawn ();
 	}
 	
 	// Update is called once per frame
@@ -25,26 +24,34 @@ public class playerSpawner : MonoBehaviour {
 
 	void Spawn() {
 		if (playerNum == 1) {
-
 			//Assign Character
-			switch ((int)gameSettings.P1Character) {
-				case 1:
-					newPlayer = Resources.Load ("Violet") as GameObject;
-					break;
-				case 2:
-					newPlayer = Resources.Load ("Zakir") as GameObject;
-					break;
-				case 3:
-					newPlayer = Resources.Load ("Noir") as GameObject;
-					break;
-				default: //Load Noir by default.
-					newPlayer = Resources.Load ("Noir") as GameObject;
-					break;
-			}
+			if(gameSettings.P1Character == InitializeStorage.CharacterSelection.Noir)
+				newPlayer = Resources.Load ("Noir") as GameObject;
+			else if(gameSettings.P1Character == InitializeStorage.CharacterSelection.Violet)
+				newPlayer = Resources.Load ("Violet") as GameObject;
+			else if(gameSettings.P1Character == InitializeStorage.CharacterSelection.Zakir)
+				newPlayer = Resources.Load ("Zakir") as GameObject;
+			else
+				print ("Error: Character Selection Not Found");
+
+			newPlayer.GetComponent<Player>().layout = 1;
+			Instantiate(newPlayer, transform.position, transform.rotation);
+		}
+
+		if (playerNum == 2) {
+			//Assign Character
+			if(gameSettings.P2Character == InitializeStorage.CharacterSelection.Noir)
+				newPlayer = Resources.Load ("Noir") as GameObject;
+			else if(gameSettings.P2Character == InitializeStorage.CharacterSelection.Violet)
+				newPlayer = Resources.Load ("Violet") as GameObject;
+			else if(gameSettings.P2Character == InitializeStorage.CharacterSelection.Zakir)
+				newPlayer = Resources.Load ("Zakir") as GameObject;
+			else
+				print ("Error: Character Selection Not Found");
+
+			newPlayer.GetComponent<Player>().layout = 2;
 			Instantiate(newPlayer, transform.position, transform.rotation);
 
-			player = (Player)newPlayer.gameObject.GetComponent (typeof(Player));
-			player.layout = 1;
 		}
 	}
 }

@@ -18,9 +18,9 @@ public class Controls {
 	public KeyCode cChangeKey;
 
 	// Constructor
-	public Controls(int layout, int changeKey) {
+	public Controls(int layout) {
 		changeControls(layout);
-		if (changeKey == 1){
+		/*if (changeKey == 1){
 			cChangeKey = KeyCode.Alpha1;
 		}
 		else if (changeKey == 2){
@@ -34,7 +34,7 @@ public class Controls {
 		}
 		else{
 			cChangeKey = KeyCode.Alpha0;
-		}
+		}*/
 
 	}
 
