@@ -26,27 +26,25 @@ public class playerSpawner : MonoBehaviour {
 	void Spawn() {
 		if (playerNum == 1) {
 
-		//Assign Character
-		switch ((int)gameSettings.P1Character) {
-			case 1:
-				print (1);
-				newPlayer = Resources.Load ("Violet") as GameObject;
-				break;
-			case 2:
-				newPlayer = Resources.Load ("Zakir") as GameObject;
-				break;
-			case 3:
-				newPlayer = Resources.Load ("Noir") as GameObject;
-				break;
-			default: //Load Noir by default.
-				newPlayer = Resources.Load ("Noir") as GameObject;
-				break;
+			//Assign Character
+			switch ((int)gameSettings.P1Character) {
+				case 1:
+					newPlayer = Resources.Load ("Violet") as GameObject;
+					break;
+				case 2:
+					newPlayer = Resources.Load ("Zakir") as GameObject;
+					break;
+				case 3:
+					newPlayer = Resources.Load ("Noir") as GameObject;
+					break;
+				default: //Load Noir by default.
+					newPlayer = Resources.Load ("Noir") as GameObject;
+					break;
 			}
+			Instantiate(newPlayer, transform.position, transform.rotation);
 
 			player = (Player)newPlayer.gameObject.GetComponent (typeof(Player));
 			player.layout = 1;
-
-			Instantiate(newPlayer, transform.position, transform.rotation);
 		}
 	}
 }
