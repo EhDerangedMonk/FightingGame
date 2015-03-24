@@ -48,7 +48,7 @@ public class CharacterSelectionMenu : MonoBehaviour {
 	private Rect P4TokenRectZ;
 	
 	// Keep track of which button each player is selecting
-	enum CharState {Noir=1, Violet, Zakir};
+	enum CharState {Violet=1, Zakir, Noir};
 	private CharState P1State;
 	private CharState P2State;
 	private CharState P3State;
@@ -227,6 +227,11 @@ public class CharacterSelectionMenu : MonoBehaviour {
 		// If all players have selected, go to the next scene (Map Selection)
 		if (P1Selected == true && P2Selected == true /*&& P3Selected == true && P4Selected == true*/)
 		{
+			InitializeStorage storage = (InitializeStorage) GameObject.Find("VariableStorage").GetComponent(typeof(InitializeStorage));
+			storage.P1Character = (InitializeStorage.CharacterSelection)((int)P1State);
+			storage.P2Character = (InitializeStorage.CharacterSelection)((int)P2State);
+			
+			
 			Application.LoadLevel("MapSelectionMenu");
 		}
 	
