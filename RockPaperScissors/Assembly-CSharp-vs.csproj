@@ -70,6 +70,7 @@
      <Compile Include="Assets\Scripts\voiceController.cs" />
      <Compile Include="Assets\Scripts\zakirBehaviour.cs" />
      <Compile Include="Assets\explosionBehaviour.cs" />
+     <Compile Include="Assets\playerSpawner.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>
