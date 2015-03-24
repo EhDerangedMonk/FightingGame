@@ -27,7 +27,7 @@ public class playerSpawner : MonoBehaviour {
 
 			//Assign Controller
 			switch(gameSettings.P1Controller) {
-				case 1:
+				case 1;
 			}
 
 			//Assign Character
