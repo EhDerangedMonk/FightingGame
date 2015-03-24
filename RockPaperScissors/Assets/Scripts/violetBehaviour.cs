@@ -61,8 +61,13 @@ public class violetBehaviour: PlayerState {
 			attack = false;
 		
 		// Place holder grapple has no current use
-		if (stateInfo.nameHash == grappleStateHash)
-			attack = true;
+        if (stateInfo.nameHash == grappleStateHash) {
+            attack = true;
+            if (contact() == true) {
+                grapple();
+            }
+            
+        }
 		
 		// If player is not already in an attack and they have triggered attack animations
 		// Set attack to true and see if they are currently hitting or missing a player (If hit inflict damage)
@@ -177,6 +182,18 @@ public class violetBehaviour: PlayerState {
 		curPlayer.playerHealth.damage(100);
 		return true;
 	}
+
+    override public bool grapple() {
+
+        if (curPlayer == null) {
+            return false;
+        }
+
+        curPlayer.playerState.setFlinch(true);
+        //curPlayer.playerState.setLaunch(true);
+        //curPlayer.playerHealth.damage(100);
+        return true;
+    }
 	
 	// Helper Method
 	private bool contact() {
