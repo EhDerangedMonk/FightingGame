@@ -397,24 +397,18 @@ public class CharacterSelectionMenu : MonoBehaviour {
 	void Update()
 	{
 		// If all players have selected, go to the next scene (Map Selection)
-		if (P1Selected && P2Selected)
+		if (P1Selected && P2Selected && ((P3Playing && P3Selected) || !P3Playing) && ((P4Playing && P4Selected) || !P4Playing))
 		{
-			if ((P3Playing && P3Selected) || !P3Playing)
-			{
-				if ((P4Playing && P4Selected) || !P4Playing)
-				{
-					InitializeStorage storage = (InitializeStorage) GameObject.Find("VariableStorage").GetComponent(typeof(InitializeStorage));
-					storage.P1Character = (InitializeStorage.CharacterSelection)((int)P1State);
-					storage.P2Character = (InitializeStorage.CharacterSelection)((int)P2State);
-					if (P3Playing == true)
-						storage.P3Character = (InitializeStorage.CharacterSelection)((int)P3State);
-					if (P4Playing == true)
-						storage.P4Character = (InitializeStorage.CharacterSelection)((int)P4State);
+			InitializeStorage storage = (InitializeStorage) GameObject.Find("VariableStorage").GetComponent(typeof(InitializeStorage));
+			storage.P1Character = (InitializeStorage.CharacterSelection)((int)P1State);
+			storage.P2Character = (InitializeStorage.CharacterSelection)((int)P2State);
+			if (P3Playing == true)
+				storage.P3Character = (InitializeStorage.CharacterSelection)((int)P3State);
+			if (P4Playing == true)
+				storage.P4Character = (InitializeStorage.CharacterSelection)((int)P4State);
 					
 					
-					Application.LoadLevel("MapSelectionMenu");
-				}
-			}
+			Application.LoadLevel("MapSelectionMenu");
 		}
 	
 		// Update the tokens based on any key input, if the players haven't selected yet
