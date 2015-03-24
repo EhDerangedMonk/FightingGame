@@ -48,7 +48,7 @@ public abstract class PlayerState {
      * DESCR: Performs a grapple and tosses the player
      * POST: Returns true if the move intersected with a player
      */
-    //public abstract bool grapple();
+    public abstract bool grapple();
 
 
     /*
