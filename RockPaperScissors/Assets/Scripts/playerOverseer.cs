@@ -13,17 +13,18 @@ public class playerOverseer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		numPlayers = 0;
 		GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
+		numPlayers = players.Length;
 
-		foreach (GameObject player in players) {
-			Player subject = (Player)player.gameObject.GetComponent(typeof(Player));
-			
-			if(subject.playerHealth.isDead() == false)
-				numPlayers++;
+		if (players != null) {
+			foreach (GameObject player in players) {
+				Player subject = (Player)player.gameObject.GetComponent (typeof(Player));
+
+				if (subject.playerHealth.isDead())
+					numPlayers--;
+			}
 		}
 
-		print (numPlayers);
 
 		//Once all but one of the players are dead, return to the character selection menu.
 		if (numPlayers <= 1)

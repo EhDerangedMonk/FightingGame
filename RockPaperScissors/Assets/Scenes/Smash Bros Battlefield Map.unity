@@ -921,6 +921,7 @@ GameObject:
   - 124: {fileID: 1750818119}
   - 81: {fileID: 1750818118}
   - 114: {fileID: 1750818124}
+  - 114: {fileID: 1750818123}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -993,6 +994,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &1750818123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1750818117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc2a1ee709e65c24582014acde425ba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  P1Tag: {fileID: 2800000, guid: 948bad63308ee9b419aaf4f33d680b30, type: 3}
+  P2Tag: {fileID: 2800000, guid: 0700d6ca272016e4196bab3fdb762787, type: 3}
+  Health_100to81: {fileID: 2800000, guid: 46448c306e88fc541aa37d7c590e3df6, type: 3}
+  Health_80to61: {fileID: 2800000, guid: 364e0124f7a9e334a920595a86aaf93a, type: 3}
+  Health_60to41: {fileID: 2800000, guid: c5eb4def2348f514a9f8ec9f374bb5e9, type: 3}
+  Health_40to21: {fileID: 2800000, guid: c4a721bf987c04044a545c8310ec88fc, type: 3}
+  Health_20to1: {fileID: 2800000, guid: 295068f401ab8d64fad544ba19ded96e, type: 3}
+  xHealthOffset: 0
+  yHealthOffset: 0
 --- !u!114 &1750818124
 MonoBehaviour:
   m_ObjectHideFlags: 0

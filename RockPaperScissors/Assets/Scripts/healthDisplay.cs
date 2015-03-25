@@ -6,6 +6,8 @@ using UnityEngine;
 using System.Collections;
 
 public class healthDisplay : MonoBehaviour {
+
+	private InitializeStorage gameSettings;
     private Player p1, p2;
 	private GUIStyle labelFontSize; // Formats the labels
 	private Vector3 P1TagPoint, P2TagPoint; // The top left locations of each player on the screen (in pixels)
@@ -18,11 +20,7 @@ public class healthDisplay : MonoBehaviour {
 	
     // Use this for initialization
     void Start () {
-        GameObject tmpGameObject;
-        tmpGameObject = GameObject.Find ("Player1");
-        p1 = (Player)tmpGameObject.GetComponent(typeof(Player));
-        tmpGameObject = GameObject.Find ("Player2");
-        p2 = (Player)tmpGameObject.GetComponent(typeof(Player));
+		gameSettings = FindObjectOfType<InitializeStorage> ();
         
         labelFontSize = new GUIStyle();
         labelFontSize.fontSize = 30;
@@ -38,6 +36,20 @@ public class healthDisplay : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+		GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
+		
+		//Find players.
+		if (players != null) {
+			foreach (GameObject player in players) {
+				Player subject = (Player)player.gameObject.GetComponent (typeof(Player));
+				
+				if(subject.layout == (int)gameSettings.P1Controller)
+					p1 = subject;
+				else if(subject.layout == (int)gameSettings.P2Controller)
+					p2 =subject;
+			}
+		}
+
     	// Get each player's top left screen position
     	Vector3 P1Location = p1.transform.position;
     	Vector3 P2Location = p2.transform.position;
@@ -62,10 +74,7 @@ public class healthDisplay : MonoBehaviour {
 		else if (201 <= p1.playerHealth.getHealth() && p1.playerHealth.getHealth() <=400)
 			GUI.DrawTexture (new Rect(P1HealthPoint.x, Screen.height-P1HealthPoint.y, Health_100to81.width/3, Health_100to81.height/3), Health_40to21);
 		else if (1 <= p1.playerHealth.getHealth() && p1.playerHealth.getHealth() <=200)
-			GUI.DrawTexture (new Rect(P1HealthPoint.x, Screen.height-P1HealthPoint.y, Health_100to81.width/3, Health_100to81.height/3), Health_20to1);
-			
-		
-		
+			GUI.DrawTexture (new Rect(P1HealthPoint.x, Screen.height-P1HealthPoint.y, Health_100to81.width/3, Health_100to81.height/3), Health_20to1);	
 		
 		GUI.Label (new Rect(P2TagPoint.x, Screen.height-P2TagPoint.y-40, 300, 300), p2.playerHealth.getHealth().ToString(), labelFontSize);
         GUI.DrawTexture (new Rect(P2TagPoint.x, Screen.height-P2TagPoint.y, P2Tag.width/4, P2Tag.height/4), P2Tag);
