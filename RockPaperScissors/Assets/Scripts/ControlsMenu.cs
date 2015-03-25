@@ -32,6 +32,8 @@ public class ControlsMenu : MonoBehaviour {
 	private Rect SaveButtonRect; // Used to draw and detect button clicks
 	private Rect CancelButtonRect;
 	
+	private Rect ErrorRect;
+	
 	public Texture P1LabelTexture; // Textures for drawing all the rects
 	public Texture P2LabelTexture;
 	public Texture P3LabelTexture;
@@ -50,6 +52,8 @@ public class ControlsMenu : MonoBehaviour {
 	public Texture SaveButtonTexture;
 	public Texture CancelButtonTexture;
 	public Texture GreyOutTexture;
+	public Texture Error1;
+	public Texture Error2;
 	
 	private enum ControllerSelectionState {None=0, KB1, KB2, C1, C2, C3, C4}; // Store where the controllers are
 	private ControllerSelectionState Slot1Selection;
@@ -61,6 +65,10 @@ public class ControlsMenu : MonoBehaviour {
 	private SelectingState CurrentlySelecting;
 	
 	private int numOfControllers; // gets the number of controllers plugged in
+	
+	enum ErrorState {None, Error1, Error2};
+	private ErrorState errorState;
+	private float timeRemaining;
 	
 	
 	
@@ -94,6 +102,10 @@ public class ControlsMenu : MonoBehaviour {
 		C4SlotRect = new Rect(horzSpacing*5 + buttonWidth*3, vertSpacing*3 + buttonHeight*2, buttonWidth, buttonHeight);
 		CancelButtonRect = new Rect(horzSpacing*5 + buttonWidth*3, vertSpacing*4 + buttonHeight*3, buttonWidth, buttonHeight);
 		
+		int errorHeight = Screen.height / 2;
+		int errorWidth = (int)((float)Error1.width * ((float)errorHeight / (float)Error1.height));
+		ErrorRect = new Rect((Screen.width - errorWidth) / 2, (Screen.height - errorHeight) / 2, errorWidth, errorHeight);
+		
 		
 		// Initialize the slot states by getting the storage object
 		InitializeStorage storage = (InitializeStorage) GameObject.Find("VariableStorage").GetComponent(typeof(InitializeStorage));
@@ -111,6 +123,8 @@ public class ControlsMenu : MonoBehaviour {
 		
 		// Initialize the what the player is currently selecting
 		CurrentlySelecting = SelectingState.None;
+		
+		errorState = ErrorState.None;
 	}
 	
 	
@@ -118,17 +132,10 @@ public class ControlsMenu : MonoBehaviour {
 	/********\
 	* UPDATE *
 	\********/
-	void Update () {
-		/*if(CurrentlySelecting == SelectingState.None)
-			Debug.Log("NONE");
-		if(CurrentlySelecting == SelectingState.P1)
-			Debug.Log("P1");
-		if(CurrentlySelecting == SelectingState.P2)
-			Debug.Log("P2");
-		if(CurrentlySelecting == SelectingState.P3)
-			Debug.Log("P3");
-		if(CurrentlySelecting == SelectingState.P4)
-			Debug.Log("P4");*/
+	void Update ()
+	{
+		// update the timer
+		threeSecTimer(Time.deltaTime);
 	}
 	
 	
@@ -159,16 +166,18 @@ public class ControlsMenu : MonoBehaviour {
 		// Draw the Save and Cancel buttons
 		if (GUI.Button(SaveButtonRect, SaveButtonTexture, "")) // if they click the save button
 		{
-			if (CurrentlySelecting == SelectingState.None) // and they're not selecting anything
+			if (CurrentlySelecting == SelectingState.None && errorState == ErrorState.None) // and they're not selecting anything or in an error state
 			{
 				// check for the two kinds of errors
 				if (Slot1Selection == ControllerSelectionState.None || Slot2Selection == ControllerSelectionState.None) // if P1 or P2 don't have controllers assigned
 				{
-					//TODO display error messages
+					errorState = ErrorState.Error1; // put it in the correct error state
+					timeRemaining = 3f; // start the timer for 3 seconds
 				}
 				else if ((Slot3Selection == ControllerSelectionState.None) && !(Slot4Selection == ControllerSelectionState.None)) // if P3 doesn't have a controller but P4 does
 				{
-				
+					errorState = ErrorState.Error2; // put it in the correct error state
+					timeRemaining = 3f; // start the timer for 3 seconds
 				}
 				else // otherwise the changes can be saved and go back to the main menu
 				{
@@ -183,7 +192,7 @@ public class ControlsMenu : MonoBehaviour {
 		}
 		if (GUI.Button(CancelButtonRect, CancelButtonTexture, "")) // if they click the cancel button
 		{
-			if (CurrentlySelecting == SelectingState.None) // and they're not selecting anything
+			if (CurrentlySelecting == SelectingState.None && errorState == ErrorState.None) // and they're not selecting anything or in an error state
 			{
 				Application.LoadLevel("mainmenu"); // go back to the main menu, discarding all changes (by not saving)
 			}
@@ -250,7 +259,45 @@ public class ControlsMenu : MonoBehaviour {
 		if (Slot1Selection != ControllerSelectionState.C4 && Slot2Selection != ControllerSelectionState.C4 &&
 		    Slot3Selection != ControllerSelectionState.C4 && Slot4Selection != ControllerSelectionState.C4)
 			drawC4Icon();
+			
+			
+			
+			
+		// Draw the error message if applicable
+		if (errorState != ErrorState.None)
+		{
+			GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.5f); // Make it translucent
+			GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), GreyOutTexture);
+			GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f); // Reset the colour
+		}
+		
+		if (errorState == ErrorState.Error1)
+		{
+			GUI.DrawTexture(ErrorRect, Error1);
+		}
+		else if (errorState == ErrorState.Error2)
+		{
+			GUI.DrawTexture(ErrorRect, Error2);
+		}
 	}
+	
+	
+	
+	/******************************\
+	* TIMER  					   *
+	*------------------------------*
+	* Counts down 3 seconds then   *
+	* sets the ErrorState to None. *
+	\******************************/
+	void threeSecTimer(float dTime)
+	{
+		if (timeRemaining >= 0f)
+			timeRemaining -= dTime;
+		
+		if (timeRemaining < 0f)
+			errorState = ErrorState.None;
+	}
+	
 	
 	
 	
@@ -265,16 +312,19 @@ public class ControlsMenu : MonoBehaviour {
 	{
 		if (GUI.Button (P1SlotRect, ControllerSlotTexture, ""))
 		{
-			// Toggle selecting for the slot
-			if (CurrentlySelecting == SelectingState.None)
+			if (errorState == ErrorState.None) // if it's not in an error state
 			{
-				if (Slot1Selection == ControllerSelectionState.None)
-					CurrentlySelecting = SelectingState.P1; // toggle
-				else
-					Slot1Selection = ControllerSelectionState.None; // reset slot
-			}				
-			else if (CurrentlySelecting == SelectingState.P1)
-				CurrentlySelecting = SelectingState.None;
+				// Toggle selecting for the slot
+				if (CurrentlySelecting == SelectingState.None)
+				{
+					if (Slot1Selection == ControllerSelectionState.None)
+						CurrentlySelecting = SelectingState.P1; // toggle
+					else
+						Slot1Selection = ControllerSelectionState.None; // reset slot
+				}				
+				else if (CurrentlySelecting == SelectingState.P1)
+					CurrentlySelecting = SelectingState.None;
+			}
 		}
 	}
 	
@@ -282,16 +332,19 @@ public class ControlsMenu : MonoBehaviour {
 	{
 		if (GUI.Button (P2SlotRect, ControllerSlotTexture, ""))
 		{
-			// Toggle selecting for the slot
-			if (CurrentlySelecting == SelectingState.None)
+			if (errorState == ErrorState.None) // if it's not in an error state
 			{
-				if (Slot2Selection == ControllerSelectionState.None)
-					CurrentlySelecting = SelectingState.P2; // toggle
-				else
-					Slot2Selection = ControllerSelectionState.None; // reset slot
-			}	
-			else if (CurrentlySelecting == SelectingState.P2)
-				CurrentlySelecting = SelectingState.None;
+				// Toggle selecting for the slot
+				if (CurrentlySelecting == SelectingState.None)
+				{
+					if (Slot2Selection == ControllerSelectionState.None)
+						CurrentlySelecting = SelectingState.P2; // toggle
+					else
+						Slot2Selection = ControllerSelectionState.None; // reset slot
+				}	
+				else if (CurrentlySelecting == SelectingState.P2)
+					CurrentlySelecting = SelectingState.None;
+			}
 		}
 	}
 	
@@ -299,16 +352,19 @@ public class ControlsMenu : MonoBehaviour {
 	{
 		if (GUI.Button (P3SlotRect, ControllerSlotTexture, ""))
 		{
-			// Toggle selecting for the slot
-			if (CurrentlySelecting == SelectingState.None)
+			if (errorState == ErrorState.None) // if it's not in an error state
 			{
-				if (Slot3Selection == ControllerSelectionState.None)
-					CurrentlySelecting = SelectingState.P3; // toggle
-				else
-					Slot3Selection = ControllerSelectionState.None; // reset slot
-			}	
-			else if (CurrentlySelecting == SelectingState.P3)
-				CurrentlySelecting = SelectingState.None;
+				// Toggle selecting for the slot
+				if (CurrentlySelecting == SelectingState.None)
+				{
+					if (Slot3Selection == ControllerSelectionState.None)
+						CurrentlySelecting = SelectingState.P3; // toggle
+					else
+						Slot3Selection = ControllerSelectionState.None; // reset slot
+				}	
+				else if (CurrentlySelecting == SelectingState.P3)
+					CurrentlySelecting = SelectingState.None;
+			}
 		}
 	}
 	
@@ -316,17 +372,19 @@ public class ControlsMenu : MonoBehaviour {
 	{
 		if (GUI.Button (P4SlotRect, ControllerSlotTexture, ""))
 		{
-			// Toggle selecting for the slot
-			if (CurrentlySelecting == SelectingState.None)
+			if (errorState == ErrorState.None) // if it's not in an error state
 			{
-				if (Slot4Selection == ControllerSelectionState.None)
-					CurrentlySelecting = SelectingState.P4; // toggle
-				else
-					Slot4Selection = ControllerSelectionState.None; // reset slot
-			}	
-			else if (CurrentlySelecting == SelectingState.P4)
-				CurrentlySelecting = SelectingState.None;
-			
+				// Toggle selecting for the slot
+				if (CurrentlySelecting == SelectingState.None)
+				{
+					if (Slot4Selection == ControllerSelectionState.None)
+						CurrentlySelecting = SelectingState.P4; // toggle
+					else
+						Slot4Selection = ControllerSelectionState.None; // reset slot
+				}	
+				else if (CurrentlySelecting == SelectingState.P4)
+					CurrentlySelecting = SelectingState.None;
+			}			
 		}
 	}
 	
@@ -344,17 +402,20 @@ public class ControlsMenu : MonoBehaviour {
 		{
 			if (GUI.Button(KB1SlotRect, KB1Texture, ""))
 			{
-				if (CurrentlySelecting == SelectingState.P1)
-					Slot1Selection = ControllerSelectionState.KB1;
-				else if (CurrentlySelecting == SelectingState.P2)
-					Slot2Selection = ControllerSelectionState.KB1;
-				else if (CurrentlySelecting == SelectingState.P3)
-					Slot3Selection = ControllerSelectionState.KB1;
-				else if (CurrentlySelecting == SelectingState.P4)
-					Slot4Selection = ControllerSelectionState.KB1;
-				
-				if (CurrentlySelecting != SelectingState.None)
-					CurrentlySelecting = SelectingState.None;
+				if (errorState == ErrorState.None) // if it's not in an error state
+				{
+					if (CurrentlySelecting == SelectingState.P1)
+						Slot1Selection = ControllerSelectionState.KB1;
+					else if (CurrentlySelecting == SelectingState.P2)
+						Slot2Selection = ControllerSelectionState.KB1;
+					else if (CurrentlySelecting == SelectingState.P3)
+						Slot3Selection = ControllerSelectionState.KB1;
+					else if (CurrentlySelecting == SelectingState.P4)
+						Slot4Selection = ControllerSelectionState.KB1;
+					
+					if (CurrentlySelecting != SelectingState.None)
+						CurrentlySelecting = SelectingState.None;
+				}
 			}
 		}
 	}
@@ -373,17 +434,20 @@ public class ControlsMenu : MonoBehaviour {
 		{
 			if (GUI.Button(KB2SlotRect, KB2Texture, ""))
 			{
-				if (CurrentlySelecting == SelectingState.P1)
-					Slot1Selection = ControllerSelectionState.KB2;
-				else if (CurrentlySelecting == SelectingState.P2)
-					Slot2Selection = ControllerSelectionState.KB2;
-				else if (CurrentlySelecting == SelectingState.P3)
-					Slot3Selection = ControllerSelectionState.KB2;
-				else if (CurrentlySelecting == SelectingState.P4)
-					Slot4Selection = ControllerSelectionState.KB2;
-				
-				if (CurrentlySelecting != SelectingState.None)
-					CurrentlySelecting = SelectingState.None;
+				if (errorState == ErrorState.None) // if it's not in an error state
+				{
+					if (CurrentlySelecting == SelectingState.P1)
+						Slot1Selection = ControllerSelectionState.KB2;
+					else if (CurrentlySelecting == SelectingState.P2)
+						Slot2Selection = ControllerSelectionState.KB2;
+					else if (CurrentlySelecting == SelectingState.P3)
+						Slot3Selection = ControllerSelectionState.KB2;
+					else if (CurrentlySelecting == SelectingState.P4)
+						Slot4Selection = ControllerSelectionState.KB2;
+					
+					if (CurrentlySelecting != SelectingState.None)
+						CurrentlySelecting = SelectingState.None;
+				}
 			}
 		}
 	}
@@ -404,17 +468,20 @@ public class ControlsMenu : MonoBehaviour {
 			{
 				if (GUI.Button(C1SlotRect, C1Texture, ""))
 				{
-					if (CurrentlySelecting == SelectingState.P1)
-						Slot1Selection = ControllerSelectionState.C1;
-					else if (CurrentlySelecting == SelectingState.P2)
-						Slot2Selection = ControllerSelectionState.C1;
-					else if (CurrentlySelecting == SelectingState.P3)
-						Slot3Selection = ControllerSelectionState.C1;
-					else if (CurrentlySelecting == SelectingState.P4)
-						Slot4Selection = ControllerSelectionState.C1;
-					
-					if (CurrentlySelecting != SelectingState.None)
-						CurrentlySelecting = SelectingState.None;
+					if (errorState == ErrorState.None) // if it's not in an error state
+					{
+						if (CurrentlySelecting == SelectingState.P1)
+							Slot1Selection = ControllerSelectionState.C1;
+						else if (CurrentlySelecting == SelectingState.P2)
+							Slot2Selection = ControllerSelectionState.C1;
+						else if (CurrentlySelecting == SelectingState.P3)
+							Slot3Selection = ControllerSelectionState.C1;
+						else if (CurrentlySelecting == SelectingState.P4)
+							Slot4Selection = ControllerSelectionState.C1;
+						
+						if (CurrentlySelecting != SelectingState.None)
+							CurrentlySelecting = SelectingState.None;
+					}
 				}
 			}
 			else
@@ -440,17 +507,20 @@ public class ControlsMenu : MonoBehaviour {
 			{
 				if (GUI.Button(C2SlotRect, C2Texture, ""))
 				{
-					if (CurrentlySelecting == SelectingState.P1)
-						Slot1Selection = ControllerSelectionState.C2;
-					else if (CurrentlySelecting == SelectingState.P2)
-						Slot2Selection = ControllerSelectionState.C2;
-					else if (CurrentlySelecting == SelectingState.P3)
-						Slot3Selection = ControllerSelectionState.C2;
-					else if (CurrentlySelecting == SelectingState.P4)
-						Slot4Selection = ControllerSelectionState.C2;
-					
-					if (CurrentlySelecting != SelectingState.None)
-						CurrentlySelecting = SelectingState.None;
+					if (errorState == ErrorState.None) // if it's not in an error state
+					{
+						if (CurrentlySelecting == SelectingState.P1)
+							Slot1Selection = ControllerSelectionState.C2;
+						else if (CurrentlySelecting == SelectingState.P2)
+							Slot2Selection = ControllerSelectionState.C2;
+						else if (CurrentlySelecting == SelectingState.P3)
+							Slot3Selection = ControllerSelectionState.C2;
+						else if (CurrentlySelecting == SelectingState.P4)
+							Slot4Selection = ControllerSelectionState.C2;
+						
+						if (CurrentlySelecting != SelectingState.None)
+							CurrentlySelecting = SelectingState.None;
+					}
 				}
 			}
 			else
@@ -476,17 +546,20 @@ public class ControlsMenu : MonoBehaviour {
 			{
 				if (GUI.Button(C3SlotRect, C3Texture, ""))
 				{
-					if (CurrentlySelecting == SelectingState.P1)
-						Slot1Selection = ControllerSelectionState.C3;
-					else if (CurrentlySelecting == SelectingState.P2)
-						Slot2Selection = ControllerSelectionState.C3;
-					else if (CurrentlySelecting == SelectingState.P3)
-						Slot3Selection = ControllerSelectionState.C3;
-					else if (CurrentlySelecting == SelectingState.P4)
-						Slot4Selection = ControllerSelectionState.C3;
-					
-					if (CurrentlySelecting != SelectingState.None)
-						CurrentlySelecting = SelectingState.None;
+					if (errorState == ErrorState.None) // if it's not in an error state
+					{
+						if (CurrentlySelecting == SelectingState.P1)
+							Slot1Selection = ControllerSelectionState.C3;
+						else if (CurrentlySelecting == SelectingState.P2)
+							Slot2Selection = ControllerSelectionState.C3;
+						else if (CurrentlySelecting == SelectingState.P3)
+							Slot3Selection = ControllerSelectionState.C3;
+						else if (CurrentlySelecting == SelectingState.P4)
+							Slot4Selection = ControllerSelectionState.C3;
+						
+						if (CurrentlySelecting != SelectingState.None)
+							CurrentlySelecting = SelectingState.None;
+					}
 				}
 			}
 			else
@@ -512,17 +585,20 @@ public class ControlsMenu : MonoBehaviour {
 			{
 				if (GUI.Button(C4SlotRect, C4Texture, ""))
 				{
-					if (CurrentlySelecting == SelectingState.P1)
-						Slot1Selection = ControllerSelectionState.C4;
-					else if (CurrentlySelecting == SelectingState.P2)
-						Slot2Selection = ControllerSelectionState.C4;
-					else if (CurrentlySelecting == SelectingState.P3)
-						Slot3Selection = ControllerSelectionState.C4;
-					else if (CurrentlySelecting == SelectingState.P4)
-						Slot4Selection = ControllerSelectionState.C4;
-					
-					if (CurrentlySelecting != SelectingState.None)
-						CurrentlySelecting = SelectingState.None;
+					if (errorState == ErrorState.None) // if it's not in an error state
+					{
+						if (CurrentlySelecting == SelectingState.P1)
+							Slot1Selection = ControllerSelectionState.C4;
+						else if (CurrentlySelecting == SelectingState.P2)
+							Slot2Selection = ControllerSelectionState.C4;
+						else if (CurrentlySelecting == SelectingState.P3)
+							Slot3Selection = ControllerSelectionState.C4;
+						else if (CurrentlySelecting == SelectingState.P4)
+							Slot4Selection = ControllerSelectionState.C4;
+						
+						if (CurrentlySelecting != SelectingState.None)
+							CurrentlySelecting = SelectingState.None;
+					}
 				}
 			}
 			else

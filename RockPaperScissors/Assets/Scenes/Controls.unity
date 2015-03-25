@@ -189,3 +189,5 @@ MonoBehaviour:
   SaveButtonTexture: {fileID: 2800000, guid: a726c2840e0d8ce43aa97b1ce3babba9, type: 3}
   CancelButtonTexture: {fileID: 2800000, guid: ecc0984c29aaef64bb983ad0eec53197, type: 3}
   GreyOutTexture: {fileID: 2800000, guid: 58912ad1cb5de994abd431753c1a0397, type: 3}
+  Error1: {fileID: 2800000, guid: 5261752526d99cb4580847c44a21b1f8, type: 3}
+  Error2: {fileID: 2800000, guid: e81ef51e289067c4d9c7f8a1f7c481ff, type: 3}
