@@ -120,15 +120,15 @@ public class MainMenu : MonoBehaviour {
 			P1yAxis = "LeftJoystick1Y";
 			break;
 		case 4:
-			P1Enter = KeyCode.Joystick1Button0;
+			P1Enter = KeyCode.Joystick2Button0;
 			P1yAxis = "LeftJoystick2Y";
 			break;
 		case 5:
-			P1Enter = KeyCode.Joystick1Button0;
+			P1Enter = KeyCode.Joystick3Button0;
 			P1yAxis = "LeftJoystick3Y";
 			break;
 		case 6:
-			P1Enter = KeyCode.Joystick1Button0;
+			P1Enter = KeyCode.Joystick4Button0;
 			P1yAxis = "LeftJoystick4Y";
 			break;
 		}
@@ -148,15 +148,15 @@ public class MainMenu : MonoBehaviour {
 			P2yAxis = "LeftJoystick1Y";
 			break;
 		case 4:
-			P2Enter = KeyCode.Joystick1Button0;
+			P2Enter = KeyCode.Joystick2Button0;
 			P2yAxis = "LeftJoystick2Y";
 			break;
 		case 5:
-			P2Enter = KeyCode.Joystick1Button0;
+			P2Enter = KeyCode.Joystick3Button0;
 			P2yAxis = "LeftJoystick3Y";
 			break;
 		case 6:
-			P2Enter = KeyCode.Joystick1Button0;
+			P2Enter = KeyCode.Joystick4Button0;
 			P2yAxis = "LeftJoystick4Y";
 			break;
 		}
@@ -180,15 +180,15 @@ public class MainMenu : MonoBehaviour {
 			P3yAxis = "LeftJoystick1Y";
 			break;
 		case 4:
-			P3Enter = KeyCode.Joystick1Button0;
+			P3Enter = KeyCode.Joystick2Button0;
 			P3yAxis = "LeftJoystick2Y";
 			break;
 		case 5:
-			P3Enter = KeyCode.Joystick1Button0;
+			P3Enter = KeyCode.Joystick3Button0;
 			P3yAxis = "LeftJoystick3Y";
 			break;
 		case 6:
-			P3Enter = KeyCode.Joystick1Button0;
+			P3Enter = KeyCode.Joystick4Button0;
 			P3yAxis = "LeftJoystick4Y";
 			break;
 		}
@@ -212,15 +212,15 @@ public class MainMenu : MonoBehaviour {
 			P4yAxis = "LeftJoystick1Y";
 			break;
 		case 4:
-			P4Enter = KeyCode.Joystick1Button0;
+			P4Enter = KeyCode.Joystick2Button0;
 			P4yAxis = "LeftJoystick2Y";
 			break;
 		case 5:
-			P4Enter = KeyCode.Joystick1Button0;
+			P4Enter = KeyCode.Joystick3Button0;
 			P4yAxis = "LeftJoystick3Y";
 			break;
 		case 6:
-			P4Enter = KeyCode.Joystick1Button0;
+			P4Enter = KeyCode.Joystick4Button0;
 			P4yAxis = "LeftJoystick4Y";
 			break;
 		}

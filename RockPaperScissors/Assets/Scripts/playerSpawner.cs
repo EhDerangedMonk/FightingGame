@@ -19,9 +19,9 @@ public class playerSpawner : MonoBehaviour {
 			Spawn (gameSettings.P1Character, gameSettings.P1Controller);
 		else if (playerNum == 2 && gameSettings.P2Controller != 0)
 			Spawn (gameSettings.P2Character, gameSettings.P2Controller);
-		else if (playerNum == 1 && gameSettings.P3Controller != 0)
+		else if (playerNum == 3 && gameSettings.P3Controller != 0)
 			Spawn (gameSettings.P3Character, gameSettings.P3Controller);
-		else if (playerNum == 1 && gameSettings.P4Controller != 0)
+		else if (playerNum == 4 && gameSettings.P4Controller != 0)
 			Spawn (gameSettings.P4Character, gameSettings.P4Controller);
 	}
 	
