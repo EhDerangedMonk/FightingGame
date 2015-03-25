@@ -52,6 +52,8 @@ public class MainMenu : MonoBehaviour {
 	private KeyCode P4Enter;
 	private string P4yAxis;
 	
+	private bool canMove; // slows down controller input. It sets when a player uses a controller button and resets when they release it.
+	
 	// Determine if players 3 and 4 are playing
 	private bool P3Playing;
 	private bool P4Playing;
@@ -86,9 +88,11 @@ public class MainMenu : MonoBehaviour {
 		creditsHover = false;
 		exitHover = false;
 		
-		mouseActive = true;
-		lastMousePosition = new Vector3(0f, 0f); // set it to a random position
+		mouseActive = false;
+		lastMousePosition = Input.mousePosition;
 		controllerState = MenuState.Play;
+		
+		canMove = true;
 		
 		// Initialize the logo location
 		int logoWidth = (int)(0.35*Screen.width);
@@ -240,53 +244,61 @@ public class MainMenu : MonoBehaviour {
 		{
 			mouseActive = false;
 			
-			// adjust which option is being selected
-			if (controllerState == MenuState.Play)
+			if (canMove)
 			{
-				// down
-				if (Input.GetAxis(P1yAxis)>0 || Input.GetAxis(P2yAxis)>0 || (P3Playing && Input.GetAxis(P3yAxis)>0) || (P4Playing && Input.GetAxis(P4yAxis)>0))
+				// adjust which option is being selected
+				if (controllerState == MenuState.Play)
 				{
-					controllerState = MenuState.Controls;
+					// down
+					if (Input.GetAxis(P1yAxis)>0 || Input.GetAxis(P2yAxis)>0 || (P3Playing && Input.GetAxis(P3yAxis)>0) || (P4Playing && Input.GetAxis(P4yAxis)>0))
+					{
+						controllerState = MenuState.Controls;
+					}
+				}
+				else if (controllerState == MenuState.Controls)
+				{
+					// up
+					if (Input.GetAxis(P1yAxis)<0 || Input.GetAxis(P2yAxis)<0 || (P3Playing && Input.GetAxis(P3yAxis)<0) || (P4Playing && Input.GetAxis(P4yAxis)<0))
+					{
+						controllerState = MenuState.Play;
+					}
+					// down
+					if (Input.GetAxis(P1yAxis)>0 || Input.GetAxis(P2yAxis)>0 || (P3Playing && Input.GetAxis(P3yAxis)>0) || (P4Playing && Input.GetAxis(P4yAxis)>0))
+					{
+						controllerState = MenuState.Credits;
+					}
+				}
+				else if (controllerState == MenuState.Credits)
+				{
+					// up
+					if (Input.GetAxis(P1yAxis)<0 || Input.GetAxis(P2yAxis)<0 || (P3Playing && Input.GetAxis(P3yAxis)<0) || (P4Playing && Input.GetAxis(P4yAxis)<0))
+					{
+						controllerState = MenuState.Controls;
+					}
+					// down
+					if (Input.GetAxis(P1yAxis)>0 || Input.GetAxis(P2yAxis)>0 || (P3Playing && Input.GetAxis(P3yAxis)>0) || (P4Playing && Input.GetAxis(P4yAxis)>0))
+					{
+						controllerState = MenuState.Exit;
+					}
+				}
+				else if (controllerState == MenuState.Exit)
+				{
+					// up
+					if (Input.GetAxis(P1yAxis)<0 || Input.GetAxis(P2yAxis)<0 || (P3Playing && Input.GetAxis(P3yAxis)<0) || (P4Playing && Input.GetAxis(P4yAxis)<0))
+					{
+						controllerState = MenuState.Credits;
+					}
 				}
 			}
-			else if (controllerState == MenuState.Controls)
-			{
-				// up
-				if (Input.GetAxis(P1yAxis)<0 || Input.GetAxis(P2yAxis)<0 || (P3Playing && Input.GetAxis(P3yAxis)<0) || (P4Playing && Input.GetAxis(P4yAxis)<0))
-				{
-					controllerState = MenuState.Play;
-				}
-				// down
-				if (Input.GetAxis(P1yAxis)>0 || Input.GetAxis(P2yAxis)>0 || (P3Playing && Input.GetAxis(P3yAxis)>0) || (P4Playing && Input.GetAxis(P4yAxis)>0))
-				{
-					controllerState = MenuState.Credits;
-				}
-			}
-			else if (controllerState == MenuState.Credits)
-			{
-				// up
-				if (Input.GetAxis(P1yAxis)<0 || Input.GetAxis(P2yAxis)<0 || (P3Playing && Input.GetAxis(P3yAxis)<0) || (P4Playing && Input.GetAxis(P4yAxis)<0))
-				{
-					controllerState = MenuState.Controls;
-				}
-				// down
-				if (Input.GetAxis(P1yAxis)>0 || Input.GetAxis(P2yAxis)>0 || (P3Playing && Input.GetAxis(P3yAxis)>0) || (P4Playing && Input.GetAxis(P4yAxis)>0))
-				{
-					controllerState = MenuState.Exit;
-				}
-			}
-			else if (controllerState == MenuState.Exit)
-			{
-				// up
-				if (Input.GetAxis(P1yAxis)<0 || Input.GetAxis(P2yAxis)<0 || (P3Playing && Input.GetAxis(P3yAxis)<0) || (P4Playing && Input.GetAxis(P4yAxis)<0))
-				{
-					controllerState = MenuState.Credits;
-				}
-			}
+			
+			canMove = false;
 		}
 		
-		print (mouseActive.ToString());
-		print (((int)controllerState).ToString());
+		// Reset the controller's ability to move
+		if (Input.GetAxis(P1yAxis)==0 && Input.GetAxis(P2yAxis)==0 && ((P3Playing && Input.GetAxis(P3yAxis)==0) || !P3Playing) && ((P4Playing && Input.GetAxis(P4yAxis)==0) || !P4Playing))
+		{
+			canMove = true;
+		}
 		
 		lastMousePosition = currentMousePosition;
 	}
@@ -455,6 +467,42 @@ public class MainMenu : MonoBehaviour {
 	    
 	    // Draw the logo
 	    GUI.DrawTexture(logoRect, logoTexture);
+	    
+	    
+	    
+	    // Determine if a controller was used to select an icon
+	    if (mouseActive == false)
+	    {
+	    	if (Input.GetKeyDown(P1Enter) || Input.GetKeyDown(P2Enter) || (P3Playing && Input.GetKeyDown(P3Enter)) || (P4Playing && Input.GetKeyDown(P4Enter)))
+	    	{
+	    		if (controllerState == MenuState.Play)
+	    		{
+					print ("Clicked PLAY");
+					
+					// Load the character selection menu
+					Application.LoadLevel("CharacterSelectionMenu");
+	    		}
+	    		else if (controllerState == MenuState.Controls)
+	    		{
+					print ("Clicked CONTROLS");
+					
+					Application.LoadLevel("Controls");
+	    		}
+	    		else if (controllerState == MenuState.Credits)
+	    		{
+					print ("Clicked CREDITS");
+					
+					// Load the credits scene
+					Application.LoadLevel ("Credits");
+	    		}
+	    		else if (controllerState == MenuState.Exit)
+	    		{
+					print ("Clicked EXIT");
+					
+					Application.Quit();
+	    		}
+	    	}
+	    }
         
     }
     
