@@ -33,7 +33,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 464588}
   - 61: {fileID: 6164588}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: groundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
@@ -230,7 +230,6 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 512
-  cChangeKey: 1
   characterChoice: 1
 --- !u!212 &21264588
 SpriteRenderer:

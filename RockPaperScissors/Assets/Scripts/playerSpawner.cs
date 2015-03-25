@@ -14,7 +14,15 @@ public class playerSpawner : MonoBehaviour {
 	void Start () {
 		//Find the options.
 		gameSettings = FindObjectOfType<InitializeStorage>();
-		Spawn ();
+
+		if (playerNum == 1 && gameSettings.P1Controller != 0)
+			Spawn (gameSettings.P1Character, gameSettings.P1Controller);
+		else if (playerNum == 2 && gameSettings.P2Controller != 0)
+			Spawn (gameSettings.P2Character, gameSettings.P2Controller);
+		else if (playerNum == 1 && gameSettings.P3Controller != 0)
+			Spawn (gameSettings.P3Character, gameSettings.P3Controller);
+		else if (playerNum == 1 && gameSettings.P4Controller != 0)
+			Spawn (gameSettings.P4Character, gameSettings.P4Controller);
 	}
 	
 	// Update is called once per frame
@@ -22,10 +30,9 @@ public class playerSpawner : MonoBehaviour {
 	
 	}
 
-	void Spawn() {
-		if (playerNum == 1 && gameSettings.P1Controller != 0) {
+	void Spawn(InitializeStorage.CharacterSelection character, InitializeStorage.ControllerSelection controller) {
 			//Assign Character
-			switch((int)gameSettings.P1Character) {
+			switch((int)character) {
 				case 1: //Violet
 					newPlayer = Resources.Load ("Violet") as GameObject;
 					break;
@@ -41,23 +48,23 @@ public class playerSpawner : MonoBehaviour {
 			}
 
 			//Assign Controller
-			switch((int)gameSettings.P1Controller) {
-				case 1:
+			switch((int)controller) {
+				case 1: //Keyboard 1
 					newPlayer.GetComponent<Player>().layout = 1;
 					break;
-				case 2:
+				case 2: //Keyboard 2
 					newPlayer.GetComponent<Player>().layout = 2;
 					break;
-				case 3:
+				case 3: //Controller 1
 					newPlayer.GetComponent<Player>().layout = 3;
 					break;
-				case 4:
+				case 4: //Controller 2
 					newPlayer.GetComponent<Player>().layout = 4;
 					break;
-				case 5:
+				case 5: //Controller 3
 					newPlayer.GetComponent<Player>().layout = 5;
 					break;
-				case 6:
+				case 6: //Controller 4
 					newPlayer.GetComponent<Player>().layout = 6;
 					break;
 				default:
@@ -66,145 +73,6 @@ public class playerSpawner : MonoBehaviour {
 			}
 
 			//Spawn the player.
-			Instantiate(newPlayer, transform.position, transform.rotation);
-		}
-
-		else if (playerNum == 2  && gameSettings.P2Controller != 0) {
-			//Assign Character
-			switch((int)gameSettings.P2Character) {
-			case 1: //Violet
-				newPlayer = Resources.Load ("Violet") as GameObject;
-				break;
-			case 2: //Zakir
-				newPlayer = Resources.Load ("Zakir") as GameObject;
-				break;
-			case 3: //Noir
-				newPlayer = Resources.Load ("Noir") as GameObject;
-				break;
-			default:
-				print("Error: Character not selected.");
-				break;
-			}
-			
-			//Assign Controller
-			switch((int)gameSettings.P2Controller) {
-			case 1:
-				newPlayer.GetComponent<Player>().layout = 1;
-				break;
-			case 2:
-				newPlayer.GetComponent<Player>().layout = 2;
-				break;
-			case 3:
-				newPlayer.GetComponent<Player>().layout = 3;
-				break;
-			case 4:
-				newPlayer.GetComponent<Player>().layout = 4;
-				break;
-			case 5:
-				newPlayer.GetComponent<Player>().layout = 5;
-				break;
-			case 6:
-				newPlayer.GetComponent<Player>().layout = 6;
-				break;
-			default:
-				print ("Error: Controller not assigned.");
-				break;
-			}
-			
-			//Spawn the player.
-			Instantiate(newPlayer, transform.position, transform.rotation);
-		}
-
-		else if (playerNum == 3  && gameSettings.P3Controller != 0) {
-			//Assign Character
-			switch((int)gameSettings.P3Character) {
-			case 1: //Violet
-				newPlayer = Resources.Load ("Violet") as GameObject;
-				break;
-			case 2: //Zakir
-				newPlayer = Resources.Load ("Zakir") as GameObject;
-				break;
-			case 3: //Noir
-				newPlayer = Resources.Load ("Noir") as GameObject;
-				break;
-			default:
-				print("Error: Character not selected.");
-				break;
-			}
-			
-			//Assign Controller
-			switch((int)gameSettings.P3Controller) {
-			case 1:
-				newPlayer.GetComponent<Player>().layout = 1;
-				break;
-			case 2:
-				newPlayer.GetComponent<Player>().layout = 2;
-				break;
-			case 3:
-				newPlayer.GetComponent<Player>().layout = 3;
-				break;
-			case 4:
-				newPlayer.GetComponent<Player>().layout = 4;
-				break;
-			case 5:
-				newPlayer.GetComponent<Player>().layout = 5;
-				break;
-			case 6:
-				newPlayer.GetComponent<Player>().layout = 6;
-				break;
-			default:
-				print ("Error: Controller not assigned.");
-				break;
-			}
-			
-			//Spawn the player.
-			Instantiate(newPlayer, transform.position, transform.rotation);
-		}
-
-		else if(playerNum == 4  && gameSettings.P4Controller != 0) {
-			//Assign Character
-			switch((int)gameSettings.P4Character) {
-			case 1: //Violet
-				newPlayer = Resources.Load ("Violet") as GameObject;
-				break;
-			case 2: //Zakir
-				newPlayer = Resources.Load ("Zakir") as GameObject;
-				break;
-			case 3: //Noir
-				newPlayer = Resources.Load ("Noir") as GameObject;
-				break;
-			default:
-				print("Error: Character not selected.");
-				break;
-			}
-			
-			//Assign Controller
-			switch((int)gameSettings.P4Controller) {
-			case 1:
-				newPlayer.GetComponent<Player>().layout = 1;
-				break;
-			case 2:
-				newPlayer.GetComponent<Player>().layout = 2;
-				break;
-			case 3:
-				newPlayer.GetComponent<Player>().layout = 3;
-				break;
-			case 4:
-				newPlayer.GetComponent<Player>().layout = 4;
-				break;
-			case 5:
-				newPlayer.GetComponent<Player>().layout = 5;
-				break;
-			case 6:
-				newPlayer.GetComponent<Player>().layout = 6;
-				break;
-			default:
-				print ("Error: Controller not assigned.");
-				break;
-			}
-			
-			//Spawn the player.
-			Instantiate(newPlayer, transform.position, transform.rotation);
-		}
+			Instantiate (newPlayer, transform.position, transform.rotation);
 	}
 }

@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\noirBehaviour.cs" />
      <Compile Include="Assets\Scripts\pitfallBehaviour.cs" />
      <Compile Include="Assets\Scripts\platformBehaviour.cs" />
+     <Compile Include="Assets\Scripts\playerOverseer.cs" />
      <Compile Include="Assets\Scripts\playerSpawner.cs" />
      <Compile Include="Assets\Scripts\rockBehaviour.cs" />
      <Compile Include="Assets\Scripts\rockSpawner.cs" />
