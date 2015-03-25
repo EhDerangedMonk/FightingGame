@@ -225,12 +225,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e832cbe63e919a54db3472a9521dd7c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightAttack: {fileID: 8300000, guid: 821567137ca4f754db8b4794f59f0d47, type: 3}
-  heavyAttack: {fileID: 8300000, guid: 783b95d7f6faa404580d3fee4dd4e21f, type: 3}
-  specialAttack: {fileID: 8300000, guid: 379eaa6b11be2cb4f9f9661633945e0a, type: 3}
-  flinch: {fileID: 8300000, guid: 1ad1f1b4cd128344482abd0efdf4212d, type: 3}
-  launched: {fileID: 8300000, guid: f2d301c9d25e2094eb980d803bc745d4, type: 3}
-  death: {fileID: 8300000, guid: da99589e71379cd42a3d44064022ff2b, type: 3}
+  lightAttack: {fileID: 8300000, guid: f243d05abdae0e743a432164eb7f3972, type: 3}
+  heavyAttack: {fileID: 8300000, guid: 5ea794a811d08a544af20e6c5c94d956, type: 3}
+  specialAttack: {fileID: 8300000, guid: b309b3b8ac65bac4a90d1c28373fd543, type: 3}
+  flinch: {fileID: 8300000, guid: 89cb7264a2c56a94f92cffcccda949c1, type: 3}
+  launched: {fileID: 8300000, guid: d758ede1079f1c846bf451aa9bb77059, type: 3}
+  death: {fileID: 8300000, guid: 64bba2fb5f5b653478a7a2be8e7c3931, type: 3}
 --- !u!212 &21277538
 SpriteRenderer:
   m_ObjectHideFlags: 1

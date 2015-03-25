@@ -46,6 +46,7 @@ public class InitializeStorage : MonoBehaviour {
 	{
 		// Determine the default controller assignments
 		numOfControllers = Input.GetJoystickNames().Length;
+		Debug.Log (Input.GetJoystickNames ().ToString ());
 		
 		if (numOfControllers == 0)
 		{
