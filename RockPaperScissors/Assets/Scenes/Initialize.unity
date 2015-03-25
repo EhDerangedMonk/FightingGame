@@ -193,6 +193,7 @@ MonoBehaviour:
   P2Character: 0
   P3Character: 0
   P4Character: 0
+  numOfControllers: 0
 --- !u!4 &821327911
 Transform:
   m_ObjectHideFlags: 0

@@ -391,7 +391,7 @@ public class CharacterSelectionMenu : MonoBehaviour {
 		}
 	}
 	
-	/*-******\
+	/********\
 	* UPDATE *
 	\********/
 	void Update()
