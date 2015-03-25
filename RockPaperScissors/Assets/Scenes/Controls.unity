@@ -182,6 +182,10 @@ MonoBehaviour:
   C2Texture: {fileID: 2800000, guid: 69766b6ddc5fb6d4591237ffdfc4f4da, type: 3}
   C3Texture: {fileID: 2800000, guid: 64118bf8975ad9e419c68e1d8ac203fd, type: 3}
   C4Texture: {fileID: 2800000, guid: be70f8dbe65d5064d908ed4d6e496c65, type: 3}
+  C1DarkTexture: {fileID: 2800000, guid: 337b176c08bc6b24b83db951ef9e75ec, type: 3}
+  C2DarkTexture: {fileID: 2800000, guid: ee82437823880a94487af1c9ab4f3514, type: 3}
+  C3DarkTexture: {fileID: 2800000, guid: 82dd4cd3b0c965d469bf834faa3daeb5, type: 3}
+  C4DarkTexture: {fileID: 2800000, guid: 5cfc8f4bff73e42479cc3f060d75d09c, type: 3}
   SaveButtonTexture: {fileID: 2800000, guid: a726c2840e0d8ce43aa97b1ce3babba9, type: 3}
   CancelButtonTexture: {fileID: 2800000, guid: ecc0984c29aaef64bb983ad0eec53197, type: 3}
   GreyOutTexture: {fileID: 2800000, guid: 58912ad1cb5de994abd431753c1a0397, type: 3}

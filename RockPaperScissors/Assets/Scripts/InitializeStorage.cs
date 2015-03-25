@@ -24,6 +24,8 @@ public class InitializeStorage : MonoBehaviour {
 	public CharacterSelection P2Character;
 	public CharacterSelection P3Character;
 	public CharacterSelection P4Character;
+	
+	public int numOfControllers; // Stores how many controllers are plugged in
 
 
 
@@ -43,7 +45,7 @@ public class InitializeStorage : MonoBehaviour {
 	void Start()
 	{
 		// Determine the default controller assignments
-		int numOfControllers = Input.GetJoystickNames().Length;
+		numOfControllers = Input.GetJoystickNames().Length;
 		
 		if (numOfControllers == 0)
 		{

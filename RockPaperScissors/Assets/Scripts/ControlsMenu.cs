@@ -43,6 +43,10 @@ public class ControlsMenu : MonoBehaviour {
 	public Texture C2Texture;
 	public Texture C3Texture;
 	public Texture C4Texture;
+	public Texture C1DarkTexture;
+	public Texture C2DarkTexture;
+	public Texture C3DarkTexture;
+	public Texture C4DarkTexture;
 	public Texture SaveButtonTexture;
 	public Texture CancelButtonTexture;
 	public Texture GreyOutTexture;
@@ -55,6 +59,8 @@ public class ControlsMenu : MonoBehaviour {
 	
 	private enum SelectingState {None=0, P1, P2, P3, P4}; // Keeps track of which slot the player is choosing for
 	private SelectingState CurrentlySelecting;
+	
+	private int numOfControllers; // gets the number of controllers plugged in
 	
 	
 	
@@ -100,6 +106,8 @@ public class ControlsMenu : MonoBehaviour {
 		Slot2Selection = (ControllerSelectionState)((int)storedP2Controller);
 		Slot3Selection = (ControllerSelectionState)((int)storedP3Controller);
 		Slot4Selection = (ControllerSelectionState)((int)storedP4Controller);
+		
+		numOfControllers = storage.numOfControllers;
 		
 		// Initialize the what the player is currently selecting
 		CurrentlySelecting = SelectingState.None;
@@ -390,21 +398,28 @@ public class ControlsMenu : MonoBehaviour {
 			GUI.DrawTexture(P3SlotRect, C1Texture);
 		else if (Slot4Selection == ControllerSelectionState.C1)
 			GUI.DrawTexture(P4SlotRect, C1Texture);
-		else // Draw it as a button
+		else // Draw it as a button if there's enough controllers, otherwise draw it as a texture
 		{
-			if (GUI.Button(C1SlotRect, C1Texture, ""))
+			if (numOfControllers >= 1)
 			{
-				if (CurrentlySelecting == SelectingState.P1)
-					Slot1Selection = ControllerSelectionState.C1;
-				else if (CurrentlySelecting == SelectingState.P2)
-					Slot2Selection = ControllerSelectionState.C1;
-				else if (CurrentlySelecting == SelectingState.P3)
-					Slot3Selection = ControllerSelectionState.C1;
-				else if (CurrentlySelecting == SelectingState.P4)
-					Slot4Selection = ControllerSelectionState.C1;
-				
-				if (CurrentlySelecting != SelectingState.None)
-					CurrentlySelecting = SelectingState.None;
+				if (GUI.Button(C1SlotRect, C1Texture, ""))
+				{
+					if (CurrentlySelecting == SelectingState.P1)
+						Slot1Selection = ControllerSelectionState.C1;
+					else if (CurrentlySelecting == SelectingState.P2)
+						Slot2Selection = ControllerSelectionState.C1;
+					else if (CurrentlySelecting == SelectingState.P3)
+						Slot3Selection = ControllerSelectionState.C1;
+					else if (CurrentlySelecting == SelectingState.P4)
+						Slot4Selection = ControllerSelectionState.C1;
+					
+					if (CurrentlySelecting != SelectingState.None)
+						CurrentlySelecting = SelectingState.None;
+				}
+			}
+			else
+			{
+				GUI.DrawTexture(C1SlotRect, C1DarkTexture);
 			}
 		}
 	}
@@ -419,21 +434,28 @@ public class ControlsMenu : MonoBehaviour {
 			GUI.DrawTexture(P3SlotRect, C2Texture);
 		else if (Slot4Selection == ControllerSelectionState.C2)
 			GUI.DrawTexture(P4SlotRect, C2Texture);
-		else // Draw it as a button
+		else // Draw it as a button if there's enough controllers, otherwise draw it as a texture
 		{
-			if (GUI.Button(C2SlotRect, C2Texture, ""))
+			if (numOfControllers >= 2)
 			{
-				if (CurrentlySelecting == SelectingState.P1)
-					Slot1Selection = ControllerSelectionState.C2;
-				else if (CurrentlySelecting == SelectingState.P2)
-					Slot2Selection = ControllerSelectionState.C2;
-				else if (CurrentlySelecting == SelectingState.P3)
-					Slot3Selection = ControllerSelectionState.C2;
-				else if (CurrentlySelecting == SelectingState.P4)
-					Slot4Selection = ControllerSelectionState.C2;
-				
-				if (CurrentlySelecting != SelectingState.None)
-					CurrentlySelecting = SelectingState.None;
+				if (GUI.Button(C2SlotRect, C2Texture, ""))
+				{
+					if (CurrentlySelecting == SelectingState.P1)
+						Slot1Selection = ControllerSelectionState.C2;
+					else if (CurrentlySelecting == SelectingState.P2)
+						Slot2Selection = ControllerSelectionState.C2;
+					else if (CurrentlySelecting == SelectingState.P3)
+						Slot3Selection = ControllerSelectionState.C2;
+					else if (CurrentlySelecting == SelectingState.P4)
+						Slot4Selection = ControllerSelectionState.C2;
+					
+					if (CurrentlySelecting != SelectingState.None)
+						CurrentlySelecting = SelectingState.None;
+				}
+			}
+			else
+			{
+				GUI.DrawTexture(C2SlotRect, C2DarkTexture);
 			}
 		}
 	}
@@ -448,21 +470,28 @@ public class ControlsMenu : MonoBehaviour {
 			GUI.DrawTexture(P3SlotRect, C3Texture);
 		else if (Slot4Selection == ControllerSelectionState.C3)
 			GUI.DrawTexture(P4SlotRect, C3Texture);
-		else // Draw it as a button
+		else // Draw it as a button if there's enough controllers, otherwise draw it as a texture
 		{
-			if (GUI.Button(C3SlotRect, C3Texture, ""))
+			if (numOfControllers >= 3)
 			{
-				if (CurrentlySelecting == SelectingState.P1)
-					Slot1Selection = ControllerSelectionState.C3;
-				else if (CurrentlySelecting == SelectingState.P2)
-					Slot2Selection = ControllerSelectionState.C3;
-				else if (CurrentlySelecting == SelectingState.P3)
-					Slot3Selection = ControllerSelectionState.C3;
-				else if (CurrentlySelecting == SelectingState.P4)
-					Slot4Selection = ControllerSelectionState.C3;
-				
-				if (CurrentlySelecting != SelectingState.None)
-					CurrentlySelecting = SelectingState.None;
+				if (GUI.Button(C3SlotRect, C3Texture, ""))
+				{
+					if (CurrentlySelecting == SelectingState.P1)
+						Slot1Selection = ControllerSelectionState.C3;
+					else if (CurrentlySelecting == SelectingState.P2)
+						Slot2Selection = ControllerSelectionState.C3;
+					else if (CurrentlySelecting == SelectingState.P3)
+						Slot3Selection = ControllerSelectionState.C3;
+					else if (CurrentlySelecting == SelectingState.P4)
+						Slot4Selection = ControllerSelectionState.C3;
+					
+					if (CurrentlySelecting != SelectingState.None)
+						CurrentlySelecting = SelectingState.None;
+				}
+			}
+			else
+			{
+				GUI.DrawTexture(C3SlotRect, C3DarkTexture);
 			}
 		}
 	}
@@ -477,21 +506,28 @@ public class ControlsMenu : MonoBehaviour {
 			GUI.DrawTexture(P3SlotRect, C4Texture);
 		else if (Slot4Selection == ControllerSelectionState.C4)
 			GUI.DrawTexture(P4SlotRect, C4Texture);
-		else // Draw it as a button
+		else // Draw it as a button if there's enough controllers, otherwise draw it as a texture
 		{
-			if (GUI.Button(C4SlotRect, C4Texture, ""))
+			if (numOfControllers >= 4)
 			{
-				if (CurrentlySelecting == SelectingState.P1)
-					Slot1Selection = ControllerSelectionState.C4;
-				else if (CurrentlySelecting == SelectingState.P2)
-					Slot2Selection = ControllerSelectionState.C4;
-				else if (CurrentlySelecting == SelectingState.P3)
-					Slot3Selection = ControllerSelectionState.C4;
-				else if (CurrentlySelecting == SelectingState.P4)
-					Slot4Selection = ControllerSelectionState.C4;
-				
-				if (CurrentlySelecting != SelectingState.None)
-					CurrentlySelecting = SelectingState.None;
+				if (GUI.Button(C4SlotRect, C4Texture, ""))
+				{
+					if (CurrentlySelecting == SelectingState.P1)
+						Slot1Selection = ControllerSelectionState.C4;
+					else if (CurrentlySelecting == SelectingState.P2)
+						Slot2Selection = ControllerSelectionState.C4;
+					else if (CurrentlySelecting == SelectingState.P3)
+						Slot3Selection = ControllerSelectionState.C4;
+					else if (CurrentlySelecting == SelectingState.P4)
+						Slot4Selection = ControllerSelectionState.C4;
+					
+					if (CurrentlySelecting != SelectingState.None)
+						CurrentlySelecting = SelectingState.None;
+				}
+			}
+			else
+			{
+				GUI.DrawTexture(C4SlotRect, C4DarkTexture);
 			}
 		}
 	}
