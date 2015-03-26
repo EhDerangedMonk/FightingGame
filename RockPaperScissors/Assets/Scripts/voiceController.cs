@@ -60,7 +60,7 @@ public class voiceController : MonoBehaviour {
 	void playLaunched() {
 		if (voice.clip != launched) {
 			voice.clip = launched;
-			voice.Play ();;
+			voice.Play ();
 		}
 	}
 	

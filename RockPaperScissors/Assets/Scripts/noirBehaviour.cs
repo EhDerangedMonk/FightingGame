@@ -15,6 +15,8 @@ public class noirBehaviour: PlayerState {
     private Player curPlayer; // Colliding player which is usually the opponent
     private bool attack; // If player currently in attack don't redo dmg for it
 
+	//TEMP CODE - Nigel
+	private hitMarkerSpawner hitFactory = GameObject.FindObjectOfType<hitMarkerSpawner> ();
 
     // Constructor
     public noirBehaviour(Transform trans, Animator animation) {
@@ -128,6 +130,9 @@ public class noirBehaviour: PlayerState {
             return false;
         }
 
+		//TEMP CODE - Nigel
+		hitFactory.makeHitMarker (curPlayer.gameObject, 1);
+
         curPlayer.playerState.setFlinch(true);
         curPlayer.playerHealth.damage(50);
         return true; 
@@ -162,6 +167,10 @@ public class noirBehaviour: PlayerState {
                 damage = 400;
                 break;
         }
+
+		//TEMP CODE - Nigel
+		hitFactory.makeHitMarker (curPlayer.gameObject, 1);
+
         curPlayer.playerState.setFlinch(true);
         curPlayer.playerHealth.damage(damage);
         return true;
@@ -179,9 +188,11 @@ public class noirBehaviour: PlayerState {
             return false;
         }
 
-
-        curPlayer.playerState.setLaunch(true);
-        curPlayer.playerHealth.damage(100);
+		//TEMP CODE - Nigel
+		hitFactory.makeHitMarker (curPlayer.gameObject, 1);
+		
+		curPlayer.playerState.setLaunch (true);
+		curPlayer.playerHealth.damage (100);
         return true;
     }
 
@@ -219,6 +230,8 @@ public class noirBehaviour: PlayerState {
             return false;
         }
 
+		//TEMP CODE - Nigel
+		hitFactory.makeHitMarker (curPlayer.gameObject, 1);
 
         curPlayer.playerState.setFlinch(true);
         curPlayer.playerHealth.damage(25);

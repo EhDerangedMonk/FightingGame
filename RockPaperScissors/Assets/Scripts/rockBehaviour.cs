@@ -7,13 +7,16 @@ using UnityEngine;
 using System.Collections;
 
 public class rockBehaviour : MonoBehaviour {
-	Player victim;
+
+	private Player victim;
 	private Animator anim;
 	private bool hit = false;
+	private hitMarkerSpawner hitFactory;
 
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
+		hitFactory = GameObject.FindObjectOfType<hitMarkerSpawner> ();
 	}
 
 	// Update is called once per frame
@@ -25,7 +28,7 @@ public class rockBehaviour : MonoBehaviour {
 		anim.SetTrigger ("Hit");
 	}
 
-	void Destroy () {
+	void Remove () {
 		Destroy (this.gameObject);
 	}
 
@@ -34,6 +37,7 @@ public class rockBehaviour : MonoBehaviour {
 		bool dealDamage = true;
 
 		if (other.gameObject.tag == "Player") {
+			hitFactory.makeHitMarker (other.gameObject, 4);
 			victim = (Player)other.gameObject.GetComponent(typeof(Player));
 
 			if(!hit) {
@@ -67,6 +71,7 @@ public class rockBehaviour : MonoBehaviour {
 		}
 		//Rocks break each other.
 		if (other.gameObject.tag == "Rock") {
+			hitFactory.makeHitMarker (other.gameObject, 4);
 			playHit(); //The rock 'breaks' when it collides with another rock.
 		}
 	}

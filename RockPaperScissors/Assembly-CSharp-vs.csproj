@@ -72,7 +72,6 @@
      <Compile Include="Assets\Scripts\violetBehaviour.cs" />
      <Compile Include="Assets\Scripts\voiceController.cs" />
      <Compile Include="Assets\Scripts\zakirBehaviour.cs" />
-     <Compile Include="Assets\soundManager.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>

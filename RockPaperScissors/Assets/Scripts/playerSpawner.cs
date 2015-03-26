@@ -48,29 +48,8 @@ public class playerSpawner : MonoBehaviour {
 			}
 
 			//Assign Controller
-			switch((int)controller) {
-				case 1: //Keyboard 1
-					newPlayer.GetComponent<Player>().layout = 1;
-					break;
-				case 2: //Keyboard 2
-					newPlayer.GetComponent<Player>().layout = 2;
-					break;
-				case 3: //Controller 1
-					newPlayer.GetComponent<Player>().layout = 3;
-					break;
-				case 4: //Controller 2
-					newPlayer.GetComponent<Player>().layout = 4;
-					break;
-				case 5: //Controller 3
-					newPlayer.GetComponent<Player>().layout = 5;
-					break;
-				case 6: //Controller 4
-					newPlayer.GetComponent<Player>().layout = 6;
-					break;
-				default:
-					print ("Error: Controller not assigned.");
-					break;
-			}
+			if(controller != 0)
+				newPlayer.GetComponent<Player>().layout = (int)controller;
 
 			//Spawn the player.
 			Instantiate (newPlayer, transform.position, transform.rotation);

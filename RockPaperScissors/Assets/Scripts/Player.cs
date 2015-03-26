@@ -50,9 +50,6 @@ public class Player : MonoBehaviour {
 		} else {
 			playerState = new violetBehaviour(this.transform, anim);
 		}
-
-
-
     }
 
     // Update is called whenever the processor is free (As fast as possible)
@@ -80,7 +77,6 @@ public class Player : MonoBehaviour {
 			}
 
         }
-	
 
     }
 

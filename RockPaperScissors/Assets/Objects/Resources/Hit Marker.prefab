@@ -10,8 +10,8 @@ GameObject:
   - 4: {fileID: 490756}
   - 212: {fileID: 21290756}
   - 82: {fileID: 8290756}
+  - 95: {fileID: 9513252}
   - 114: {fileID: 11490756}
-  - 95: {fileID: 9590756}
   m_Layer: 0
   m_Name: Hit Marker
   m_TagString: Untagged
@@ -39,7 +39,7 @@ AudioSource:
   m_GameObject: {fileID: 190756}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 14bd67249fed8d44184a84d9ddea82ba, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4b418879e26a883498ffd1a2550c5962, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -89,7 +89,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!95 &9590756
+--- !u!95 &9513252
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -135,7 +135,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 1413090587
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0fa1a624ca6787d45a0ca6d79944c261, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7d621383ffd264e418fa1c2cf83f034b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

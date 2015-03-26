@@ -451,6 +451,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 14
+--- !u!1 &920018777
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 920018778}
+  - 114: {fileID: 920018779}
+  m_Layer: 0
+  m_Name: Hit Marker Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &920018778
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 920018777}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+--- !u!114 &920018779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 920018777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed197437a468324fb403e3d7a0e2fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  punch: {fileID: 8300000, guid: 67cb5279c9bd14d4ea05be884da21ee1, type: 3}
+  sword: {fileID: 8300000, guid: f82e0d2eafc5bf84fb3cda449e1965e1, type: 3}
+  fire: {fileID: 8300000, guid: 80dfa38a5cda4a64eaf97f9dfa693d6c, type: 3}
+  lightning: {fileID: 8300000, guid: 9cf72a197dca6814db54a13d5a407866, type: 3}
+  rock: {fileID: 8300000, guid: 4b418879e26a883498ffd1a2550c5962, type: 3}
 --- !u!1 &1030212361
 GameObject:
   m_ObjectHideFlags: 0

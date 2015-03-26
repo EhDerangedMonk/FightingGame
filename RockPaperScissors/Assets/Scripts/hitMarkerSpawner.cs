@@ -3,29 +3,43 @@ using System.Collections;
 
 public class hitMarkerSpawner : MonoBehaviour {
 
-	private Animator anim;
-	private bool hit = true;
+	public AudioClip punch, sword, fire, lightning, rock;
 
 	// Use this for initialization
 	void Start () {
-		anim = this.GetComponent<Animator> ();
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (anim.IsInTransition (0))
-			resetHit ();
+;
 	}
+	
+	public void makeHitMarker (GameObject victim, int type) {
+		GameObject newHit = Resources.Load ("Hit Marker") as GameObject;
+		AudioSource sound = newHit.GetComponent<AudioSource> ();
 
-	void resetHit() {
-		hit = false;
-	}
-
-	void makeHitMarker () {
-		if (!hit) {
-			GameObject newHit = Resources.Load ("Hit Marker") as GameObject;
-			Instantiate (newHit, transform.position, transform.rotation);
-			hit = true;
+		switch (type) {
+			case 0: //Punch
+			sound.clip = punch;
+				break;
+			case 1:	//Sword
+				sound.clip = sword;
+				break;
+			case 2: //Fire
+				sound.clip = fire;
+				break;
+			case 3: //Lightning
+				sound.clip = lightning;
+				break;
+			case 4: //Rock
+				sound.clip = rock;
+				break;
+			default:
+				sound.clip = punch;
+				break;
 		}
+
+		Instantiate (newHit, victim.transform.position, victim.transform.rotation);
 	}
 }
