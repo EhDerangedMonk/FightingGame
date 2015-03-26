@@ -7,12 +7,13 @@ using UnityEngine;
 using System.Collections;
 
 public class lavaBehaviour : MonoBehaviour {
-	Player victim;
-	float launchForce = 1000f;
+	private Player victim;
+	private float launchForce = 1000f;
+	private AudioSource sound;
 	
 	// Use this for initialization
 	void Start () {
-		
+		sound = this.gameObject.GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -26,6 +27,7 @@ public class lavaBehaviour : MonoBehaviour {
 			victim = (Player)other.gameObject.GetComponent(typeof(Player));
 
 			if(victim.playerHealth.isDead() == false) {
+				sound.Play ();
 				victim.playerState.setFlinch (true);
 				victim.rigidbody2D.AddForce(new Vector2(0, launchForce));
 				victim.playerHealth.damage(100); //Deal 100 to the player.

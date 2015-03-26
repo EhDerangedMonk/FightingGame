@@ -20,8 +20,10 @@ public class playerOverseer : MonoBehaviour {
 			foreach (GameObject player in players) {
 				Player subject = (Player)player.gameObject.GetComponent (typeof(Player));
 
-				if (subject.playerHealth.isDead())
-					numPlayers--;
+				if(subject != null) {
+					if (subject.playerHealth.isDead())
+						numPlayers--;
+				}
 			}
 		}
 

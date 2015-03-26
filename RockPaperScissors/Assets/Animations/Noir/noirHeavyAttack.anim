@@ -76,7 +76,7 @@ AnimationClip:
   m_EditorCurves: []
   m_EulerEditorCurves: []
   m_Events:
-  - time: 0
+  - time: .375
     functionName: playHeavyAttack
     data: 
     objectReferenceParameter: {fileID: 0}

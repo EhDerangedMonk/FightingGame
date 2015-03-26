@@ -208,9 +208,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e832cbe63e919a54db3472a9521dd7c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightAttack: {fileID: 8300000, guid: 5946131b148bfae459b53365635a671b, type: 3}
-  heavyAttack: {fileID: 8300000, guid: fe781e3332f614d4d8ac91a71c97214c, type: 3}
-  specialAttack: {fileID: 8300000, guid: c97983f60a58cb348b8486e94ff20c8a, type: 3}
+  lightAttack: {fileID: 8300000, guid: 7a8d626b77f168945a5a69ceeb2368e1, type: 3}
+  heavyAttack: {fileID: 8300000, guid: 3d5ee97e683e0564bb810d0fd7df6a8b, type: 3}
+  specialAttack: {fileID: 8300000, guid: 451043b2b9434eb47a7234783926436f, type: 3}
   flinch: {fileID: 8300000, guid: 9a12324e161a7c749a013f5a50484e55, type: 3}
   launched: {fileID: 8300000, guid: cdd82d1f2296ca64dba4137e7164e38d, type: 3}
   death: {fileID: 8300000, guid: 85b0b9c8d0995314cb86e326ef4d332f, type: 3}
