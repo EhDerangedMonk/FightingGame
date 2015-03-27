@@ -10,6 +10,8 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
     private const float maxSpeed = 5f; // limit on player run speed
+    private const float jumpDelay = 0.3f;
+    private float nextJump = 0.0f;
 
     //** Want to turn into getters/setters
     public int layout; // Controller layout
@@ -175,8 +177,8 @@ public class Player : MonoBehaviour {
      *  jump if they hit their jump key
      */
     void jump() {
-        float nextJump = 0.0f;
-        float jumpDelay = 0.3f;
+
+        
   
         //if we are on the ground, refreshes our double jump
         if (grounded) { //Can't double jump unless already in air
