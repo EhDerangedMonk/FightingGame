@@ -6,7 +6,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class pitfallBehaviour : MonoBehaviour {
+public class Pitfall : MonoBehaviour {
 
 	public int orientation;
 

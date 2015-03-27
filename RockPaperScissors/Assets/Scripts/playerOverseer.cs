@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class playerOverseer : MonoBehaviour {
+public class PlayerOverseer : MonoBehaviour {
 
 	private int numPlayers;
 

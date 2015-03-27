@@ -6,7 +6,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class platformBehaviour : MonoBehaviour {
+public class Platform : MonoBehaviour {
 
 	private Transform location; //The location of the platform;
 	private BoxCollider2D myCollider; //The trigger collider that checks if players are standing on top.

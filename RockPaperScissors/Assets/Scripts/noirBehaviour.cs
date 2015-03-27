@@ -16,7 +16,7 @@ public class noirBehaviour: PlayerState {
     private bool attack; // If player currently in attack don't redo dmg for it
 
 	//TEMP CODE - Nigel
-	private hitMarkerSpawner hitFactory = GameObject.FindObjectOfType<hitMarkerSpawner> ();
+	private HitMarkerSpawner hitFactory = GameObject.FindObjectOfType<HitMarkerSpawner> ();
 
     // Constructor
     public noirBehaviour(Transform trans, Animator animation) {
@@ -131,7 +131,7 @@ public class noirBehaviour: PlayerState {
         }
 
 		//TEMP CODE - Nigel
-		hitFactory.makeHitMarker (curPlayer.gameObject, 1);
+		hitFactory.MakeHitMarker (curPlayer.gameObject, 1);
 
         curPlayer.playerState.setFlinch(true);
         curPlayer.playerHealth.damage(50);
@@ -169,7 +169,7 @@ public class noirBehaviour: PlayerState {
         }
 
 		//TEMP CODE - Nigel
-		hitFactory.makeHitMarker (curPlayer.gameObject, 1);
+		hitFactory.MakeHitMarker (curPlayer.gameObject, 1);
 
         curPlayer.playerState.setFlinch(true);
         curPlayer.playerHealth.damage(damage);
@@ -189,7 +189,7 @@ public class noirBehaviour: PlayerState {
         }
 
 		//TEMP CODE - Nigel
-		hitFactory.makeHitMarker (curPlayer.gameObject, 1);
+		hitFactory.MakeHitMarker (curPlayer.gameObject, 1);
 		
 		curPlayer.playerState.setLaunch (true);
 		curPlayer.playerHealth.damage (100);
@@ -231,7 +231,7 @@ public class noirBehaviour: PlayerState {
         }
 
 		//TEMP CODE - Nigel
-		hitFactory.makeHitMarker (curPlayer.gameObject, 1);
+		hitFactory.MakeHitMarker (curPlayer.gameObject, 1);
 
         curPlayer.playerState.setFlinch(true);
         curPlayer.playerHealth.damage(25);

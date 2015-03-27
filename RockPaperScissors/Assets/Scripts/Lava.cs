@@ -6,7 +6,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class lavaBehaviour : MonoBehaviour {
+public class Lava : MonoBehaviour {
 	private Player victim;
 	private float launchForce = 1000f;
 	private AudioSource sound;

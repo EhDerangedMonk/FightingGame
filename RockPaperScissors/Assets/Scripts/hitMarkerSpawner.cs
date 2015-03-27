@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class hitMarkerSpawner : MonoBehaviour {
+public class HitMarkerSpawner : MonoBehaviour {
 
 	public AudioClip punch, sword, fire, lightning, rock;
 
@@ -15,7 +15,7 @@ public class hitMarkerSpawner : MonoBehaviour {
 ;
 	}
 	
-	public void makeHitMarker (GameObject victim, int type) {
+	public void MakeHitMarker (GameObject victim, int type) {
 		GameObject newHit = Resources.Load ("Hit Marker") as GameObject;
 		AudioSource sound = newHit.GetComponent<AudioSource> ();
 

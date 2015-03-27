@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class playerSpawner : MonoBehaviour {
+public class PlayerSpawner : MonoBehaviour {
 
 	public InitializeStorage gameSettings;
 
