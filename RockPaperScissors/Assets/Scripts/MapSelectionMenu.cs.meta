@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 676b8503f623e0448901d8b4db7127c1
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - TradSelectionButton: {fileID: 2800000, guid: c659cd2eb9bf18144bd910823ffb762b,
+      type: 3}
+  - BtleSelectionButton: {fileID: 2800000, guid: 40d6e98a2aee080408e7d7fe7c016cb6,
+      type: 3}
+  - LandSelectionButton: {fileID: 2800000, guid: 3482d1802c21bdb438a13a11a5996fd4,
+      type: 3}
+  - LavaSelectionButton: {fileID: 2800000, guid: 8c47137771a173e4a8d4fa8379e4abd2,
+      type: 3}
+  - RandSelectionButton: {instanceID: 0}
+  - MapSelectionButton: {instanceID: 0}
+  - P1TokenTexture: {instanceID: 0}
+  - P2TokenTexture: {instanceID: 0}
+  - P1TokenSelectedTexture: {instanceID: 0}
+  - P2TokenSelectedTexture: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
