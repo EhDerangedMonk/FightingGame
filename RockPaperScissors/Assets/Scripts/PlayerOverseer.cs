@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerOverseer : MonoBehaviour {
 
-	private int numPlayers;
+	private int numPlayers ;
 
 	// Use this for initialization
 	void Start () {
@@ -13,20 +13,17 @@ public class PlayerOverseer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		numPlayers = 0;
 		GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
-		numPlayers = players.Length;
 
 		if (players != null) {
 			foreach (GameObject player in players) {
 				Player subject = (Player)player.gameObject.GetComponent (typeof(Player));
 
-				if(subject != null) {
-					if (subject.playerHealth.isDead())
-						numPlayers--;
+					if (!subject.playerHealth.isDead())
+						numPlayers++;
 				}
 			}
-		}
-
 
 		//Once all but one of the players are dead, return to the character selection menu.
 		if (numPlayers <= 1)

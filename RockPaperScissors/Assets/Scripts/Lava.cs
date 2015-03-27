@@ -28,7 +28,7 @@ public class Lava : MonoBehaviour {
 
 			if(victim.playerHealth.isDead() == false) {
 				sound.Play ();
-				victim.playerState.setFlinch (true);
+				victim.playerState.setLaunch (true);
 				victim.rigidbody2D.AddForce(new Vector2(0, launchForce));
 				victim.playerHealth.damage(100); //Deal 100 to the player.
 			}
