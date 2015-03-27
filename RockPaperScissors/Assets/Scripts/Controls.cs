@@ -7,39 +7,26 @@ using System.Collections;
 
 public class Controls {
 
-	public KeyCode light;
-	public KeyCode heavy;
-	public KeyCode special;
-	public KeyCode block;
-	public KeyCode grapple;
-	public KeyCode jump;
-	public string XAxis;
-	public string YAxis;
-	public KeyCode cChangeKey;
+	private KeyCode light;
+	private KeyCode heavy;
+	private KeyCode special;
+	private KeyCode block;
+	private KeyCode grapple;
+	private KeyCode jump;
+	private string XAxis;
+	private string YAxis;
+	private KeyCode cChangeKey;
 
 	// Constructor
 	public Controls(int layout) {
 		changeControls(layout);
-		/*if (changeKey == 1){
-			cChangeKey = KeyCode.Alpha1;
-		}
-		else if (changeKey == 2){
-			cChangeKey = KeyCode.Alpha2;
-		}
-		else if (changeKey == 3){
-			cChangeKey = KeyCode.Alpha3;
-		}
-		else if (changeKey == 4){
-			cChangeKey = KeyCode.Alpha4;
-		}
-		else{
-			cChangeKey = KeyCode.Alpha0;
-		}*/
-
 	}
 
 	/*
 	 * DESCR: Changes the control scheme layout for the current player
+	 * 1 - Keyboard layout (W,A,S,D - left Ctrl, Left Alt, Left Shift, F)
+	 * 2 - Keyboard layout (I,J,K,L - Semi quote, Slash, Quote, O)
+	 * 3 - 6 Game Controllers
 	 * PRE: an integer representing the layout(1 - player 1/ 2 - player 2)
 	 */
 	public void changeControls(int layout) {
@@ -108,5 +95,39 @@ public class Controls {
 				Debug.Log("Unkown player! " + layout);
 				break;
 		}
+	}
+
+	// Getters (Return Keycodes)
+
+	public KeyCode getLightKey() {
+		return light;
+	}
+
+	public KeyCode getHeavyKey() {
+		return heavy;
+	}
+
+	public KeyCode getSpecialKey() {
+		return special;
+	}
+
+	public KeyCode getBlockKey() {
+		return block;
+	}
+
+	public KeyCode getJumpKey() {
+		return jump;
+	}
+
+	public KeyCode getGrappleKey() {
+		return grapple;
+	}
+
+	public string getXAxisKey() {
+		return XAxis;
+	}
+
+	public string getYAxisKey() {
+		return YAxis;
 	}
 }

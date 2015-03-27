@@ -189,10 +189,19 @@ public class noirBehaviour: PlayerState {
         }
 
 		//TEMP CODE - Nigel
-		hitFactory.MakeHitMarker (curPlayer.gameObject, 1);
+		hitFactory.MakeHitMarker(curPlayer.gameObject, 1);
 		
-		curPlayer.playerState.setLaunch (true);
-		curPlayer.playerHealth.damage (100);
+		curPlayer.playerState.setLaunch(true);
+		curPlayer.playerHealth.damage(100);
+        return true;
+    }
+
+    override public bool environmentDamage(int dmg) {
+        if (attack == true)
+            return false;
+            
+        attack = true;
+        curPlayer.playerHealth.damage(dmg);
         return true;
     }
 

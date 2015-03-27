@@ -180,6 +180,16 @@ public class zakirBehaviour: PlayerState {
 		return true;
 	}
 
+    override public bool environmentDamage(int dmg) {
+        if (attack == true)
+            return false;
+            
+        attack = true;
+        curPlayer.playerHealth.damage(dmg);
+        return true;
+    }
+
+
 	override public bool grapple() {
 
         if (curPlayer == null) {

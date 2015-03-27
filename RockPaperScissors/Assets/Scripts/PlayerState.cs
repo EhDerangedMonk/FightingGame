@@ -60,6 +60,9 @@ public abstract class PlayerState {
     public abstract bool checkState(Player player);
 
 
+    public abstract bool environmentDamage(int dmg);
+
+
     /*
      * DESCR: getter method if the player is currently flinching
      * POST: True (Currently flichning) - False (Not flinchings)
