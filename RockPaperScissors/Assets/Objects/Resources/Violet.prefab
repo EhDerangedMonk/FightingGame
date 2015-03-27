@@ -28,9 +28,9 @@ GameObject:
   - 50: {fileID: 5077538}
   - 61: {fileID: 6177540}
   - 58: {fileID: 5877538}
+  - 58: {fileID: 5877540}
   - 95: {fileID: 9577538}
   - 114: {fileID: 11477538}
-  - 58: {fileID: 5877540}
   - 82: {fileID: 8277538}
   - 114: {fileID: 11477540}
   m_Layer: 8
@@ -99,7 +99,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 177540}
   m_Enabled: 1
   m_Material: {fileID: 6200000, guid: 108a0f16b7f4f0149a83166e2ebdfb64, type: 2}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Radius: .430000007
   m_Center: {x: .133000001, y: .790000021}
 --- !u!61 &6177538
@@ -209,11 +209,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   layout: 1
+  characterChoice: 2
   groundCheck: {fileID: 477538}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 512
-  characterChoice: 2
 --- !u!114 &11477540
 MonoBehaviour:
   m_ObjectHideFlags: 1
