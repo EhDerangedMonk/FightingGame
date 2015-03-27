@@ -14,7 +14,9 @@ public class zakirBehaviour: PlayerState {
 	private int specState;// int representing the charge value
 	private Player curPlayer; // Colliding player which is usually the opponent
 	private bool attack; // If player currently in attack don't redo dmg for it
-	
+
+	//TEMP CODE - Nigel
+	private HitMarkerSpawner hitFactory = GameObject.FindObjectOfType<HitMarkerSpawner> ();
 	
 	// Constructor
 	public zakirBehaviour(Transform trans, Animator animation) {
@@ -123,6 +125,9 @@ public class zakirBehaviour: PlayerState {
 			curPlayer.playerState.anim.SetTrigger("Counter");
 			return false;
 		}
+
+		//TEMP CODE - Nigel
+		hitFactory.MakeHitMarker (curPlayer.gameObject, 0);
 		
 		curPlayer.playerState.setFlinch(true);
 		curPlayer.playerHealth.damage(50);
@@ -147,6 +152,9 @@ public class zakirBehaviour: PlayerState {
 		//damgage that zakir's special does
 		damage = 200;
 
+		//TEMP CODE - Nigel
+		hitFactory.MakeHitMarker (curPlayer.gameObject, 0);
+
 		curPlayer.playerState.setFlinch(true);
 		curPlayer.playerHealth.damage(damage);
 		return true;
@@ -163,7 +171,9 @@ public class zakirBehaviour: PlayerState {
 			curPlayer.playerState.anim.SetTrigger("Counter");
 			return false;
 		}
-		
+
+		//TEMP CODE - Nigel
+		hitFactory.MakeHitMarker (curPlayer.gameObject, 0);
 		
 		curPlayer.playerState.setLaunch(true);
 		curPlayer.playerHealth.damage(100);

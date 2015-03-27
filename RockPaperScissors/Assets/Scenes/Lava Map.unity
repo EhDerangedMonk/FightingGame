@@ -393,7 +393,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 760821279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17c15a6f054ebd5409bea889509c623b, type: 3}
+  m_Script: {fileID: 11500000, guid: 3eff91b8ab1c6d1479b860110b743e36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   orientation: 2
@@ -511,7 +511,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 855079635}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c381bc15e162f7e47bc320a02a82fdfc, type: 3}
+  m_Script: {fileID: 11500000, guid: a6bffa3205d498444b7042245e5609a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!82 &855079639
@@ -597,10 +597,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 855195225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17c15a6f054ebd5409bea889509c623b, type: 3}
+  m_Script: {fileID: 11500000, guid: 3eff91b8ab1c6d1479b860110b743e36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientation: 0
+  orientation: 1
 --- !u!61 &855195227
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1194,7 +1194,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1984632783}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61f0b1ab881299149ad4595d6decfc38, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e2d7089b06c0fa48bc04146038c7001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2115683698

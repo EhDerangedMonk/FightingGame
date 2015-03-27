@@ -14,7 +14,9 @@ public class violetBehaviour: PlayerState {
 	private int specState;// int representing the charge value
 	private Player curPlayer; // Colliding player which is usually the opponent
 	private bool attack; // If player currently in attack don't redo dmg for it
-	
+
+	//TEMP CODE - Nigel
+	private HitMarkerSpawner hitFactory = GameObject.FindObjectOfType<HitMarkerSpawner> ();
 	
 	// Constructor
 	public violetBehaviour(Transform trans, Animator animation) {
@@ -122,6 +124,9 @@ public class violetBehaviour: PlayerState {
 			curPlayer.playerState.anim.SetTrigger("Counter");
 			return false;
 		}
+
+		//TEMP CODE - Nigel
+		hitFactory.MakeHitMarker (curPlayer.gameObject, 2);
 		
 		curPlayer.playerState.setFlinch(true);
 		curPlayer.playerHealth.damage(50);
@@ -176,7 +181,9 @@ public class violetBehaviour: PlayerState {
 			curPlayer.playerState.anim.SetTrigger("Counter");
 			return false;
 		}
-		
+
+		//TEMP CODE - Nigel
+		hitFactory.MakeHitMarker (curPlayer.gameObject, 1);
 		
 		curPlayer.playerState.setLaunch(true);
 		curPlayer.playerHealth.damage(100);
