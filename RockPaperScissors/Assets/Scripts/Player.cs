@@ -49,7 +49,7 @@ public class Player : MonoBehaviour {
 			playerState = new noirBehaviour (this.transform, anim);
 		} else if(characterChoice == 1) {
 			playerState = new zakirBehaviour(this.transform, anim);
-		} else if (characterChoice == 3) {
+		} else if (characterChoice == 2) {
 			playerState = new violetBehaviour(this.transform, anim);
 		}
     }
