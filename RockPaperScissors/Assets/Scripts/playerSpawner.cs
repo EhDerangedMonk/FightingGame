@@ -5,6 +5,7 @@ public class PlayerSpawner : MonoBehaviour {
 
 	public InitializeStorage gameSettings;
 
+	//FUCK!
 	public int playerNum; // Player this Spawner is responsibile for. Player 1 = 1, Player 2 = 2, etc.
 
 	private Player player;
