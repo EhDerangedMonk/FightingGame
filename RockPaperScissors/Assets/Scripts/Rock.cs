@@ -1,6 +1,6 @@
 ﻿/*
 	Authored By: Nigel Martinez
-	Purpose: Controls the behaviour of rock objects, which are hazards to players.
+	Purpose: Controls the behaviour of rock hazards.
 */
 
 using UnityEngine;
@@ -28,6 +28,11 @@ public class Rock : MonoBehaviour {
 		anim.SetTrigger ("Hit");
 	}
 
+	/*
+     * DESCR: Called by an animation event, the rock's game object is destroyed.
+     * PRE: NONE
+     * POST: The rock's game object is destroyed.
+     */
 	void Remove () {
 		Destroy (this.gameObject);
 	}
@@ -54,7 +59,7 @@ public class Rock : MonoBehaviour {
 							dealDamage = false;
 					}
 				}
-
+				//Otherwise, deal damage.
 				if(dealDamage == true) {
 					victim.playerState.setLaunch(true); //Causes a launch to the player.
 					victim.playerHealth.damage(100); // Rocks deal 100DMG
@@ -71,7 +76,7 @@ public class Rock : MonoBehaviour {
 		}
 		//Rocks break each other.
 		if (other.gameObject.tag == "Rock") {
-			hitFactory.MakeHitMarker (other.gameObject, 4);
+			hitFactory.MakeHitMarker (other.gameObject, 4); //Create a hit marker at the player's location.
 			playHit(); //The rock 'breaks' when it collides with another rock.
 		}
 	}

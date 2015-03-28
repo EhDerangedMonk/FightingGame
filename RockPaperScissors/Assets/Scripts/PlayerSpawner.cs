@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/*
+	Authored By: Nigel Martinez
+	Purpose: Spawns players on the map.
+*/
+using UnityEngine;
 using System.Collections;
 
 public class PlayerSpawner : MonoBehaviour {
@@ -16,6 +20,7 @@ public class PlayerSpawner : MonoBehaviour {
 		//Find the options.
 		gameSettings = FindObjectOfType<InitializeStorage>();
 
+		//Spawn the corresponding player.
 		if (playerNum == 1 && gameSettings.P1Controller != 0)
 			Spawn (gameSettings.P1Character, gameSettings.P1Controller);
 		else if (playerNum == 2 && gameSettings.P2Controller != 0)
@@ -31,6 +36,11 @@ public class PlayerSpawner : MonoBehaviour {
 	
 	}
 
+	/*
+     * DESCR: Spawns a player, assigning a character and controller scheme.
+     * PRE: The controller and character data are sent in.
+     * POST: A player with the correct character and controller are spawned on the map.
+     */
 	void Spawn(InitializeStorage.CharacterSelection character, InitializeStorage.ControllerSelection controller) {
 			//Assign Character
 			switch((int)character) {

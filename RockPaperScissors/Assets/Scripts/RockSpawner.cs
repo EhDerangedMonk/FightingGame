@@ -20,7 +20,7 @@ public class RockSpawner : MonoBehaviour {
 	}
 
 	/*
-     * DESCR: Spawns objects at randomized intervals and randomized locations.
+     * DESCR: Spawns rock objects at randomized locations.
      * PRE: NONE
      * POST: A rock is spawned on either left or right of the map, above the players.
      */

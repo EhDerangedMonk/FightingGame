@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/*
+	Authored By: Nigel Martinez
+	Purpose: Creates hit markers, indicating that attacks or hazards made contact.
+*/
+using UnityEngine;
 using System.Collections;
 
 public class HitMarkerSpawner : MonoBehaviour {
@@ -12,9 +16,16 @@ public class HitMarkerSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-;
+
 	}
-	
+
+	/*
+     * DESCR: Creates a hit marker at a location on the map.
+     * PRE: The game object of the player getting hit and the integer representing the hit marker type.
+     * 0 - Punch, 1 - Sword, 2 - Fire
+     * 3 - Lightning, 4 - Rock
+     * POST: A hit marker is created on the map, playing a sound akin to its type.
+     */
 	public void MakeHitMarker (GameObject victim, int type) {
 		GameObject newHit = Resources.Load ("Hit Marker") as GameObject;
 		AudioSource sound = newHit.GetComponent<AudioSource> ();

@@ -39,7 +39,7 @@ public class Pitfall : MonoBehaviour {
 				else //Spawn from the right of the screen.
 					Instantiate(explosion, spawnLocation, Quaternion.Euler (0,0,90));
 			}
-
+			//Kill the player.
 			victim.playerHealth.kill ();
 		}
 	}

@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/*
+	Authored By: Nigel Martinez
+	Purpose: Controls the behaviour of player's attack hit boxes.
+*/
+using UnityEngine;
 using System.Collections;
 
 public class HitBoxManager : MonoBehaviour {
@@ -8,6 +12,7 @@ public class HitBoxManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		//Find the attack hit box.
 		anim = this.gameObject.GetComponent<Animator> ();
 		Collider2D[] colliders = this.gameObject.GetComponentsInChildren<Collider2D> ();
 
@@ -15,7 +20,7 @@ public class HitBoxManager : MonoBehaviour {
 			if(collider.isTrigger)
 				hitBox = collider;
 		}
-
+		//Disable the hitbox.
 		disableHit ();
 
 	}
@@ -26,10 +31,20 @@ public class HitBoxManager : MonoBehaviour {
 		    disableHit();
 	}
 
+	/*
+     * DESCR: Called by an animation event, the hitbox is enabled.
+     * PRE: NONE
+     * POST: The hitbox is enabled.
+     */
 	void enableHit() {
 		hitBox.enabled = true;
 	}
 
+	/*
+     * DESCR: Called by an animation event, the hitbox is disabled.
+     * PRE: NONE
+     * POST: The hitbox is disabled.
+     */
 	void disableHit() {
 		hitBox.enabled = false;
 	}

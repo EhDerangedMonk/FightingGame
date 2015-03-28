@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/*
+	Authored By: Nigel Martinez
+	Purpose: Controls the behaviour of hit markers.
+*/
+using UnityEngine;
 using System.Collections;
 
 public class HitMarker : MonoBehaviour {
@@ -13,6 +17,11 @@ public class HitMarker : MonoBehaviour {
 
 	}
 
+	/*
+     * DESCR: Called by an animation event, the hit marker's game object is destroyed.
+     * PRE: NONE
+     * POST: The hit marker's game object is destroyed.
+     */
 	void Remove() {
 		Destroy (this.gameObject);
 	}
