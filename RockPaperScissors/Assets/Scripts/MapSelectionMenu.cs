@@ -89,6 +89,12 @@ public class MapSelectionMenu : MonoBehaviour {
 	private bool P3Playing;
 	private bool P4Playing;
 	
+	// Slow down the selecting by only letting them move once per "axis push"
+	private bool P1canMove;
+	private bool P2canMove;
+	private bool P3canMove;
+	private bool P4canMove;
+	
 	
 	
 	/*******\
@@ -154,151 +160,157 @@ public class MapSelectionMenu : MonoBehaviour {
 		P3Selected = false;
 		P4Selected = false;
 		
+		// Initialize whether the players can move their tokens
+		P1canMove = true;
+		P2canMove = true;
+		P3canMove = true;
+		P4canMove = true;
+		
 		
 		// Initialize the controller layouts
 		InitializeStorage settings = (InitializeStorage) GameObject.Find("VariableStorage").GetComponent(typeof(InitializeStorage));
 		switch ((int)settings.P1Controller)
 		{
-		case 1:
-			P1Enter = KeyCode.Space;
-			P1xAxis = "Keyboard1X";
-			P1yAxis = "Keyboard1Y";
-			break;
-		case 2:
-			P1Enter = KeyCode.Return;
-			P1xAxis = "Keyboard2X";
-			P1yAxis = "Keyboard2Y";
-			break;
-		case 3:
-			P1Enter = KeyCode.Joystick1Button0;
-			P1xAxis = "LeftJoystick1X";
-			P1yAxis = "LeftJoystick1Y";
-			break;
-		case 4:
-			P1Enter = KeyCode.Joystick2Button0;
-			P1xAxis = "LeftJoystick2X";
-			P1yAxis = "LeftJoystick2Y";
-			break;
-		case 5:
-			P1Enter = KeyCode.Joystick3Button0;
-			P1xAxis = "LeftJoystick3X";
-			P1yAxis = "LeftJoystick3Y";
-			break;
-		case 6:
-			P1Enter = KeyCode.Joystick4Button0;
-			P1xAxis = "LeftJoystick4X";
-			P1yAxis = "LeftJoystick4Y";
-			break;
+			case 1:
+				P1Enter = KeyCode.Space;
+				P1xAxis = "Keyboard1X";
+				P1yAxis = "Keyboard1Y";
+				break;
+			case 2:
+				P1Enter = KeyCode.Return;
+				P1xAxis = "Keyboard2X";
+				P1yAxis = "Keyboard2Y";
+				break;
+			case 3:
+				P1Enter = KeyCode.Joystick1Button0;
+				P1xAxis = "LeftJoystick1X";
+				P1yAxis = "LeftJoystick1Y";
+				break;
+			case 4:
+				P1Enter = KeyCode.Joystick2Button0;
+				P1xAxis = "LeftJoystick2X";
+				P1yAxis = "LeftJoystick2Y";
+				break;
+			case 5:
+				P1Enter = KeyCode.Joystick3Button0;
+				P1xAxis = "LeftJoystick3X";
+				P1yAxis = "LeftJoystick3Y";
+				break;
+			case 6:
+				P1Enter = KeyCode.Joystick4Button0;
+				P1xAxis = "LeftJoystick4X";
+				P1yAxis = "LeftJoystick4Y";
+				break;
 		}
 		
 		switch ((int)settings.P2Controller)
 		{
-		case 1:
-			P2Enter = KeyCode.Space;
-			P2xAxis = "Keyboard1X";
-			P2yAxis = "Keyboard1Y";
-			break;
-		case 2:
-			P2Enter = KeyCode.Return;
-			P2xAxis = "Keyboard2X";
-			P2yAxis = "Keyboard2Y";
-			break;
-		case 3:
-			P2Enter = KeyCode.Joystick1Button0;
-			P2xAxis = "LeftJoystick1X";
-			P2yAxis = "LeftJoystick1Y";
-			break;
-		case 4:
-			P2Enter = KeyCode.Joystick2Button0;
-			P2xAxis = "LeftJoystick2X";
-			P2yAxis = "LeftJoystick2Y";
-			break;
-		case 5:
-			P2Enter = KeyCode.Joystick3Button0;
-			P2xAxis = "LeftJoystick3X";
-			P2yAxis = "LeftJoystick3Y";
-			break;
-		case 6:
-			P2Enter = KeyCode.Joystick4Button0;
-			P2xAxis = "LeftJoystick4X";
-			P2yAxis = "LeftJoystick4Y";
-			break;
+			case 1:
+				P2Enter = KeyCode.Space;
+				P2xAxis = "Keyboard1X";
+				P2yAxis = "Keyboard1Y";
+				break;
+			case 2:
+				P2Enter = KeyCode.Return;
+				P2xAxis = "Keyboard2X";
+				P2yAxis = "Keyboard2Y";
+				break;
+			case 3:
+				P2Enter = KeyCode.Joystick1Button0;
+				P2xAxis = "LeftJoystick1X";
+				P2yAxis = "LeftJoystick1Y";
+				break;
+			case 4:
+				P2Enter = KeyCode.Joystick2Button0;
+				P2xAxis = "LeftJoystick2X";
+				P2yAxis = "LeftJoystick2Y";
+				break;
+			case 5:
+				P2Enter = KeyCode.Joystick3Button0;
+				P2xAxis = "LeftJoystick3X";
+				P2yAxis = "LeftJoystick3Y";
+				break;
+			case 6:
+				P2Enter = KeyCode.Joystick4Button0;
+				P2xAxis = "LeftJoystick4X";
+				P2yAxis = "LeftJoystick4Y";
+				break;
 		}
 		
 		P3Playing = true;
 		switch ((int)settings.P3Controller)
 		{
-		case 0:
-			P3Playing = false;
-			break;
-		case 1:
-			P3Enter = KeyCode.Space;
-			P3xAxis = "Keyboard1X";
-			P3yAxis = "Keyboard1Y";
-			break;
-		case 2:
-			P3Enter = KeyCode.Return;
-			P3xAxis = "Keyboard2X";
-			P3yAxis = "Keyboard2Y";
-			break;
-		case 3:
-			P3Enter = KeyCode.Joystick1Button0;
-			P3xAxis = "LeftJoystick1X";
-			P3yAxis = "LeftJoystick1Y";
-			break;
-		case 4:
-			P3Enter = KeyCode.Joystick2Button0;
-			P3xAxis = "LeftJoystick2X";
-			P3yAxis = "LeftJoystick2Y";
-			break;
-		case 5:
-			P3Enter = KeyCode.Joystick3Button0;
-			P3xAxis = "LeftJoystick3X";
-			P3yAxis = "LeftJoystick3Y";
-			break;
-		case 6:
-			P3Enter = KeyCode.Joystick4Button0;
-			P3xAxis = "LeftJoystick4X";
-			P3yAxis = "LeftJoystick4Y";
-			break;
+			case 0:
+				P3Playing = false;
+				break;
+			case 1:
+				P3Enter = KeyCode.Space;
+				P3xAxis = "Keyboard1X";
+				P3yAxis = "Keyboard1Y";
+				break;
+			case 2:
+				P3Enter = KeyCode.Return;
+				P3xAxis = "Keyboard2X";
+				P3yAxis = "Keyboard2Y";
+				break;
+			case 3:
+				P3Enter = KeyCode.Joystick1Button0;
+				P3xAxis = "LeftJoystick1X";
+				P3yAxis = "LeftJoystick1Y";
+				break;
+			case 4:
+				P3Enter = KeyCode.Joystick2Button0;
+				P3xAxis = "LeftJoystick2X";
+				P3yAxis = "LeftJoystick2Y";
+				break;
+			case 5:
+				P3Enter = KeyCode.Joystick3Button0;
+				P3xAxis = "LeftJoystick3X";
+				P3yAxis = "LeftJoystick3Y";
+				break;
+			case 6:
+				P3Enter = KeyCode.Joystick4Button0;
+				P3xAxis = "LeftJoystick4X";
+				P3yAxis = "LeftJoystick4Y";
+				break;
 		}
 		
 		P4Playing = true;
 		switch ((int)settings.P4Controller)
 		{
-		case 0:
-			P4Playing = false;
-			break;
-		case 1:
-			P4Enter = KeyCode.Space;
-			P4xAxis = "Keyboard1X";
-			P4yAxis = "Keyboard1Y";
-			break;
-		case 2:
-			P4Enter = KeyCode.Return;
-			P4xAxis = "Keyboard2X";
-			P4yAxis = "Keyboard2Y";
-			break;
-		case 3:
-			P4Enter = KeyCode.Joystick1Button0;
-			P4xAxis = "LeftJoystick1X";
-			P4yAxis = "LeftJoystick1Y";
-			break;
-		case 4:
-			P4Enter = KeyCode.Joystick2Button0;
-			P4xAxis = "LeftJoystick2X";
-			P4yAxis = "LeftJoystick2Y";
-			break;
-		case 5:
-			P4Enter = KeyCode.Joystick3Button0;
-			P4xAxis = "LeftJoystick3X";
-			P4yAxis = "LeftJoystick3Y";
-			break;
-		case 6:
-			P4Enter = KeyCode.Joystick4Button0;
-			P4xAxis = "LeftJoystick4X";
-			P4yAxis = "LeftJoystick4Y";
-			break;
+			case 0:
+				P4Playing = false;
+				break;
+			case 1:
+				P4Enter = KeyCode.Space;
+				P4xAxis = "Keyboard1X";
+				P4yAxis = "Keyboard1Y";
+				break;
+			case 2:
+				P4Enter = KeyCode.Return;
+				P4xAxis = "Keyboard2X";
+				P4yAxis = "Keyboard2Y";
+				break;
+			case 3:
+				P4Enter = KeyCode.Joystick1Button0;
+				P4xAxis = "LeftJoystick1X";
+				P4yAxis = "LeftJoystick1Y";
+				break;
+			case 4:
+				P4Enter = KeyCode.Joystick2Button0;
+				P4xAxis = "LeftJoystick2X";
+				P4yAxis = "LeftJoystick2Y";
+				break;
+			case 5:
+				P4Enter = KeyCode.Joystick3Button0;
+				P4xAxis = "LeftJoystick3X";
+				P4yAxis = "LeftJoystick3Y";
+				break;
+			case 6:
+				P4Enter = KeyCode.Joystick4Button0;
+				P4xAxis = "LeftJoystick4X";
+				P4yAxis = "LeftJoystick4Y";
+				break;
 		}
 	}
 	
@@ -479,6 +491,23 @@ public class MapSelectionMenu : MonoBehaviour {
 	\********/
 	void Update()
 	{
+		// Determine if the players can move their tokens again
+		if (Input.GetAxis(P1xAxis) == 0 && Input.GetAxis(P1yAxis) == 0)
+			P1canMove = true;
+		if (Input.GetAxis(P2xAxis) == 0 && Input.GetAxis(P2yAxis) == 0)
+			P2canMove = true;
+		if (P3Playing)
+		{
+			if (Input.GetAxis(P3xAxis) == 0 && Input.GetAxis(P3yAxis) == 0)
+				P3canMove = true;
+		}
+		if (P4Playing)
+		{
+			if (Input.GetAxis(P4xAxis) == 0 && Input.GetAxis(P4yAxis) == 0)
+				P4canMove = true;	
+		}
+			
+			
 		// If both players have selected, determine which map to load and do so
 		if (P1Selected == true && P2Selected == true)
 		{
@@ -514,44 +543,80 @@ public class MapSelectionMenu : MonoBehaviour {
 				Application.LoadLevel("Lava Map");
 		}
 		
-		// Update the tokens based on any key input, if the players haven't selected yet
-		if (P1Selected == false)
+		// Update the tokens based on any key input, if the players haven't selected yet and they can move the tokens again
+		if (P1Selected == false && P1canMove == true)
 		{
 			switch(P1State)
 			{
 				case MapState.Rand:
 					if (Input.GetAxis(P1yAxis) < 0) // up
+					{
 						P1State = MapState.Trad;
+						P1canMove = false;
+					}
 				    else if (Input.GetAxis(P1xAxis) > 0) // right
-				    	P1State = MapState.Land;
+				    {
+						P1State = MapState.Land;
+						P1canMove = false;
+					}
 					break;	
 				case MapState.Trad:	
 					if (Input.GetAxis(P1yAxis) > 0) // down
+					{
 						P1State	= MapState.Land;
-					else if (Input.GetAxis(P1xAxis) > 0) // right
+						P1canMove = false;
+					}
+					else if (Input.GetAxis(P1xAxis) > 0) // right\
+					{
 						P1State = MapState.Btle;
+						P1canMove = false;
+					}
 					else if (Input.GetAxis(P1xAxis) < 0) // left
+					{
 						P1State = MapState.Rand;
+						P1canMove = false;
+					}
 					break;
 				case MapState.Btle:
 					if (Input.GetAxis(P1yAxis) > 0) // down
+					{
 						P1State = MapState.Lava;
-					else if (Input.GetAxis(P1xAxis) > 0) // right
+						P1canMove = false;
+					}
+					else if (Input.GetAxis(P1xAxis) < 0) // left
+					{
 						P1State = MapState.Trad;
+						P1canMove = false;
+					}
 					break;	
 				case MapState.Land:
 					if (Input.GetAxis(P1yAxis) < 0) // up
+					{
 						P1State = MapState.Trad;
+						P1canMove = false;
+					}
 					else if (Input.GetAxis(P1xAxis) > 0) // right
+					{
 						P1State = MapState.Lava;
+						P1canMove = false;
+					}
 					else if (Input.GetAxis(P1xAxis) < 0) // left
+					{
 						P1State = MapState.Rand;
+						P1canMove = false;
+					}
 					break;	
 				case MapState.Lava:
 					if (Input.GetAxis(P1yAxis) < 0) // up
+					{
 						P1State = MapState.Btle;
-					else if (Input.GetAxis(P1xAxis) > 0) // right
+						P1canMove = false;
+					}
+					else if (Input.GetAxis(P1xAxis) < 0) // left
+					{
 						P1State = MapState.Land;
+						P1canMove = false;
+					}
 					break;
 			}
 		}
@@ -565,44 +630,80 @@ public class MapSelectionMenu : MonoBehaviour {
 				P1Selected = true;
 		}
 		
-		if (P2Selected == false)
+		if (P2Selected == false && P2canMove == true)
 		{
 			switch(P2State)
 			{
-			case MapState.Rand:
-				if (Input.GetAxis(P2yAxis) < 0) // up
-					P2State = MapState.Trad;
-				else if (Input.GetAxis(P2xAxis) > 0) // right
-					P2State = MapState.Land;
-				break;	
-			case MapState.Trad:	
-				if (Input.GetAxis(P2yAxis) > 0) // down
-					P2State	= MapState.Land;
-				else if (Input.GetAxis(P2xAxis) > 0) // right
-					P2State = MapState.Btle;
-				else if (Input.GetAxis(P2xAxis) < 0) // left
-					P2State = MapState.Rand;
-				break;
-			case MapState.Btle:
-				if (Input.GetAxis(P2yAxis) > 0) // down
-					P2State = MapState.Lava;
-				else if (Input.GetAxis(P2xAxis) > 0) // right
-					P2State = MapState.Trad;
-				break;	
-			case MapState.Land:
-				if (Input.GetAxis(P2yAxis) < 0) // up
-					P2State = MapState.Trad;
-				else if (Input.GetAxis(P2xAxis) > 0) // right
-					P2State = MapState.Lava;
-				else if (Input.GetAxis(P2xAxis) < 0) // left
-					P2State = MapState.Rand;
-				break;	
-			case MapState.Lava:
-				if (Input.GetAxis(P2yAxis) < 0) // up
-					P2State = MapState.Btle;
-				else if (Input.GetAxis(P2xAxis) > 0) // right
-					P2State = MapState.Land;
-				break;
+				case MapState.Rand:
+					if (Input.GetAxis(P2yAxis) < 0) // up
+					{
+						P2State = MapState.Trad;
+						P2canMove = false;
+					}
+					else if (Input.GetAxis(P2xAxis) > 0) // right
+					{
+						P2State = MapState.Land;
+						P2canMove = false;
+					}
+					break;	
+				case MapState.Trad:	
+					if (Input.GetAxis(P2yAxis) > 0) // down
+					{
+						P2State	= MapState.Land;
+						P2canMove = false;
+					}
+					else if (Input.GetAxis(P2xAxis) > 0) // right
+					{
+						P2State = MapState.Btle;
+						P2canMove = false;
+					}
+					else if (Input.GetAxis(P2xAxis) < 0) // left
+					{
+						P2State = MapState.Rand;
+						P2canMove = false;
+					}
+					break;
+				case MapState.Btle:
+					if (Input.GetAxis(P2yAxis) > 0) // down
+					{
+						P2State = MapState.Lava;
+						P2canMove = false;
+					}
+					else if (Input.GetAxis(P2xAxis) < 0) // left
+					{
+						P2State = MapState.Trad;
+						P2canMove = false;
+					}
+					break;	
+				case MapState.Land:
+					if (Input.GetAxis(P2yAxis) < 0) // up
+					{
+						P2State = MapState.Trad;
+						P2canMove = false;
+					}
+					else if (Input.GetAxis(P2xAxis) > 0) // right
+					{
+						P2State = MapState.Lava;
+						P2canMove = false;
+					}
+					else if (Input.GetAxis(P2xAxis) < 0) // left
+					{
+						P2State = MapState.Rand;
+						P2canMove = false;
+					}
+					break;	
+				case MapState.Lava:
+					if (Input.GetAxis(P2yAxis) < 0) // up
+					{
+						P2State = MapState.Btle;
+						P2canMove = false;
+					}
+					else if (Input.GetAxis(P2xAxis) < 0) // left
+					{
+						P2State = MapState.Land;
+						P2canMove = false;
+					}
+					break;
 			}
 		}
 		// Check for the selection key being pressed
@@ -615,46 +716,82 @@ public class MapSelectionMenu : MonoBehaviour {
 				P2Selected = true;
 		}
 		
-		if (P3Playing)
+		if (P3Playing && P3canMove == true)
 		{
 			if (P3Selected == false)
 			{
 				switch(P3State)
 				{
-				case MapState.Rand:
-					if (Input.GetAxis(P3yAxis) < 0) // up
-						P3State = MapState.Trad;
-					else if (Input.GetAxis(P3xAxis) > 0) // right
-						P3State = MapState.Land;
-					break;	
-				case MapState.Trad:	
-					if (Input.GetAxis(P3yAxis) > 0) // down
-						P3State	= MapState.Land;
-					else if (Input.GetAxis(P3xAxis) > 0) // right
-						P3State = MapState.Btle;
-					else if (Input.GetAxis(P3xAxis) < 0) // left
-						P3State = MapState.Rand;
-					break;
-				case MapState.Btle:
-					if (Input.GetAxis(P3yAxis) > 0) // down
-						P3State = MapState.Lava;
-					else if (Input.GetAxis(P3xAxis) > 0) // right
-						P3State = MapState.Trad;
-					break;	
-				case MapState.Land:
-					if (Input.GetAxis(P3yAxis) < 0) // up
-						P3State = MapState.Trad;
-					else if (Input.GetAxis(P3xAxis) > 0) // right
-						P3State = MapState.Lava;
-					else if (Input.GetAxis(P3xAxis) < 0) // left
-						P3State = MapState.Rand;
-					break;	
-				case MapState.Lava:
-					if (Input.GetAxis(P3yAxis) < 0) // up
-						P3State = MapState.Btle;
-					else if (Input.GetAxis(P3xAxis) > 0) // right
-						P3State = MapState.Land;
-					break;
+					case MapState.Rand:
+						if (Input.GetAxis(P3yAxis) < 0) // up
+						{
+							P3State = MapState.Trad;
+							P3canMove = false;
+						}
+						else if (Input.GetAxis(P3xAxis) > 0) // right
+						{
+							P3State = MapState.Land;
+							P3canMove = false;
+						}
+						break;	
+					case MapState.Trad:	
+						if (Input.GetAxis(P3yAxis) > 0) // down
+						{
+							P3State	= MapState.Land;
+							P3canMove = false;
+						}
+						else if (Input.GetAxis(P3xAxis) > 0) // right
+						{
+							P3State = MapState.Btle;
+							P3canMove = false;
+						}
+						else if (Input.GetAxis(P3xAxis) < 0) // left
+						{
+							P3State = MapState.Rand;
+							P3canMove = false;
+						}
+						break;
+					case MapState.Btle:
+						if (Input.GetAxis(P3yAxis) > 0) // down
+						{
+							P3State = MapState.Lava;
+							P3canMove = false;
+						}
+						else if (Input.GetAxis(P3xAxis) < 0) // left
+						{
+							P3State = MapState.Trad;
+							P3canMove = false;
+						}
+						break;	
+					case MapState.Land:
+						if (Input.GetAxis(P3yAxis) < 0) // up
+						{
+							P3State = MapState.Trad;
+							P3canMove = false;
+						}
+						else if (Input.GetAxis(P3xAxis) > 0) // right
+						{
+							P3State = MapState.Lava;
+							P3canMove = false;
+						}
+						else if (Input.GetAxis(P3xAxis) < 0) // left
+						{
+							P3State = MapState.Rand;
+							P3canMove = false;
+						}
+						break;	
+					case MapState.Lava:
+						if (Input.GetAxis(P3yAxis) < 0) // up
+						{
+							P3State = MapState.Btle;
+							P3canMove = false;
+						}
+						else if (Input.GetAxis(P3xAxis) < 0) // left
+						{
+							P3State = MapState.Land;
+							P3canMove = false;
+						}
+						break;
 				}
 			}
 			// Check for the selection key being pressed
@@ -668,46 +805,82 @@ public class MapSelectionMenu : MonoBehaviour {
 			}
 		}
 		
-		if (P4Playing)
+		if (P4Playing && P4canMove == true)
 		{
 			if (P4Selected == false)
 			{
 				switch(P4State)
 				{
-				case MapState.Rand:
-					if (Input.GetAxis(P4yAxis) < 0) // up
-						P4State = MapState.Trad;
-					else if (Input.GetAxis(P4xAxis) > 0) // right
-						P4State = MapState.Land;
-					break;	
-				case MapState.Trad:	
-					if (Input.GetAxis(P4yAxis) > 0) // down
-						P4State	= MapState.Land;
-					else if (Input.GetAxis(P4xAxis) > 0) // right
-						P4State = MapState.Btle;
-					else if (Input.GetAxis(P4xAxis) < 0) // left
-						P4State = MapState.Rand;
-					break;
-				case MapState.Btle:
-					if (Input.GetAxis(P4yAxis) > 0) // down
-						P4State = MapState.Lava;
-					else if (Input.GetAxis(P4xAxis) > 0) // right
-						P4State = MapState.Trad;
-					break;	
-				case MapState.Land:
-					if (Input.GetAxis(P4yAxis) < 0) // up
-						P4State = MapState.Trad;
-					else if (Input.GetAxis(P4xAxis) > 0) // right
-						P4State = MapState.Lava;
-					else if (Input.GetAxis(P4xAxis) < 0) // left
-						P4State = MapState.Rand;
-					break;	
-				case MapState.Lava:
-					if (Input.GetAxis(P4yAxis) < 0) // up
-						P4State = MapState.Btle;
-					else if (Input.GetAxis(P4xAxis) > 0) // right
-						P4State = MapState.Land;
-					break;
+					case MapState.Rand:
+						if (Input.GetAxis(P4yAxis) < 0) // up
+						{
+							P4State = MapState.Trad;
+							P4canMove = false;
+						}
+						else if (Input.GetAxis(P4xAxis) > 0) // right
+						{
+							P4State = MapState.Land;
+							P4canMove = false;
+						}
+						break;	
+					case MapState.Trad:	
+						if (Input.GetAxis(P4yAxis) > 0) // down
+						{
+							P4State	= MapState.Land;
+							P4canMove = false;
+						}
+						else if (Input.GetAxis(P4xAxis) > 0) // right
+						{
+							P4State = MapState.Btle;
+							P4canMove = false;
+						}
+						else if (Input.GetAxis(P4xAxis) < 0) // left
+						{
+							P4State = MapState.Rand;
+							P4canMove = false;
+						}
+						break;
+					case MapState.Btle:
+						if (Input.GetAxis(P4yAxis) > 0) // down
+						{
+							P4State = MapState.Lava;
+							P4canMove = false;
+						}
+						else if (Input.GetAxis(P4xAxis) < 0) // left
+						{
+							P4State = MapState.Trad;
+							P4canMove = false;
+						}
+						break;	
+					case MapState.Land:
+						if (Input.GetAxis(P4yAxis) < 0) // up
+						{
+							P4State = MapState.Trad;
+							P4canMove = false;
+						}
+						else if (Input.GetAxis(P4xAxis) > 0) // right
+						{
+							P4State = MapState.Lava;
+							P4canMove = false;
+						}
+						else if (Input.GetAxis(P4xAxis) < 0) // left
+						{
+							P4State = MapState.Rand;
+							P4canMove = false;
+						}
+						break;	
+					case MapState.Lava:
+						if (Input.GetAxis(P4yAxis) < 0) // up
+						{
+							P4State = MapState.Btle;
+							P4canMove = false;
+						}
+						else if (Input.GetAxis(P4xAxis) < 0) // left
+						{
+							P4State = MapState.Land;
+							P4canMove = false;
+						}
+						break;
 				}
 			}
 			// Check for the selection key being pressed
