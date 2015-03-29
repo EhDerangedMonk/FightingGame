@@ -60,6 +60,11 @@ public abstract class PlayerState {
     public abstract bool checkState(Player player);
 
 
+    /*
+     * DESCR: Deals damage from environmental hazards to the player
+     * PRE: An amount of damage
+     * POST: If the damage was successful
+     */
     public abstract bool environmentDamage(int dmg);
 
 

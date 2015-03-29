@@ -14,12 +14,14 @@ public class noirBehaviour: PlayerState {
     private int specState;// int representing the charge value
     private Player curPlayer; // Colliding player which is usually the opponent
     private bool attack; // If player currently in attack don't redo dmg for it
+    private bool canAttack; // If the player currently can attack
 
 	//TEMP CODE - Nigel
 	private HitMarkerSpawner hitFactory = GameObject.FindObjectOfType<HitMarkerSpawner> ();
 
     // Constructor
     public noirBehaviour(Transform trans, Animator animation) {
+        canAttack = true;
         attack = false;
         flinch = false;
         specState = 0;// No spec attack by default
@@ -49,24 +51,29 @@ public class noirBehaviour: PlayerState {
         curPlayer = player;
         stateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
-        if (stateInfo.nameHash != flinchStateHash) {
-            anim.SetBool("Flinch", false);
+        //**FIX should relate this code to the idle state instead refactoring
+        if (stateInfo.nameHash == flinchStateHash) {
+            //anim.SetBool("Flinch", false);
+            canAttack = false;
             setFlinch(false);
         }
-
+        
         if (stateInfo.nameHash == launchStateHash) {
+            canAttack = false;
             setLaunch(false);
         }
-
+        
         // Player is idling thus not attacking
         if (stateInfo.nameHash == idleStateHash) {
+            canAttack = true;
             attack = false;
         }
-
+        
         // Place holder grapple has no current use
         if (stateInfo.nameHash == grappleStateHash) {
-            attack = true;
+            canAttack = false;
             if (contact() == true) {
+                attack = true;
                 grapple();
             }
             
@@ -74,34 +81,45 @@ public class noirBehaviour: PlayerState {
 
         // If player is not already in an attack and they have triggered attack animations
         // Set attack to true and see if they are currently hitting or missing a player (If hit inflict damage)
+        // If player is not already in an attack and they have triggered attack animations
+        // Set attack to true and see if they are currently hitting or missing a player (If hit inflict damage)
         if (!attack && stateInfo.nameHash == lightAttackStateHash) {
-            attack = true;
-            if (contact() == true)
+            canAttack = false;
+            if (contact() == true) {
+                attack = true;
                 lightAttack();
+            }
         }
+
 
         if (!attack && stateInfo.nameHash == specStateHash[4]) {
-            attack = true;
-            if (contact() == true)
+            canAttack = false;
+            if (contact() == true) {
+                attack = true;
                 specialAttack(specState);
+            }
         }
-
+        
         if (!attack && stateInfo.nameHash == heavyAttackStateHash) {
-            attack = true;
-            if (contact() == true)
+            canAttack = false;      
+            if (contact() == true) {
+                attack = true;
                 heavyAttack();
+            }
         }
 
         if (!attack && stateInfo.nameHash == counterStateHash) {
-            attack = true;
-            if (contact() == true)
+            canAttack = false;
+            if (contact() == true) {
+                attack = true;
                 counterAttack();
+            }
         }
 
         // Special attack for Noir can have 4 states of charging
         for (int i = 0; i < 4; i++) {
-            
             if (stateInfo.nameHash == specStateHash[i]) {
+                canAttack = false;
                 chargeState = true;
                 specState = i + 1;
             }
@@ -115,7 +133,7 @@ public class noirBehaviour: PlayerState {
             setBlock(false);
 
 
-        return (attack || chargeState); //Don't allow the player to attack again until the attack/move is finished
+        return (attack || chargeState || !canAttack); //Don't allow the player to attack again until the attack/move is finished
     }
 
 

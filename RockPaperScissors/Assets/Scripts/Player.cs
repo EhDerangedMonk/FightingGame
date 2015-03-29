@@ -9,9 +9,6 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-    private const float maxSpeed = 5f; // limit on player run speed
-    private const float jumpDelay = 0.3f;
-    private float nextJump = 0.0f;
 
     //** Want to turn into getters/setters
     public int layout; // Controller layout
@@ -36,12 +33,18 @@ public class Player : MonoBehaviour {
 
     private bool isFlinching; // Stops player from flinching more than one until flinch is done
     private bool isLaunching; // Stops the player from launching more than once until done
+    private bool isFacingLeft;
+
+    private const float maxSpeed = 5f; // limit on player run speed
+    private const float jumpDelay = 0.3f;
+    private float nextJump = 0.0f;
 
 
     void Start() {
         player = null; // Not colliding with a player by default
         isFlinching = false;
         isLaunching = false;
+        isFacingLeft = false;
 
         anim = GetComponent<Animator>(); // State machine is controlled by looking at the animator
         controller = new Controls(layout);
@@ -58,12 +61,17 @@ public class Player : MonoBehaviour {
 
     // Update is called whenever the processor is free (As fast as possible)
     void Update() {
+        bool attack;
+
+        setGround();
+        attack = playerState.checkState(player);
 
         // Disable controls if the player is dead/ otherwise accept them
         if (playerHealth.isDead() == true) {
             anim.SetBool("Death", true);
-        } else {
-			//input for player controls
+        } else  {
+            
+            
             if (playerState.isBlock() == false && playerState.isFlinch() == false && Input.GetKeyDown (controller.getLightKey())) {
                 anim.SetTrigger("Light");
             } else if (Input.GetKeyUp (controller.getSpecialKey())) {
@@ -78,7 +86,11 @@ public class Player : MonoBehaviour {
 				anim.SetBool("Block", true);
 			} else if (playerState.isBlock() == false && Input.GetKeyDown (controller.getGrappleKey())) {
 				anim.SetTrigger("Grapple");
-			}
+            } else if (!attack && playerState.isBlock() == false && playerState.isFlinch() == false && (Input.GetKeyDown (controller.getJumpKey()) || -0.6 >Input.GetAxis(controller.getYAxisKey()))) {
+                jump(); // Controls players jumping ability
+			} else if (!attack && playerState.isBlock() == false && playerState.isFlinch() == false) {
+                movement();
+            }
 
         }
 
@@ -87,20 +99,18 @@ public class Player : MonoBehaviour {
     // Update is called once per frame (Controlled)
     void FixedUpdate ()  {
 
-
         if (playerHealth.isDead() == true) {
             anim.SetBool("Death", true);
             return;
         } else if (isFlinching == false && playerState.isFlinch() == true) { // Code to handle the movement of the player if they are flinching
             anim.SetTrigger("Flinch");
 
-            if (player != null) {
-                if (player.playerState.isFacingLeft() == true) {
-                    rigidbody2D.AddForce(new Vector3(-2f, 0f, 0f) * 200); //Test force not final
-                } else if (player.playerState.isFacingLeft() == false) {
-                    rigidbody2D.AddForce(new Vector3(2f, 0f, 0f) * 200); //Test force not final
-                }
+            if (isFacingLeft == true) {
+                rigidbody2D.AddForce(new Vector3(-2f, 0f, 0f) * 200); //Test force not final
+            } else if (isFacingLeft == false) {
+                rigidbody2D.AddForce(new Vector3(2f, 0f, 0f) * 200); //Test force not final
             }
+
             isFlinching = true;
             return;
         } else if (isFlinching == true && playerState.isFlinch() == false) {
@@ -108,46 +118,57 @@ public class Player : MonoBehaviour {
         } else if (isLaunching == false && playerState.isLaunch() == true) {
             anim.SetTrigger("Launch");
 
-            if (player != null) {
-                if (player.playerState.isFacingLeft() == true) {
-                    rigidbody2D.AddForce(new Vector3(-1.2f, 3f, 0f) * 300); //Test force not final
-                } else if (player.playerState.isFacingLeft() == false) {
-                    rigidbody2D.AddForce(new Vector3(1.2f, 3f, 0f) * 300); //Test force not final
-                }
+            if (isFacingLeft == true) {
+                rigidbody2D.AddForce(new Vector3(-1.2f, 3f, 0f) * 300); //Test force not final
+            } else if (isFacingLeft == false) {
+                rigidbody2D.AddForce(new Vector3(1.2f, 3f, 0f) * 300); //Test force not final
             }
             isLaunching = true;
         } else if (isLaunching == true && playerState.isLaunch() == false) {
             isLaunching = false; // Animation is complete flip the variable
         }
 
-        setGround();
-
-        if (playerState.checkState(player) == true) { //Controls player and their actions
-            return; // Currently in attack if return is true so don't allow character movement
-        } else if (isFlinching == true || playerState.isBlock() == true || playerState.isLaunch() == true) {
-            return;
+        //** Don't look in child once update is pushed from Nigel
+        Collider2D[] colliders = this.gameObject.GetComponentsInChildren<Collider2D> ();
+        foreach (Collider2D collider in colliders) {
+            if (collider.isTrigger && collider.enabled == false) {
+                    player = null;
+            }
         }
 
-        jump(); // Controls players jumping ability
-        movement();
+        //setGround();
+
+        // if (playerState.checkState(player) == true) { //Controls player and their actions
+        //     return; // Currently in attack if return is true so don't allow character movement
+        // } else if (playerState.isFlinch() == true || playerState.isBlock() == true || playerState.isLaunch() == true) {
+        //     return;
+        // }
 
     }
 
 
     //triggers when a trigger is maintained for more than a frame
-    void OnTriggerStay2D(Collider2D other) {
-
+    void OnTriggerEnter2D(Collider2D other) {
         //If you're intersecting with another player you will capture their class to be able to interact with them
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player") {
             player = (Player)other.gameObject.GetComponent(typeof(Player));
+            isFacingLeft = player.playerState.isFacingLeft();
+            //Debug.Log(player.playerHealth.getHealth() + " is facing " + isFacingLeft);
+            // Debug.Log(isFacingLeft);
+        }
     }
 
+    // //triggers when a trigger is maintained for more than a frame
+    // void OnTriggerStay2D(Collider2D other) {
+    //     Debug.Log(isFacingLeft);
+    //     //If you're intersecting with another player you will capture their class to be able to interact with them
+    //     if (other.gameObject.tag == "Player") {
+    //         //player = (Player)other.gameObject.GetComponent(typeof(Player));
+    //         if (player != null)
+    //             isFacingLeft = player.playerState.isFacingLeft();
+    //     }
+    // }
 
-    void OnTriggerExit2D(Collider2D other) {
-        // When a Player object stops colliding with another Player object (Since they are not in your range)
-        if (other.gameObject.tag == "Player")
-            player = null;
-    }
 
 	/*
      * DESCR: Flips the horizontal direction the sprite is facing.
@@ -179,14 +200,13 @@ public class Player : MonoBehaviour {
     void jump() {
 
         
-  
         //if we are on the ground, refreshes our double jump
         if (grounded) { //Can't double jump unless already in air
             doubleJump = false;
         }
 
         //checks conditions for jumping, launches player if they can jump
-        if ((grounded || !doubleJump) && (-0.6>Input.GetAxis(controller.getYAxisKey()) || Input.GetKeyDown(controller.getJumpKey())) && Time.time > nextJump){
+        if ((grounded || !doubleJump) && Time.time > nextJump){
             nextJump = Time.time + jumpDelay;
             anim.SetBool("Ground", false);
             Vector2 v = rigidbody2D.velocity;
