@@ -50,7 +50,6 @@
      <Compile Include="Assets\Scripts\Controls.cs" />
      <Compile Include="Assets\Scripts\ControlsMenu.cs" />
      <Compile Include="Assets\Scripts\Credits.cs" />
-     <Compile Include="Assets\Scripts\Explosion.cs" />
      <Compile Include="Assets\Scripts\Health.cs" />
      <Compile Include="Assets\Scripts\HitBoxManager.cs" />
      <Compile Include="Assets\Scripts\HitMarker.cs" />
