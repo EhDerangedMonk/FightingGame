@@ -30,7 +30,7 @@ public class Lava : MonoBehaviour {
 				sound.Play ();
 				victim.playerState.setLaunch (true);
 				victim.rigidbody2D.AddForce(new Vector2(0, launchForce));
-				victim.playerHealth.damage(100); //Deal 100 to the player.
+				victim.playerState.environmentDamage(100); //Deal 100 to the player.
 			}
 		}
 	}

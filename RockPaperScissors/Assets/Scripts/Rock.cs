@@ -62,7 +62,7 @@ public class Rock : MonoBehaviour {
 				//Otherwise, deal damage.
 				if(dealDamage == true) {
 					victim.playerState.setLaunch(true); //Causes a launch to the player.
-					victim.playerHealth.damage(100); // Rocks deal 100DMG
+					victim.playerState.environmentDamage(100); // Rocks deal 100DMG
 
 					//Apply a force to the player in the corresponding direction.
 					if(this.transform.position.x > victim.transform.position.x)
