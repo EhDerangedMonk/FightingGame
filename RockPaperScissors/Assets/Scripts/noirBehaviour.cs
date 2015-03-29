@@ -12,14 +12,12 @@ public class noirBehaviour: PlayerState {
     private int counterStateHash;
     private int specState;// int representing the charge value
     private bool attack; // If player currently in attack don't redo dmg for it
-    private bool canAttack; // If the player currently can attack
 
 	//TEMP CODE - Nigel
 	private HitMarkerSpawner hitFactory = GameObject.FindObjectOfType<HitMarkerSpawner> ();
 
     // Constructor
     public noirBehaviour() {
-        canAttack = true;
         attack = false;
         flinch = false;
         specState = 0;// No spec attack by default
@@ -37,122 +35,67 @@ public class noirBehaviour: PlayerState {
         blockStateHash = Animator.StringToHash("Base Layer.noirBlock");
         counterStateHash = Animator.StringToHash("Base Layer.noirCounter");
         launchStateHash = Animator.StringToHash("Base Layer.noirRecovery");
+        runStateHash = Animator.StringToHash("Base Layer.noirRun");
+        jumpStateHash = Animator.StringToHash("Base Layer.noirJump");
     }
 
 
     override public bool checkState(Player player) {
-        bool chargeState; // Player is charging set to true (Prevents player from moving while charging)
+        bool canAttack; // Is the player in a valid animation to attack
 
-        chargeState = false;
+        canAttack = false;
         curPlayer = player;
         stateInfo = curPlayer.anim.GetCurrentAnimatorStateInfo(0);
-
-        //**FIX should relate this code to the idle state instead refactoring
+        
         if (stateInfo.nameHash == flinchStateHash) {
-            //curPlayer.anim.SetBool("Flinch", false);
-            canAttack = false;
             setFlinch(false);
-        }
-        
-        if (stateInfo.nameHash == launchStateHash) {
-            canAttack = false;
+        } else if (stateInfo.nameHash == launchStateHash) {
             setLaunch(false);
-        }
-        
-        // Player is idling thus not attacking
-        if (stateInfo.nameHash == idleStateHash) {
+        } else if (stateInfo.nameHash == idleStateHash || stateInfo.nameHash == runStateHash || stateInfo.nameHash == jumpStateHash) {
+            attack = false; // Player is in a valid animation to attack running or idle
             canAttack = true;
-            attack = false;
-        }
-        
-        // Place holder grapple has no current use
-        if (!attack && stateInfo.nameHash == grappleStateHash) {
-            canAttack = false;
-            if (contact() == true) {
-                attack = true;
-                grapple();
-            }
-            
-        }
-
-        // If player is not already in an attack and they have triggered attack animations
-        // Set attack to true and see if they are currently hitting or missing a player (If hit inflict damage)
-        // If player is not already in an attack and they have triggered attack animations
-        // Set attack to true and see if they are currently hitting or missing a player (If hit inflict damage)
-        if (!attack && stateInfo.nameHash == lightAttackStateHash) {
-            canAttack = false;
-            if (contact() == true) {
-                attack = true;
-                lightAttack();
-            }
-        }
-
-
-        if (!attack && stateInfo.nameHash == specStateHash[4]) {
-            canAttack = false;
-            if (contact() == true) {
-                attack = true;
-                specialAttack(specState);
-            }
-        }
-        
-        if (!attack && stateInfo.nameHash == heavyAttackStateHash) {
-            canAttack = false;      
-            if (contact() == true) {
-                attack = true;
-                heavyAttack();
-            }
-        }
-
-        if (!attack && stateInfo.nameHash == counterStateHash) {
-            canAttack = false;
-            if (contact() == true) {
-                attack = true;
-                counterAttack();
-            }
-        }
-
-        // Special attack for Noir can have 4 states of charging
-        for (int i = 0; i < 4; i++) {
-            if (stateInfo.nameHash == specStateHash[i]) {
-                canAttack = false;
-                chargeState = true;
-                specState = i + 1;
-            }
-        }
-
-
-
-        if (!attack && stateInfo.nameHash == blockStateHash) {
-            setBlock(true); // Player is blocking incoming damage
-        } else {
             setBlock(false);
+        } else if (stateInfo.nameHash == blockStateHash) {
+            setBlock(true);
+        } else if (!attack && contact() == true) {
+            if (stateInfo.nameHash == grappleStateHash) {
+                attack = grapple(); 
+            } else if (stateInfo.nameHash == lightAttackStateHash) {
+                attack = lightAttack();
+            } else if (stateInfo.nameHash == specStateHash[4]) {
+                attack = specialAttack(specState);
+            } else if (stateInfo.nameHash == heavyAttackStateHash) {
+                attack = heavyAttack();
+            } else if (stateInfo.nameHash == counterStateHash) {
+                attack = counterAttack();
+            }
+        } else {
+            // Special attack for Noir can have 4 states of charging
+            for (int i = 0; i < 4; i++) {
+                if (stateInfo.nameHash == specStateHash[i]) {
+                    canAttack = false;
+                    specState = i + 1;
+                }
+            }
         }
 
 
-        return (attack || chargeState || !canAttack); //Don't allow the player to attack again until the attack/move is finished
+
+        return (attack || !canAttack); //Don't allow the player to attack again until the attack/move is finished
     }
 
 
     override public bool lightAttack() {
         
-        if (curPlayer.player == null) {
+        if (curPlayer.player == null || checkIfCountered(200) == true)
             return false;
-        } else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
-            ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
-            setFlinch(true);
-            curPlayer.player.anim.SetTrigger("Counter");
-            sideForcePush(isFacingLeft());
-            sideForcePush(curPlayer.player.playerState.isFacingLeft());
-            return false;
-        }
 
 		//TEMP CODE - Nigel
 		hitFactory.MakeHitMarker (curPlayer.player.gameObject, 1);
 
         curPlayer.player.playerState.setFlinch(true);
         curPlayer.player.playerHealth.damage(50);
-        curPlayer.player.playerState.sideForcePush(isFacingLeft());
+        curPlayer.player.playerState.sideForcePush(isFacingLeft(), 200);
         return true; 
     }
 
@@ -162,16 +105,8 @@ public class noirBehaviour: PlayerState {
 
         damage = 0;
 
-        if (curPlayer.player == null) {
+        if (curPlayer.player == null || checkIfCountered(200) == true)
             return false;
-        } else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
-            ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
-            setFlinch(true);
-            curPlayer.player.anim.SetTrigger("Counter");
-            sideForcePush(isFacingLeft());
-            sideForcePush(curPlayer.player.playerState.isFacingLeft());
-            return false;
-        }
 
         switch (curState) { // Calculate damage based on charge of noirs special
             case 1:
@@ -193,30 +128,21 @@ public class noirBehaviour: PlayerState {
 
         curPlayer.player.playerState.setFlinch(true);
         curPlayer.player.playerHealth.damage(damage);
-        curPlayer.player.playerState.sideForcePush(isFacingLeft());
+        curPlayer.player.playerState.sideForcePush(isFacingLeft(), damage);
         return true;
     }
 
 
     override public bool heavyAttack() {
         
-        if (curPlayer.player == null) {
+        if (curPlayer.player == null || checkIfCountered(200) == true)
             return false;
-        } else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
-            ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
-            setFlinch(true);
-            curPlayer.player.anim.SetTrigger("Counter");
-            sideForcePush(isFacingLeft());
-            sideForcePush(curPlayer.player.playerState.isFacingLeft());
-            return false;
-        }
-
 		//TEMP CODE - Nigel
 		hitFactory.MakeHitMarker(curPlayer.player.gameObject, 1);
 		
 		curPlayer.player.playerState.setLaunch(true);
 		curPlayer.player.playerHealth.damage(100);
-        curPlayer.player.playerState.forceLaunch(isFacingLeft());
+        curPlayer.player.playerState.forceLaunch(isFacingLeft(), 300);
         return true;
     }
 
@@ -236,7 +162,7 @@ public class noirBehaviour: PlayerState {
         }
 
         curPlayer.player.playerState.setFlinch(true);
-        curPlayer.player.playerState.sideForcePush(isFacingLeft());
+        curPlayer.player.playerState.sideForcePush(isFacingLeft(), 200);
         return true;
     }
 
@@ -255,24 +181,27 @@ public class noirBehaviour: PlayerState {
     }
 
     private bool counterAttack() {
-        if (curPlayer.player == null) {
+        if (curPlayer.player == null || checkIfCountered(200) == true)
             return false;
-        } else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
-            ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
-            setFlinch(true);
-            curPlayer.player.anim.SetTrigger("Counter");
-            sideForcePush(isFacingLeft());
-            sideForcePush(curPlayer.player.playerState.isFacingLeft());
-            return false;
-        }
 
 		//TEMP CODE - Nigel
 		hitFactory.MakeHitMarker (curPlayer.player.gameObject, 1);
 
         curPlayer.player.playerState.setFlinch(true);
-        curPlayer.player.playerHealth.damage(25);
-        curPlayer.player.playerState.sideForcePush(isFacingLeft());
+        curPlayer.player.playerHealth.damage(50);
+        curPlayer.player.playerState.sideForcePush(isFacingLeft(), 200);
         return true;
+    }
+
+    private bool checkIfCountered(int intensity) {
+        if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
+                   ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
+            setFlinch(true);
+            curPlayer.player.anim.SetTrigger("Counter");
+            sideForcePush(curPlayer.player.playerState.isFacingLeft(), intensity);
+            return true;
+        }
+        return false;
     }
 
 }

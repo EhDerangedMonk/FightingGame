@@ -8,7 +8,8 @@ using System.Collections;
 
 public abstract class PlayerState {
 
-    public Player curPlayer; // Colliding player which is usually the opponent
+    public Player curPlayer; // Player that the behaviour belongs to
+
     public int lightAttackStateHash; // All State hashes are links to the animator
     public int[] specStateHash; // Can have more than one state
     public int heavyAttackStateHash;
@@ -17,6 +18,9 @@ public abstract class PlayerState {
     public int blockStateHash;
     public int grappleStateHash;
     public int launchStateHash;
+    public int runStateHash;
+    public int jumpStateHash;
+
     public bool flinch; // Is the player currently unable attack due to a flinch?
     public bool launch; // Is the player launching in the air from an attack?
     public bool block; // Is the player currently blocking
@@ -68,22 +72,30 @@ public abstract class PlayerState {
     public abstract bool environmentDamage(int dmg);
 
 
-    public void sideForcePush(bool isFacingLeft) {
+    /* 
+     * DESCR: Applies force to current player in the left or right direction as a push
+     * PRE: bool direction your force is coming from, intensity of force (0- 1000's)
+     */
+    public void sideForcePush(bool isFacingLeft, int intensity) { // 200
         if (isFacingLeft == true) {
-            curPlayer.rigidbody2D.AddForce(new Vector3(-2f, 0f, 0f) * 200); //Test force not final
+            curPlayer.rigidbody2D.AddForce(new Vector3(-2f, 0f, 0f) * intensity); //Test force not final
         } else if (isFacingLeft == false) {
-            curPlayer.rigidbody2D.AddForce(new Vector3(2f, 0f, 0f) * 200); //Test force not final
+            curPlayer.rigidbody2D.AddForce(new Vector3(2f, 0f, 0f) * intensity); //Test force not final
         }
     }
 
-    public void forceLaunch(bool isFacingLeft) {
+
+    /* 
+     * DESCR: Applies force to current player in the left or right direction going up
+     * PRE: bool direction your force is coming from, intensity of force (0- 1000's)
+     */
+    public void forceLaunch(bool isFacingLeft, int intensity) { // 310
         if (isFacingLeft == true) {
-            curPlayer.rigidbody2D.AddForce(new Vector3(-1.1f, 3f, 0f) * 310); //Test force not final
+            curPlayer.rigidbody2D.AddForce(new Vector3(-1.1f, 3f, 0f) * intensity); //Test force not final
         } else if (isFacingLeft == false) {
-            curPlayer.rigidbody2D.AddForce(new Vector3(1.1f, 3f, 0f) * 310); //Test force not final
+            curPlayer.rigidbody2D.AddForce(new Vector3(1.1f, 3f, 0f) * intensity); //Test force not final
         }
     }
-
 
 
     /*

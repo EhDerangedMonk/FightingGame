@@ -19,14 +19,13 @@ public class Player : MonoBehaviour {
     public Controls controller; // Player keyboard/game controller controls
     public PlayerState playerState; // Contains the attack behaviours and reactions of the selected player
     public Player player; //when collided check player collided with
+    public Animator anim; // Stores player animation -This is read and changed to determine what the character is doing
 
     // Unity needs public access to assign these to the scene
     public Transform groundCheck; // object that is used to check if the player is on the ground
     public LayerMask whatIsGround;//Layer object that indicates that the player themselves and other players are not the ground, everything else is
     
 	
-    public Animator anim; // Stores player animation -This is read and changed to determine what the character is doing
-
     
     private bool grounded = false;
     private float groundRadius = 0.2f;
@@ -68,9 +67,7 @@ public class Player : MonoBehaviour {
         // Disable controls if the player is dead/ otherwise accept them
         if (playerHealth.isDead() == true) {
             anim.SetBool("Death", true);
-        } else  {
-            
-            
+        } else  {   
             if (playerState.isBlock() == false && playerState.isFlinch() == false && Input.GetKeyDown (controller.getLightKey())) {
                 anim.SetTrigger("Light");
             } else if (Input.GetKeyUp (controller.getSpecialKey())) {
@@ -99,7 +96,6 @@ public class Player : MonoBehaviour {
     void FixedUpdate ()  {
 
         if (playerHealth.isDead() == true) {
-            anim.SetBool("Death", true);
             return;
         } else if (isFlinching == false && playerState.isFlinch() == true) { // Code to handle the movement of the player if they are flinching
             anim.SetTrigger("Flinch");
@@ -115,21 +111,12 @@ public class Player : MonoBehaviour {
             isLaunching = false; // Animation is complete flip the variable
         }
 
-        //** Don't look in child once update is pushed from Nigel
         Collider2D[] colliders = this.gameObject.GetComponentsInChildren<Collider2D> ();
         foreach (Collider2D collider in colliders) {
             if (collider.isTrigger && collider.enabled == false) {
                     player = null;
             }
         }
-
-        //setGround();
-
-        // if (playerState.checkState(player) == true) { //Controls player and their actions
-        //     return; // Currently in attack if return is true so don't allow character movement
-        // } else if (playerState.isFlinch() == true || playerState.isBlock() == true || playerState.isLaunch() == true) {
-        //     return;
-        // }
 
     }
 
@@ -191,6 +178,9 @@ public class Player : MonoBehaviour {
     }
 
 
+    /*
+     * DESCR: Moves the player around on screen
+     */
     void movement() {
         float move; // Direction that the player is moving in forward(1) - backwards(-1) - stop(0)
         //X-axis movement input
