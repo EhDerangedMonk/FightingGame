@@ -18,6 +18,7 @@ public class Player : MonoBehaviour {
     public Health playerHealth; // Player health representation - Needs to be public for GUI to read
     public Controls controller; // Player keyboard/game controller controls
     public PlayerState playerState; // Contains the attack behaviours and reactions of the selected player
+    public Player player; //when collided check player collided with
 
     // Unity needs public access to assign these to the scene
     public Transform groundCheck; // object that is used to check if the player is on the ground
@@ -25,7 +26,7 @@ public class Player : MonoBehaviour {
     
 	
     private Animator anim; // Stores player animation -This is read and changed to determine what the character is doing
-    private Player player; //when collided check player collided with
+
     
     private bool grounded = false;
     private float groundRadius = 0.2f;
@@ -51,7 +52,7 @@ public class Player : MonoBehaviour {
         playerHealth = new Health(1000);
 
 		if (characterChoice == 0) {
-			playerState = new noirBehaviour (this.transform, anim);
+			playerState = new noirBehaviour(this.transform, anim);
 		} else if(characterChoice == 1) {
 			playerState = new zakirBehaviour(this.transform, anim);
 		} else if (characterChoice == 2) {
@@ -64,7 +65,7 @@ public class Player : MonoBehaviour {
         bool attack;
 
         setGround();
-        attack = playerState.checkState(player);
+        attack = playerState.checkState(this);
 
         // Disable controls if the player is dead/ otherwise accept them
         if (playerHealth.isDead() == true) {
@@ -105,11 +106,11 @@ public class Player : MonoBehaviour {
         } else if (isFlinching == false && playerState.isFlinch() == true) { // Code to handle the movement of the player if they are flinching
             anim.SetTrigger("Flinch");
 
-            if (isFacingLeft == true) {
-                rigidbody2D.AddForce(new Vector3(-2f, 0f, 0f) * 200); //Test force not final
-            } else if (isFacingLeft == false) {
-                rigidbody2D.AddForce(new Vector3(2f, 0f, 0f) * 200); //Test force not final
-            }
+            // if (isFacingLeft == true) {
+            //     rigidbody2D.AddForce(new Vector3(-2f, 0f, 0f) * 200); //Test force not final
+            // } else if (isFacingLeft == false) {
+            //     rigidbody2D.AddForce(new Vector3(2f, 0f, 0f) * 200); //Test force not final
+            // }
 
             isFlinching = true;
             return;
@@ -118,11 +119,11 @@ public class Player : MonoBehaviour {
         } else if (isLaunching == false && playerState.isLaunch() == true) {
             anim.SetTrigger("Launch");
 
-            if (isFacingLeft == true) {
-                rigidbody2D.AddForce(new Vector3(-1.2f, 3f, 0f) * 300); //Test force not final
-            } else if (isFacingLeft == false) {
-                rigidbody2D.AddForce(new Vector3(1.2f, 3f, 0f) * 300); //Test force not final
-            }
+            // if (isFacingLeft == true) {
+            //     rigidbody2D.AddForce(new Vector3(-1.2f, 3f, 0f) * 300); //Test force not final
+            // } else if (isFacingLeft == false) {
+            //     rigidbody2D.AddForce(new Vector3(1.2f, 3f, 0f) * 300); //Test force not final
+            // }
             isLaunching = true;
         } else if (isLaunching == true && playerState.isLaunch() == false) {
             isLaunching = false; // Animation is complete flip the variable

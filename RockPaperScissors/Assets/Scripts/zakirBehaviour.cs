@@ -113,20 +113,20 @@ public class zakirBehaviour: PlayerState {
 	
 	override public bool lightAttack() {
 		
-		if (curPlayer == null) {
+		if (curPlayer.player == null) {
 			return false;
-		} else if ((curPlayer.playerState.isBlock() && isFacingLeft() && !(curPlayer.playerState.isFacingLeft()))
-		           ||  (curPlayer.playerState.isBlock() && !isFacingLeft() && curPlayer.playerState.isFacingLeft())) {
+		} else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
+		           ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
 			setFlinch(true);
-			curPlayer.playerState.anim.SetTrigger("Counter");
+			curPlayer.player.playerState.anim.SetTrigger("Counter");
 			return false;
 		}
 
 		//TEMP CODE - Nigel
-		hitFactory.MakeHitMarker (curPlayer.gameObject, 0);
+		hitFactory.MakeHitMarker (curPlayer.player.gameObject, 0);
 		
-		curPlayer.playerState.setFlinch(true);
-		curPlayer.playerHealth.damage(50);
+		curPlayer.player.playerState.setFlinch(true);
+		curPlayer.player.playerHealth.damage(50);
 		return true; 
 	}
 	
@@ -136,12 +136,12 @@ public class zakirBehaviour: PlayerState {
 		
 		damage = 0;
 		
-		if (curPlayer == null) {
+		if (curPlayer.player == null) {
 			return false;
-		} else if ((curPlayer.playerState.isBlock() && isFacingLeft() && !(curPlayer.playerState.isFacingLeft()))
-		           ||  (curPlayer.playerState.isBlock() && !isFacingLeft() && curPlayer.playerState.isFacingLeft())) {
+		} else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
+		           ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
 			setFlinch(true);
-			curPlayer.playerState.anim.SetTrigger("Counter");
+			curPlayer.player.playerState.anim.SetTrigger("Counter");
 			return false;
 		}
 
@@ -149,30 +149,30 @@ public class zakirBehaviour: PlayerState {
 		damage = 200;
 
 		//TEMP CODE - Nigel
-		hitFactory.MakeHitMarker (curPlayer.gameObject, 0);
+		hitFactory.MakeHitMarker (curPlayer.player.gameObject, 0);
 
-		curPlayer.playerState.setFlinch(true);
-		curPlayer.playerHealth.damage(damage);
+		curPlayer.player.playerState.setFlinch(true);
+		curPlayer.player.playerHealth.damage(damage);
 		return true;
 	}
 	
 	
 	override public bool heavyAttack() {
 		
-		if (curPlayer == null) {
+		if (curPlayer.player == null) {
 			return false;
-		} else if ((curPlayer.playerState.isBlock() && isFacingLeft() && !(curPlayer.playerState.isFacingLeft()))
-		           ||  (curPlayer.playerState.isBlock() && !isFacingLeft() && curPlayer.playerState.isFacingLeft())) {
+		} else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
+		           ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
 			setFlinch(true);
-			curPlayer.playerState.anim.SetTrigger("Counter");
+			curPlayer.player.playerState.anim.SetTrigger("Counter");
 			return false;
 		}
 
 		//TEMP CODE - Nigel
-		hitFactory.MakeHitMarker (curPlayer.gameObject, 0);
+		hitFactory.MakeHitMarker (curPlayer.player.gameObject, 0);
 		
-		curPlayer.playerState.setLaunch(true);
-		curPlayer.playerHealth.damage(100);
+		curPlayer.player.playerState.setLaunch(true);
+		curPlayer.player.playerHealth.damage(100);
 		return true;
 	}
 
@@ -188,42 +188,43 @@ public class zakirBehaviour: PlayerState {
 
 	override public bool grapple() {
 
-        if (curPlayer == null) {
+        if (curPlayer.player == null) {
             return false;
         }
 
-        curPlayer.playerState.setFlinch(true);
-        //curPlayer.playerState.setLaunch(true);
-        //curPlayer.playerHealth.damage(100);
+        curPlayer.player.playerState.setFlinch(true);
+        //curPlayer.player.playerState.setLaunch(true);
+        //curPlayer.player.playerHealth.damage(100);
         return true;
     }
 	
 	// Helper Method
 	private bool contact() {
-		if (curPlayer == null)
+		if (curPlayer.player == null)
 			return false;
 
-		if (this.transform.position.x < curPlayer.transform.position.x && isFacingLeft())
+
+		if (this.transform.position.x < curPlayer.player.transform.position.x && isFacingLeft())
 			return false;
-		else if (this.transform.position.x > curPlayer.transform.position.x && !(isFacingLeft()))
+		else if (this.transform.position.x > curPlayer.player.transform.position.x && !(isFacingLeft()))
 			return false;
 		else    
 			return true;
 	}
 	
 	private bool counterAttack() {
-		if (curPlayer == null) {
+		if (curPlayer.player == null) {
 			return false;
-		} else if ((curPlayer.playerState.isBlock() && isFacingLeft() && !(curPlayer.playerState.isFacingLeft()))
-		           ||  (curPlayer.playerState.isBlock() && !isFacingLeft() && curPlayer.playerState.isFacingLeft())) {
+		} else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
+		           ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
 			setFlinch(true);
-			curPlayer.playerState.anim.SetTrigger("Counter");
+			curPlayer.player.playerState.anim.SetTrigger("Counter");
 			return false;
 		}
 		
 		
-		curPlayer.playerState.setFlinch(true);
-		//curPlayer.playerHealth.damage(25);
+		curPlayer.player.playerState.setFlinch(true);
+		//curPlayer.player.playerHealth.damage(25);
 		return true;
 	}
 	
