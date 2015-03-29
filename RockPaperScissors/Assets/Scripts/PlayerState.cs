@@ -8,6 +8,7 @@ using System.Collections;
 
 public abstract class PlayerState {
 
+    public Player curPlayer; // Colliding player which is usually the opponent
     public int lightAttackStateHash; // All State hashes are links to the animator
     public int[] specStateHash; // Can have more than one state
     public int heavyAttackStateHash;
@@ -16,7 +17,6 @@ public abstract class PlayerState {
     public int blockStateHash;
     public int grappleStateHash;
     public int launchStateHash;
-    public Animator anim; // Passing in a copy of the player animation to read it
     public bool flinch; // Is the player currently unable attack due to a flinch?
     public bool launch; // Is the player launching in the air from an attack?
     public bool block; // Is the player currently blocking
@@ -66,6 +66,24 @@ public abstract class PlayerState {
      * POST: If the damage was successful
      */
     public abstract bool environmentDamage(int dmg);
+
+
+    public void sideForcePush(bool isFacingLeft) {
+        if (isFacingLeft == true) {
+            curPlayer.rigidbody2D.AddForce(new Vector3(-2f, 0f, 0f) * 200); //Test force not final
+        } else if (isFacingLeft == false) {
+            curPlayer.rigidbody2D.AddForce(new Vector3(2f, 0f, 0f) * 200); //Test force not final
+        }
+    }
+
+    public void forceLaunch(bool isFacingLeft) {
+        if (isFacingLeft == true) {
+            curPlayer.rigidbody2D.AddForce(new Vector3(-1.1f, 3f, 0f) * 310); //Test force not final
+        } else if (isFacingLeft == false) {
+            curPlayer.rigidbody2D.AddForce(new Vector3(1.1f, 3f, 0f) * 310); //Test force not final
+        }
+    }
+
 
 
     /*

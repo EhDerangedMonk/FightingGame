@@ -8,11 +8,9 @@ using System.Collections;
 
 public class violetBehaviour: PlayerState {
 	
-	private Transform transform; // Current player coordinates - Compare to other players
 	private AnimatorStateInfo stateInfo;
 	//private int counterStateHash;
 	private int specState;// int representing the charge value
-	private Player curPlayer; // Colliding player which is usually the opponent
 	private bool attack; // If player currently in attack don't redo dmg for it
 	private bool canAttack; // If the player currently can attack
 
@@ -20,13 +18,11 @@ public class violetBehaviour: PlayerState {
 	private HitMarkerSpawner hitFactory = GameObject.FindObjectOfType<HitMarkerSpawner> ();
 	
 	// Constructor
-	public violetBehaviour(Transform trans, Animator animation) {
+	public violetBehaviour() {
 		canAttack = true;
 		attack = false;
 		flinch = false;
 		specState = 0;// No spec attack by default
-		anim = animation; // Getting component from unity passed in
-		transform = trans; // Player coordinates
 		specStateHash = new int[4]; // Noir has 4 special states
 		idleStateHash = Animator.StringToHash("Base Layer.violetIdle");
 		lightAttackStateHash = Animator.StringToHash("Base Layer.violetLightAttack");
@@ -49,11 +45,11 @@ public class violetBehaviour: PlayerState {
 		
 		chargeState = false;
 		curPlayer = player;
-		stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+		stateInfo = curPlayer.anim.GetCurrentAnimatorStateInfo(0);
 		
 		//**FIX should relate this code to the idle state instead refactoring
         if (stateInfo.nameHash == flinchStateHash) {
-            //anim.SetBool("Flinch", false);
+            //curPlayer.anim.SetBool("Flinch", false);
             canAttack = false;
             setFlinch(false);
         }
@@ -70,7 +66,7 @@ public class violetBehaviour: PlayerState {
         }
         
         // Place holder grapple has no current use
-        if (stateInfo.nameHash == grappleStateHash) {
+        if (!attack && stateInfo.nameHash == grappleStateHash) {
             canAttack = false;
             if (contact() == true) {
                 attack = true;
@@ -139,7 +135,8 @@ public class violetBehaviour: PlayerState {
 		} else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
 		           ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
 			setFlinch(true);
-			curPlayer.player.playerState.anim.SetTrigger("Counter");
+			curPlayer.player.anim.SetTrigger("Counter");
+			sideForcePush(curPlayer.player.playerState.isFacingLeft());
 			return false;
 		}
 
@@ -148,6 +145,7 @@ public class violetBehaviour: PlayerState {
 		
 		curPlayer.player.playerState.setFlinch(true);
 		curPlayer.player.playerHealth.damage(50);
+		curPlayer.player.playerState.sideForcePush(isFacingLeft());
 		return true; 
 	}
 	
@@ -162,7 +160,8 @@ public class violetBehaviour: PlayerState {
 		} else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
 		           ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
 			setFlinch(true);
-			curPlayer.player.playerState.anim.SetTrigger("Counter");
+			curPlayer.player.anim.SetTrigger("Counter");
+			sideForcePush(curPlayer.player.playerState.isFacingLeft());
 			return false;
 		}
 		
@@ -185,6 +184,7 @@ public class violetBehaviour: PlayerState {
 		}
 		curPlayer.player.playerState.setFlinch(true);
 		curPlayer.player.playerHealth.damage(damage);
+		curPlayer.player.playerState.sideForcePush(isFacingLeft());
 		return true;
 	}
 	
@@ -196,7 +196,8 @@ public class violetBehaviour: PlayerState {
 		} else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
 		           ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
 			setFlinch(true);
-			curPlayer.player.playerState.anim.SetTrigger("Counter");
+			curPlayer.player.anim.SetTrigger("Counter");
+			sideForcePush(curPlayer.player.playerState.isFacingLeft());
 			return false;
 		}
 
@@ -205,6 +206,7 @@ public class violetBehaviour: PlayerState {
 		
 		curPlayer.player.playerState.setLaunch(true);
 		curPlayer.player.playerHealth.damage(100);
+		curPlayer.player.playerState.forceLaunch(isFacingLeft());
 		return true;
 	}
 
@@ -225,6 +227,7 @@ public class violetBehaviour: PlayerState {
         }
 
         curPlayer.player.playerState.setFlinch(true);
+        curPlayer.player.playerState.sideForcePush(isFacingLeft());
         return true;
     }
 	
@@ -232,9 +235,11 @@ public class violetBehaviour: PlayerState {
 	private bool contact() {
 		if (curPlayer.player == null)
 			return false;
-		if (this.transform.position.x < curPlayer.player.transform.position.x && isFacingLeft())
+
+
+		if (curPlayer.transform.position.x < curPlayer.player.transform.position.x && isFacingLeft())
 			return false;
-		else if (this.transform.position.x > curPlayer.player.transform.position.x && !(isFacingLeft()))
+		else if (curPlayer.transform.position.x > curPlayer.player.transform.position.x && !(isFacingLeft()))
 			return false;
 		else    
 			return true;
@@ -246,11 +251,13 @@ public class violetBehaviour: PlayerState {
 		} else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
 		           ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
 			setFlinch(true);
-			curPlayer.player.playerState.anim.SetTrigger("Counter");
+			curPlayer.player.anim.SetTrigger("Counter");
+			sideForcePush(curPlayer.player.playerState.isFacingLeft());
 			return false;
 		}
 		
 		curPlayer.player.playerState.setFlinch(true);
+		curPlayer.player.playerState.sideForcePush(isFacingLeft());
 		return true;
 	}
 	

@@ -8,11 +8,8 @@ using System.Collections;
 
 public class zakirBehaviour: PlayerState {
 	
-	private Transform transform; // Current player coordinates - Compare to other players
 	private AnimatorStateInfo stateInfo;
-	//private int counterStateHash;
 	private int specState;// int representing the charge value
-	private Player curPlayer; // Colliding player which is usually the opponent
 	private bool attack; // If player currently in attack don't redo dmg for it
 	private bool canAttack; // If the player currently can attack
 
@@ -20,13 +17,11 @@ public class zakirBehaviour: PlayerState {
 	private HitMarkerSpawner hitFactory = GameObject.FindObjectOfType<HitMarkerSpawner> ();
 	
 	// Constructor
-	public zakirBehaviour(Transform trans, Animator animation) {
+	public zakirBehaviour() {
 		canAttack = true;
 		attack = false;
 		flinch = false;
-		specState = 0;// No spec attack by default
-		anim = animation; // Getting component from unity passed in
-		transform = trans; // Player coordinates
+		specState = 0; // No spec attack by default
 		specStateHash = new int[1]; // Zakir has 1 special state
 		idleStateHash = Animator.StringToHash("Base Layer.zakirIdle");
 		lightAttackStateHash = Animator.StringToHash("Base Layer.zakirLightAttack");
@@ -43,19 +38,17 @@ public class zakirBehaviour: PlayerState {
 	override public bool checkState(Player player) {
 
 		curPlayer = player;
-		stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+		stateInfo = curPlayer.anim.GetCurrentAnimatorStateInfo(0);
 		
 		//**FIX should relate this code to the idle state instead refactoring
 		if (stateInfo.nameHash == flinchStateHash) {
-			//anim.SetBool("Flinch", false);
+			//curPlayer.anim.SetBool("Flinch", false);
 			canAttack = false;
 			setFlinch(false);
 		}
 		
-		if (stateInfo.nameHash == launchStateHash) {
-			canAttack = false;
+		if (stateInfo.nameHash != launchStateHash)
 			setLaunch(false);
-		}
 		
 		// Player is idling thus not attacking
 		if (stateInfo.nameHash == idleStateHash) {
@@ -64,7 +57,7 @@ public class zakirBehaviour: PlayerState {
 		}
 		
 		// Place holder grapple has no current use
-		if (stateInfo.nameHash == grappleStateHash) {
+		if (!attack && stateInfo.nameHash == grappleStateHash) {
 			canAttack = false;
             if (contact() == true) {
             	attack = true;
@@ -118,7 +111,8 @@ public class zakirBehaviour: PlayerState {
 		} else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
 		           ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
 			setFlinch(true);
-			curPlayer.player.playerState.anim.SetTrigger("Counter");
+			curPlayer.player.anim.SetTrigger("Counter");
+			sideForcePush(curPlayer.player.playerState.isFacingLeft());
 			return false;
 		}
 
@@ -127,6 +121,7 @@ public class zakirBehaviour: PlayerState {
 		
 		curPlayer.player.playerState.setFlinch(true);
 		curPlayer.player.playerHealth.damage(50);
+		curPlayer.player.playerState.sideForcePush(isFacingLeft());
 		return true; 
 	}
 	
@@ -141,7 +136,8 @@ public class zakirBehaviour: PlayerState {
 		} else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
 		           ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
 			setFlinch(true);
-			curPlayer.player.playerState.anim.SetTrigger("Counter");
+			curPlayer.player.anim.SetTrigger("Counter");
+			sideForcePush(curPlayer.player.playerState.isFacingLeft());
 			return false;
 		}
 
@@ -153,6 +149,7 @@ public class zakirBehaviour: PlayerState {
 
 		curPlayer.player.playerState.setFlinch(true);
 		curPlayer.player.playerHealth.damage(damage);
+		curPlayer.player.playerState.sideForcePush(isFacingLeft());
 		return true;
 	}
 	
@@ -164,7 +161,8 @@ public class zakirBehaviour: PlayerState {
 		} else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
 		           ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
 			setFlinch(true);
-			curPlayer.player.playerState.anim.SetTrigger("Counter");
+			curPlayer.player.anim.SetTrigger("Counter");
+			sideForcePush(curPlayer.player.playerState.isFacingLeft());
 			return false;
 		}
 
@@ -173,6 +171,7 @@ public class zakirBehaviour: PlayerState {
 		
 		curPlayer.player.playerState.setLaunch(true);
 		curPlayer.player.playerHealth.damage(100);
+		curPlayer.player.playerState.forceLaunch(isFacingLeft());
 		return true;
 	}
 
@@ -193,8 +192,7 @@ public class zakirBehaviour: PlayerState {
         }
 
         curPlayer.player.playerState.setFlinch(true);
-        //curPlayer.player.playerState.setLaunch(true);
-        //curPlayer.player.playerHealth.damage(100);
+        curPlayer.player.playerState.sideForcePush(isFacingLeft());
         return true;
     }
 	
@@ -204,9 +202,9 @@ public class zakirBehaviour: PlayerState {
 			return false;
 
 
-		if (this.transform.position.x < curPlayer.player.transform.position.x && isFacingLeft())
+		if (curPlayer.transform.position.x < curPlayer.player.transform.position.x && isFacingLeft())
 			return false;
-		else if (this.transform.position.x > curPlayer.player.transform.position.x && !(isFacingLeft()))
+		else if (curPlayer.transform.position.x > curPlayer.player.transform.position.x && !(isFacingLeft()))
 			return false;
 		else    
 			return true;
@@ -218,13 +216,14 @@ public class zakirBehaviour: PlayerState {
 		} else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
 		           ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
 			setFlinch(true);
-			curPlayer.player.playerState.anim.SetTrigger("Counter");
+			curPlayer.player.anim.SetTrigger("Counter");
+			sideForcePush(curPlayer.player.playerState.isFacingLeft());
 			return false;
 		}
 		
 		
 		curPlayer.player.playerState.setFlinch(true);
-		//curPlayer.player.playerHealth.damage(25);
+		curPlayer.player.playerState.sideForcePush(isFacingLeft());
 		return true;
 	}
 	

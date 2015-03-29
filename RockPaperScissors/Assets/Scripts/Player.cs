@@ -25,7 +25,7 @@ public class Player : MonoBehaviour {
     public LayerMask whatIsGround;//Layer object that indicates that the player themselves and other players are not the ground, everything else is
     
 	
-    private Animator anim; // Stores player animation -This is read and changed to determine what the character is doing
+    public Animator anim; // Stores player animation -This is read and changed to determine what the character is doing
 
     
     private bool grounded = false;
@@ -34,7 +34,6 @@ public class Player : MonoBehaviour {
 
     private bool isFlinching; // Stops player from flinching more than one until flinch is done
     private bool isLaunching; // Stops the player from launching more than once until done
-    private bool isFacingLeft;
 
     private const float maxSpeed = 5f; // limit on player run speed
     private const float jumpDelay = 0.3f;
@@ -45,18 +44,17 @@ public class Player : MonoBehaviour {
         player = null; // Not colliding with a player by default
         isFlinching = false;
         isLaunching = false;
-        isFacingLeft = false;
 
         anim = GetComponent<Animator>(); // State machine is controlled by looking at the animator
         controller = new Controls(layout);
         playerHealth = new Health(1000);
 
 		if (characterChoice == 0) {
-			playerState = new noirBehaviour(this.transform, anim);
+			playerState = new noirBehaviour();
 		} else if(characterChoice == 1) {
-			playerState = new zakirBehaviour(this.transform, anim);
+			playerState = new zakirBehaviour();
 		} else if (characterChoice == 2) {
-			playerState = new violetBehaviour(this.transform, anim);
+			playerState = new violetBehaviour();
 		}
     }
 
@@ -89,7 +87,7 @@ public class Player : MonoBehaviour {
 				anim.SetTrigger("Grapple");
             } else if (!attack && playerState.isBlock() == false && playerState.isFlinch() == false && (Input.GetKeyDown (controller.getJumpKey()) || -0.6 >Input.GetAxis(controller.getYAxisKey()))) {
                 jump(); // Controls players jumping ability
-			} else if (!attack && playerState.isBlock() == false && playerState.isFlinch() == false) {
+			} else if (!attack && playerState.isBlock() == false && playerState.isFlinch() == false && playerState.isLaunch() == false) {
                 movement();
             }
 
@@ -105,26 +103,14 @@ public class Player : MonoBehaviour {
             return;
         } else if (isFlinching == false && playerState.isFlinch() == true) { // Code to handle the movement of the player if they are flinching
             anim.SetTrigger("Flinch");
-
-            // if (isFacingLeft == true) {
-            //     rigidbody2D.AddForce(new Vector3(-2f, 0f, 0f) * 200); //Test force not final
-            // } else if (isFacingLeft == false) {
-            //     rigidbody2D.AddForce(new Vector3(2f, 0f, 0f) * 200); //Test force not final
-            // }
-
             isFlinching = true;
             return;
         } else if (isFlinching == true && playerState.isFlinch() == false) {
             isFlinching = false; // Animation is complete flip the variable
         } else if (isLaunching == false && playerState.isLaunch() == true) {
             anim.SetTrigger("Launch");
-
-            // if (isFacingLeft == true) {
-            //     rigidbody2D.AddForce(new Vector3(-1.2f, 3f, 0f) * 300); //Test force not final
-            // } else if (isFacingLeft == false) {
-            //     rigidbody2D.AddForce(new Vector3(1.2f, 3f, 0f) * 300); //Test force not final
-            // }
             isLaunching = true;
+            return;
         } else if (isLaunching == true && playerState.isLaunch() == false) {
             isLaunching = false; // Animation is complete flip the variable
         }
@@ -151,24 +137,9 @@ public class Player : MonoBehaviour {
     //triggers when a trigger is maintained for more than a frame
     void OnTriggerEnter2D(Collider2D other) {
         //If you're intersecting with another player you will capture their class to be able to interact with them
-        if (other.gameObject.tag == "Player") {
+        if (other.gameObject.tag == "Player")
             player = (Player)other.gameObject.GetComponent(typeof(Player));
-            isFacingLeft = player.playerState.isFacingLeft();
-            //Debug.Log(player.playerHealth.getHealth() + " is facing " + isFacingLeft);
-            // Debug.Log(isFacingLeft);
-        }
     }
-
-    // //triggers when a trigger is maintained for more than a frame
-    // void OnTriggerStay2D(Collider2D other) {
-    //     Debug.Log(isFacingLeft);
-    //     //If you're intersecting with another player you will capture their class to be able to interact with them
-    //     if (other.gameObject.tag == "Player") {
-    //         //player = (Player)other.gameObject.GetComponent(typeof(Player));
-    //         if (player != null)
-    //             isFacingLeft = player.playerState.isFacingLeft();
-    //     }
-    // }
 
 
 	/*
