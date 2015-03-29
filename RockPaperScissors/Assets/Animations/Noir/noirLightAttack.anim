@@ -74,7 +74,7 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_Events:
   - time: 0
-    functionName: playLightAttack
+    functionName: playVoice
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

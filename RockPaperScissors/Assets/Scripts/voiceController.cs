@@ -35,55 +35,40 @@ public class voiceController : MonoBehaviour {
 	}
 
 	/*
-     * DESCR: Called by an animation event, the player's light attack sound effect is played.
-     * PRE: NONE
-     * POST: The voice clip plays the light attack sound effect.
+     * DESCR: Called by an animation event, a corresponding sound effect is played.
+     * PRE: An integer representing one of the character's sound effects,
+     * POST: The audio source plays the correct sound effect.
      */
-	void playLightAttack () {
-		if (voice.clip != lightAttack) {
-			voice.clip = lightAttack;
+	void playVoice (int clip) {
+		AudioClip sound = null;
+		switch(clip) {
+			case 0: //Light Attack
+				sound = lightAttack;
+				break;
+			case 1: //Heavy Attack
+				sound = heavyAttack;
+				break;
+			case 2: //Special Attack
+				sound = specialAttack;
+				break;
+			case 3: //Flinch
+				sound = flinch;
+				break;
+			case 4: //Launched
+				sound = launched;
+				break;
+			case 5: //Death
+				sound = death;
+				break;
+			default:
+				sound = null;
+				break;
+		}
+
+		if (voice.clip != sound) {
+			voice.clip = sound;
 			voice.Play ();
 		}
 	}
 
-	/*
-     * DESCR: Called by an animation event, the player's heavy attack sound effect is played.
-     * PRE: NONE
-     * POST: The voice clip plays the heavy attack sound effect.
-     */
-	void playHeavyAttack() {
-		if (voice.clip != heavyAttack) {
-			voice.clip = heavyAttack;
-			voice.Play ();
-		}
-	}
-
-	void playSpecialAttack() {
-		if (voice.clip != specialAttack) {
-			voice.clip = specialAttack;
-			voice.Play ();
-		}
-	}
-
-	void playFlinch() {
-		if (voice.clip != flinch) {
-			voice.clip = flinch;
-			voice.Play ();
-		}
-	}
-	
-	void playLaunched() {
-		if (voice.clip != launched) {
-			voice.clip = launched;
-			voice.Play ();
-		}
-	}
-	
-	void playDeath() {
-		if (voice.clip != death) {
-			voice.clip = death;
-			voice.Play ();
-		}
-	}
-	
 }

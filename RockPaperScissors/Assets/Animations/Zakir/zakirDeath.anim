@@ -65,9 +65,9 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_Events:
   - time: 0
-    functionName: playDeath
+    functionName: playVoice
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 0
+    intParameter: 5
     messageOptions: 0
