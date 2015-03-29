@@ -735,6 +735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422d5c125c920f443a3c5b4f69574d90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PausedTexture: {fileID: 2800000, guid: ccd195e80c8c63d488d015117d81bce0, type: 3}
 --- !u!1 &1498491807
 GameObject:
   m_ObjectHideFlags: 0
