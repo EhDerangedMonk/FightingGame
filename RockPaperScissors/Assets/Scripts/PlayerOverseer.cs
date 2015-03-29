@@ -25,11 +25,15 @@ public class PlayerOverseer : MonoBehaviour {
 		if (players != null) {
 			foreach (GameObject player in players) {
 				Player subject = (Player)player.gameObject.GetComponent (typeof(Player));
-
+					
+				if(subject.playerHealth != null) {
 					if (!subject.playerHealth.isDead())
 						numPlayers++;
 				}
+				else
+					numPlayers = 4;
 			}
+		}
 
 		//Once all but one of the players are dead, return to the character selection menu.
 		if (numPlayers <= 1)

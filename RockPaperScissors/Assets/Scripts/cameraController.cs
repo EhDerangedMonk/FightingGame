@@ -58,9 +58,11 @@ public class cameraController : MonoBehaviour {
 		foreach (GameObject player in players) {
 			subject = (Player)player.gameObject.GetComponent(typeof(Player));
 
-			if(!subject.playerHealth.isDead()) {
-				targetSize++;
-				targets[targetSize] = player.transform;
+			if(subject.playerHealth != null) {
+				if(!subject.playerHealth.isDead()) {
+					targetSize++;
+					targets[targetSize] = player.transform;
+				}
 			}
 		}
 	}
