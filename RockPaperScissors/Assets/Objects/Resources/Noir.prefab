@@ -33,6 +33,7 @@ GameObject:
   - 114: {fileID: 11426504}
   - 82: {fileID: 8226504}
   - 114: {fileID: 11426506}
+  - 114: {fileID: 11486288}
   m_Layer: 8
   m_Name: Noir
   m_TagString: Player
@@ -231,6 +232,17 @@ MonoBehaviour:
   flinch: {fileID: 8300000, guid: e19719c209fb6914d84a4adabbfaa186, type: 3}
   launched: {fileID: 8300000, guid: 881810b66e342824b9503c306bf03c67, type: 3}
   death: {fileID: 8300000, guid: 763df2918fb020e4b894968eb1a4dbb9, type: 3}
+--- !u!114 &11486288
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 126506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1bd49410d5c0234eb81fe6853da6a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21226504
 SpriteRenderer:
   m_ObjectHideFlags: 1
