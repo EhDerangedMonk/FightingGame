@@ -652,6 +652,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   P1Tag: {fileID: 2800000, guid: 948bad63308ee9b419aaf4f33d680b30, type: 3}
   P2Tag: {fileID: 2800000, guid: 0700d6ca272016e4196bab3fdb762787, type: 3}
+  P3Tag: {fileID: 2800000, guid: 1b7e48343ddbf814cb61eeb9c8fda9a1, type: 3}
+  P4Tag: {fileID: 2800000, guid: 6567d1caf5173584d9b5e9ad611e94f2, type: 3}
   Health_100to81: {fileID: 2800000, guid: 46448c306e88fc541aa37d7c590e3df6, type: 3}
   Health_80to61: {fileID: 2800000, guid: 364e0124f7a9e334a920595a86aaf93a, type: 3}
   Health_60to41: {fileID: 2800000, guid: c5eb4def2348f514a9f8ec9f374bb5e9, type: 3}
@@ -735,6 +737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422d5c125c920f443a3c5b4f69574d90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PausedTexture: {fileID: 2800000, guid: ccd195e80c8c63d488d015117d81bce0, type: 3}
 --- !u!1 &1498491807
 GameObject:
   m_ObjectHideFlags: 0

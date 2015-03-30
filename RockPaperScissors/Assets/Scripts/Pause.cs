@@ -21,6 +21,9 @@ public class Pause : MonoBehaviour {
 	private bool P3Playing; // keeps track of whether P3 and P4 are playing
 	private bool P4Playing;
 	
+	public Texture PausedTexture;
+	private Rect PausedRect;
+	
 	
 	
 	/*******\
@@ -32,6 +35,10 @@ public class Pause : MonoBehaviour {
 		isPaused = false;
 		P3Playing = true;
 		P4Playing = true;
+		
+		int width = (int)((float)Screen.width * 0.7f);
+		int height = (int)((float)PausedTexture.height * ((float)width/(float)PausedTexture.width));
+		PausedRect = new Rect((int)((Screen.width - width)/2), (int)((Screen.height - height)/2), width, height);
 		
 		// Get controller information
 		InitializeStorage settings = (InitializeStorage) GameObject.Find("VariableStorage").GetComponent(typeof(InitializeStorage));
@@ -57,7 +64,7 @@ public class Pause : MonoBehaviour {
 				P1Pause = KeyCode.Joystick4Button7;
 				break;
 		}
-		switch((int)settings.P1Controller)
+		switch((int)settings.P2Controller)
 		{
 			case 1:
 				P2Pause = KeyCode.Escape;
@@ -78,7 +85,7 @@ public class Pause : MonoBehaviour {
 				P2Pause = KeyCode.Joystick4Button7;
 				break;
 		}
-		switch((int)settings.P1Controller)
+		switch((int)settings.P3Controller)
 		{
 			case 0:
 				P3Playing = false;
@@ -102,7 +109,7 @@ public class Pause : MonoBehaviour {
 				P3Pause = KeyCode.Joystick4Button7;
 				break;
 		}
-		switch((int)settings.P1Controller)
+		switch((int)settings.P4Controller)
 		{
 			case 0:
 				P4Playing = false;
@@ -149,6 +156,21 @@ public class Pause : MonoBehaviour {
 				isPaused = true;
 				Time.timeScale = 0f;
 			}
+		}
+	}
+	
+	
+	
+	/*******\
+	* ONGUI *
+	\*******/
+	void OnGUI()
+	{
+		GUI.depth = 0;
+		
+		if (isPaused)
+		{
+			GUI.DrawTexture(PausedRect, PausedTexture);
 		}
 	}
 }

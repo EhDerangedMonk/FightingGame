@@ -509,23 +509,169 @@ public class MapSelectionMenu : MonoBehaviour {
 			
 			
 		// If both players have selected, determine which map to load and do so
-		if (P1Selected == true && P2Selected == true)
+		if (P1Selected == true && P2Selected == true && ((P3Playing && P3Selected == true) || !P3Playing) && ((P4Playing && P4Selected == true) || !P4Playing))
 		{
-			MapState selected; // Stores whatever the voted map is
+			MapState selected = MapState.Trad; // Stores whatever the voted map is (give it a random starting value)
+			
+			
 			// Determine what the voted map is
-			if (P1State == P2State) // If they voted for the same thing
+			int numLand = 0; // number of votes for Landslide
+			int numLava = 0; // number of votes for Lava
+			int numBtle = 0; // Battlefield
+			int numTrad = 0; // Traditional
+			int numRand = 0; // Random
+			
+			// Count the votes
+			if (P1State == MapState.Land)
+				numLand++;
+			else if (P1State == MapState.Lava)
+				numLava++;
+			else if (P1State == MapState.Btle)
+				numBtle++;
+			else if (P1State == MapState.Trad)
+				numTrad++;
+			else
+				numRand++;
+				
+			if (P2State == MapState.Land)
+				numLand++;
+			else if (P2State == MapState.Lava)
+				numLava++;
+			else if (P2State == MapState.Btle)
+				numBtle++;
+			else if (P2State == MapState.Trad)
+				numTrad++;
+			else
+				numRand++;
+			
+			if (P3Playing)
 			{
-				selected = P1State;
-			}
-			else // They voted for different things
-			{
-				int rnd = Random.Range (1,3); // pick player 1 or player 2
-				if (rnd == 1)
-					selected = P1State;
+				if (P3State == MapState.Land)
+					numLand++;
+				else if (P3State == MapState.Lava)
+					numLava++;
+				else if (P3State == MapState.Btle)
+					numBtle++;
+				else if (P3State == MapState.Trad)
+					numTrad++;
 				else
-					selected = P2State;
+					numRand++;
 			}
-						
+				
+			if (P4Playing)
+			{
+				if (P4State == MapState.Land)
+					numLand++;
+				else if (P4State == MapState.Lava)
+					numLava++;
+				else if (P4State == MapState.Btle)
+					numBtle++;
+				else if (P4State == MapState.Trad)
+					numTrad++;
+				else
+					numRand++;
+			}
+			
+			
+			// Determine the winner based on the votes
+			int maxVotes = Mathf.Max(numBtle, numLand, numLava, numRand, numTrad);  // The largest number of votes
+			
+			int btleWin = 0; // Determine if the map was a winner. If it's a 0, it's not up for selection. Otherwise assign it a number.
+			int tradWin = 0;
+			int landWin = 0;
+			int lavaWin = 0;
+			int randWin = 0;
+			
+			int numWinners = 0; // Keep track of the number of winning maps
+			
+			if (numBtle == maxVotes)
+			{
+				btleWin = numWinners+1;
+				numWinners++;
+			}
+			if (numTrad == maxVotes)
+			{
+				tradWin = numWinners+1;
+				numWinners++;
+			}
+			if (numLand == maxVotes)
+			{
+				landWin = numWinners+1;
+				numWinners++;
+			}
+			if (numLava == maxVotes)
+			{
+				lavaWin = numWinners+1;
+				numWinners++;
+			}
+			if (numRand == maxVotes)
+			{
+				randWin = numWinners+1;
+				numWinners++;
+			}
+			
+			
+			// Pick a map
+			if (numWinners == 4) // if there was a 4-way tie
+			{
+				int rndMap = Random.Range (1,5); // pick a number from 1 to 4 (maps with a value of 0 can't be selected)
+				
+				if (rndMap == btleWin)
+					selected = MapState.Btle;
+				else if (rndMap == tradWin)
+					selected = MapState.Trad;
+				else if (rndMap == landWin)
+					selected = MapState.Land;
+				else if (rndMap == lavaWin)
+					selected = MapState.Lava;
+				else if (rndMap == randWin)
+					selected = MapState.Rand;
+			}
+			else if (numWinners == 3) // if there was a 3-way tie
+			{
+				int rndMap = Random.Range (1,4); // pick a number from 1 to 3 (maps with a value of 0 can't be selected)
+				
+				if (rndMap == btleWin)
+					selected = MapState.Btle;
+				else if (rndMap == tradWin)
+					selected = MapState.Trad;
+				else if (rndMap == landWin)
+					selected = MapState.Land;
+				else if (rndMap == lavaWin)
+					selected = MapState.Lava;
+				else if (rndMap == randWin)
+					selected = MapState.Rand;
+			}
+			else if (numWinners == 2) // if there was a 2-way tie
+			{
+				int rndMap = Random.Range (1,3); // pick a number from 1 to 2 (maps with a value of 0 can't be selected)
+				
+				if (rndMap == btleWin)
+					selected = MapState.Btle;
+				else if (rndMap == tradWin)
+					selected = MapState.Trad;
+				else if (rndMap == landWin)
+					selected = MapState.Land;
+				else if (rndMap == lavaWin)
+					selected = MapState.Lava;
+				else if (rndMap == randWin)
+					selected = MapState.Rand;
+			}
+			else if (numWinners == 1) // if there was a clear winner
+			{
+				if (btleWin == 1)
+					selected = MapState.Btle;
+				else if (tradWin == 1)
+					selected = MapState.Trad;
+				else if (landWin == 1)
+					selected = MapState.Land;
+				else if (lavaWin == 1)
+					selected = MapState.Lava;
+				else if (randWin == 1)
+					selected = MapState.Rand;
+			}
+				
+								
 			// Load the map based on the winner
 			int randomSelection = 0;
 			if (selected == MapState.Rand) // Assign a value to the random selection, otherwise leave it as 0

@@ -29,123 +29,71 @@ public class violetBehaviour: PlayerState {
 		specStateHash[0] = Animator.StringToHash("Base Layer.violetSpecial1"); // Noir has multiple special states (Charging)
 		specStateHash[1] = Animator.StringToHash("Base Layer.violetSpecial2");
 		specStateHash[2] = Animator.StringToHash("Base Layer.violetSpecial3");
-		//specStateHash[3] = Animator.StringToHash("Base Layer.noirSpecial4");
 		specStateHash[3] = Animator.StringToHash("Base Layer.violetSpecialEX"); // Extension when the attack is considered to hitting
 		heavyAttackStateHash = Animator.StringToHash("Base Layer.violetHeavyAttack");
 		flinchStateHash = Animator.StringToHash("Base Layer.violetFlinch");
 		grappleStateHash = Animator.StringToHash("Base Layer.violetGrapple");
 		blockStateHash = Animator.StringToHash("Base Layer.violetBlock");
-		//counterStateHash = Animator.StringToHash("Base Layer.violetCounter");
 		launchStateHash = Animator.StringToHash("Base Layer.violetRecovery");
+		runStateHash = Animator.StringToHash("Base Layer.violetRun");
+        jumpStateHash = Animator.StringToHash("Base Layer.violetJump");
 	}
 	
 	
 	override public bool checkState(Player player) {
-		bool chargeState; // Player is charging set to true (Prevents player from moving while charging)
-		
-		chargeState = false;
+		bool canAttack; // Is the player in a valid animation to attack
+
+        canAttack = false;
 		curPlayer = player;
 		stateInfo = curPlayer.anim.GetCurrentAnimatorStateInfo(0);
 		
-		//**FIX should relate this code to the idle state instead refactoring
-        if (stateInfo.nameHash == flinchStateHash) {
-            //curPlayer.anim.SetBool("Flinch", false);
-            canAttack = false;
-            setFlinch(false);
-        }
-        
-        if (stateInfo.nameHash == launchStateHash) {
-            canAttack = false;
-            setLaunch(false);
-        }
-        
-        // Player is idling thus not attacking
-        if (stateInfo.nameHash == idleStateHash) {
+		if (stateInfo.nameHash == flinchStateHash) {
+			setFlinch(false);
+		} else if (stateInfo.nameHash == launchStateHash) {
+			setLaunch(false);
+		} else if (stateInfo.nameHash == idleStateHash || stateInfo.nameHash == runStateHash || stateInfo.nameHash == jumpStateHash) {
+			attack = false; // Player is in a valid animation to attack running or idle
             canAttack = true;
-            attack = false;
-        }
-        
-        // Place holder grapple has no current use
-        if (!attack && stateInfo.nameHash == grappleStateHash) {
-            canAttack = false;
-            if (contact() == true) {
-                attack = true;
-                grapple();
-            }
-            
-        }
-		
-		// If player is not already in an attack and they have triggered attack animations
-        // Set attack to true and see if they are currently hitting or missing a player (If hit inflict damage)
-        // If player is not already in an attack and they have triggered attack animations
-        // Set attack to true and see if they are currently hitting or missing a player (If hit inflict damage)
-        if (!attack && stateInfo.nameHash == lightAttackStateHash) {
-            canAttack = false;
-            if (contact() == true) {
-                attack = true;
-                lightAttack();
-            }
-        }
-
-
-        if (!attack && stateInfo.nameHash == specStateHash[3]) {
-            canAttack = false;
-            if (contact() == true) {
-                attack = true;
-                specialAttack(specState);
-            }
-        }
-        
-        if (!attack && stateInfo.nameHash == heavyAttackStateHash) {
-            canAttack = false;      
-            if (contact() == true) {
-                attack = true;
-                heavyAttack();
-            }
-        }
-		
-
-		
-		// Special attack for Violet can have 4 states of charging
-		for (int i = 0; i < 3; i++) {
-			
-			if (stateInfo.nameHash == specStateHash[i]) {
-				canAttack = false;
-				chargeState = true;
-				specState = i + 1;
+            setBlock(false);
+        } else if (!attack && stateInfo.nameHash == blockStateHash) {
+				attack = true;
+				setBlock(true);
+				sideForcePush(!facingLeft, 200);
+		} else if (!attack && contact() == true) {
+			if (stateInfo.nameHash == grappleStateHash) {
+	            attack = grapple(); 
+	        } else if (stateInfo.nameHash == lightAttackStateHash) {
+				attack = lightAttack();
+			} else if (stateInfo.nameHash == specStateHash[3]) {
+				attack = specialAttack(specState);
+			} else if (stateInfo.nameHash == heavyAttackStateHash) {
+				attack = heavyAttack();
+			}
+		} else {
+			// Special attack for Violet can have 4 states of charging
+			for (int i = 0; i < 3; i++) {
+				if (stateInfo.nameHash == specStateHash[i]) {
+					canAttack = false;
+					specState = i + 1;
+				}
 			}
 		}
 		
-		
-		
-		if (!attack && stateInfo.nameHash == blockStateHash)
-			setBlock(true); // Player is blocking incoming damage
-		else
-			setBlock(false);
-		
-		
-		return (attack || chargeState || !canAttack); //Don't allow the player to attack again until the attack/move is finished
+		return (attack || !canAttack); //Don't allow the player to attack again until the attack/move is finished		
 	}
 	
 	
 	override public bool lightAttack() {
 		
-		if (curPlayer.player == null) {
+		if (curPlayer.player == null || checkIfCountered(200) == true)
 			return false;
-		} else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
-		           ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
-			setFlinch(true);
-			curPlayer.player.anim.SetTrigger("Counter");
-			sideForcePush(curPlayer.player.playerState.isFacingLeft());
-			return false;
-		}
 
 		//TEMP CODE - Nigel
 		hitFactory.MakeHitMarker (curPlayer.player.gameObject, 2);
 		
 		curPlayer.player.playerState.setFlinch(true);
 		curPlayer.player.playerHealth.damage(50);
-		curPlayer.player.playerState.sideForcePush(isFacingLeft());
+		curPlayer.player.playerState.sideForcePush(isFacingLeft(), 200);
 		return true; 
 	}
 	
@@ -155,15 +103,8 @@ public class violetBehaviour: PlayerState {
 		
 		damage = 0;
 		
-		if (curPlayer.player == null) {
+		if (curPlayer.player == null || checkIfCountered(200) == true)
 			return false;
-		} else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
-		           ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
-			setFlinch(true);
-			curPlayer.player.anim.SetTrigger("Counter");
-			sideForcePush(curPlayer.player.playerState.isFacingLeft());
-			return false;
-		}
 		
 		switch (curState) { // Calculate damage based on charge of Violet's special
 		case 1:
@@ -184,29 +125,22 @@ public class violetBehaviour: PlayerState {
 		}
 		curPlayer.player.playerState.setFlinch(true);
 		curPlayer.player.playerHealth.damage(damage);
-		curPlayer.player.playerState.sideForcePush(isFacingLeft());
+		curPlayer.player.playerState.sideForcePush(isFacingLeft(), 200);
 		return true;
 	}
 	
 	
 	override public bool heavyAttack() {
 		
-		if (curPlayer.player == null) {
+		if (curPlayer.player == null || checkIfCountered(200) == true)
 			return false;
-		} else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
-		           ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
-			setFlinch(true);
-			curPlayer.player.anim.SetTrigger("Counter");
-			sideForcePush(curPlayer.player.playerState.isFacingLeft());
-			return false;
-		}
 
 		//TEMP CODE - Nigel
 		hitFactory.MakeHitMarker (curPlayer.player.gameObject, 1);
 		
 		curPlayer.player.playerState.setLaunch(true);
 		curPlayer.player.playerHealth.damage(100);
-		curPlayer.player.playerState.forceLaunch(isFacingLeft());
+		curPlayer.player.playerState.forceLaunch(isFacingLeft(), 300);
 		return true;
 	}
 
@@ -227,7 +161,7 @@ public class violetBehaviour: PlayerState {
         }
 
         curPlayer.player.playerState.setFlinch(true);
-        curPlayer.player.playerState.sideForcePush(isFacingLeft());
+        curPlayer.player.playerState.sideForcePush(isFacingLeft(), 200);
         return true;
     }
 	
@@ -246,19 +180,23 @@ public class violetBehaviour: PlayerState {
 	}
 	
 	private bool counterAttack() {
-		if (curPlayer.player == null) {
+		if (curPlayer.player == null || checkIfCountered(200) == true)
 			return false;
-		} else if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
-		           ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
-			setFlinch(true);
-			curPlayer.player.anim.SetTrigger("Counter");
-			sideForcePush(curPlayer.player.playerState.isFacingLeft());
-			return false;
-		}
 		
 		curPlayer.player.playerState.setFlinch(true);
-		curPlayer.player.playerState.sideForcePush(isFacingLeft());
+		curPlayer.player.playerState.sideForcePush(isFacingLeft(), 200);
 		return true;
 	}
+
+	private bool checkIfCountered(int intensity) {
+        if ((curPlayer.player.playerState.isBlock() && isFacingLeft() && !(curPlayer.player.playerState.isFacingLeft()))
+                   ||  (curPlayer.player.playerState.isBlock() && !isFacingLeft() && curPlayer.player.playerState.isFacingLeft())) {
+            setFlinch(true);
+            curPlayer.player.anim.SetTrigger("Counter");
+            sideForcePush(curPlayer.player.playerState.isFacingLeft(), intensity);
+            return true;
+        }
+        return false;
+    }
 	
 }
