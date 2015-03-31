@@ -13,6 +13,7 @@ public class Controls {
 	private KeyCode block;
 	private KeyCode grapple;
 	private KeyCode jump;
+	private KeyCode phaseDown;
 	private string XAxis;
 	private string YAxis;
 	private KeyCode cChangeKey;
@@ -37,6 +38,7 @@ public class Controls {
 				special = KeyCode.LeftShift;
 				block = KeyCode.F;
 				jump = KeyCode.W;
+				phaseDown = KeyCode.S;
 				grapple = KeyCode.LeftAlt;
 				XAxis = "Keyboard1X";
 				YAxis = "Keyboard1Y";
@@ -47,6 +49,7 @@ public class Controls {
 				special = KeyCode.Semicolon;
 				block = KeyCode.Slash;
 				jump = KeyCode.I;
+				phaseDown = KeyCode.K;
 				grapple = KeyCode.P;
 				XAxis = "Keyboard2X";
 				YAxis = "Keyboard2Y";
@@ -57,6 +60,7 @@ public class Controls {
 				special = KeyCode.Joystick1Button1;
 				block = KeyCode.Joystick1Button4;
 				jump = KeyCode.Joystick1Button0;
+				phaseDown = KeyCode.Joystick1Button6;
 				grapple = KeyCode.Joystick1Button5;
 				XAxis = "LeftJoystick1X";
 				YAxis = "LeftJoystick1Y";
@@ -67,6 +71,7 @@ public class Controls {
 				special = KeyCode.Joystick2Button1;
 				block = KeyCode.Joystick2Button4;
 				jump = KeyCode.Joystick2Button0;
+				phaseDown = KeyCode.Joystick2Button6;
 				grapple = KeyCode.Joystick2Button5;
 				XAxis = "LeftJoystick2X";
 				YAxis = "LeftJoystick2Y";
@@ -77,6 +82,7 @@ public class Controls {
 				special = KeyCode.Joystick3Button1;
 				block = KeyCode.Joystick3Button4;
 				jump = KeyCode.Joystick3Button0;
+				phaseDown = KeyCode.Joystick3Button6;
 				grapple = KeyCode.Joystick3Button5;
 				XAxis = "LeftJoystick3X";
 				YAxis = "LeftJoystick3Y";
@@ -87,6 +93,7 @@ public class Controls {
 				special = KeyCode.Joystick4Button1;
 				block = KeyCode.Joystick4Button4;
 				jump = KeyCode.Joystick4Button0;
+				phaseDown = KeyCode.Joystick4Button6;
 				grapple = KeyCode.Joystick4Button5;
 				XAxis = "LeftJoystick4X";
 				YAxis = "LeftJoystick4Y";
@@ -123,6 +130,10 @@ public class Controls {
 		return grapple;
 	}
 
+	public KeyCode getPhaseDownKey() {
+		return phaseDown;
+	}
+
 	public string getXAxisKey() {
 		return XAxis;
 	}
@@ -130,4 +141,5 @@ public class Controls {
 	public string getYAxisKey() {
 		return YAxis;
 	}
+
 }

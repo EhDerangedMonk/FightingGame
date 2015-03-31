@@ -12,14 +12,12 @@ public class violetBehaviour: PlayerState {
 	//private int counterStateHash;
 	private int specState;// int representing the charge value
 	private bool attack; // If player currently in attack don't redo dmg for it
-	private bool canAttack; // If the player currently can attack
 
 	//TEMP CODE - Nigel
 	private HitMarkerSpawner hitFactory = GameObject.FindObjectOfType<HitMarkerSpawner> ();
 	
 	// Constructor
 	public violetBehaviour() {
-		canAttack = true;
 		attack = false;
 		flinch = false;
 		specState = 0;// No spec attack by default
