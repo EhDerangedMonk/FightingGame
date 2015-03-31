@@ -29,6 +29,8 @@ public class zakirBehaviour: PlayerState {
 		runStateHash = Animator.StringToHash("Base Layer.zakirRun");
         jumpStateHash = Animator.StringToHash("Base Layer.zakirJump");
 		launchStateHash = Animator.StringToHash("Base Layer.zakirRecovery");
+		grappleFailStateHash = Animator.StringToHash ("Base Layer.zakirGrappleFail");
+		grappleSuccessStateHash = Animator.StringToHash ("Base Layer.zakirGrappleSuccess");
 	}
 	
 	

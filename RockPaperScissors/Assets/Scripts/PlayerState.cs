@@ -1,5 +1,5 @@
 /*
-    Authored By: Jerrit Anderson
+    Authored By: Jerrit Anderson & Josiah Menezes
     Purpose: An interface that must be implemented by all behaviour classes for the game to use them
 */
 using UnityEngine;
@@ -20,6 +20,8 @@ public abstract class PlayerState {
     public int launchStateHash;
     public int runStateHash;
     public int jumpStateHash;
+	public int grappleFailStateHash;
+	public int grappleSuccessStateHash;
 
     public bool flinch; // Is the player currently unable attack due to a flinch?
     public bool launch; // Is the player launching in the air from an attack?

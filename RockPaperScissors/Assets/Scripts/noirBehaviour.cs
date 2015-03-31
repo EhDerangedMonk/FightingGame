@@ -37,6 +37,9 @@ public class noirBehaviour: PlayerState {
         launchStateHash = Animator.StringToHash("Base Layer.noirRecovery");
         runStateHash = Animator.StringToHash("Base Layer.noirRun");
         jumpStateHash = Animator.StringToHash("Base Layer.noirJump");
+		grappleFailStateHash = Animator.StringToHash ("Base Layer.noirGrappleFail");
+		grappleSuccessStateHash = Animator.StringToHash ("Base Layer.noirGrappleSuccess");
+
     }
 
 

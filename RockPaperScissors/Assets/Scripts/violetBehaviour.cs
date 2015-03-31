@@ -37,6 +37,8 @@ public class violetBehaviour: PlayerState {
 		launchStateHash = Animator.StringToHash("Base Layer.violetRecovery");
 		runStateHash = Animator.StringToHash("Base Layer.violetRun");
         jumpStateHash = Animator.StringToHash("Base Layer.violetJump");
+		grappleFailStateHash = Animator.StringToHash ("Base Layer.violetGrappleFail");
+		grappleSuccessStateHash = Animator.StringToHash ("Base Layer.violetGrappleSuccess");
 	}
 	
 	
