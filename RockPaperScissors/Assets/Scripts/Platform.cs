@@ -8,7 +8,6 @@ using System.Collections;
 
 public class Platform : MonoBehaviour {
 
-	private InitializeStorage gameSettings;
 	private PlayerOverseer overlord;
 	private Transform location; //The location of the platform;
 	private BoxCollider2D myCollider; //The trigger collider that checks if players are standing on top.
@@ -32,8 +31,7 @@ public class Platform : MonoBehaviour {
 				}
 			}
 		}
-
-		gameSettings = GameObject.FindObjectOfType<InitializeStorage> ();
+		
 		overlord = GameObject.FindObjectOfType<PlayerOverseer> ();
 	}
 	
