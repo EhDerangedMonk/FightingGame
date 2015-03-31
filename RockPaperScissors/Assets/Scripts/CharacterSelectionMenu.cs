@@ -62,15 +62,19 @@ public class CharacterSelectionMenu : MonoBehaviour {
 	
 	// How each player selects their character
 	private KeyCode P1Enter;
+	private KeyCode P1Back;
 	private string P1xAxis;
 	private string P1yAxis;
 	private KeyCode P2Enter;
+	private KeyCode P2Back;
 	private string P2xAxis;
 	private string P2yAxis;
 	private KeyCode P3Enter;
+	private KeyCode P3Back;
 	private string P3xAxis;
 	private string P3yAxis;
 	private KeyCode P4Enter;
+	private KeyCode P4Back;
 	private string P4xAxis;
 	private string P4yAxis;
 	
@@ -143,31 +147,37 @@ public class CharacterSelectionMenu : MonoBehaviour {
 		{
 			case 1:
 				P1Enter = KeyCode.Space;
+				P1Back = KeyCode.Escape;
 				P1xAxis = "Keyboard1X";
 				P1yAxis = "Keyboard1Y";
 				break;
 			case 2:
 					P1Enter = KeyCode.Return;
+					P1Back = KeyCode.Escape;
 					P1xAxis = "Keyboard2X";
 					P1yAxis = "Keyboard2Y";
 					break;
 			case 3:
 					P1Enter = KeyCode.Joystick1Button0;
+					P1Back = KeyCode.Joystick1Button1;
 					P1xAxis = "LeftJoystick1X";
 					P1yAxis = "LeftJoystick1Y";
 					break;
 			case 4:
 					P1Enter = KeyCode.Joystick2Button0;
+					P1Back = KeyCode.Joystick2Button1;
 					P1xAxis = "LeftJoystick2X";
 					P1yAxis = "LeftJoystick2Y";
 					break;
 			case 5:
 					P1Enter = KeyCode.Joystick3Button0;
+					P1Back = KeyCode.Joystick3Button1;
 					P1xAxis = "LeftJoystick3X";
 					P1yAxis = "LeftJoystick3Y";
 					break;
 			case 6:
 					P1Enter = KeyCode.Joystick4Button0;
+					P1Back = KeyCode.Joystick4Button1;
 					P1xAxis = "LeftJoystick4X";
 					P1yAxis = "LeftJoystick4Y";
 					break;
@@ -177,31 +187,37 @@ public class CharacterSelectionMenu : MonoBehaviour {
 		{
 			case 1:
 				P2Enter = KeyCode.Space;
+				P2Back = KeyCode.Escape;
 				P2xAxis = "Keyboard1X";
 				P2yAxis = "Keyboard1Y";
 				break;
 			case 2:
 					P2Enter = KeyCode.Return;
+					P2Back = KeyCode.Escape;
 					P2xAxis = "Keyboard2X";
 					P2yAxis = "Keyboard2Y";
 					break;
 			case 3:
 					P2Enter = KeyCode.Joystick1Button0;
+					P2Back = KeyCode.Joystick1Button1;
 					P2xAxis = "LeftJoystick1X";
 					P2yAxis = "LeftJoystick1Y";
 					break;
 			case 4:
 					P2Enter = KeyCode.Joystick2Button0;
+					P2Back = KeyCode.Joystick2Button1;
 					P2xAxis = "LeftJoystick2X";
 					P2yAxis = "LeftJoystick2Y";
 					break;
 			case 5:
 					P2Enter = KeyCode.Joystick3Button0;
+					P2Back = KeyCode.Joystick3Button1;
 					P2xAxis = "LeftJoystick3X";
 					P2yAxis = "LeftJoystick3Y";
 					break;
 			case 6:
 					P2Enter = KeyCode.Joystick4Button0;
+					P2Back = KeyCode.Joystick4Button1;
 					P2xAxis = "LeftJoystick4X";
 					P2yAxis = "LeftJoystick4Y";
 					break;
@@ -215,31 +231,37 @@ public class CharacterSelectionMenu : MonoBehaviour {
 				break;
 			case 1:
 					P3Enter = KeyCode.Space;
+					P3Back = KeyCode.Escape;
 					P3xAxis = "Keyboard1X";
 					P3yAxis = "Keyboard1Y";
 					break;
 			case 2:
 					P3Enter = KeyCode.Return;
+					P3Back = KeyCode.Escape;
 					P3xAxis = "Keyboard2X";
 					P3yAxis = "Keyboard2Y";
 					break;
 			case 3:
 					P3Enter = KeyCode.Joystick1Button0;
+					P3Back = KeyCode.Joystick1Button1;
 					P3xAxis = "LeftJoystick1X";
 					P3yAxis = "LeftJoystick1Y";
 					break;
 			case 4:
 					P3Enter = KeyCode.Joystick2Button0;
+					P3Back = KeyCode.Joystick2Button1;
 					P3xAxis = "LeftJoystick2X";
 					P3yAxis = "LeftJoystick2Y";
 					break;
 			case 5:
 					P3Enter = KeyCode.Joystick3Button0;
+					P3Back = KeyCode.Joystick3Button1;
 					P3xAxis = "LeftJoystick3X";
 					P3yAxis = "LeftJoystick3Y";
 					break;
 			case 6:
 					P3Enter = KeyCode.Joystick4Button0;
+					P3Back = KeyCode.Joystick4Button1;
 					P3xAxis = "LeftJoystick4X";
 					P3yAxis = "LeftJoystick4Y";
 					break;
@@ -253,31 +275,37 @@ public class CharacterSelectionMenu : MonoBehaviour {
 				break;
 			case 1:
 				P4Enter = KeyCode.Space;
+				P4Back = KeyCode.Escape;
 				P4xAxis = "Keyboard1X";
 				P4yAxis = "Keyboard1Y";
 				break;
 			case 2:
 					P4Enter = KeyCode.Return;
+					P4Back = KeyCode.Escape;
 					P4xAxis = "Keyboard2X";
 					P4yAxis = "Keyboard2Y";
 					break;
 			case 3:
 					P4Enter = KeyCode.Joystick1Button0;
+					P4Back = KeyCode.Joystick1Button1;
 					P4xAxis = "LeftJoystick1X";
 					P4yAxis = "LeftJoystick1Y";
 					break;
 			case 4:
 					P4Enter = KeyCode.Joystick2Button0;
+					P4Back = KeyCode.Joystick2Button1;
 					P4xAxis = "LeftJoystick2X";
 					P4yAxis = "LeftJoystick2Y";
 					break;
 			case 5:
 					P4Enter = KeyCode.Joystick3Button0;
+					P4Back = KeyCode.Joystick3Button1;
 					P4xAxis = "LeftJoystick3X";
 					P4yAxis = "LeftJoystick3Y";
 					break;
 			case 6:
 					P4Enter = KeyCode.Joystick4Button0;
+					P4Back = KeyCode.Joystick4Button1;
 					P4xAxis = "LeftJoystick4X";
 					P4yAxis = "LeftJoystick4Y";
 					break;
@@ -553,5 +581,9 @@ public class CharacterSelectionMenu : MonoBehaviour {
 					P4Selected = true;
 			}
 		}
+		
+		// Check for the back button being pressed
+		if (Input.GetKeyUp(P1Back) || Input.GetKeyUp(P2Back) || (P3Playing && Input.GetKeyUp(P3Back)) || (P4Playing && Input.GetKeyUp(P4Back)))
+			Application.LoadLevel("mainmenu");
 	}
 }
