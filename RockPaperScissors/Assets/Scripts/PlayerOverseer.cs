@@ -7,6 +7,7 @@ using System.Collections;
 
 public class PlayerOverseer : MonoBehaviour {
 
+	public GameObject[] allPlayers;
 	private int numPlayers ;
 
 	// Use this for initialization
@@ -20,6 +21,7 @@ public class PlayerOverseer : MonoBehaviour {
 		//Find players.
 		numPlayers = 0;
 		GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
+		allPlayers = players;
 
 		//Count how many are alive.
 		if (players != null) {

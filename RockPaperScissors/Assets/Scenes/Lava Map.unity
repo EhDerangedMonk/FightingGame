@@ -447,6 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecb529e5f85a81349a0bc20a85ae1d1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allPlayers: []
 --- !u!4 &819174848
 Transform:
   m_ObjectHideFlags: 0
@@ -1171,7 +1172,7 @@ GameObject:
   - 4: {fileID: 1984632784}
   - 114: {fileID: 1984632786}
   - 61: {fileID: 1984632785}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: phaseCheck
   m_TagString: Platform
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}

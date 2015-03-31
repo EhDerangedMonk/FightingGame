@@ -331,6 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecb529e5f85a81349a0bc20a85ae1d1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allPlayers: []
 --- !u!1 &497469807
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,7 +547,7 @@ GameObject:
   - 4: {fileID: 1088457426}
   - 114: {fileID: 1088457425}
   - 61: {fileID: 1088457424}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Right phaseCheck
   m_TagString: Platform
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
@@ -770,7 +771,7 @@ GameObject:
   - 4: {fileID: 1540374269}
   - 114: {fileID: 1540374268}
   - 61: {fileID: 1540374267}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Left phaseCheck
   m_TagString: Platform
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
@@ -1190,7 +1191,7 @@ GameObject:
   - 4: {fileID: 1980930671}
   - 114: {fileID: 1980930673}
   - 61: {fileID: 1980930672}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Top phaseCheck
   m_TagString: Platform
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
