@@ -154,14 +154,16 @@ public class violetBehaviour: PlayerState {
     }
 
 
-	override public bool grapple() {
+    override public bool grapple() {
 
         if (curPlayer.player == null) {
+            curPlayer.anim.SetTrigger("GrappleFail");
             return false;
         }
 
+        curPlayer.anim.SetTrigger("GrappleSuccess");
         curPlayer.player.playerState.setFlinch(true);
-        curPlayer.player.playerState.sideForcePush(isFacingLeft(), 200);
+        curPlayer.player.playerState.sideForcePush(isFacingLeft(), 250);
         return true;
     }
 	

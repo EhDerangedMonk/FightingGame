@@ -161,9 +161,11 @@ public class noirBehaviour: PlayerState {
     override public bool grapple() {
 
         if (curPlayer.player == null) {
+            curPlayer.anim.SetTrigger("GrappleFail");
             return false;
         }
 
+        curPlayer.anim.SetTrigger("GrappleSuccess");
         curPlayer.player.playerState.setFlinch(true);
         curPlayer.player.playerState.sideForcePush(isFacingLeft(), 200);
         return true;
