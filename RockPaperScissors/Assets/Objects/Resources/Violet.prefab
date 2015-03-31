@@ -211,10 +211,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layout: 1
   characterChoice: 2
+  player: {fileID: 0}
+  anim: {fileID: 0}
   groundCheck: {fileID: 477538}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 2560
 --- !u!114 &11477540
 MonoBehaviour:
   m_ObjectHideFlags: 1

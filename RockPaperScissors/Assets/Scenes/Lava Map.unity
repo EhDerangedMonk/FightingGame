@@ -471,7 +471,7 @@ GameObject:
   - 68: {fileID: 855079636}
   - 114: {fileID: 855079638}
   - 82: {fileID: 855079639}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: Lava Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -663,7 +663,7 @@ GameObject:
   - 212: {fileID: 1393397654}
   - 68: {fileID: 1393397656}
   - 82: {fileID: 1393397657}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: Lava Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
