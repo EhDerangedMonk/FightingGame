@@ -63,7 +63,8 @@ public class zakirBehaviour: PlayerState {
 			}
 		} else if (attack == true && stateInfo.nameHash == grappleSuccessStateHash) {
 			attack = false;
-			curPlayer.player.playerState.sideForcePush(isFacingLeft(), 180);
+			curPlayer.player.anim.SetTrigger("Launch");
+			curPlayer.player.playerState.sideForcePush(isFacingLeft(), 120);
 		}
 		
 		return (attack || !canAttack); //Don't allow the player to attack again until the attack/move is finished
