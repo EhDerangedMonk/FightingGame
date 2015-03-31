@@ -14,7 +14,6 @@ public class healthDisplay : MonoBehaviour {
 	private Vector3 P1HealthPoint, P2HealthPoint, P3HealthPoint, P4HealthPoint; // Where to draw the health indicators.
     public Texture P1Tag, P2Tag, P3Tag, P4Tag; // Floats above the players' heads
     public Texture Health_100to81, Health_80to61, Health_60to41, Health_40to21, Health_20to1; // Indicate the players' health levels
-    private int n;
 	private float xTagOffset, yTagOffset; // How much the tags will be offset from the players' positions. 
 	public float xHealthOffset, yHealthOffset; // How much the health indicators will be offset from the players' positions.
 	private bool P3Playing, P4Playing; // Determine if these players are playing
@@ -31,8 +30,6 @@ public class healthDisplay : MonoBehaviour {
         yHealthOffset = 2.14f;
         xTagOffset = -0.75f;
         yTagOffset = 3.3f; // These are just where it looks good, they can be modified
-        
-        n=0;
         
         // Determine if P3 and P4 are playing
 		InitializeStorage settings = (InitializeStorage) GameObject.Find("VariableStorage").GetComponent(typeof(InitializeStorage));
@@ -91,7 +88,7 @@ public class healthDisplay : MonoBehaviour {
     }
 
     void OnGUI() {
-		GUI.Label (new Rect(P1TagPoint.x, Screen.height-P1TagPoint.y-40, 300, 300), p1.playerHealth.getHealth().ToString(), labelFontSize);
+		//GUI.Label (new Rect(P1TagPoint.x, Screen.height-P1TagPoint.y-40, 300, 300), p1.playerHealth.getHealth().ToString(), labelFontSize);
         GUI.DrawTexture (new Rect(P1TagPoint.x, Screen.height-P1TagPoint.y, P1Tag.width/4, P1Tag.height/4), P1Tag);GUI.DrawTexture (new Rect(P1TagPoint.x, Screen.height-P1TagPoint.y, P1Tag.width/4, P1Tag.height/4), P1Tag);
         // Determine which health indicator texture to draw based on the player's health
 		if (801 <= p1.playerHealth.getHealth() && p1.playerHealth.getHealth() <= 1000)
@@ -105,7 +102,7 @@ public class healthDisplay : MonoBehaviour {
 		else if (1 <= p1.playerHealth.getHealth() && p1.playerHealth.getHealth() <=200)
 			GUI.DrawTexture (new Rect(P1HealthPoint.x, Screen.height-P1HealthPoint.y, Health_100to81.width/3, Health_100to81.height/3), Health_20to1);	
 		
-		GUI.Label (new Rect(P2TagPoint.x, Screen.height-P2TagPoint.y-40, 300, 300), p2.playerHealth.getHealth().ToString(), labelFontSize);
+		//GUI.Label (new Rect(P2TagPoint.x, Screen.height-P2TagPoint.y-40, 300, 300), p2.playerHealth.getHealth().ToString(), labelFontSize);
         GUI.DrawTexture (new Rect(P2TagPoint.x, Screen.height-P2TagPoint.y, P2Tag.width/4, P2Tag.height/4), P2Tag);
 		// Determine which health indicator texture to draw based on the player's health
 		if (801 <= p2.playerHealth.getHealth() && p2.playerHealth.getHealth() <= 1000)
@@ -121,7 +118,7 @@ public class healthDisplay : MonoBehaviour {
 		
 		if (P3Playing)
 		{
-			GUI.Label (new Rect(P3TagPoint.x, Screen.height-P3TagPoint.y-40, 300, 300), p3.playerHealth.getHealth().ToString(), labelFontSize);
+			//GUI.Label (new Rect(P3TagPoint.x, Screen.height-P3TagPoint.y-40, 300, 300), p3.playerHealth.getHealth().ToString(), labelFontSize);
 			GUI.DrawTexture (new Rect(P3TagPoint.x, Screen.height-P3TagPoint.y, P3Tag.width/4, P3Tag.height/4), P3Tag);
 			// Determine which health indicator texture to draw based on the player's health
 			if (801 <= p3.playerHealth.getHealth() && p3.playerHealth.getHealth() <= 1000)
@@ -138,7 +135,7 @@ public class healthDisplay : MonoBehaviour {
 		
 		if (P4Playing)
 		{
-			GUI.Label (new Rect(P4TagPoint.x, Screen.height-P4TagPoint.y-40, 300, 300), p4.playerHealth.getHealth().ToString(), labelFontSize);
+			//GUI.Label (new Rect(P4TagPoint.x, Screen.height-P4TagPoint.y-40, 300, 300), p4.playerHealth.getHealth().ToString(), labelFontSize);
 			GUI.DrawTexture (new Rect(P4TagPoint.x, Screen.height-P4TagPoint.y, P4Tag.width/4, P4Tag.height/4), P4Tag);
 			// Determine which health indicator texture to draw based on the player's health
 			if (801 <= p4.playerHealth.getHealth() && p4.playerHealth.getHealth() <= 1000)
