@@ -72,6 +72,9 @@ public class noirBehaviour: PlayerState {
             } else if (stateInfo.nameHash == counterStateHash) {
                 attack = counterAttack();
             }
+        } else if (attack == true && stateInfo.nameHash == grappleSuccessStateHash) {
+            attack = false;
+            curPlayer.player.playerState.sideForcePush(isFacingLeft(), 200);
         } else {
             // Special attack for Noir can have 4 states of charging
             for (int i = 0; i < 4; i++) {
@@ -167,7 +170,6 @@ public class noirBehaviour: PlayerState {
 
         curPlayer.anim.SetTrigger("GrappleSuccess");
         curPlayer.player.playerState.setFlinch(true);
-        curPlayer.player.playerState.sideForcePush(isFacingLeft(), 200);
         return true;
     }
 
