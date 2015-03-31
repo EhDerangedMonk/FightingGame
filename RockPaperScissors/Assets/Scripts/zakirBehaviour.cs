@@ -53,7 +53,7 @@ public class zakirBehaviour: PlayerState {
 			setBlock(true);
 		} else if (!attack && contact() == true) {
 			if (stateInfo.nameHash == grappleStateHash) {
-	            attack = grapple(); 
+	            attack = grapple();
 	        } else if (stateInfo.nameHash == lightAttackStateHash) {
 				attack = lightAttack();
 			} else if (stateInfo.nameHash == specStateHash[0]) {
@@ -61,6 +61,9 @@ public class zakirBehaviour: PlayerState {
 			} else if (stateInfo.nameHash == heavyAttackStateHash) {
 				attack = heavyAttack();
 			}
+		} else if (attack == true && stateInfo.nameHash == grappleSuccessStateHash) {
+			attack = false;
+			curPlayer.player.playerState.sideForcePush(isFacingLeft(), 180);
 		}
 		
 		return (attack || !canAttack); //Don't allow the player to attack again until the attack/move is finished
@@ -130,7 +133,7 @@ public class zakirBehaviour: PlayerState {
 
         curPlayer.anim.SetTrigger("GrappleSuccess");
         curPlayer.player.playerState.setFlinch(true);
-        curPlayer.player.playerState.sideForcePush(isFacingLeft(), 180);
+        //curPlayer.player.playerState.sideForcePush(isFacingLeft(), 180);
         return true;
     }
 	

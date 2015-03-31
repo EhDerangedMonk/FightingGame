@@ -58,7 +58,7 @@ public class violetBehaviour: PlayerState {
         } else if (!attack && stateInfo.nameHash == blockStateHash) {
 				attack = true;
 				setBlock(true);
-				sideForcePush(!facingLeft, 200);
+				sideForcePush(!facingLeft, 250);
 		} else if (!attack && contact() == true) {
 			if (stateInfo.nameHash == grappleStateHash) {
 	            attack = grapple(); 
@@ -69,6 +69,9 @@ public class violetBehaviour: PlayerState {
 			} else if (stateInfo.nameHash == heavyAttackStateHash) {
 				attack = heavyAttack();
 			}
+		} else if (attack == true && stateInfo.nameHash == grappleSuccessStateHash) {
+            attack = false;
+            curPlayer.player.playerState.sideForcePush(isFacingLeft(), 300);
 		} else {
 			// Special attack for Violet can have 4 states of charging
 			for (int i = 0; i < 3; i++) {
@@ -163,7 +166,6 @@ public class violetBehaviour: PlayerState {
 
         curPlayer.anim.SetTrigger("GrappleSuccess");
         curPlayer.player.playerState.setFlinch(true);
-        curPlayer.player.playerState.sideForcePush(isFacingLeft(), 250);
         return true;
     }
 	
