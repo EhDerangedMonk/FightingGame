@@ -232,7 +232,7 @@ public class MainMenu : MonoBehaviour {
 	* UPDATE *
 	\********/
 	void Update()
-	{
+	{	
 		Vector3 currentMousePosition = Input.mousePosition;
 		
 		// if the mouse has moved, assign it focus
@@ -301,6 +301,45 @@ public class MainMenu : MonoBehaviour {
 		}
 		
 		lastMousePosition = currentMousePosition;
+		
+		
+		// Determine if a controller was used to select an icon
+		if (mouseActive == false)
+		{
+			
+			if (P3Playing && Input.GetKeyUp(P3Enter))
+				print ("both!");
+			
+			if (Input.GetKeyUp(P1Enter) || Input.GetKeyUp(P2Enter) || (P3Playing && Input.GetKeyUp(P3Enter)) || (P4Playing && Input.GetKeyUp(P4Enter)))
+			{
+				if (controllerState == MenuState.Play)
+				{
+					print ("Clicked PLAY");
+					
+					// Load the character selection menu
+					Application.LoadLevel("CharacterSelectionMenu");
+				}
+				else if (controllerState == MenuState.Controls)
+				{
+					print ("Clicked CONTROLS");
+					
+					Application.LoadLevel("Controls");
+				}
+				else if (controllerState == MenuState.Credits)
+				{
+					print ("Clicked CREDITS");
+					
+					// Load the credits scene
+					Application.LoadLevel ("Credits");
+				}
+				else if (controllerState == MenuState.Exit)
+				{
+					print ("Clicked EXIT");
+					
+					Application.Quit();
+				}
+			}
+		}
 	}
 	
 	
@@ -467,43 +506,5 @@ public class MainMenu : MonoBehaviour {
 	    
 	    // Draw the logo
 	    GUI.DrawTexture(logoRect, logoTexture);
-	    
-	    
-	    
-	    // Determine if a controller was used to select an icon
-	    if (mouseActive == false)
-	    {
-	    	if (Input.GetKeyDown(P1Enter) || Input.GetKeyDown(P2Enter) || (P3Playing && Input.GetKeyDown(P3Enter)) || (P4Playing && Input.GetKeyDown(P4Enter)))
-	    	{
-	    		if (controllerState == MenuState.Play)
-	    		{
-					print ("Clicked PLAY");
-					
-					// Load the character selection menu
-					Application.LoadLevel("CharacterSelectionMenu");
-	    		}
-	    		else if (controllerState == MenuState.Controls)
-	    		{
-					print ("Clicked CONTROLS");
-					
-					Application.LoadLevel("Controls");
-	    		}
-	    		else if (controllerState == MenuState.Credits)
-	    		{
-					print ("Clicked CREDITS");
-					
-					// Load the credits scene
-					Application.LoadLevel ("Credits");
-	    		}
-	    		else if (controllerState == MenuState.Exit)
-	    		{
-					print ("Clicked EXIT");
-					
-					Application.Quit();
-	    		}
-	    	}
-	    }
-        
     }
-    
 }
