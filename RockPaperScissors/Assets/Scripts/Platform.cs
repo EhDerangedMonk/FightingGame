@@ -84,12 +84,13 @@ public class Platform : MonoBehaviour {
 	}
 
 	void checkPhaseDown(GameObject other) {
+		/*
 		Player player = (Player)other.gameObject.GetComponent (typeof(Player));
 
 		if (Input.GetKeyDown (player.controller.getPhaseDownKey ()))
 			other.layer = LayerMask.NameToLayer ("Phase");
 		else
 			other.layer = LayerMask.NameToLayer ("Player");
-
+			*/
 	}
 }
