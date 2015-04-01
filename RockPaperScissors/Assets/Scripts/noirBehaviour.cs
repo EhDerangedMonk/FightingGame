@@ -73,6 +73,7 @@ public class noirBehaviour: PlayerState {
                 attack = counterAttack();
             }
         } else if (attack == true && stateInfo.nameHash == grappleSuccessStateHash) {
+            hitFactory.MakeHitMarker (curPlayer.player.gameObject, 0);
             attack = false;
             curPlayer.player.playerState.sideForcePush(isFacingLeft(), 200);
         } else {

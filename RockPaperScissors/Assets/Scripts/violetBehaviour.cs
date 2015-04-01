@@ -70,6 +70,7 @@ public class violetBehaviour: PlayerState {
 				attack = heavyAttack();
 			}
 		} else if (attack == true && stateInfo.nameHash == grappleSuccessStateHash) {
+			hitFactory.MakeHitMarker (curPlayer.player.gameObject, 2);
             attack = false;
             curPlayer.player.playerState.setLaunch(true);
             curPlayer.player.playerState.forceLaunch(isFacingLeft(), 300);

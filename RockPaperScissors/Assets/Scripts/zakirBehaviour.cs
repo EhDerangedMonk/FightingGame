@@ -63,6 +63,7 @@ public class zakirBehaviour: PlayerState {
 			}
 		} else if (attack == true && stateInfo.nameHash == grappleSuccessStateHash) {
 			attack = false;
+			hitFactory.MakeHitMarker (curPlayer.player.gameObject, 0);
 			curPlayer.player.anim.SetTrigger("Launch");
 			curPlayer.player.playerState.sideForcePush(isFacingLeft(), 120);
 		}
