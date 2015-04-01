@@ -21,10 +21,10 @@ public class Rock : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
-	void playHit() {
+	public void playHit() {
 		anim.SetTrigger ("Hit");
 	}
 
@@ -40,8 +40,15 @@ public class Rock : MonoBehaviour {
 	// Called when a 2D object collides with another 2D object
 	void OnCollisionEnter2D(Collision2D other) {
 		bool dealDamage = true;
+		bool inMotion = true;
+		float horizVelocity = this.gameObject.rigidbody2D.velocity.x;
 
-		if (other.gameObject.tag == "Player") {
+		if (horizVelocity > 3 || horizVelocity < -3)
+			inMotion = true;
+		else
+			inMotion = false;
+
+		if (other.gameObject.tag == "Player" && inMotion) {
 			hitFactory.MakeHitMarker (other.gameObject, 4);
 			victim = (Player)other.gameObject.GetComponent(typeof(Player));
 
@@ -72,10 +79,11 @@ public class Rock : MonoBehaviour {
 				}
 				hit = true;
 			}
+
 			playHit(); //The rock 'breaks' when it collides with a player.
 		}
 		//Rocks break each other.
-		if (other.gameObject.tag == "Rock") {
+		if (other.gameObject.tag == "Rock" && inMotion) {
 			hitFactory.MakeHitMarker (other.gameObject, 4); //Create a hit marker at the player's location.
 			playHit(); //The rock 'breaks' when it collides with another rock.
 		}

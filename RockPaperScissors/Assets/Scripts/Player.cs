@@ -65,32 +65,31 @@ public class Player : MonoBehaviour {
         attack = playerState.checkState(this);
 
         // Disable controls if the player is dead/ otherwise accept them
-        if (playerHealth.isDead() == true) {
-            anim.SetBool("Death", true);
-        } else  {   
-            if (playerState.isBlock() == false && playerState.isFlinch() == false && Input.GetKeyDown (controller.getLightKey())) {
-                anim.SetTrigger("Light");
-            } else if (Input.GetKeyUp (controller.getSpecialKey())) {
-                anim.SetBool("Special", false);
-            } else if (playerState.isBlock() == false && playerState.isFlinch() == false && Input.GetKeyDown (controller.getSpecialKey())) {
-                anim.SetBool("Special", true);
-            } else if (playerState.isBlock() == false && playerState.isFlinch() == false && Input.GetKeyDown (controller.getHeavyKey())) {
-                anim.SetTrigger("Heavy");
-			} else if (Input.GetKeyUp(controller.getBlockKey())) {
+        if (playerHealth.isDead () == true) {
+			anim.SetBool ("Death", true);
+		} else if (!attack) {   
+				if (playerState.isBlock () == false && playerState.isFlinch () == false && Input.GetKeyDown (controller.getLightKey ())) {
+						anim.SetTrigger ("Light");
+				} else if (playerState.isBlock () == false && playerState.isFlinch () == false && Input.GetKeyDown (controller.getSpecialKey ())) {
+						anim.SetBool ("Special", true);
+				} else if (playerState.isBlock () == false && playerState.isFlinch () == false && Input.GetKeyDown (controller.getHeavyKey ())) {
+						anim.SetTrigger ("Heavy");
+				} else if (playerState.isBlock () == false && playerState.isFlinch () == false && Input.GetKeyDown (controller.getBlockKey ())) {
+						anim.SetBool ("Block", true);
+				} else if (playerState.isBlock () == false && Input.GetKeyDown (controller.getGrappleKey ())) {
+						anim.SetTrigger ("Grapple");
+				} else if (!attack && playerState.isBlock () == false && playerState.isFlinch () == false && (Input.GetKeyDown (controller.getJumpKey ()) || -0.6 > Input.GetAxis (controller.getYAxisKey ()))) {
+						jump (); // Controls players jumping ability
+				} else if (!attack && playerState.isBlock () == false && playerState.isFlinch () == false && playerState.isLaunch () == false) {
+						movement ();
+				}
+		}
+		if (Input.GetKeyUp (controller.getBlockKey ())) {
 				anim.SetBool ("Block", false);
-			} else if (playerState.isBlock() == false && playerState.isFlinch() == false && Input.GetKeyDown (controller.getBlockKey())) {
-				anim.SetBool("Block", true);
-			} else if (playerState.isBlock() == false && Input.GetKeyDown (controller.getGrappleKey())) {
-				anim.SetTrigger("Grapple");
-            } else if (!attack && playerState.isBlock() == false && playerState.isFlinch() == false && (Input.GetKeyDown (controller.getJumpKey()) || -0.6 >Input.GetAxis(controller.getYAxisKey()))) {
-                jump(); // Controls players jumping ability
-			} else if (!attack && playerState.isBlock() == false && playerState.isFlinch() == false && playerState.isLaunch() == false) {
-                movement();
-            }
-
-        }
-
-    }
+		} else if (Input.GetKeyUp (controller.getSpecialKey ())) {
+				anim.SetBool ("Special", false);
+		}
+	}
 
     // Update is called once per frame (Controlled)
     void FixedUpdate ()  {
@@ -126,6 +125,12 @@ public class Player : MonoBehaviour {
         //If you're intersecting with another player you will capture their class to be able to interact with them
         if (other.gameObject.tag == "Player")
             player = (Player)other.gameObject.GetComponent(typeof(Player));
+
+		//If you're intersect with rock while attacking, you will break that rock.
+		if(other.gameObject.tag == "Rock") {
+			Rock boulder = (Rock)other.gameObject.GetComponent(typeof(Rock));
+			boulder.playHit();
+		}
     }
 
 
