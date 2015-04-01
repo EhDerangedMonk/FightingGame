@@ -473,7 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db430f27868082438f3d33d21bddc79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layout: 2
+  layout: 1
   characterChoice: 0
   player: {fileID: 0}
   anim: {fileID: 0}
@@ -936,7 +936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db430f27868082438f3d33d21bddc79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layout: 1
+  layout: 2
   characterChoice: 2
   player: {fileID: 0}
   anim: {fileID: 0}

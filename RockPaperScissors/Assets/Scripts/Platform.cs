@@ -84,13 +84,17 @@ public class Platform : MonoBehaviour {
 	}
 
 	void checkPhaseDown(GameObject other) {
-		/*
-		Player player = (Player)other.gameObject.GetComponent (typeof(Player));
+		Player player = (Player)other.gameObject.GetComponent(typeof(Player));
+		Collider2D[] playerColliders = other.GetComponents<Collider2D>();
 
-		if (Input.GetKeyDown (player.controller.getPhaseDownKey ()))
-			other.layer = LayerMask.NameToLayer ("Phase");
-		else
-			other.layer = LayerMask.NameToLayer ("Player");
-			*/
+		if(Input.GetKeyDown (player.controller.getPhaseDownKey ())) {
+			foreach(Collider2D playerCollider in playerColliders)
+				Physics2D.IgnoreCollision(myCollider, playerCollider, true);
+		}
+
+		else if(Input.GetKeyUp (player.controller.getPhaseDownKey ())) {
+			foreach(Collider2D playerCollider in playerColliders)
+				Physics2D.IgnoreCollision(myCollider, playerCollider, false);
+		}
 	}
 }
