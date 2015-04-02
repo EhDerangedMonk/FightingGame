@@ -11,7 +11,6 @@ public class zakirBehaviour: PlayerState {
 	private AnimatorStateInfo stateInfo;
 	private bool attack; // If player currently in attack don't redo dmg for it
 
-	//TEMP CODE - Nigel
 	private HitMarkerSpawner hitFactory = GameObject.FindObjectOfType<HitMarkerSpawner> ();
 	
 	// Constructor
@@ -76,8 +75,7 @@ public class zakirBehaviour: PlayerState {
 		
 		if (curPlayer.player == null || checkIfCountered(200) == true)
 			return false;
-
-		//TEMP CODE - Nigel
+		
 		hitFactory.MakeHitMarker (curPlayer.player.gameObject, 0);
 		
 		curPlayer.player.playerState.setFlinch(true);
@@ -91,8 +89,7 @@ public class zakirBehaviour: PlayerState {
 		
 		if (curPlayer.player == null || checkIfCountered(200))
 			return false;
-
-		//TEMP CODE - Nigel
+		
 		hitFactory.MakeHitMarker (curPlayer.player.gameObject, 0);
 
 		curPlayer.player.playerState.setFlinch(true);
@@ -106,8 +103,7 @@ public class zakirBehaviour: PlayerState {
 		
 		if (curPlayer.player == null || checkIfCountered(200))
 			return false;
-
-		//TEMP CODE - Nigel
+		
 		hitFactory.MakeHitMarker (curPlayer.player.gameObject, 0);
 		
 		curPlayer.player.playerState.setLaunch(true);

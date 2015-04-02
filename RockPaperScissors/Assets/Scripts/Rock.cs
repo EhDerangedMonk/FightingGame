@@ -51,6 +51,7 @@ public class Rock : MonoBehaviour {
 		if (other.gameObject.tag == "Player" && inMotion) {
 			hitFactory.MakeHitMarker (other.gameObject, 4);
 			victim = (Player)other.gameObject.GetComponent(typeof(Player));
+			this.gameObject.rigidbody2D.velocity = new Vector3(0,0,0); //Kill momentum.
 
 			if(!hit) {
 				//Do not deal damage if the player is blocking.
@@ -68,14 +69,13 @@ public class Rock : MonoBehaviour {
 				}
 				//Otherwise, deal damage.
 				if(dealDamage == true) {
-					victim.playerState.setLaunch(true); //Causes a launch to the player.
 					victim.playerState.environmentDamage(100); // Rocks deal 100DMG
 
-					//Apply a force to the player in the corresponding direction.
+					//Launch the player in the corresponding direction.
 					if(this.transform.position.x > victim.transform.position.x)
-						rigidbody2D.velocity = new Vector2(100, 100);
+						victim.playerState.forceLaunch (false, 200);
 					else
-						rigidbody2D.velocity = new Vector2(-100, 100);
+						victim.playerState.forceLaunch (true, 200);
 				}
 				hit = true;
 			}
@@ -84,6 +84,7 @@ public class Rock : MonoBehaviour {
 		}
 		//Rocks break each other.
 		if (other.gameObject.tag == "Rock" && inMotion) {
+			this.gameObject.rigidbody2D.velocity = new Vector3(0,0,0); //Kill momentum.
 			hitFactory.MakeHitMarker (other.gameObject, 4); //Create a hit marker at the player's location.
 			playHit(); //The rock 'breaks' when it collides with another rock.
 		}

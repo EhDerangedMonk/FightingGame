@@ -13,7 +13,6 @@ public class noirBehaviour: PlayerState {
     private int specState;// int representing the charge value
     private bool attack; // If player currently in attack don't redo dmg for it
 
-	//TEMP CODE - Nigel
 	private HitMarkerSpawner hitFactory = GameObject.FindObjectOfType<HitMarkerSpawner> ();
 
     // Constructor
@@ -96,8 +95,7 @@ public class noirBehaviour: PlayerState {
         
         if (curPlayer.player == null || checkIfCountered(200) == true)
             return false;
-
-		//TEMP CODE - Nigel
+		
 		hitFactory.MakeHitMarker (curPlayer.player.gameObject, 1);
 
         curPlayer.player.playerState.setFlinch(true);
@@ -129,8 +127,7 @@ public class noirBehaviour: PlayerState {
                 damage = 400;
                 break;
         }
-
-		//TEMP CODE - Nigel
+		
 		hitFactory.MakeHitMarker (curPlayer.player.gameObject, 1);
 
         curPlayer.player.playerState.setFlinch(true);
@@ -144,7 +141,7 @@ public class noirBehaviour: PlayerState {
         
         if (curPlayer.player == null || checkIfCountered(200) == true)
             return false;
-		//TEMP CODE - Nigel
+
 		hitFactory.MakeHitMarker(curPlayer.player.gameObject, 1);
 		
 		curPlayer.player.playerState.setLaunch(true);
@@ -179,7 +176,6 @@ public class noirBehaviour: PlayerState {
         if (curPlayer.player == null)
             return false;
 
-
         if (curPlayer.transform.position.x < curPlayer.player.transform.position.x && isFacingLeft())
             return false;
         else if (curPlayer.transform.position.x > curPlayer.player.transform.position.x && !(isFacingLeft()))
@@ -191,8 +187,7 @@ public class noirBehaviour: PlayerState {
     private bool counterAttack() {
         if (curPlayer.player == null || checkIfCountered(200) == true)
             return false;
-
-		//TEMP CODE - Nigel
+		
 		hitFactory.MakeHitMarker (curPlayer.player.gameObject, 1);
 
         curPlayer.player.playerState.setFlinch(true);
