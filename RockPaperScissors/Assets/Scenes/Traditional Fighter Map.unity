@@ -165,7 +165,7 @@ GameObject:
   - 4: {fileID: 251968256}
   - 212: {fileID: 251968255}
   - 61: {fileID: 251968254}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -660,7 +660,11 @@ MonoBehaviour:
   Health_60to41: {fileID: 2800000, guid: c5eb4def2348f514a9f8ec9f374bb5e9, type: 3}
   Health_40to21: {fileID: 2800000, guid: c4a721bf987c04044a545c8310ec88fc, type: 3}
   Health_20to1: {fileID: 2800000, guid: 295068f401ab8d64fad544ba19ded96e, type: 3}
-  xHealthOffset: 0
+  xRightTagOffset: 0
+  xLeftTagOffset: 0
+  yTagOffset: 0
+  xRightHealthOffset: 0
+  xLeftHealthOffset: 0
   yHealthOffset: 0
 --- !u!81 &1439033459
 AudioListener:

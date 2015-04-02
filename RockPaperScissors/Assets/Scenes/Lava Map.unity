@@ -471,7 +471,7 @@ GameObject:
   - 68: {fileID: 855079636}
   - 114: {fileID: 855079638}
   - 82: {fileID: 855079639}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: Lava Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -663,7 +663,7 @@ GameObject:
   - 212: {fileID: 1393397654}
   - 68: {fileID: 1393397656}
   - 82: {fileID: 1393397657}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: Lava Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -936,7 +936,11 @@ MonoBehaviour:
   Health_60to41: {fileID: 2800000, guid: c5eb4def2348f514a9f8ec9f374bb5e9, type: 3}
   Health_40to21: {fileID: 2800000, guid: c4a721bf987c04044a545c8310ec88fc, type: 3}
   Health_20to1: {fileID: 2800000, guid: 295068f401ab8d64fad544ba19ded96e, type: 3}
-  xHealthOffset: 0
+  xRightTagOffset: 0
+  xLeftTagOffset: 0
+  yTagOffset: 0
+  xRightHealthOffset: 0
+  xLeftHealthOffset: 0
   yHealthOffset: 0
 --- !u!114 &1560533660
 MonoBehaviour:
@@ -1172,7 +1176,7 @@ GameObject:
   - 4: {fileID: 1984632784}
   - 114: {fileID: 1984632786}
   - 61: {fileID: 1984632785}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: phaseCheck
   m_TagString: Platform
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
