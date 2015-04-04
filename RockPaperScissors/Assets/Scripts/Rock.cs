@@ -69,6 +69,7 @@ public class Rock : MonoBehaviour {
 				}
 				//Otherwise, deal damage.
 				if(dealDamage == true) {
+					victim.playerState.setLaunch (true);
 					victim.playerState.environmentDamage(100); // Rocks deal 100DMG
 
 					//Launch the player in the corresponding direction.
