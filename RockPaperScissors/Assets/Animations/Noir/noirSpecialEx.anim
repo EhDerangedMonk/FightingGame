@@ -78,6 +78,13 @@ AnimationClip:
     functionName: enableHit
     data: 
     objectReferenceParameter: {fileID: 0}
+    floatParameter: 5.19999981
+    intParameter: 0
+    messageOptions: 0
+  - time: .25
+    functionName: disableHit
+    data: 
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

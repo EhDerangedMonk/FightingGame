@@ -7,16 +7,16 @@ using System.Collections;
 
 public class HitBoxManager : MonoBehaviour {
 
-	private Collider2D hitBox;
+	private BoxCollider2D hitBox;
 	private Animator anim;
 
 	// Use this for initialization
 	void Start () {
 		//Find the attack hit box.
 		anim = this.gameObject.GetComponent<Animator> ();
-		Collider2D[] colliders = this.gameObject.GetComponentsInChildren<Collider2D> ();
+		BoxCollider2D[] colliders = this.gameObject.GetComponentsInChildren<BoxCollider2D> ();
 
-		foreach (Collider2D collider in colliders) {
+		foreach (BoxCollider2D collider in colliders) {
 			if(collider.isTrigger)
 				hitBox = collider;
 		}
@@ -33,11 +33,12 @@ public class HitBoxManager : MonoBehaviour {
 
 	/*
      * DESCR: Called by an animation event, the hitbox is enabled.
-     * PRE: NONE
-     * POST: The hitbox is enabled.
+     * PRE: A float representing the size of the hitbox is entered.
+     * POST: The hitbox is enabled, using the size value as the x dimension.
      */
-	void enableHit() {
+	void enableHit(float size) {
 		hitBox.enabled = true;
+		hitBox.size = new Vector2 (size, 1);
 	}
 
 	/*
