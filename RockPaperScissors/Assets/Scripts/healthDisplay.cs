@@ -13,7 +13,7 @@ public class healthDisplay : MonoBehaviour {
 	private Vector3 P1TagPoint, P2TagPoint, P3TagPoint, P4TagPoint; // The top left locations of each player on the screen (in pixels)
 	private Vector3 P1HealthPoint, P2HealthPoint, P3HealthPoint, P4HealthPoint; // Where to draw the health indicators.
     public Texture P1Tag, P2Tag, P3Tag, P4Tag; // Floats above the players' heads
-    public Texture Health_100to81, Health_80to61, Health_60to41, Health_40to21, Health_20to1; // Indicate the players' health levels
+    public Texture Health_100to81, Health_80to61, Health_60to41, Health_40to21, Health_20to1, Health_Blank; // Indicate the players' health levels
 	public float xRightTagOffset, xLeftTagOffset, yTagOffset; // How much the tags will be offset from the players' positions. 
 	public float xRightHealthOffset, xLeftHealthOffset, yHealthOffset; // How much the health indicators will be offset from the players' positions.
 	private bool P3Playing, P4Playing; // Determine if these players are playing
@@ -140,66 +140,86 @@ public class healthDisplay : MonoBehaviour {
     }
 
     void OnGUI() {
+		float green;
+		float red;
+		Color original = new Color (GUI.color.r, GUI.color.g, GUI.color.b);
+		
 		//GUI.Label (new Rect(P1TagPoint.x, Screen.height-P1TagPoint.y-40, 300, 300), p1.playerHealth.getHealth().ToString(), labelFontSize);
-        GUI.DrawTexture (new Rect(P1TagPoint.x, Screen.height-P1TagPoint.y, P1Tag.width/4, P1Tag.height/4), P1Tag);GUI.DrawTexture (new Rect(P1TagPoint.x, Screen.height-P1TagPoint.y, P1Tag.width/4, P1Tag.height/4), P1Tag);
-        // Determine which health indicator texture to draw based on the player's health
-		if (801 <= p1.playerHealth.getHealth() && p1.playerHealth.getHealth() <= 1000)
-			GUI.DrawTexture (new Rect(P1HealthPoint.x, Screen.height-P1HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_100to81);
-		else if (601 <= p1.playerHealth.getHealth() && p1.playerHealth.getHealth() <=800)
-			GUI.DrawTexture (new Rect(P1HealthPoint.x, Screen.height-P1HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_80to61);
-		else if (401 <= p1.playerHealth.getHealth() && p1.playerHealth.getHealth() <=600)
-			GUI.DrawTexture (new Rect(P1HealthPoint.x, Screen.height-P1HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_60to41);
-		else if (201 <= p1.playerHealth.getHealth() && p1.playerHealth.getHealth() <=400)
-			GUI.DrawTexture (new Rect(P1HealthPoint.x, Screen.height-P1HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_40to21);
-		else if (1 <= p1.playerHealth.getHealth() && p1.playerHealth.getHealth() <=200)
-			GUI.DrawTexture (new Rect(P1HealthPoint.x, Screen.height-P1HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_20to1);	
+        if (p1.playerHealth.getHealth() > 0)
+        {
+	        GUI.DrawTexture (new Rect(P1TagPoint.x, Screen.height-P1TagPoint.y, P1Tag.width/4, P1Tag.height/4), P1Tag);GUI.DrawTexture (new Rect(P1TagPoint.x, Screen.height-P1TagPoint.y, P1Tag.width/4, P1Tag.height/4), P1Tag);
+			if (p1.playerHealth.getHealth() >= 500)
+			{
+				green = 1.0f;
+				red = (500f -((float)p1.playerHealth.getHealth() - 500f)) / 500f;
+			}
+			else
+			{
+				red = 1.0f;
+				green = ((float)p1.playerHealth.getHealth()) / 500f;
+			}
+			GUI.color = new Color(red, green, 0f);
+			GUI.DrawTexture (new Rect(P1HealthPoint.x, Screen.height-P1HealthPoint.y, (int)(Health_Blank.width/2.5), (int)(Health_Blank.height/2.5)), Health_Blank);
+			GUI.color = original;
+		}
+		
 		
 		//GUI.Label (new Rect(P2TagPoint.x, Screen.height-P2TagPoint.y-40, 300, 300), p2.playerHealth.getHealth().ToString(), labelFontSize);
-        GUI.DrawTexture (new Rect(P2TagPoint.x, Screen.height-P2TagPoint.y, P2Tag.width/4, P2Tag.height/4), P2Tag);
-		// Determine which health indicator texture to draw based on the player's health
-		if (801 <= p2.playerHealth.getHealth() && p2.playerHealth.getHealth() <= 1000)
-			GUI.DrawTexture (new Rect(P2HealthPoint.x, Screen.height-P2HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_100to81);
-		else if (601 <= p2.playerHealth.getHealth() && p2.playerHealth.getHealth() <=800)
-			GUI.DrawTexture (new Rect(P2HealthPoint.x, Screen.height-P2HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_80to61);
-		else if (401 <= p2.playerHealth.getHealth() && p2.playerHealth.getHealth() <=600)
-			GUI.DrawTexture (new Rect(P2HealthPoint.x, Screen.height-P2HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_60to41);
-		else if (201 <= p2.playerHealth.getHealth() && p2.playerHealth.getHealth() <=400)
-			GUI.DrawTexture (new Rect(P2HealthPoint.x, Screen.height-P2HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_40to21);
-		else if (1 <= p2.playerHealth.getHealth() && p2.playerHealth.getHealth() <=200)
-			GUI.DrawTexture (new Rect(P2HealthPoint.x, Screen.height-P2HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_20to1);
+        if (p2.playerHealth.getHealth() > 0)
+        {
+	        GUI.DrawTexture (new Rect(P2TagPoint.x, Screen.height-P2TagPoint.y, P2Tag.width/4, P2Tag.height/4), P2Tag);
+			if (p2.playerHealth.getHealth() >= 500)
+			{
+				green = 1.0f;
+				red = (500f -((float)p2.playerHealth.getHealth() - 500f)) / 500f;
+			}
+			else
+			{
+				red = 1.0f;
+				green = ((float)p2.playerHealth.getHealth()) / 500f;
+			}
+			GUI.color = new Color(red, green, 0f);
+			GUI.DrawTexture (new Rect(P2HealthPoint.x, Screen.height-P2HealthPoint.y, (int)(Health_Blank.width/2.5), (int)(Health_Blank.height/2.5)), Health_Blank);
+			GUI.color = original;
+		}
 		
-		if (P3Playing)
+		if (P3Playing && p3.playerHealth.getHealth() > 0)
 		{
 			//GUI.Label (new Rect(P3TagPoint.x, Screen.height-P3TagPoint.y-40, 300, 300), p3.playerHealth.getHealth().ToString(), labelFontSize);
 			GUI.DrawTexture (new Rect(P3TagPoint.x, Screen.height-P3TagPoint.y, P3Tag.width/4, P3Tag.height/4), P3Tag);
-			// Determine which health indicator texture to draw based on the player's health
-			if (801 <= p3.playerHealth.getHealth() && p3.playerHealth.getHealth() <= 1000)
-				GUI.DrawTexture (new Rect(P3HealthPoint.x, Screen.height-P3HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_100to81);
-			else if (601 <= p3.playerHealth.getHealth() && p3.playerHealth.getHealth() <=800)
-				GUI.DrawTexture (new Rect(P3HealthPoint.x, Screen.height-P3HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_80to61);
-			else if (401 <= p3.playerHealth.getHealth() && p3.playerHealth.getHealth() <=600)
-				GUI.DrawTexture (new Rect(P3HealthPoint.x, Screen.height-P3HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_60to41);
-			else if (201 <= p3.playerHealth.getHealth() && p3.playerHealth.getHealth() <=400)
-				GUI.DrawTexture (new Rect(P3HealthPoint.x, Screen.height-P3HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_40to21);
-			else if (1 <= p3.playerHealth.getHealth() && p3.playerHealth.getHealth() <=200)
-				GUI.DrawTexture (new Rect(P3HealthPoint.x, Screen.height-P3HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_20to1);
+			if (p3.playerHealth.getHealth() >= 500)
+			{
+				green = 1.0f;
+				red = (500f -((float)p3.playerHealth.getHealth() - 500f)) / 500f;
+			}
+			else
+			{
+				red = 1.0f;
+				green = ((float)p3.playerHealth.getHealth()) / 500f;
+			}
+			GUI.color = new Color(red, green, 0f);
+			GUI.DrawTexture (new Rect(P3HealthPoint.x, Screen.height-P3HealthPoint.y, (int)(Health_Blank.width/2.5), (int)(Health_Blank.height/2.5)), Health_Blank);
+			GUI.color = original;
 		}
 		
-		if (P4Playing)
+		
+		if (P4Playing && p4.playerHealth.getHealth() > 0)
 		{
 			//GUI.Label (new Rect(P4TagPoint.x, Screen.height-P4TagPoint.y-40, 300, 300), p4.playerHealth.getHealth().ToString(), labelFontSize);
 			GUI.DrawTexture (new Rect(P4TagPoint.x, Screen.height-P4TagPoint.y, P4Tag.width/4, P4Tag.height/4), P4Tag);
-			// Determine which health indicator texture to draw based on the player's health
-			if (801 <= p4.playerHealth.getHealth() && p4.playerHealth.getHealth() <= 1000)
-				GUI.DrawTexture (new Rect(P4HealthPoint.x, Screen.height-P4HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_100to81);
-			else if (601 <= p4.playerHealth.getHealth() && p4.playerHealth.getHealth() <=800)
-				GUI.DrawTexture (new Rect(P4HealthPoint.x, Screen.height-P4HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_80to61);
-			else if (401 <= p4.playerHealth.getHealth() && p4.playerHealth.getHealth() <=600)
-				GUI.DrawTexture (new Rect(P4HealthPoint.x, Screen.height-P4HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_60to41);
-			else if (201 <= p4.playerHealth.getHealth() && p4.playerHealth.getHealth() <=400)
-				GUI.DrawTexture (new Rect(P4HealthPoint.x, Screen.height-P4HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_40to21);
-			else if (1 <= p4.playerHealth.getHealth() && p4.playerHealth.getHealth() <=200)
-				GUI.DrawTexture (new Rect(P4HealthPoint.x, Screen.height-P4HealthPoint.y, (int)(Health_100to81.width/2.5), (int)(Health_100to81.height/2.5)), Health_20to1);
+			if (p4.playerHealth.getHealth() >= 500)
+			{
+				green = 1.0f;
+				red = (500f -((float)p4.playerHealth.getHealth() - 500f)) / 500f;
+			}
+			else
+			{
+				red = 1.0f;
+				green = ((float)p4.playerHealth.getHealth()) / 500f;
+			}
+			GUI.color = new Color(red, green, 0f);
+			GUI.DrawTexture (new Rect(P4HealthPoint.x, Screen.height-P4HealthPoint.y, (int)(Health_Blank.width/2.5), (int)(Health_Blank.height/2.5)), Health_Blank);
+			GUI.color = original;
 		}
 	}
 }

@@ -936,6 +936,7 @@ MonoBehaviour:
   Health_60to41: {fileID: 2800000, guid: c5eb4def2348f514a9f8ec9f374bb5e9, type: 3}
   Health_40to21: {fileID: 2800000, guid: c4a721bf987c04044a545c8310ec88fc, type: 3}
   Health_20to1: {fileID: 2800000, guid: 295068f401ab8d64fad544ba19ded96e, type: 3}
+  Health_Blank: {fileID: 2800000, guid: 01698f5e3165fec498fe5c3c47b5418a, type: 3}
   xRightTagOffset: 0
   xLeftTagOffset: 0
   yTagOffset: 0
