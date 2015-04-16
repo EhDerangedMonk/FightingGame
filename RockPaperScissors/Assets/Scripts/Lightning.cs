@@ -34,42 +34,42 @@ public class Lightning : MonoBehaviour {
 
 			//Do not deal damage if the player is blocking.
 			if (victim.playerState.isBlock ()) {
-				//If the lightning bolt collides to the right of the player.
+			//If the lightning bolt collides to the right of the player.
 				if (this.transform.position.x > victim.transform.position.x) {
 					if (!victim.playerState.isFacingLeft ())
 						dealDamage = false;
 				}
-				//If the rock collides to the left of the player.
-				else {
-					if (victim.playerState.isFacingLeft ())
-						dealDamage = false;
+			//If the rock collides to the left of the player.
+			else {
+				if (victim.playerState.isFacingLeft ())
+					dealDamage = false;
 				}
 			}
 			//Otherwise, deal damage.
 			if (dealDamage) {
 				if (superLaser) {
 					victim.playerState.setLaunch (true);
-					victim.playerState.environmentDamage(damage); // Rocks deal 100DMG
-				
-					//Launch the player in the corresponding direction.
-					if (this.transform.position.x > victim.transform.position.x)
-						victim.playerState.forceLaunch (true, 20);
-					else
-						victim.playerState.forceLaunch (false, 20);
-				}
-				else {
-					victim.playerState.setFlinch (true);
-					victim.playerState.environmentDamage(damage);
+					victim.playerState.environmentDamage (damage); // Rocks deal 100DMG
 
 					//Launch the player in the corresponding direction.
 					if (this.transform.position.x > victim.transform.position.x)
-						victim.playerState.sideForcePush (true, 200);
+							victim.playerState.forceLaunch (true, 20);
 					else
-						victim.playerState.sideForcePush (false, 200);
+							victim.playerState.forceLaunch (false, 20);
+				} else {
+					victim.playerState.setFlinch (true);
+					victim.playerState.environmentDamage (damage);
+
+					//Launch the player in the corresponding direction.
+					if (this.transform.position.x > victim.transform.position.x)
+							victim.playerState.sideForcePush (true, 200);
+					else
+							victim.playerState.sideForcePush (false, 200);
 					Destroy (this.gameObject);
 				}
 			}
-		}
+				} 
+		else if (other.gameObject.tag == "Platform"){}
 
 		else
 			Destroy (this.gameObject);

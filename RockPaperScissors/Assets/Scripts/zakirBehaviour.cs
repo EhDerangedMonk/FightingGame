@@ -42,12 +42,11 @@ public class zakirBehaviour: PlayerState {
 		
 		if (stateInfo.nameHash == flinchStateHash) {
 			setFlinch(false);
-		} else if (stateInfo.nameHash == launchStateHash) {
-			setLaunch(false);
 		} else if (stateInfo.nameHash == idleStateHash || stateInfo.nameHash == runStateHash || stateInfo.nameHash == jumpStateHash) {
 			attack = false; // Player is in a valid animation to attack running or idle
             canAttack = true;
             setBlock(false);
+			setLaunch(false);
 		} else if (stateInfo.nameHash == blockStateHash) {
 			setBlock(true);
 		} else if (!attack && contact() == true) {
