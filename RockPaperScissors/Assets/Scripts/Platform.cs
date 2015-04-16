@@ -87,11 +87,8 @@ public class Platform : MonoBehaviour {
 		Player player = (Player)other.gameObject.GetComponent(typeof(Player));
 		Collider2D[] playerColliders = other.GetComponents<Collider2D>();
 		float phase;
-
-		if (Input.GetAxis (player.controller.getYAxisKey()) == null)
-			phase = 0;
-		else
-			phase = Input.GetAxis (player.controller.getYAxisKey ());
+		
+		phase = Input.GetAxis (player.controller.getYAxisKey ());
 
 		if(phase >= 0.8) {
 			foreach(Collider2D playerCollider in playerColliders)

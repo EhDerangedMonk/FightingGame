@@ -63,9 +63,7 @@ public class violetBehaviour: PlayerState {
 	            attack = grapple(); 
 	        } else if (stateInfo.nameHash == lightAttackStateHash) {
 				attack = lightAttack();
-			} else if (stateInfo.nameHash == specStateHash[3]) {
-				attack = specialAttack(specState);
-			} else if (stateInfo.nameHash == heavyAttackStateHash) {
+			}  else if (stateInfo.nameHash == heavyAttackStateHash) {
 				attack = heavyAttack();
 			}
 		} else if (attack == true && stateInfo.nameHash == grappleSuccessStateHash) {
@@ -80,6 +78,9 @@ public class violetBehaviour: PlayerState {
 					canAttack = false;
 					specState = i + 1;
 				}
+			}
+			if (!attack && stateInfo.nameHash == specStateHash[3]) {
+				attack = specialAttack(specState);
 			}
 		}
 		
@@ -102,35 +103,44 @@ public class violetBehaviour: PlayerState {
 	
 	
 	override public bool specialAttack(int curState) {
-		int damage;
 		GameObject newBolt;
-		
-		damage = 0;
-		
-		if (curPlayer.player == null || checkIfCountered(200) == true)
-			return false;
 		
 		switch (curState) { // Calculate damage based on charge of Violet's special
 		case 1:
 			newBolt = Resources.Load ("Weak Lightning") as GameObject;
-			newBolt.GetComponent<Lightning>() = new Lightning(25, facingLeft);
+			newBolt.GetComponent<Lightning>().damage = 25;
+			newBolt.GetComponent<Lightning>().facingLeft = facingLeft;
 			break;
 		case 2:
-			newBolt = Resources.Load ("Weak Lightning") as GameObject;
-			newBolt.GetComponent<Lightning>() = new Lightning(100, facingLeft);
+			newBolt = Resources.Load ("Medium Lightning") as GameObject;
+			newBolt.GetComponent<Lightning>().damage = 100;
+			newBolt.GetComponent<Lightning>().facingLeft = facingLeft;
 			break;
 		case 3:
-			newBolt = Resources.Load ("Medium Lightning") as GameObject;
-			newBolt.GetComponent<Lightning>() = new Lightning(200, facingLeft);
+			newBolt = Resources.Load ("Strong Lightning")as GameObject;
+			newBolt.GetComponent<Lightning>().damage = 200;
+			newBolt.GetComponent<Lightning>().facingLeft = facingLeft;
 			break;
 		case 4:
 			newBolt = Resources.Load ("Strong Lightning")as GameObject;
-			newBolt.GetComponent<Lightning>() = new Lightning(300, facingLeft);
+			newBolt.GetComponent<Lightning>().damage = 25;
+			newBolt.GetComponent<Lightning>().facingLeft = facingLeft;
 			break;
 		default:
 			newBolt = Resources.Load ("Weak Lightning") as GameObject;
-			newBolt.GetComponent<Lightning>() = new Lightning(25, facingLeft);
+			newBolt.GetComponent<Lightning>().damage = 25;
+			newBolt.GetComponent<Lightning>().facingLeft = facingLeft;
 			break;
+		}
+
+		Vector3 newPos = curPlayer.transform.position;
+		if (facingLeft) {
+			newPos.x = newPos.x - 1;
+			MonoBehaviour.Instantiate (newBolt, newPos, curPlayer.transform.rotation);
+		} 
+		else {
+			newPos.x = newPos.x + 1;
+			MonoBehaviour.Instantiate (newBolt, newPos, Quaternion.Euler (0,0,180));
 		}
 
 		return true;

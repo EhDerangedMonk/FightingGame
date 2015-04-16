@@ -15,7 +15,6 @@ public class MusicManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		string map = Application.loadedLevelName;
-		Debug.Log (map);
 
 		if (map == "Landslide Map")
 			playingSong = landslide;
