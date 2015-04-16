@@ -103,6 +103,7 @@ public class violetBehaviour: PlayerState {
 	
 	override public bool specialAttack(int curState) {
 		int damage;
+		GameObject newBolt;
 		
 		damage = 0;
 		
@@ -111,24 +112,27 @@ public class violetBehaviour: PlayerState {
 		
 		switch (curState) { // Calculate damage based on charge of Violet's special
 		case 1:
-			damage = 25;
+			newBolt = Resources.Load ("Weak Lightning") as GameObject;
+			newBolt.GetComponent<Lightning>() = new Lightning(25, facingLeft);
 			break;
 		case 2:
-			damage = 200;
+			newBolt = Resources.Load ("Weak Lightning") as GameObject;
+			newBolt.GetComponent<Lightning>() = new Lightning(100, facingLeft);
 			break;
 		case 3:
-			damage = 300;
+			newBolt = Resources.Load ("Medium Lightning") as GameObject;
+			newBolt.GetComponent<Lightning>() = new Lightning(200, facingLeft);
 			break;
 		case 4:
-			damage = 400;
+			newBolt = Resources.Load ("Strong Lightning")as GameObject;
+			newBolt.GetComponent<Lightning>() = new Lightning(300, facingLeft);
 			break;
 		default:
-			damage = 20;
+			newBolt = Resources.Load ("Weak Lightning") as GameObject;
+			newBolt.GetComponent<Lightning>() = new Lightning(25, facingLeft);
 			break;
 		}
-		curPlayer.player.playerState.setFlinch(true);
-		curPlayer.player.playerHealth.damage(damage);
-		curPlayer.player.playerState.sideForcePush(isFacingLeft(), 200);
+
 		return true;
 	}
 	
